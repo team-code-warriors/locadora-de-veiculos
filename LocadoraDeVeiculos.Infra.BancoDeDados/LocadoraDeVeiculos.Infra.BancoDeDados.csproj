@@ -9,8 +9,15 @@
   <ItemGroup>
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloCliente\" />
-    <Folder Include="ModuloTaxa\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj" />
   </ItemGroup>
 
 </Project>
