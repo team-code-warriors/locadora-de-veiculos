@@ -8,9 +8,12 @@
 
   <ItemGroup>
     <Folder Include="ModuloFuncionario\" />
-    <Folder Include="ModuloTaxa\" />
     <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.1.0" />
   </ItemGroup>
 
 </Project>
