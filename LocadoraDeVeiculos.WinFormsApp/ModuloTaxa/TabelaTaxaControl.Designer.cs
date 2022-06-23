@@ -28,10 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.grid = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // grid
+            // 
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grid.Location = new System.Drawing.Point(0, 0);
+            this.grid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.grid.Name = "grid";
+            this.grid.RowHeadersWidth = 51;
+            this.grid.RowTemplate.Height = 25;
+            this.grid.Size = new System.Drawing.Size(524, 383);
+            this.grid.TabIndex = 1;
+            // 
+            // TabelaTaxaControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.grid);
+            this.Name = "TabelaTaxaControl";
+            this.Size = new System.Drawing.Size(524, 383);
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private DataGridView grid;
     }
 }
