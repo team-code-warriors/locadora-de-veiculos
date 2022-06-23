@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private Cliente cliente;
 
-        public Func<Cliente, Cliente> ClienteFunc { get; set; }
+        public Func<Cliente, ValidationResult> GravarRegistro { get; set; }
 
         public Cliente Cliente
         {

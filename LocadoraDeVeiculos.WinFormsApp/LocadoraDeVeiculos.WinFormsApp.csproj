@@ -10,9 +10,12 @@
 
   <ItemGroup>
     <Folder Include="ModuloFuncionario\" />
-    <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloTaxa\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
   </ItemGroup>
 
   <ItemGroup>
