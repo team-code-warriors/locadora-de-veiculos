@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaMenuPrincipal));
-            this.panelRegistros = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolbox = new System.Windows.Forms.ToolStrip();
             this.btnInserir = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
@@ -44,39 +41,13 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grupoDeVeículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelRegistros.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.panelRegistros = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolbox.SuspendLayout();
             this.menu.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelRegistros
-            // 
-            this.panelRegistros.Controls.Add(this.statusStrip1);
-            this.panelRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRegistros.Location = new System.Drawing.Point(0, 95);
-            this.panelRegistros.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panelRegistros.Name = "panelRegistros";
-            this.panelRegistros.Size = new System.Drawing.Size(626, 332);
-            this.panelRegistros.TabIndex = 6;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelRodape});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 306);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(626, 26);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // labelRodape
-            // 
-            this.labelRodape.Name = "labelRodape";
-            this.labelRodape.Size = new System.Drawing.Size(67, 20);
-            this.labelRodape.Text = "[rodapé]";
             // 
             // toolbox
             // 
@@ -104,6 +75,7 @@
             this.btnInserir.Padding = new System.Windows.Forms.Padding(5);
             this.btnInserir.Size = new System.Drawing.Size(62, 62);
             this.btnInserir.Text = "Inserir";
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // btnEditar
             // 
@@ -115,6 +87,7 @@
             this.btnEditar.Padding = new System.Windows.Forms.Padding(5);
             this.btnEditar.Size = new System.Drawing.Size(62, 62);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnExcluir
             // 
@@ -126,6 +99,7 @@
             this.btnExcluir.Padding = new System.Windows.Forms.Padding(5);
             this.btnExcluir.Size = new System.Drawing.Size(62, 62);
             this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // toolStripSeparator1
             // 
@@ -165,56 +139,83 @@
             // funcionáriosToolStripMenuItem
             // 
             this.funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.funcionáriosToolStripMenuItem.Text = "Funcionários";
+            this.funcionáriosToolStripMenuItem.Click += new System.EventHandler(this.funcionariosMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesMenuItem_Click);
             // 
             // grupoDeVeículosToolStripMenuItem
             // 
             this.grupoDeVeículosToolStripMenuItem.Name = "grupoDeVeículosToolStripMenuItem";
-            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.grupoDeVeículosToolStripMenuItem.Text = "Grupo de Veículos";
+            this.grupoDeVeículosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeVeiculosMenuItem_Click);
             // 
             // taxasToolStripMenuItem
             // 
             this.taxasToolStripMenuItem.Name = "taxasToolStripMenuItem";
-            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.taxasToolStripMenuItem.Text = "Taxas";
+            this.taxasToolStripMenuItem.Click += new System.EventHandler(this.taxasMenuItem_Click);
+            // 
+            // panelRegistros
+            // 
+            this.panelRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRegistros.Location = new System.Drawing.Point(0, 95);
+            this.panelRegistros.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelRegistros.Name = "panelRegistros";
+            this.panelRegistros.Size = new System.Drawing.Size(626, 332);
+            this.panelRegistros.TabIndex = 6;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.labelRodape});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 401);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(626, 26);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // labelRodape
+            // 
+            this.labelRodape.Name = "labelRodape";
+            this.labelRodape.Size = new System.Drawing.Size(67, 20);
+            this.labelRodape.Text = "[rodapé]";
             // 
             // TelaMenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 427);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelRegistros);
             this.Controls.Add(this.toolbox);
             this.Controls.Add(this.menu);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TelaMenuPrincipal";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tela Principal";
-            this.panelRegistros.ResumeLayout(false);
-            this.panelRegistros.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.toolbox.ResumeLayout(false);
             this.toolbox.PerformLayout();
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Panel panelRegistros;
         private ToolStrip toolbox;
         private ToolStripButton btnInserir;
         private ToolStripButton btnEditar;
@@ -227,6 +228,7 @@
         private ToolStripMenuItem clientesToolStripMenuItem;
         private ToolStripMenuItem grupoDeVeículosToolStripMenuItem;
         private ToolStripMenuItem taxasToolStripMenuItem;
+        private Panel panelRegistros;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel labelRodape;
     }

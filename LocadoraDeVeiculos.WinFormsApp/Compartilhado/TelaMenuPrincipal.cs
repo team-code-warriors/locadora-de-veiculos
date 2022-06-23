@@ -1,4 +1,6 @@
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
+using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {
@@ -10,6 +12,7 @@ namespace LocadoraDeVeiculos.WinFormsApp
         public TelaMenuPrincipal()
         {
             InitializeComponent();
+            this.ConfigurarTela();
 
             Instancia = this;
 
@@ -123,14 +126,14 @@ namespace LocadoraDeVeiculos.WinFormsApp
         {
             //var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
             //var repositorioCliente = new RepositorioClienteEmBancoDeDados();
-            //var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
+            var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
             //var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
 
             controladores = new Dictionary<string, ControladorBase>();
 
             //controladores.Add("Funcionários", new ControladorFuncionario());
             //controladores.Add("Clientes", new ControladorCliente());
-            //controladores.Add("Taxas", new ControladorTaxa());
+            controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa));
             //controladores.Add("Grupo De Veículos", new ControladorGrupoDeVeiculos());
         }
     }
