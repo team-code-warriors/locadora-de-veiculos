@@ -93,6 +93,7 @@
             // 
             // cbTipoCalculo
             // 
+            this.cbTipoCalculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoCalculo.FormattingEnabled = true;
             this.cbTipoCalculo.Items.AddRange(new object[] {
             "Diário",

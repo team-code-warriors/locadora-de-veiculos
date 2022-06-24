@@ -31,7 +31,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "DataAdmissao", HeaderText = "Data de Admissão"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "DataAdmissao", HeaderText = "Admissão"}, 
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "TipoPerfil", HeaderText = "Tipo de Perfil"},
             };

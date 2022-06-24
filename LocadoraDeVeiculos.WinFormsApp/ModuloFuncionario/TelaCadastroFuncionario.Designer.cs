@@ -138,6 +138,7 @@
             // 
             // cbTipoPerfil
             // 
+            this.cbTipoPerfil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoPerfil.FormattingEnabled = true;
             this.cbTipoPerfil.Items.AddRange(new object[] {
             "Comum",
