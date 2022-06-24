@@ -20,6 +20,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloTaxa
 
             validador = new ValidadorTaxa();
         }
+
         [TestMethod]
         public void Descricao_Nao_Pode_Ser_Nulo()
         {

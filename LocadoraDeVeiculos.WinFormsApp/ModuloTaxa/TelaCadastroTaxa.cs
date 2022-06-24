@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
     public partial class TelaCadastroTaxa : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
+        RepositorioTaxaEmBancoDeDados repositorio = new RepositorioTaxaEmBancoDeDados();
         public TelaCadastroTaxa()
         {
             InitializeComponent();
@@ -35,7 +37,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
                 tbNumero.Text = taxa.Id.ToString();
                 tbDescricao.Text = taxa.Descricao;
-                tbValor.Text = "";
+
+                if (taxa.Valor == 0)
+                {
+                    tbValor.Text = "";
+                }
+                else
+                {
+                    tbValor.Text = taxa.Valor.ToString();
+                }
                 cbTipoCalculo.SelectedItem = taxa.TipoCalculo;
             }
         }
@@ -66,8 +76,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
                 "Cadastro de Taxas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 DialogResult = DialogResult.None;
-
-                tbValor.Text = "";
 
                 return;
             }
