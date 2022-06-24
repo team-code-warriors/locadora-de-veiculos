@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+﻿using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -76,5 +77,45 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
                     [TIPOPERFIL]
 	            FROM 
 		            [TBFUNCIONARIO]";
+
+        public override ValidationResult Validar(Funcionario registro)
+        {
+            var validador = new ValidadorFuncionario();
+
+            var resultadoValidacao = validador.Validate(registro);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            var registroEncontradoNome = SelecionarTodos()
+                .Select(x => x.Nome.ToLower())
+                .Contains(registro.Nome.ToLower());
+
+            if (registroEncontradoNome)
+            {
+                if (registro.Id == 0)
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Funcionário já cadastrado"));
+                else if (registro.Id != 0)
+                {
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Funcionário já cadastrado"));
+                }
+            }
+
+            var registroEncontradoLogin = SelecionarTodos()
+                .Select(x => x.Login.ToLower())
+                .Contains(registro.Login.ToLower());
+
+            if (registroEncontradoLogin)
+            {
+                if (registro.Id == 0)
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Login já cadastrado"));
+                else if (registro.Id != 0)
+                {
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Login já cadastrado"));
+                }
+            }
+
+            return resultadoValidacao;
+        }
     }
 }

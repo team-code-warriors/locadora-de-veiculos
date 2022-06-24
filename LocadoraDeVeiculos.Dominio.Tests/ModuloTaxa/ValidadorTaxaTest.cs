@@ -14,7 +14,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloTaxa
             taxa = new()
             {
                 Descricao = "Cadeira de bebê",
-                Valor = 45.5,
+                Valor = 45,
                 TipoCalculo = "Fixo"
             };
 
@@ -59,12 +59,6 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloTaxa
             // assert
             resultado.ShouldHaveValidationErrorFor(f => f.Descricao);
         }
-
-        //[TestMethod]
-        //public void Valor_Aceita_Apenas_Numeros()
-        //{
-
-        //}
 
         [TestMethod]
         public void Valor_Deve_Ser_Maior_Que_0()

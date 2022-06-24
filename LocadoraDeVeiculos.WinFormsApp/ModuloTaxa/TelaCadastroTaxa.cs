@@ -49,7 +49,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
                 cbTipoCalculo.SelectedItem = taxa.TipoCalculo;
             }
         }
-
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
             taxa.Descricao = tbDescricao.Text;
@@ -69,7 +68,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
                     DialogResult = DialogResult.None;
                 }
-        } 
+            }
             else
             {
                 MessageBox.Show("Insira um número válido no campo 'Valor'",
@@ -79,7 +78,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
                 return;
             }
-}
+        }
 
         private void TelaCadastroContatosForm_Load(object sender, EventArgs e)
         {
