@@ -10,7 +10,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado
     {
         public bool ApenasNumeros(string numero)
         {
-            bool estaValido = System.Text.RegularExpressions.Regex.IsMatch(numero, @"[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?");
+            bool estaValido = System.Text.RegularExpressions.Regex.IsMatch(numero, @"^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$");
 
             return estaValido;
         }
