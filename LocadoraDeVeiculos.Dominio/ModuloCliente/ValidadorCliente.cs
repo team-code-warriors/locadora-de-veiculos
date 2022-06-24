@@ -13,20 +13,20 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public ValidadorCliente()
         {
             RuleFor(x => x.Nome)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Email)
                 .EmailAddress(EmailValidationMode.AspNetCoreCompatible)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty().MinimumLength(5);
 
             RuleFor(x => x.Cpf)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty().MinimumLength(10);
 
             RuleFor(x => x.Telefone)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty().MinimumLength(5);
 
             RuleFor(x => x.Cnh)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty().MinimumLength(10);
         }
     }
 }

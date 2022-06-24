@@ -16,6 +16,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 {
     public partial class TelaCadastroClientesForm : Form
     {
+        ValidadorRegex validador = new ValidadorRegex();
         public TelaCadastroClientesForm()
         {
             InitializeComponent();
@@ -52,15 +53,27 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Telefone = txtTelefone.Text;
             cliente.Cnh = txtCnh.Text;
 
-            var resultadoValidacao = GravarRegistro(cliente);
-
-            if (resultadoValidacao.IsValid == false)
+            if (validador.ApenasLetras(txtNome.Text) && validador.ApenasNumeros(txtCpf.Text))
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                var resultadoValidacao = GravarRegistro(cliente);
 
-                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+                if (resultadoValidacao.IsValid == false)
+                {
+                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                    DialogResult = DialogResult.None;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Insira um CPF válido e um nOME válido",
+                "Cadastro de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 DialogResult = DialogResult.None;
+
+                return;
             }
         }
     }
