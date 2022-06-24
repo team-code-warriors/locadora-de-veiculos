@@ -1,8 +1,10 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloCliente;
+﻿using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
+using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
         public TelaCadastroClientesForm()
         {
             InitializeComponent();
+            this.ConfigurarTela();
         }
 
         private Cliente cliente;
@@ -49,16 +52,16 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Telefone = txtTelefone.Text;
             cliente.Cnh = txtCnh.Text;
 
-            //var resultadoValidacao = gravarRegistro(cliente);
+            var resultadoValidacao = GravarRegistro(cliente);
 
-            //if (resultadoValidacao.IsValid == false)
-            //{
-            //    string erro = resultadoValidacao.Errors[0].ErrorMessage;
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
 
-            //    TelaPrincipalForm.Instancia.AtualizarRodape(erro);
+                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
 
-            //    DialogResult = DialogResult.None;
-            //}
+                DialogResult = DialogResult.None;
+            }
         }
     }
 }

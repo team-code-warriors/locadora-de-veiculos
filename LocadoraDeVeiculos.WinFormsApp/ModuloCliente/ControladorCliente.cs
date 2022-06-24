@@ -1,4 +1,6 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloCliente;
+﻿
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 {
     public class ControladorCliente : ControladorBase
     {
-        private readonly IRepositorioCliente repositorioCliente;
+        private readonly RepositorioClienteEmBancoDeDados repositorioCliente;
         private TabelaClientesControl tabelaClientes;
 
-        public ControladorCliente(IRepositorioCliente repositorioCliente)
+        public ControladorCliente(RepositorioClienteEmBancoDeDados repositorioCliente)
         {
             this.repositorioCliente = repositorioCliente;
         }
@@ -91,16 +93,16 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private Cliente ObtemClienteSelecionado()
         {
-            var numero = tabelaClientes.ObtemNumeroClienteSelecionado();      
+            var numero = tabelaClientes.ObtemNumeroClienteSelecionado();
 
-            return repositorioCliente.SelecionarPorNumero(numero);
+            return repositorioCliente.SelecionarPorId(numero);
         }
 
         private void CarregarClientes()
         {
             List<Cliente> clientes = repositorioCliente.SelecionarTodos();
 
-            tabelaClientes.AtualizarRegistros(clientes);                   
+            tabelaClientes.AtualizarRegistros(clientes);
 
             TelaMenuPrincipal.Instancia.AtualizarRodape($"Visualizando {clientes.Count} contato(s)");
 
