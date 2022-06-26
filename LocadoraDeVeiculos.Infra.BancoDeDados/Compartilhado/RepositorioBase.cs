@@ -57,7 +57,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado
 
         public ValidationResult Editar(T registro)
         {
-            var resultadoValidacao = Validar(registro);
+            var validador = new TValidador();
+
+            var resultadoValidacao = validador.Validate(registro);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
