@@ -1,7 +1,9 @@
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario;
+using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
 
 namespace LocadoraDeVeiculos.WinFormsApp
@@ -129,14 +131,14 @@ namespace LocadoraDeVeiculos.WinFormsApp
             var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
             //var repositorioCliente = new RepositorioClienteEmBancoDeDados();
             var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
-            //var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
 
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Funcionários", new ControladorFuncionario(repositorioFuncionario));
             //controladores.Add("Clientes", new ControladorCliente());
             controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa));
-            //controladores.Add("Grupo De Veículos", new ControladorGrupoDeVeiculos());
+            controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos));
         }
     }
 }
