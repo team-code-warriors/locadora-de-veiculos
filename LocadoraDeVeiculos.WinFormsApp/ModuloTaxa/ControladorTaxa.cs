@@ -77,7 +77,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
                 repositorioTaxa.Excluir(taxaSelecionada);
                 CarregarTaxas();
             }
-        }
+        }   
 
         public override UserControl ObtemListagem()
         {
