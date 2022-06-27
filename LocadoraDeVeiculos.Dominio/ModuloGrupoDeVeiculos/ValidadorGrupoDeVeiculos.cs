@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos
 {
@@ -12,7 +7,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos
         public ValidadorGrupoDeVeiculos()
         {
             RuleFor(x => x.Nome)
-                .NotNull().NotEmpty().MinimumLength(3);
+                .NotNull().NotEmpty().MinimumLength(2);
         }
     }
 }
