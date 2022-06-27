@@ -14,10 +14,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         {
         }
 
-        public Cliente(string nome, string email, string cpf, string telefone, string cnh)
+        public Cliente(string nome, string email, string endereco, string cpf, string telefone, string cnh)
         {
             Nome = nome;
             Email = email;
+            Endereco = endereco;    
             Cpf = cpf;
             Telefone = telefone;
             Cnh = cnh;
@@ -25,6 +26,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 
         public string Nome { get; set; }
         public string Email { get; set; }
+        public string Endereco { get; set; }
         public string Cpf { get; set; }
         public string Telefone { get; set; }
         public string Cnh { get; set; }

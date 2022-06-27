@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 {
-    public class RepositorioClienteEmBancoDeDados : RepositorioBase<Cliente, ValidadorCliente, MapeadorCliente>
+    public class RepositorioClienteEmBancoDeDados : 
+        RepositorioBase<Cliente, ValidadorCliente, MapeadorCliente>
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBCLIENTE] 
                 (
                     [NOME],
                     [EMAIL],
+                    [ENDERECO],
                     [CPF],
                     [TELEFONE],
                     [CNH]
@@ -23,6 +25,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                 (
                     @NOME,
                     @EMAIL,
+                    @ENDERECO,
                     @CPF,
                     @TELEFONE,
                     @CNH
@@ -34,6 +37,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                 SET
                     [NOME] = @NOME,
                     [EMAIL] = @EMAIL,
+                    [ENDERECO] = @ENDERECO,
                     [CPF] = @CPF,
                     [TELEFONE] = @TELEFONE,
                     [CNH] = @CNH
@@ -50,6 +54,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
             @"SELECT 
 		            [NOME],
                     [EMAIL],
+                    [ENDERECO],
                     [CPF],
                     [TELEFONE],
                     [CNH]
@@ -62,6 +67,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
             @"SELECT 
 		            [NOME],
                     [EMAIL],
+                    [ENDERECO],
                     [CPF],
                     [TELEFONE],
                     [CNH]

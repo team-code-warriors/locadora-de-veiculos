@@ -16,6 +16,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
             comando.Parameters.AddWithValue("ID", cliente.Id);
             comando.Parameters.AddWithValue("NOME", cliente.Nome);
             comando.Parameters.AddWithValue("EMAIL", cliente.Email);
+            comando.Parameters.AddWithValue("ENDERECO", cliente.Endereco);
             comando.Parameters.AddWithValue("CPF", cliente.Cpf);
             comando.Parameters.AddWithValue("TELEFONE", cliente.Telefone);
             comando.Parameters.AddWithValue("CNH", cliente.Cnh);
@@ -26,6 +27,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
             int id = Convert.ToInt32(leitorCliente["ID"]);
             string nome = Convert.ToString(leitorCliente["NOME"]);
             string email = Convert.ToString(leitorCliente["EMAIL"]);
+            string endereco = Convert.ToString(leitorCliente["ENDERECO"]);
             string cpf = Convert.ToString(leitorCliente["CPF"]);
             string telefone = Convert.ToString(leitorCliente["TELEFONE"]);
             string cnh = Convert.ToString(leitorCliente["CNH"]);
@@ -35,6 +37,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                 Id = id,
                 Nome = nome,
                 Email = email,
+                Endereco = endereco,
                 Cpf = cpf,
                 Telefone = telefone,
                 Cnh = cnh

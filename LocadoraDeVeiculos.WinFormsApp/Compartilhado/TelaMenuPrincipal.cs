@@ -131,8 +131,6 @@ namespace LocadoraDeVeiculos.WinFormsApp
         private void InicializarControladores()
         {
             var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
-            //var repositorioCliente = new RepositorioClienteEmBancoDeDados();
-            //var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
             var repositorioCliente = new RepositorioClienteEmBancoDeDados();
             var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
             var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
@@ -140,8 +138,6 @@ namespace LocadoraDeVeiculos.WinFormsApp
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Funcionários", new ControladorFuncionario(repositorioFuncionario));
-            //controladores.Add("Clientes", new ControladorCliente());
-            //controladores.Add("Funcionários", new ControladorFuncionario());  
             controladores.Add("Clientes", new ControladorCliente(repositorioCliente));
             controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa));
             controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos));

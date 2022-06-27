@@ -79,7 +79,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
         {
-            throw new NotImplementedException();
+            return new ConfiguracaoToolBoxCliente();
         }
 
         public override UserControl ObtemListagem()

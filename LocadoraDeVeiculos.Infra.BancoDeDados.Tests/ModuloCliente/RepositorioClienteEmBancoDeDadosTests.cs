@@ -20,7 +20,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
         public RepositorioClienteEmBancoDeDadosTests()
         {
             Db.ExecutarSql("DELETE FROM [TBCLIENT]; DBCC CHECKIDENT (TBCLIENT, RESEED, 0)");
-            cliente = new Cliente("Lucas", "lucas@gmail.com", "111.222.333-44", "999999999", "12988754461");
+            cliente = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "999999999", "12988754461");
             repositorio = new RepositorioClienteEmBancoDeDados();
         }
 
@@ -46,6 +46,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             //action
             cliente.Nome = "Lucas Bleyer";
             cliente.Email = "lucas@gmail.com";
+            cliente.Endereco = "Lages";
             cliente.Cpf = "111.222.333-44";
             cliente.Telefone = "999999999";
             cliente.Cnh = "123456789101";
@@ -91,9 +92,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
         public void Deve_selecionar_todos_os_clientes()
         {
             //arrange
-            var cliente1 = new Cliente("Lucas", "lucas@gmail.com", "111.222.333-44", "999999999", "12988754461");
-            var cliente2 = new Cliente("Ane", "ane@gmail.com", "555.666.777-88", "999999999", "12988754461");
-            var cliente3 = new Cliente("Daniel", "daniel@gmail.com", "999.888.777-66", "999999999", "12988754461");
+            var cliente1 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "999999999", "12988754461");
+            var cliente2 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "999999999", "12988754461");
+            var cliente3 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "999999999", "12988754461");
 
             repositorio.Inserir(cliente1);
             repositorio.Inserir(cliente2);

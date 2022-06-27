@@ -57,6 +57,30 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
+        public void Endereco_deve_ser_obrigatorio()
+        {
+            cliente = NovoCliente();
+
+            cliente.Endereco = null;
+
+            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+
+            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Endereco);
+        }
+
+        [TestMethod]
+        public void Endereco_deve_ser_valido()
+        {
+            cliente = NovoCliente();
+
+            cliente.Endereco = "A";
+
+            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+
+            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Endereco);
+        }
+
+        [TestMethod]
         public void Cpf_deve_ser_obrigatorio()
         {
             cliente = NovoCliente();

@@ -19,6 +19,9 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                 .EmailAddress(EmailValidationMode.AspNetCoreCompatible)
                 .NotNull().NotEmpty().MinimumLength(5);
 
+            RuleFor(x => x.Endereco)
+                .NotNull().NotEmpty().MinimumLength(2);
+
             RuleFor(x => x.Cpf)
                 .NotNull().NotEmpty().MinimumLength(10);
 

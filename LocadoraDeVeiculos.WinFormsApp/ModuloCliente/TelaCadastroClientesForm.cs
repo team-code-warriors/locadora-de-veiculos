@@ -39,6 +39,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
                 txtNome.Text = cliente.Nome;
                 txtEmail.Text = cliente.Email;
+                txtEndereco.Text = cliente.Endereco;
                 txtCpf.Text = cliente.Cpf;
                 txtTelefone.Text = cliente.Telefone;
                 txtCnh.Text = cliente.Cnh;
@@ -49,11 +50,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
         {
             cliente.Nome = txtNome.Text;
             cliente.Email = txtEmail.Text;
+            cliente.Endereco = txtEndereco.Text;
             cliente.Cpf = txtCpf.Text;
             cliente.Telefone = txtTelefone.Text;
             cliente.Cnh = txtCnh.Text;
 
-            if (validador.ApenasLetras(txtNome.Text) && validador.ApenasNumeros(txtCpf.Text))
+            string cpf_sem_pontos = txtCpf.Text.Replace(".","");
+            string cpf_sem_traco = cpf_sem_pontos.Replace("-", "");
+
+            if (validador.ApenasLetras(txtNome.Text) && validador.ApenasNumeros(cpf_sem_traco))
             {
                 var resultadoValidacao = GravarRegistro(cliente);
 
@@ -68,7 +73,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             }
             else
             {
-                MessageBox.Show("Insira um CPF válido e um nOME válido",
+                MessageBox.Show("Insira um CPF válido e um Nome válido",
                 "Cadastro de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 DialogResult = DialogResult.None;
