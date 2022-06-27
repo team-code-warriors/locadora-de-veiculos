@@ -64,7 +64,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [ID] = @ID";
 
         protected override string sqlSelecionarTodos =>
-            @"SELECT 
+            @"SELECT
+                    [ID], 
 		            [NOME],
                     [EMAIL],
                     [ENDERECO],

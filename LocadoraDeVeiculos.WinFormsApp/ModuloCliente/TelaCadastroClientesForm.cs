@@ -56,7 +56,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Cnh = txtCnh.Text;
 
             string cpf_sem_pontos = txtCpf.Text.Replace(".","");
-            string cpf_sem_traco = cpf_sem_pontos.Replace("-", "");
+            string cpf_sem_virgula = cpf_sem_pontos.Replace(",", "");
+            string cpf_sem_traco = cpf_sem_virgula.Replace("-", "");
 
             if (validador.ApenasLetras(txtNome.Text) && validador.ApenasNumeros(cpf_sem_traco))
             {
