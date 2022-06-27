@@ -29,18 +29,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
             if (resultado == DialogResult.OK)
             {
-                CarregarTaxas();
+                CarregarGrupos();
             }
         }
 
         public override void Editar()
         {
-            GrupoDeVeiculos grupoSelecionado = ObtemTaxaSelecionada();
+            GrupoDeVeiculos grupoSelecionado = ObtemGrupoSelecionado();
 
             if (grupoSelecionado == null)
             {
-                MessageBox.Show("Selecione uma taxa primeiro",
-                "Edição de Taxas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Selecione um grupo primeiro",
+                "Edição de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -54,37 +54,36 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
             if (resultado == DialogResult.OK)
             {
-                CarregarTaxas();
+                CarregarGrupos();
             }
         }
 
         public override void Excluir()
         {
-            GrupoDeVeiculos grupoSelecionado = ObtemTaxaSelecionada();
+            GrupoDeVeiculos grupoSelecionado = ObtemGrupoSelecionado();
 
             if (grupoSelecionado == null)
             {
-                MessageBox.Show("Selecione uma taxa primeiro",
-                "Exclusão de Taxas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Selecione um grupo primeiro",
+                "Exclusão de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult resultado = MessageBox.Show("Deseja realmente excluir a taxa?",
-                "Exclusão de Taxas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show("Deseja realmente excluir o grupo?",
+                "Exclusão de Grupos", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.OK)
             {
                 repositorioGrupo.Excluir(grupoSelecionado);
-                CarregarTaxas();
+                CarregarGrupos();
             }
         }
 
         public override UserControl ObtemListagem()
         {
-            //if (tabelaContatos == null)
             tabelaGrupo = new TabelaGrupoDeVeiculosControl();
 
-            CarregarTaxas();
+            CarregarGrupos();
 
             return tabelaGrupo;
         }
@@ -94,14 +93,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
             return new ConfiguracaoToolboxGrupoDeVeiculos();
         }
 
-        private GrupoDeVeiculos ObtemTaxaSelecionada()
+        private GrupoDeVeiculos ObtemGrupoSelecionado()
         {
-            var numero = tabelaGrupo.ObtemNumeroTaxaSelecionada();
+            var numero = tabelaGrupo.ObtemNumeroGrupoSelecionado();
 
             return repositorioGrupo.SelecionarPorId(numero);
         }
 
-        private void CarregarTaxas()
+        private void CarregarGrupos()
         {
             List<GrupoDeVeiculos> grupos = repositorioGrupo.SelecionarTodos();
 

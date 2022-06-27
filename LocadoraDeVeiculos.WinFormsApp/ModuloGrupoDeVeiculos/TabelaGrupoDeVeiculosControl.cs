@@ -36,7 +36,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
             return colunas;
         }
 
-        public int ObtemNumeroTaxaSelecionada()
+        public int ObtemNumeroGrupoSelecionado()
         {
             return grid.SelecionarNumero<int>();
         }
@@ -47,7 +47,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
             foreach (var grupoDeVeiculos in grupos)
             {
-
                 grid.Rows.Add(grupoDeVeiculos.Id ,grupoDeVeiculos.Nome);
             }
         }
