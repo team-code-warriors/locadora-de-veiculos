@@ -186,6 +186,19 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
+        public void Cpf_Deve_Ter_No_Maximo_11_Caracteres()
+        {
+            // arrange
+            cliente.Cpf = "111111111111111111111111";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cpf);
+        }
+
+        [TestMethod]
         public void Telefone_Nao_Pode_Ser_Nulo()
         {
             // arrange
@@ -225,6 +238,19 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
+        public void Telefone_Deve_Ter_No_Maximo_11_Caracteres()
+        {
+            // arrange
+            cliente.Telefone = "1111111111111111111112";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Telefone);
+        }
+
+        [TestMethod]
         public void Cnh_Nao_Pode_Ser_Nulo()
         {
             // arrange
@@ -255,6 +281,19 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         {
             // arrange
             cliente.Cnh = "1";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
+        }
+
+        [TestMethod]
+        public void Cnh_Deve_Ter_No_Maximo_10_Caracteres()
+        {
+            // arrange
+            cliente.Cnh = "111111111111111111111111111";
 
             // action
             var resultado = validador.TestValidate(cliente);
