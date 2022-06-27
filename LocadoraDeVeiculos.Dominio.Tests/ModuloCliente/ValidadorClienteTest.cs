@@ -12,132 +12,255 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
     [TestClass]
     public class ValidadorClienteTest
     {
-        private Cliente? cliente;
-        private ValidadorCliente validador;
+        private readonly Cliente cliente;
+        private readonly ValidadorCliente validador;
 
         public ValidadorClienteTest()
         {
-            validador = new();
+            cliente = new()
+            {
+                Nome = "Lucas Bleyer",
+                Email = "lucas@gmail.com",
+                Endereco = "Lages",
+                Cpf = "111.222.333-44",
+                Telefone = "11999999999",
+                Cnh = "123456789101"
+            };
+            validador = new ValidadorCliente();
         }
 
         [TestMethod]
-        public void Nome_deve_ser_obrigatorio()
+        public void Nome_Nao_Pode_Ser_Nulo()
         {
-            cliente = NovoCliente();
-
+            // arrange
             cliente.Nome = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Nome);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Nome);
         }
 
         [TestMethod]
-        public void Nome_deve_ser_valido()
+        public void Nome_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Nome = "";
 
-            cliente.Nome = "@Lucas";
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
-
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Nome);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Nome);
         }
 
         [TestMethod]
-        public void Email_deve_ser_obrigatorio()
+        public void Nome_Deve_Ter_No_Minimo_2_Caracteres()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Nome = "a";
 
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Nome);
+        }
+
+        [TestMethod]
+        public void Email_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
             cliente.Email = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Email);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Email);
         }
 
         [TestMethod]
-        public void Endereco_deve_ser_obrigatorio()
+        public void Email_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Email = "";
 
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Email);
+        }
+
+        [TestMethod]
+        public void Email_Deve_Ter_No_Minimo_5_Caracteres()
+        {
+            // arrange
+            cliente.Email = "a";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Email);
+        }
+
+        [TestMethod]
+        public void Endereco_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
             cliente.Endereco = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Endereco);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Endereco);
         }
 
         [TestMethod]
-        public void Endereco_deve_ser_valido()
+        public void Endereco_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Endereco = "";
 
-            cliente.Endereco = "A";
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
-
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Endereco);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Endereco);
         }
 
         [TestMethod]
-        public void Cpf_deve_ser_obrigatorio()
+        public void Endereco_Deve_Ter_No_Minimo_2_Caracteres()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Endereco = "a";
 
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Endereco);
+        }
+
+        [TestMethod]
+        public void Cpf_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
             cliente.Cpf = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Cpf);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cpf);
         }
 
         [TestMethod]
-        public void Telefone_deve_ser_obrigatorio()
+        public void Cpf_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Cpf = "";
 
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cpf);
+        }
+
+        [TestMethod]
+        public void Cpf_Deve_Ter_No_Minimo_11_Caracteres()
+        {
+            // arrange
+            cliente.Cpf = "11";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cpf);
+        }
+
+        [TestMethod]
+        public void Telefone_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
             cliente.Telefone = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Telefone);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Telefone);
         }
 
         [TestMethod]
-        public void Cnh_deve_ser_obrigatorio()
+        public void Telefone_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Telefone = "";
 
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Telefone);
+        }
+
+        [TestMethod]
+        public void Telefone_Deve_Ter_No_Minimo_11_Caracteres()
+        {
+            // arrange
+            cliente.Telefone = "12";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Telefone);
+        }
+
+        [TestMethod]
+        public void Cnh_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
             cliente.Cnh = null;
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Cnh);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
         }
 
         [TestMethod]
-        public void CNH_deve_ser_valida()
+        public void Cnh_Nao_Pode_Ser_Vazio()
         {
-            cliente = NovoCliente();
+            // arrange
+            cliente.Cnh = "";
 
-            cliente.Cnh = "12345678901";
+            // action
+            var resultado = validador.TestValidate(cliente);
 
-            TestValidationResult<Cliente> resultado = validador.TestValidate(cliente);
-
-            resultado.ShouldHaveValidationErrorFor(cliente => cliente.Cnh);
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
         }
 
-        private Cliente NovoCliente()
+        [TestMethod]
+        public void Cnh_Deve_Ter_No_Minimo_10_Caracteres()
         {
-            return new Cliente
-            {
-                Nome = "Lucas",
-                Email = "lucas@gmail.com",
-                Cpf = "111.222.333-44",
-                Telefone = "9999999999",
-                Cnh = "12345678901",
-            };
+            // arrange
+            cliente.Cnh = "1";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
         }
     }
 }
