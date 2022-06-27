@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 {
-    partial class TelaCadastroClientesForm
+    partial class TelaCadastroCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -217,7 +217,7 @@
             this.MinimizeBox = false;
             this.Name = "TelaCadastroClientesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cadastro Clientes";
+            this.Text = "Cadastro de Clientes";
             this.ResumeLayout(false);
             this.PerformLayout();
 

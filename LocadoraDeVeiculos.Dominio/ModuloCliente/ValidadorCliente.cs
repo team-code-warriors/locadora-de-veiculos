@@ -23,13 +23,13 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                 .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Cpf)
-                .NotNull().NotEmpty().MinimumLength(11).MaximumLength(11);
+                .NotNull().NotEmpty().Length(14);
 
             RuleFor(x => x.Telefone)
-                .NotNull().NotEmpty().MinimumLength(11).MaximumLength(11);
+                .NotNull().NotEmpty().Length(15);
 
             RuleFor(x => x.Cnh)
-                .NotNull().NotEmpty().MinimumLength(10).MaximumLength(10);
+                .NotNull().NotEmpty().Length(10);
         }
     }
 }

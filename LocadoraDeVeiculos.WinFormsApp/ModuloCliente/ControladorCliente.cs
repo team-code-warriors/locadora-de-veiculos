@@ -22,7 +22,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         public override void Inserir()
         {
-            TelaCadastroClientesForm tela = new TelaCadastroClientesForm();
+            TelaCadastroCliente tela = new TelaCadastroCliente();
             tela.Cliente = new Cliente();
 
             tela.GravarRegistro = repositorioCliente.Inserir;
@@ -42,16 +42,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             if (clienteSelecionado == null)
             {
                 MessageBox.Show("Selecione um cliente primeiro",
-                "Exclusão de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                "Edição de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult resultado = MessageBox.Show("Deseja realmente excluir este cliente?",
-                 "Exclusão de Clientes", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            TelaCadastroCliente tela = new TelaCadastroCliente();
+
+            tela.Cliente = clienteSelecionado.Clonar();
+
+            tela.GravarRegistro = repositorioCliente.Editar;
+
+            DialogResult resultado = tela.ShowDialog();
 
             if (resultado == DialogResult.OK)
             {
-                repositorioCliente.Excluir(clienteSelecionado);
                 CarregarClientes();
             }
         }

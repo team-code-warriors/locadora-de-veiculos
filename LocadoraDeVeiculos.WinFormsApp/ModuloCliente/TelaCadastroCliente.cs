@@ -14,10 +14,10 @@ using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 {
-    public partial class TelaCadastroClientesForm : Form
+    public partial class TelaCadastroCliente : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        public TelaCadastroClientesForm()
+        public TelaCadastroCliente()
         {
             InitializeComponent();
             this.ConfigurarTela();
@@ -55,12 +55,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Telefone = txtTelefone.Text;
             cliente.Cnh = txtCnh.Text;
 
-            string cpf_sem_pontos = txtCpf.Text.Replace(".","");
-            string cpf_sem_virgula = cpf_sem_pontos.Replace(",", "");
-            string cpf_sem_traco = cpf_sem_virgula.Replace("-", "");
-
             if (validador.ApenasLetras(txtNome.Text) &&
-                validador.ApenasNumeros(cpf_sem_traco) &&
                 validador.ApenasNumeros(txtCnh.Text))
             {
                 var resultadoValidacao = GravarRegistro(cliente);
@@ -76,7 +71,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             }
             else
             {
-                MessageBox.Show("Insira um nome válido no campo 'Nome' , um CPF válido no campo 'CPF' e uma CNH válida no campo 'CNH'",
+                MessageBox.Show("Insira um nome válido no campo 'Nome' e uma CNH válida no campo 'CNH'",
                 "Cadastro de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 DialogResult = DialogResult.None;

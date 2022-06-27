@@ -173,7 +173,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
-        public void Cpf_Deve_Ter_No_Minimo_11_Caracteres()
+        public void Cpf_Deve_Ter_No_Minimo_14_Caracteres()
         {
             // arrange
             cliente.Cpf = "11";
@@ -186,7 +186,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
-        public void Cpf_Deve_Ter_No_Maximo_11_Caracteres()
+        public void Cpf_Deve_Ter_No_Maximo_14_Caracteres()
         {
             // arrange
             cliente.Cpf = "111111111111111111111111";
