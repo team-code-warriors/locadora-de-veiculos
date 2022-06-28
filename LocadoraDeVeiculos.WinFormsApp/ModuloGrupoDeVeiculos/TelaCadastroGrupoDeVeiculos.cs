@@ -39,32 +39,27 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
         }
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
-            if (validador.ApenasLetras(textBoxNome.Text))
+            if (!validador.ApenasLetras(textBoxNome.Text))
             {
-                grupo.Nome = textBoxNome.Text;
-
-                var resultadoValidacao = GravarRegistro(grupo);
-
-                if (resultadoValidacao.IsValid == false)
-                {
-                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
-                    DialogResult = DialogResult.None;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Insira um nome válido no campo 'Nome'",
-                "Cadastro de Grupo de Veículos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
                 DialogResult = DialogResult.None;
 
                 return;
             }
-        }
 
+            grupo.Nome = textBoxNome.Text;
+
+            var resultadoValidacao = GravarRegistro(grupo);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
+        }
 
         private void TelaCadastroContatosForm_Load(object sender, EventArgs e)
         {

@@ -57,35 +57,39 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             funcionario.Nome = tbNome.Text;
             funcionario.Login = tbLogin.Text;
 
-            if (validador.ApenasNumeros(tbSalario.Text) && validador.ApenasLetras(tbNome.Text))
+            if (!validador.ApenasNumeros(tbSalario.Text))
             {
-                funcionario.Salario = Convert.ToDouble(tbSalario.Text);
-                funcionario.DataAdmissao = dtpData.Value;
-                funcionario.Senha = tbSenha.Text;
-                funcionario.TipoPerfil = (string)cbTipoPerfil.SelectedItem;
-
-                var resultadoValidacao = GravarRegistro(funcionario);
-
-                if (resultadoValidacao.IsValid == false)
-                {
-                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
-                    DialogResult = DialogResult.None;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Insira um número válido no campo 'Salário' e um nome válido no campo 'Nome'",
-                "Cadastro de Funcionarios", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Salário'. Se for o caso, utilize o '.' ao invés da ','.");
                 DialogResult = DialogResult.None;
 
                 return;
             }
-        }
 
+            if (!validador.ApenasLetras(tbNome.Text))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            funcionario.Salario = Convert.ToDouble(tbSalario.Text);
+            funcionario.DataAdmissao = dtpData.Value;
+            funcionario.Senha = tbSenha.Text;
+            funcionario.TipoPerfil = (string)cbTipoPerfil.SelectedItem;
+
+            var resultadoValidacao = GravarRegistro(funcionario);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
+        }
+    
         private void TelaCadastroContatosForm_Load(object sender, EventArgs e)
         {
             TelaMenuPrincipal.Instancia.AtualizarRodape("");

@@ -53,30 +53,26 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
         {
             taxa.Descricao = tbDescricao.Text;
 
-            if (validador.ApenasNumeros(tbValor.Text))
+            if (!validador.ApenasNumeros(tbValor.Text))
             {
-                taxa.Valor = Convert.ToDouble(tbValor.Text);
-                taxa.TipoCalculo = (string)cbTipoCalculo.SelectedItem;
-
-                var resultadoValidacao = GravarRegistro(taxa);
-
-                if (resultadoValidacao.IsValid == false)
-                {
-                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
-                    DialogResult = DialogResult.None;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Insira um número válido no campo 'Valor'",
-                "Cadastro de Taxas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Valor'. Se for o caso, utilize o '.' ao invés da ','.");
                 DialogResult = DialogResult.None;
 
                 return;
+            }
+
+            taxa.Valor = Convert.ToDouble(tbValor.Text);
+            taxa.TipoCalculo = (string)cbTipoCalculo.SelectedItem;
+
+            var resultadoValidacao = GravarRegistro(taxa);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
             }
         }
 
