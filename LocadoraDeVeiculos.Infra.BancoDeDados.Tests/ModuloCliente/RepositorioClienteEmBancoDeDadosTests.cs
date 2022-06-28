@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
         private Cliente NovoCliente()
         {
-            return new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "11999999999", "123456789101");
+            return new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "(11) 99999-9999", "0123456789");
         }
 
         [TestMethod]
@@ -53,8 +53,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             cliente.Email = "lucassilva@gmail.com";
             cliente.Endereco = "Lages";
             cliente.Cpf = "111.999.333-44";
-            cliente.Telefone = "88999999999";
-            cliente.Cnh = "123456789199";
+            cliente.Telefone = "(99) 99999-9999";
+            cliente.Cnh = "1234567890";
 
             //action
             repositorio.Editar(cliente);
@@ -100,9 +100,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
         public void Deve_selecionar_todos_os_clientes()
         {
             //arrange
-            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "88999999999", "12988754461");
-            var c1 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "55999999999", "12988754461");
-            var c2 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "66999999999", "12988754461");
+            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "(11) 99999-9999", "3333333333");
+            var c1 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "(22) 99999-9999", "4444444444");
+            var c2 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "(33) 99999-9999", "5555555555");
 
             var repositorio = new RepositorioClienteEmBancoDeDados();
             repositorio.Inserir(c0);
