@@ -23,7 +23,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa
         {
             int id = Convert.ToInt32(leitorTaxa["ID"]);
             string descricao = Convert.ToString(leitorTaxa["DESCRICAO"]);
-            double valor = Convert.ToDouble(leitorTaxa["VALOR"]);
+            Decimal valor = Convert.ToDecimal(leitorTaxa["VALOR"]);
             string tipoCalculo = Convert.ToString(leitorTaxa["TIPOCALCULO"]);
 
             return new Taxa()

@@ -57,9 +57,12 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             funcionario.Nome = tbNome.Text;
             funcionario.Login = tbLogin.Text;
 
-            if (!validador.ApenasNumeros(tbSalario.Text))
+            string valorComPonto = tbSalario.Text.Replace(",", ".");
+            string valorComVirgula = tbSalario.Text.Replace(".", ",");
+
+            if (!validador.ApenasNumeros(valorComPonto))
             {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Salário'. Se for o caso, utilize o '.' ao invés da ','.");
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Salário'.");
                 DialogResult = DialogResult.None;
 
                 return;
@@ -73,7 +76,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
                 return;
             }
 
-            funcionario.Salario = Convert.ToDouble(tbSalario.Text);
+            funcionario.Salario = Convert.ToDouble(valorComVirgula);
             funcionario.DataAdmissao = dtpData.Value;
             funcionario.Senha = tbSenha.Text;
             funcionario.TipoPerfil = (string)cbTipoPerfil.SelectedItem;

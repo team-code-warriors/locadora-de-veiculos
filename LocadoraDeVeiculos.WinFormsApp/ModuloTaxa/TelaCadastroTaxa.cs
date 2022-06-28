@@ -53,15 +53,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
         {
             taxa.Descricao = tbDescricao.Text;
 
-            if (!validador.ApenasNumeros(tbValor.Text))
+            string valorComPonto = tbValor.Text.Replace(",", ".");
+            string valorComVirgula = tbValor.Text.Replace(".", ",");
+
+            if (!validador.ApenasNumeros(valorComPonto))
             {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Valor'. Se for o caso, utilize o '.' ao invés da ','.");
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Valor'.");
                 DialogResult = DialogResult.None;
 
                 return;
             }
 
-            taxa.Valor = Convert.ToDouble(tbValor.Text);
+            taxa.Valor = Convert.ToDecimal(valorComVirgula);
             taxa.TipoCalculo = (string)cbTipoCalculo.SelectedItem;
 
             var resultadoValidacao = GravarRegistro(taxa);
