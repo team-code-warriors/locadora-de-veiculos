@@ -17,6 +17,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
     public partial class TelaCadastroGrupoDeVeiculos : Form
     {
         RepositorioGrupoDeVeiculosEmBancoDeDados repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+        ValidadorRegex validador = new ValidadorRegex();
         public TelaCadastroGrupoDeVeiculos()
         {
             InitializeComponent();
@@ -33,22 +34,34 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
             set
             {
                 grupo = value;
-                txtNome.Text = grupo.Nome;
+                textBoxNome.Text = grupo.Nome;
             }
         }
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
-            grupo.Nome = txtNome.Text;
-
-            var resultadoValidacao = GravarRegistro(grupo);
-
-            if (resultadoValidacao.IsValid == false)
+            if (validador.ApenasLetras(textBoxNome.Text))
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                grupo.Nome = textBoxNome.Text;
 
-                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+                var resultadoValidacao = GravarRegistro(grupo);
+
+                if (resultadoValidacao.IsValid == false)
+                {
+                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                    DialogResult = DialogResult.None;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Insira um nome válido no campo 'Nome'",
+                "Cadastro de Grupo de Veículos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 DialogResult = DialogResult.None;
+
+                return;
             }
         }
 

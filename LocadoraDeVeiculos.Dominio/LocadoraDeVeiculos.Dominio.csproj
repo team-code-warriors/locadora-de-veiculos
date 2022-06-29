@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="ModuloCliente\" />
+    <Folder Include="ModuloFuncionario\" />
+    <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloTaxa\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
   </ItemGroup>
