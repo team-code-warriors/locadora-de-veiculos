@@ -55,29 +55,33 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Telefone = txtTelefone.Text;
             cliente.Cnh = txtCnh.Text;
 
-            if (validador.ApenasLetras(txtNome.Text) &&
-                validador.ApenasNumeros(txtCnh.Text))
+            if(!validador.ApenasLetras(txtNome.Text))
             {
-                var resultadoValidacao = GravarRegistro(cliente);
-
-                if (resultadoValidacao.IsValid == false)
-                {
-                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
-                    DialogResult = DialogResult.None;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Insira um nome válido no campo 'Nome' e uma CNH válida no campo 'CNH'",
-                "Cadastro de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
                 DialogResult = DialogResult.None;
 
                 return;
             }
+
+            if (!validador.ApenasNumeros(txtCnh.Text))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            var resultadoValidacao = GravarRegistro(cliente);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
+
         }
     }
 }

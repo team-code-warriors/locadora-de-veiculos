@@ -23,13 +23,19 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                 .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Cpf)
-                .NotNull().NotEmpty().Length(14);
+                .NotNull()
+                .NotEmpty()
+                .Length(14).WithMessage("'CPF' deve ter 14 caracteres.");
 
             RuleFor(x => x.Telefone)
-                .NotNull().NotEmpty().Length(15);
+                .NotNull().
+                NotEmpty().
+                Length(15).WithMessage("'Telefone' deve ter 15 caracteres.");
 
             RuleFor(x => x.Cnh)
-                .NotNull().NotEmpty().Length(10);
+                .NotNull().
+                NotEmpty().
+                Length(10).WithMessage("'CNH' deve ter 10 caracteres.");
         }
     }
 }

@@ -126,15 +126,18 @@
             // 
             this.tbSenha.Location = new System.Drawing.Point(152, 303);
             this.tbSenha.Name = "tbSenha";
+            this.tbSenha.PasswordChar = '*';
             this.tbSenha.Size = new System.Drawing.Size(301, 27);
             this.tbSenha.TabIndex = 9;
             // 
             // dtpData
             // 
             this.dtpData.Location = new System.Drawing.Point(152, 195);
+            this.dtpData.MaxDate = new System.DateTime(2022, 6, 29, 0, 0, 0, 0);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(301, 27);
             this.dtpData.TabIndex = 10;
+            this.dtpData.Value = new System.DateTime(2022, 6, 29, 0, 0, 0, 0);
             // 
             // cbTipoPerfil
             // 

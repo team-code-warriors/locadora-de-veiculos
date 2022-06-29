@@ -81,7 +81,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
         public override UserControl ObtemListagem()
         {
-            //if (tabelaContatos == null)
             tabelaTaxas = new TabelaTaxaControl();
 
             CarregarTaxas();

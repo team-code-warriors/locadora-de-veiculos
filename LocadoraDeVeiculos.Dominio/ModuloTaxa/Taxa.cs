@@ -14,11 +14,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxa
         }
 
         public string Descricao { get; set; }
-        public double Valor { get; set; }
+        public Decimal Valor { get; set; }
 
         public string TipoCalculo { get; set; }
 
-        public Taxa(string descricao, double valor, string tipoCalculo)
+        public Taxa(string descricao, Decimal valor, string tipoCalculo)
         {
             Descricao = descricao;
             Valor = valor;
