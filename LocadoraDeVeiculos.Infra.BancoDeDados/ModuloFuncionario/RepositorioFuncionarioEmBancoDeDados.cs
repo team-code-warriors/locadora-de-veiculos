@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,44 +79,44 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
 	            FROM 
 		            [TBFUNCIONARIO]";
 
-        public override ValidationResult Validar(Funcionario registro)
+        private string sqlSelecionarPorNome =>
+            @"SELECT 
+                   [ID],       
+                   [NOME],
+                   [SALARIO],
+                   [DATAADMISSAO],
+                   [LOGIN],
+                   [SENHA],
+                   [TIPOPERFIL]
+            FROM
+                [TBFUNCIONARIO]
+            WHERE 
+                [NOME] = @NOME";
+
+
+        private string sqlSelecionarPorLogin =>
+            @"SELECT 
+                   [ID],       
+                   [NOME],
+                   [SALARIO],
+                   [DATAADMISSAO],
+                   [LOGIN],
+                   [SENHA],
+                   [TIPOPERFIL]
+            FROM
+                [TBFUNCIONARIO]
+            WHERE 
+                [LOGIN] = @LOGIN";
+
+        public Funcionario SelecionarFuncionarioPorLogin(string login)
         {
-            var validador = new ValidadorFuncionario();
-
-            var resultadoValidacao = validador.Validate(registro);
-
-            if (resultadoValidacao.IsValid == false)
-                return resultadoValidacao;
-
-            var registroEncontradoNome = SelecionarTodos()
-                .Select(x => x.Nome.ToLower())
-                .Contains(registro.Nome.ToLower());
-
-            if (registroEncontradoNome)
-            {
-                if (registro.Id == 0)
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Funcionário já cadastrado"));
-                else if (registro.Id != 0)
-                {
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Funcionário já cadastrado"));
-                }
-            }
-
-            var registroEncontradoLogin = SelecionarTodos()
-                .Select(x => x.Login.ToLower())
-                .Contains(registro.Login.ToLower());
-
-            if (registroEncontradoLogin)
-            {
-                if (registro.Id == 0)
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Login já cadastrado"));
-                else if (registro.Id != 0)
-                {
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Login já cadastrado"));
-                }
-            }
-
-            return resultadoValidacao;
+            return SelecionarPorParametro(sqlSelecionarPorLogin, new SqlParameter("LOGIN", login));
         }
+
+        public Funcionario SelecionarFuncionarioPorNome(string nome)
+        {
+            return SelecionarPorParametro(sqlSelecionarPorNome, new SqlParameter("NOME", nome));
+        }
+
     }
 }

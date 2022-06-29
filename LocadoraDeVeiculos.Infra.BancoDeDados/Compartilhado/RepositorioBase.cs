@@ -145,5 +145,26 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado
 
             return resultadoValidacao;
         }
+
+        public virtual T SelecionarPorParametro(string sqlSelecionarPorParametro, SqlParameter parametro)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarPorParametro, conexaoComBanco);
+
+            comandoSelecao.Parameters.Add(parametro);
+
+            conexaoComBanco.Open();
+            SqlDataReader leitorRegistro = comandoSelecao.ExecuteReader();
+
+            var mapeador = new TMapeador();
+            T registro = null;
+            if (leitorRegistro.Read())
+                registro = mapeador.ConverterRegistro(leitorRegistro);
+
+            conexaoComBanco.Close();
+
+            return registro;
+        }
     }
 }

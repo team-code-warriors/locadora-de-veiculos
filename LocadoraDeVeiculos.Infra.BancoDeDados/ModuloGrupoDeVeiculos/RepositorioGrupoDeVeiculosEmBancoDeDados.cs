@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,28 +51,18 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos
 	            FROM 
 		            [TBGRUPODEVEICULOS]";
 
-        public override ValidationResult Validar(GrupoDeVeiculos registro)
+        private string sqlSelecionarPorNome =>
+            @"SELECT
+                    [ID], 
+		            [NOME]
+	            FROM 
+		            [TBGRUPODEVEICULOS]
+                WHERE 
+                    [NOME] = @NOME";
+
+        public GrupoDeVeiculos SelecionarGrupoPorNome(string nome)
         {
-            var validador = new ValidadorGrupoDeVeiculos();
-
-            var resultadoValidacao = validador.Validate(registro);
-
-            if (resultadoValidacao.IsValid == false)
-                return resultadoValidacao;
-
-            var registroEncontrado = SelecionarTodos()
-                .Select(x => x.Nome.ToLower())
-                .Contains(registro.Nome.ToLower());
-
-            if (registroEncontrado)
-            {
-                if (registro.Id == 0)
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Grupo já cadastrado"));
-                else if (registro.Id != 0)
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Grupo já cadastrado"));
-            }
-
-            return resultadoValidacao;
+            return SelecionarPorParametro(sqlSelecionarPorNome, new SqlParameter("NOME", nome));
         }
     }
 }

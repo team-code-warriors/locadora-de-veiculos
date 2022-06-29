@@ -7,17 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.WinForms
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1- Apresentação", "1- Apresentação", "{56875BAE-FF7C-41B0-BB03-D41BCC912DF6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Dominio", "2- Dominio", "{4E9D3CB3-E0E1-476F-A8A6-8DD8A3F4759D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3- Dominio", "3- Dominio", "{4E9D3CB3-E0E1-476F-A8A6-8DD8A3F4759D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Dominio", "LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj", "{7B552988-ABF1-4E30-AAEF-9F1E3CCE7C44}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3- Infra", "3- Infra", "{A17117EC-71D5-42C5-B675-B447FD551C00}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4- Infra", "4- Infra", "{A17117EC-71D5-42C5-B675-B447FD551C00}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Infra.BancoDeDados", "LocadoraDeVeiculos.Infra.BancoDeDados\LocadoraDeVeiculos.Infra.BancoDeDados.csproj", "{3774F6F7-9522-48BC-9491-4540EE5751E5}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LocadoraDeVeiculos.Projeto.SqlServer", "LocadoraDeVeiculos.Projeto.SqlServer\LocadoraDeVeiculos.Projeto.SqlServer.sqlproj", "{D79BDBE0-5A5E-4040-9173-7962EF252693}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4- Teste", "4- Teste", "{1369F0B4-EE7E-4D82-BFF0-6C95A490FEDC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5- Teste", "5- Teste", "{1369F0B4-EE7E-4D82-BFF0-6C95A490FEDC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1- Teste Unitário", "4.1- Teste Unitário", "{F045703F-E191-41ED-B3DF-9F4D0CA0E4C4}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Dominio.Tests", "LocadoraDeVeiculos.Dominio.Tests\LocadoraDeVeiculos.Dominio.Tests.csproj", "{B7A99728-CE5A-4DFF-A61E-FDD4B3534958}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Infra.BancoDeDados.Tests", "LocadoraDeVeiculos.Infra.BancoDeDados.Tests\LocadoraDeVeiculos.Infra.BancoDeDados.Tests.csproj", "{B8312DE5-62EE-4A74-AD04-65303494791A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Aplicação", "2- Aplicação", "{882D8FA3-1DB7-448D-863E-74F18196CF0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Aplicacao", "LocadoraDeVeiculos.Aplicacao\LocadoraDeVeiculos.Aplicacao.csproj", "{D32126D3-CC94-416F-94CE-EBD380B0FDC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,10 @@ Global
 		{B8312DE5-62EE-4A74-AD04-65303494791A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8312DE5-62EE-4A74-AD04-65303494791A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8312DE5-62EE-4A74-AD04-65303494791A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32126D3-CC94-416F-94CE-EBD380B0FDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32126D3-CC94-416F-94CE-EBD380B0FDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32126D3-CC94-416F-94CE-EBD380B0FDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32126D3-CC94-416F-94CE-EBD380B0FDC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,7 @@ Global
 		{47751646-8E41-4D0C-BCC1-E1115B476596} = {1369F0B4-EE7E-4D82-BFF0-6C95A490FEDC}
 		{B7A99728-CE5A-4DFF-A61E-FDD4B3534958} = {F045703F-E191-41ED-B3DF-9F4D0CA0E4C4}
 		{B8312DE5-62EE-4A74-AD04-65303494791A} = {47751646-8E41-4D0C-BCC1-E1115B476596}
+		{D32126D3-CC94-416F-94CE-EBD380B0FDC5} = {882D8FA3-1DB7-448D-863E-74F18196CF0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56785EF7-0895-449E-8F73-91B962E4013F}

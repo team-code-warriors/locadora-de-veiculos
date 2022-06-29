@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,30 +78,25 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 	            FROM 
 		            [TBCLIENTE]";
 
-        public override ValidationResult Validar(Cliente registro)
+        private string sqlSelecionarPorCpf =>
+            @"SELECT
+                    [ID], 
+		            [NOME],
+                    [EMAIL],
+                    [ENDERECO],
+                    [CPF],
+                    [TELEFONE],
+                    [CNH]
+	            FROM 
+		            [TBCLIENTE]
+                WHERE 
+                    [CPF] = @CPF";
+
+
+        public Cliente SelecionarClientePorCpf(string cpf)
         {
-            var validador = new ValidadorCliente();
-
-            var resultadoValidacao = validador.Validate(registro);
-
-            if (resultadoValidacao.IsValid == false)
-                return resultadoValidacao;
-
-            var registroEncontrado = SelecionarTodos()
-                .Select(x => x.Cpf.ToLower())
-                .Contains(registro.Cpf.ToLower());
-
-            if (registroEncontrado)
-            {
-                if (registro.Id == 0)
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "CPF já cadastrado"));
-                else if (registro.Id != 0)
-                {
-                    resultadoValidacao.Errors.Add(new ValidationFailure("", "CPF já cadastrado"));
-                }
-            }
-
-            return resultadoValidacao;
+            return SelecionarPorParametro(sqlSelecionarPorCpf, new SqlParameter("CPF", cpf));
         }
+
     }
 }

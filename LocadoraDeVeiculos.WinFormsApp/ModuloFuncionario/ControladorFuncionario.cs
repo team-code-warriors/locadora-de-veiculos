@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
@@ -13,9 +14,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
     {
         private readonly RepositorioFuncionarioEmBancoDeDados repositorioFuncionario;
         private TabelaFuncionarioControl tabelaFuncionarios;
-        public ControladorFuncionario(RepositorioFuncionarioEmBancoDeDados repositorioFuncionario)
+        private readonly ServicoFuncionario servicoFuncionario;
+        public ControladorFuncionario(RepositorioFuncionarioEmBancoDeDados repositorioFuncionario, ServicoFuncionario servicoFuncionario)
         {
             this.repositorioFuncionario = repositorioFuncionario;
+            this.servicoFuncionario = servicoFuncionario;
         }
 
         public override void Inserir()
@@ -23,7 +26,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
             tela.Funcionario = new Funcionario();
 
-            tela.GravarRegistro = repositorioFuncionario.Inserir;
+            tela.GravarRegistro = servicoFuncionario.Inserir;
 
             DialogResult resultado = tela.ShowDialog();
 
@@ -48,7 +51,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 
             tela.Funcionario = funcionarioSelecionado.Clonar();
 
-            tela.GravarRegistro = repositorioFuncionario.Editar;
+            tela.GravarRegistro = servicoFuncionario.Editar;
 
             DialogResult resultado = tela.ShowDialog();
 

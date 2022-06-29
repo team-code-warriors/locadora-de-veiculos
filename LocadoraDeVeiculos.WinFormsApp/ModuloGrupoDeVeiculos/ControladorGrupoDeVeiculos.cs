@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
@@ -8,9 +9,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
     {
         private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
         private TabelaGrupoDeVeiculosControl tabelaGrupo;
-        public ControladorGrupoDeVeiculos(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo)
+        private readonly ServicoGrupoDeVeiculo servicoGrupo;
+        public ControladorGrupoDeVeiculos(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo, ServicoGrupoDeVeiculo servicoGrupo)
         {
             this.repositorioGrupo = repositorioGrupo;
+            this.servicoGrupo = servicoGrupo;
         }
 
         public override void Inserir()
@@ -18,7 +21,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
             TelaCadastroGrupoDeVeiculos tela = new TelaCadastroGrupoDeVeiculos();
             tela.Grupo = new GrupoDeVeiculos();
 
-            tela.GravarRegistro = repositorioGrupo.Inserir;
+            tela.GravarRegistro = servicoGrupo.Inserir;
 
             DialogResult resultado = tela.ShowDialog();
 
@@ -43,7 +46,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
             tela.Grupo = grupoSelecionado.Clonar();
 
-            tela.GravarRegistro = repositorioGrupo.Editar;
+            tela.GravarRegistro = servicoGrupo.Editar;
 
             DialogResult resultado = tela.ShowDialog();
 

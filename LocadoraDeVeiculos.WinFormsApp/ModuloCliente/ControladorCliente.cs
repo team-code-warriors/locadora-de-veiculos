@@ -1,4 +1,5 @@
 ﻿
+using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
@@ -14,10 +15,12 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
     {
         private readonly RepositorioClienteEmBancoDeDados repositorioCliente;
         private TabelaClientesControl tabelaClientes;
+        private readonly ServicoCliente servicoCliente;
 
-        public ControladorCliente(RepositorioClienteEmBancoDeDados repositorioCliente)
+        public ControladorCliente(RepositorioClienteEmBancoDeDados repositorioCliente, ServicoCliente servicoCliente)
         {
             this.repositorioCliente = repositorioCliente;
+            this.servicoCliente = servicoCliente;
         }
 
         public override void Inserir()
@@ -25,7 +28,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             TelaCadastroCliente tela = new TelaCadastroCliente();
             tela.Cliente = new Cliente();
 
-            tela.GravarRegistro = repositorioCliente.Inserir;
+            tela.GravarRegistro = servicoCliente.Inserir;
 
             DialogResult result = tela.ShowDialog();
 
@@ -50,7 +53,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
             tela.Cliente = clienteSelecionado.Clonar();
 
-            tela.GravarRegistro = repositorioCliente.Editar;
+            tela.GravarRegistro = servicoCliente.Editar;
 
             DialogResult resultado = tela.ShowDialog();
 
