@@ -22,6 +22,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
         {
             InitializeComponent();
             this.ConfigurarTela();
+            dtpData.MaxDate = DateTime.Now.Date;
         }
 
         private Funcionario funcionario;

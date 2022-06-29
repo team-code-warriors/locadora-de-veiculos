@@ -51,7 +51,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloGrupoDeVeiculos
         }
 
         [TestMethod]
-        public void Nome_Deve_Ter_No_Minimo_3_Caracteres()
+        public void Nome_Deve_Ter_No_Minimo_2_Caracteres()
         {
             // arrange
             grupo.Nome = "a";

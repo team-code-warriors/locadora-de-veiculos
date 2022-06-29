@@ -81,7 +81,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 
         public override UserControl ObtemListagem()
         {
-            //if (tabelaContatos == null)
             tabelaFuncionarios = new TabelaFuncionarioControl();
 
             CarregarFuncionarios();
