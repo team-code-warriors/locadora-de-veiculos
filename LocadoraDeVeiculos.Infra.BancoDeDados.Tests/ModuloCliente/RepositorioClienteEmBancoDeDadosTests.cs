@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
         private Cliente NovoCliente()
         {
-            return new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "(11) 99999-9999", "0123456789");
+            return new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658/0001-49", "(11) 99999-9999");
         }
 
         [TestMethod]
@@ -53,8 +53,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             cliente.Email = "lucassilva@gmail.com";
             cliente.Endereco = "Lages";
             cliente.Cpf = "111.999.333-44";
+            cliente.Cnpj = "43.367.658/0001-49";
             cliente.Telefone = "(99) 99999-9999";
-            cliente.Cnh = "1234567890";
 
             //action
             repositorio.Editar(cliente);
@@ -100,9 +100,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
         public void Deve_selecionar_todos_os_clientes()
         {
             //arrange
-            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "(11) 99999-9999", "3333333333");
-            var c1 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "(22) 99999-9999", "4444444444");
-            var c2 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "(33) 99999-9999", "5555555555");
+            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658 / 0001 - 49", "(11) 99999-9999");
+            var c1 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "43.367.658/0001-49", "(22) 99999-9999");
+            var c2 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "43.367.658/0001-49", "(33) 99999-9999");
 
             var repositorio = new RepositorioClienteEmBancoDeDados();
             repositorio.Inserir(c0);
@@ -118,7 +118,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             Assert.AreEqual(c0.Nome, clientes[0].Nome);
             Assert.AreEqual(c1.Nome, clientes[1].Nome);
             Assert.AreEqual(c2.Nome, clientes[2].Nome);
-
         }
     }
 }
