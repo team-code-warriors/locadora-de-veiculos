@@ -37,25 +37,25 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             { 
                 cliente = value; 
 
-                txtNome.Text = cliente.Nome;
-                txtEmail.Text = cliente.Email;
-                txtEndereco.Text = cliente.Endereco;
-                txtCpf.Text = cliente.Cpf;
-                txtTelefone.Text = cliente.Telefone;
-                txtCnh.Text = cliente.Cnh;
+                tfNome.Text = cliente.Nome;
+                tfEmail.Text = cliente.Email;
+                tfEndereco.Text = cliente.Endereco;
+                tfCpf.Text = cliente.Cpf;
+                tfTelefone.Text = cliente.Telefone;
+                tfCnh.Text = cliente.Cnh;
             }
         }
 
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
-            cliente.Nome = txtNome.Text;
-            cliente.Email = txtEmail.Text;
-            cliente.Endereco = txtEndereco.Text;
-            cliente.Cpf = txtCpf.Text;
-            cliente.Telefone = txtTelefone.Text;
-            cliente.Cnh = txtCnh.Text;
+            cliente.Nome = tfNome.Text;
+            cliente.Email = tfEmail.Text;
+            cliente.Endereco = tfEndereco.Text;
+            cliente.Cpf = tfCpf.Text;
+            cliente.Telefone = tfTelefone.Text;
+            cliente.Cnh = tfCnh.Text;
 
-            if(!validador.ApenasLetras(txtNome.Text))
+            if(!validador.ApenasLetras(tfNome.Text))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
                 DialogResult = DialogResult.None;
@@ -63,7 +63,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 return;
             }
 
-            if (!validador.ApenasNumeros(txtCnh.Text))
+            if (!validador.ApenasNumeros(tfCnh.Text))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
                 DialogResult = DialogResult.None;
