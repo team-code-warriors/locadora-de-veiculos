@@ -82,7 +82,7 @@
             this.textBoxNumero.Location = new System.Drawing.Point(84, 10);
             this.textBoxNumero.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxNumero.Name = "textBoxNumero";
-            this.textBoxNumero.Size = new System.Drawing.Size(230, 27);
+            this.textBoxNumero.Size = new System.Drawing.Size(74, 27);
             this.textBoxNumero.TabIndex = 5;
             // 
             // labelNumero

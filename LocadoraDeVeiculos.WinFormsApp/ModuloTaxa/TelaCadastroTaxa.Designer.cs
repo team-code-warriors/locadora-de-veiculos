@@ -72,7 +72,7 @@
             this.tbNumero.Enabled = false;
             this.tbNumero.Location = new System.Drawing.Point(134, 19);
             this.tbNumero.Name = "tbNumero";
-            this.tbNumero.Size = new System.Drawing.Size(311, 27);
+            this.tbNumero.Size = new System.Drawing.Size(64, 27);
             this.tbNumero.TabIndex = 4;
             // 
             // tbDescricao

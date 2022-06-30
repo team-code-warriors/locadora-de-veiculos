@@ -20,8 +20,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         }
         private GrupoDeVeiculos NovoGrupo()
         {
-            return new GrupoDeVeiculos("Uber Eats");
+            return new GrupoDeVeiculos("Econômico");
         }
+
         [TestMethod]
         public void Deve_inserir_um_grupo()
         {
@@ -52,7 +53,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //action 
             repositorio.Editar(grupo);
 
-
             //assert
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
 
@@ -63,24 +63,21 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
         [TestMethod]
         public void Deve_excluir_grupo()
-        {
+        {        
             //arrange
             var grupo = NovoGrupo();
 
             //action
             repositorio.Inserir(grupo);
 
-            grupo.Nome = "Uber";
             //action           
             repositorio.Excluir(grupo);
-
-            //action
-            repositorio.Editar(grupo);
 
             //assert
             repositorio.SelecionarPorId(grupo.Id)
                 .Should().BeNull();
         }
+
         [TestMethod]
         public void Deve_selecionar_apenas_um_grupo()
         {
@@ -91,8 +88,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //action
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
 
-            grupoEncontrado.Should().NotBeNull();
-            grupoEncontrado.Should().Be(grupo);
             //assert
             Assert.IsNotNull(grupoEncontrado);
             Assert.AreEqual(grupo, grupoEncontrado);
@@ -160,10 +155,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             Assert.AreEqual(g1.Nome, grupos[1].Nome);
             Assert.AreEqual(g2.Nome, grupos[2].Nome);
             Assert.AreEqual(3, grupos.Count);
-
-            Assert.AreEqual(g0.Nome, grupos[0].Nome);
-            Assert.AreEqual(g1.Nome, grupos[1].Nome);
-            Assert.AreEqual(g2.Nome, grupos[2].Nome);
         }
     }
 }

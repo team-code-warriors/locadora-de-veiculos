@@ -20,8 +20,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [EMAIL],
                     [ENDERECO],
                     [CPF],
-                    [TELEFONE],
-                    [CNH]
+                    [CNPJ],
+                    [TELEFONE]
 	            )
 	            VALUES
                 (
@@ -29,8 +29,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     @EMAIL,
                     @ENDERECO,
                     @CPF,
-                    @TELEFONE,
-                    @CNH
+                    @CNPJ,
+                    @TELEFONE
 
                 );SELECT SCOPE_IDENTITY();";
 
@@ -41,8 +41,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [EMAIL] = @EMAIL,
                     [ENDERECO] = @ENDERECO,
                     [CPF] = @CPF,
-                    [TELEFONE] = @TELEFONE,
-                    [CNH] = @CNH
+                    [CNPJ] = @CNPJ,
+                    [TELEFONE] = @TELEFONE
 
                 WHERE
                     [ID] = @ID";
@@ -59,8 +59,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [EMAIL],
                     [ENDERECO],
                     [CPF],
-                    [TELEFONE],
-                    [CNH]
+                    [CNPJ],
+                    [TELEFONE]
 	            FROM 
 		            [TBCLIENTE]
 		        WHERE
@@ -73,8 +73,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [EMAIL],
                     [ENDERECO],
                     [CPF],
-                    [TELEFONE],
-                    [CNH]
+                    [CNPJ],
+                    [TELEFONE]
 	            FROM 
 		            [TBCLIENTE]";
 
@@ -85,17 +85,36 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
                     [EMAIL],
                     [ENDERECO],
                     [CPF],
-                    [TELEFONE],
-                    [CNH]
+                    [CNPJ],
+                    [TELEFONE]
 	            FROM 
 		            [TBCLIENTE]
                 WHERE 
                     [CPF] = @CPF";
 
+        private string sqlSelecionarPorCnpj =>
+            @"SELECT
+                    [ID], 
+		            [NOME],
+                    [EMAIL],
+                    [ENDERECO],
+                    [CPF],
+                    [CNPJ],
+                    [TELEFONE]
+	            FROM 
+		            [TBCLIENTE]
+                WHERE 
+                    [CNPJ] = @CNPJ";
+
 
         public Cliente SelecionarClientePorCpf(string cpf)
         {
             return SelecionarPorParametro(sqlSelecionarPorCpf, new SqlParameter("CPF", cpf));
+        }
+
+        public Cliente SelecionarClientePorCnpj(string cnpj)
+        {
+            return SelecionarPorParametro(sqlSelecionarPorCnpj, new SqlParameter("CNPJ", cnpj));
         }
 
     }

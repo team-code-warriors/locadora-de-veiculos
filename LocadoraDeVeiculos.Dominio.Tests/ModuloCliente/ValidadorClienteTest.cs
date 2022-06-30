@@ -23,8 +23,8 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
                 Email = "lucas@gmail.com",
                 Endereco = "Lages",
                 Cpf = "111.222.333-44",
+                Cnpj = "43.367.658/0001-49",
                 Telefone = "11999999999",
-                Cnh = "123456789101"
             };
             validador = new ValidadorCliente();
         }
@@ -199,6 +199,58 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
         }
 
         [TestMethod]
+        public void Cnpj_Nao_Pode_Ser_Nulo()
+        {
+            // arrange
+            cliente.Cnpj = null;
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnpj);
+        }
+
+        [TestMethod]
+        public void Cnpj_Nao_Pode_Ser_Vazio()
+        {
+            // arrange
+            cliente.Cnpj = "";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnpj);
+        }
+
+        [TestMethod]
+        public void Cnpj_Deve_Ter_No_Minimo_14_Caracteres()
+        {
+            // arrange
+            cliente.Cnpj = "11";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnpj);
+        }
+
+        [TestMethod]
+        public void Cnpj_Deve_Ter_No_Maximo_20_Caracteres()
+        {
+            // arrange
+            cliente.Cnpj = "111111111111111111111111";
+
+            // action
+            var resultado = validador.TestValidate(cliente);
+
+            // assert
+            resultado.ShouldHaveValidationErrorFor(f => f.Cnpj);
+        }
+
+        [TestMethod]
         public void Telefone_Nao_Pode_Ser_Nulo()
         {
             // arrange
@@ -248,58 +300,6 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloCliente
 
             // assert
             resultado.ShouldHaveValidationErrorFor(f => f.Telefone);
-        }
-
-        [TestMethod]
-        public void Cnh_Nao_Pode_Ser_Nulo()
-        {
-            // arrange
-            cliente.Cnh = null;
-
-            // action
-            var resultado = validador.TestValidate(cliente);
-
-            // assert
-            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
-        }
-
-        [TestMethod]
-        public void Cnh_Nao_Pode_Ser_Vazio()
-        {
-            // arrange
-            cliente.Cnh = "";
-
-            // action
-            var resultado = validador.TestValidate(cliente);
-
-            // assert
-            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
-        }
-
-        [TestMethod]
-        public void Cnh_Deve_Ter_No_Minimo_10_Caracteres()
-        {
-            // arrange
-            cliente.Cnh = "1";
-
-            // action
-            var resultado = validador.TestValidate(cliente);
-
-            // assert
-            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
-        }
-
-        [TestMethod]
-        public void Cnh_Deve_Ter_No_Maximo_10_Caracteres()
-        {
-            // arrange
-            cliente.Cnh = "111111111111111111111111111";
-
-            // action
-            var resultado = validador.TestValidate(cliente);
-
-            // assert
-            resultado.ShouldHaveValidationErrorFor(f => f.Cnh);
         }
     }
 }

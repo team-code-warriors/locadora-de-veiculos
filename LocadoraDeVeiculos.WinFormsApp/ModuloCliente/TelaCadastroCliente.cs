@@ -20,7 +20,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
         public TelaCadastroCliente()
         {
             InitializeComponent();
-            this.ConfigurarTela();
+            this.ConfigurarTela();            
         }
 
         private Cliente cliente;
@@ -41,8 +41,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 tfEmail.Text = cliente.Email;
                 tfEndereco.Text = cliente.Endereco;
                 tfCpf.Text = cliente.Cpf;
+                tfCnpj.Text = cliente.Cnpj;
                 tfTelefone.Text = cliente.Telefone;
-                tfCnh.Text = cliente.Cnh;
             }
         }
 
@@ -52,8 +52,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             cliente.Email = tfEmail.Text;
             cliente.Endereco = tfEndereco.Text;
             cliente.Cpf = tfCpf.Text;
+            cliente.Cnpj = tfCnpj.Text;
             cliente.Telefone = tfTelefone.Text;
-            cliente.Cnh = tfCnh.Text;
 
             if(!validador.ApenasLetras(tfNome.Text))
             {
@@ -63,13 +63,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 return;
             }
 
-            if (!validador.ApenasNumeros(tfCnh.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
-                DialogResult = DialogResult.None;
+            //if (!validador.ApenasNumeros(tfCnh.Text))
+            //{
+            //    TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
+            //    DialogResult = DialogResult.None;
 
-                return;
-            }
+            //    return;
+            //}
 
             var resultadoValidacao = GravarRegistro(cliente);
 
@@ -81,7 +81,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
                 DialogResult = DialogResult.None;
             }
+        }
 
+        private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
+        {
+
+            tfCnpj.Enabled = false;
+            tfCpf.Enabled = true;
+        }
+
+        private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
+        {
+
+            tfCpf.Enabled=false;
+            tfCnpj.Enabled = true;
         }
     }
 }

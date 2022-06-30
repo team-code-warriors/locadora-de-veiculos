@@ -14,22 +14,22 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         {
         }
 
-        public Cliente(string nome, string email, string endereco, string cpf, string telefone, string cnh)
+        public Cliente(string nome, string email, string endereco, string cpf, string cnpj, string telefone)
         {
             Nome = nome;
             Email = email;
             Endereco = endereco;    
             Cpf = cpf;
+            Cnpj = cnpj;
             Telefone = telefone;
-            Cnh = cnh;
         }
 
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Endereco { get; set; }
         public string Cpf { get; set; }
+        public string Cnpj { get; set; }
         public string Telefone { get; set; }
-        public string Cnh { get; set; }
 
         public Cliente Clonar()
         {
@@ -44,8 +44,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                    Email == cliente.Email &&
                    Endereco == cliente.Endereco &&
                    Cpf == cliente.Cpf &&
-                   Telefone == cliente.Telefone &&
-                   Cnh == cliente.Cnh;
+                   Cnpj == cliente.Cnpj &&
+                   Telefone == cliente.Telefone;
         }
     }
 }
