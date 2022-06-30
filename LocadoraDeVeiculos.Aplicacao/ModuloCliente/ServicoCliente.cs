@@ -40,7 +40,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
             var resultadoValidacao = validador.Validate(cliente);
 
             if (CpfDuplicado(cliente))
-                resultadoValidacao.Errors.Add(new ValidationFailure("Cpf", "Cpf já cadastrado"));
+                resultadoValidacao.Errors.Add(new ValidationFailure("CPF", "CPF já cadastrado"));
+
+            if(CnpjDuplicado(cliente))
+                resultadoValidacao.Errors.Add(new ValidationFailure("CNJP", "CNPJ já cadastrado"));
 
             return resultadoValidacao;
         }
@@ -51,6 +54,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
 
             return clienteEncontrado != null &&
                    clienteEncontrado.Cpf == cliente.Cpf &&
+                   clienteEncontrado.Id != cliente.Id;
+        }
+
+        private bool CnpjDuplicado(Cliente cliente)
+        {
+            var clienteEncontrado = repositorioCliente.SelecionarClientePorCnpj(cliente.Cnpj);
+
+            return clienteEncontrado != null &&
+                   clienteEncontrado.Cnpj == cliente.Cnpj &&
                    clienteEncontrado.Id != cliente.Id;
         }
     }

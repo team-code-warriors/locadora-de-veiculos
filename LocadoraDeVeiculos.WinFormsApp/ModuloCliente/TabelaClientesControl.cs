@@ -37,9 +37,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Cpf", HeaderText = "CPF"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Telefone", HeaderText = "Telefone"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Cnpj", HeaderText = "CNPJ"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Cnh", HeaderText = "CNH"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Telefone", HeaderText = "Telefone"},
             };
             return colunas;
         }
@@ -55,7 +55,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
             foreach (var cliente in clientes)
             {
-                grid.Rows.Add(cliente.Id, cliente.Nome, cliente.Email, cliente.Endereco, cliente.Cpf, cliente.Telefone, cliente.Cnh);
+                grid.Rows.Add(cliente.Id, cliente.Nome, cliente.Email, cliente.Endereco, cliente.Cpf, cliente.Cnpj, cliente.Telefone);
             }
         }
     }
