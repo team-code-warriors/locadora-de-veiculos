@@ -51,12 +51,12 @@
             // 
             // lNumero
             // 
-            this.lId.AutoSize = true;
-            this.lId.Location = new System.Drawing.Point(110, 48);
-            this.lId.Name = "lId";
-            this.lId.Size = new System.Drawing.Size(29, 20);
-            this.lId.TabIndex = 0;
-            this.lId.Text = "Id: ";
+            this.lNumero.AutoSize = true;
+            this.lNumero.Location = new System.Drawing.Point(110, 48);
+            this.lNumero.Name = "lId";
+            this.lNumero.Size = new System.Drawing.Size(29, 20);
+            this.lNumero.TabIndex = 0;
+            this.lNumero.Text = "Id: ";
             this.lNumero.AutoSize = true;
             this.lNumero.Location = new System.Drawing.Point(20, 17);
             this.lNumero.Name = "lNumero";

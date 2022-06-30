@@ -45,7 +45,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                    Endereco == cliente.Endereco &&
                    Cpf == cliente.Cpf &&
                    Cnpj == cliente.Cnpj &&
-                   Telefone == cliente.Telefone &&
+                   Telefone == cliente.Telefone;
         }
     }
 }
