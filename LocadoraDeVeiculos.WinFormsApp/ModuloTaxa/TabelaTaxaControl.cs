@@ -53,7 +53,5 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
                 grid.Rows.Add(taxa.Id, taxa.Descricao, taxa.Valor, taxa.TipoCalculo);
             }
         }
-
-
     }
 }

@@ -17,7 +17,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         public RepositorioGrupoDeVeiculosEmBancoDeDadosTest()
         {
             repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
-            repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
         }
         private GrupoDeVeiculos NovoGrupo()
         {
@@ -38,12 +37,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             grupoEncontrado.Should().NotBeNull();
             grupoEncontrado.Should().Be(grupo);
         }
-
-        private GrupoDeVeiculos NovoGrupo()
-        {
-            return new GrupoDeVeiculos("Econômico");
-        }
-
         [TestMethod]
         public void Deve_editar_informacoes_grupo()
         {
@@ -51,8 +44,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             var grupo = NovoGrupo();
 
             //action
-            //arrange
-            var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
 
             //assert
@@ -75,8 +66,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         {
             //arrange
             var grupo = NovoGrupo();
-            //arrange           
-            var grupo = NovoGrupo();
+
+            //action
             repositorio.Inserir(grupo);
 
             grupo.Nome = "Uber";
@@ -113,13 +104,12 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //arrange           
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
+
             //arrange
             var g0 = new GrupoDeVeiculos("0 Kms");
             var g1 = new GrupoDeVeiculos("Antigos usados");
             var g2 = new GrupoDeVeiculos("Seminovos");
 
-
-            var repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
             repositorio.Inserir(g0);
             repositorio.Inserir(g1);
             repositorio.Inserir(g2);
@@ -164,7 +154,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             var grupos = repositorio.SelecionarTodos();
 
             //assert
-
             Assert.AreEqual(3, grupos.Count);
 
             Assert.AreEqual(g0.Nome, grupos[0].Nome);
