@@ -20,6 +20,7 @@
     <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
+    <Folder Include="ModuloVeiculo\" />
   </ItemGroup>
 
   <ItemGroup>
