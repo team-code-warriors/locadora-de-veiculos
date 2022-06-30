@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lId = new System.Windows.Forms.Label();
+            this.lNumero = new System.Windows.Forms.Label();
             this.lNome = new System.Windows.Forms.Label();
             this.lEmail = new System.Windows.Forms.Label();
             this.lTelefone = new System.Windows.Forms.Label();
@@ -46,14 +46,14 @@
             this.tfEndereco = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // lId
+            // lNumero
             // 
-            this.lId.AutoSize = true;
-            this.lId.Location = new System.Drawing.Point(61, 20);
-            this.lId.Name = "lId";
-            this.lId.Size = new System.Drawing.Size(29, 20);
-            this.lId.TabIndex = 0;
-            this.lId.Text = "Id: ";
+            this.lNumero.AutoSize = true;
+            this.lNumero.Location = new System.Drawing.Point(20, 17);
+            this.lNumero.Name = "lNumero";
+            this.lNumero.Size = new System.Drawing.Size(70, 20);
+            this.lNumero.TabIndex = 0;
+            this.lNumero.Text = "Número: ";
             // 
             // lNome
             // 
@@ -117,7 +117,7 @@
             // 
             // tfId
             // 
-            this.tfId.Location = new System.Drawing.Point(96, 17);
+            this.tfId.Location = new System.Drawing.Point(96, 14);
             this.tfId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfId.Name = "tfId";
             this.tfId.ReadOnly = true;
@@ -210,7 +210,7 @@
             this.Controls.Add(this.lTelefone);
             this.Controls.Add(this.lEmail);
             this.Controls.Add(this.lNome);
-            this.Controls.Add(this.lId);
+            this.Controls.Add(this.lNumero);
             this.ForeColor = System.Drawing.SystemColors.Desktop;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
@@ -225,7 +225,7 @@
 
         #endregion
 
-        private Label lId;
+        private Label lNumero;
         private Label lNome;
         private Label lEmail;
         private Label lTelefone;

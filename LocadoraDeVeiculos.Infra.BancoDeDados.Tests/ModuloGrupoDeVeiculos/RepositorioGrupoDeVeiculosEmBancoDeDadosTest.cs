@@ -21,8 +21,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         }
         private GrupoDeVeiculos NovoGrupo()
         {
-            return new GrupoDeVeiculos("Uber Eats");
+            return new GrupoDeVeiculos("Econômico");
         }
+
         [TestMethod]
         public void Deve_inserir_um_grupo()
         {
@@ -39,18 +40,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             grupoEncontrado.Should().Be(grupo);
         }
 
-        private GrupoDeVeiculos NovoGrupo()
-        {
-            return new GrupoDeVeiculos("Econômico");
-        }
-
         [TestMethod]
         public void Deve_editar_informacoes_grupo()
         {
-            //arrange
-            var grupo = NovoGrupo();
-
-            //action
             //arrange
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
@@ -60,7 +52,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
             //action 
             repositorio.Editar(grupo);
-
 
             //assert
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
@@ -72,24 +63,19 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
         [TestMethod]
         public void Deve_excluir_grupo()
-        {
+        {        
             //arrange
-            var grupo = NovoGrupo();
-            //arrange           
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
 
-            grupo.Nome = "Uber";
             //action           
             repositorio.Excluir(grupo);
-
-            //action
-            repositorio.Editar(grupo);
 
             //assert
             repositorio.SelecionarPorId(grupo.Id)
                 .Should().BeNull();
         }
+
         [TestMethod]
         public void Deve_selecionar_apenas_um_grupo()
         {
@@ -100,36 +86,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //action
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
 
-            grupoEncontrado.Should().NotBeNull();
-            grupoEncontrado.Should().Be(grupo);
             //assert
             Assert.IsNotNull(grupoEncontrado);
             Assert.AreEqual(grupo, grupoEncontrado);
-        }
-
-        [TestMethod]
-        public void Deve_selecionar_todos_os_grupos()
-        {
-            //arrange           
-            var grupo = NovoGrupo();
-            repositorio.Inserir(grupo);
-            //arrange
-            var g0 = new GrupoDeVeiculos("0 Kms");
-            var g1 = new GrupoDeVeiculos("Antigos usados");
-            var g2 = new GrupoDeVeiculos("Seminovos");
-
-
-            var repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
-            repositorio.Inserir(g0);
-            repositorio.Inserir(g1);
-            repositorio.Inserir(g2);
-
-            //action
-            var grupos = repositorio.SelecionarTodos();
-
-            //assert
-            repositorio.SelecionarPorId(grupo.Id)
-                .Should().BeNull();
         }
 
         [TestMethod]
@@ -171,10 +130,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             Assert.AreEqual(g1.Nome, grupos[1].Nome);
             Assert.AreEqual(g2.Nome, grupos[2].Nome);
             Assert.AreEqual(3, grupos.Count);
-
-            Assert.AreEqual(g0.Nome, grupos[0].Nome);
-            Assert.AreEqual(g1.Nome, grupos[1].Nome);
-            Assert.AreEqual(g2.Nome, grupos[2].Nome);
         }
     }
 }

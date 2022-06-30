@@ -1,11 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.Tests.ModuloGrupoDeVeiculos
 {
@@ -14,6 +9,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloGrupoDeVeiculos
     {
         private readonly GrupoDeVeiculos grupo;
         private readonly ValidadorGrupoDeVeiculos validador;
+
         public ValidadorGrupoDeVeiculosTest()
         {
             grupo = new()
