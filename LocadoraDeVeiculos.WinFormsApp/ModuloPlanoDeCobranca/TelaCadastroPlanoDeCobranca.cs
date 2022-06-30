@@ -37,11 +37,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
             }
         }
 
-        private PlanoDeCobrancas plano;
+        private PlanoDeCobranca plano;
 
-        public Func<PlanoDeCobrancas, ValidationResult> GravarRegistro { get; set; }
+        public Func<PlanoDeCobranca, ValidationResult> GravarRegistro { get; set; }
 
-        public PlanoDeCobrancas Plano
+        public PlanoDeCobranca Plano
         {
             get { return plano; }
             set
@@ -49,9 +49,33 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
                 plano = value;
                 cbGrupo.SelectedItem = plano.GrupoVeiculo;
                 cbTipoPlano.SelectedItem = plano.TipoPlano;
-                tbValorDiaria.Text = plano.ValorDiaria.ToString();
-                tbKmIncluso.Text = plano.KmIncluso.ToString();
-                tbPrecoKm.Text = plano.PrecoKm.ToString();
+
+                if (plano.ValorDiaria == 0)
+                {
+                    tbValorDiaria.Text = "";
+                }
+                else
+                {
+                    tbValorDiaria.Text = plano.ValorDiaria.ToString();
+                }
+
+                if (plano.KmIncluso == 0)
+                {
+                    tbKmIncluso.Text = "";
+                }
+                else
+                {
+                    tbKmIncluso.Text = plano.KmIncluso.ToString();
+                }
+
+                if (plano.PrecoKm == 0)
+                {
+                    tbPrecoKm.Text = "";
+                }
+                else
+                {
+                    tbPrecoKm.Text = plano.PrecoKm.ToString();
+                }
             }
         }
 

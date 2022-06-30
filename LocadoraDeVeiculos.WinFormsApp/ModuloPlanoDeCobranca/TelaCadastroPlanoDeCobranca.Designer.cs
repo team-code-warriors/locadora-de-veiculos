@@ -91,6 +91,7 @@
             // 
             // cbGrupo
             // 
+            this.cbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGrupo.FormattingEnabled = true;
             this.cbGrupo.Location = new System.Drawing.Point(150, 64);
             this.cbGrupo.Name = "cbGrupo";
@@ -99,7 +100,12 @@
             // 
             // cbTipoPlano
             // 
+            this.cbTipoPlano.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoPlano.FormattingEnabled = true;
+            this.cbTipoPlano.Items.AddRange(new object[] {
+            "Plano Diário",
+            "KM Controlado",
+            "KM Livre"});
             this.cbTipoPlano.Location = new System.Drawing.Point(150, 113);
             this.cbTipoPlano.Name = "cbTipoPlano";
             this.cbTipoPlano.Size = new System.Drawing.Size(279, 28);

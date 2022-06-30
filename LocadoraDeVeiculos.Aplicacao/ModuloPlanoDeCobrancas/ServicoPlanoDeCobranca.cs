@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,52 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
 {
     public class ServicoPlanoDeCobranca
     {
-        public ValidationResult Editar(PlanoDeCobrancas arg)
+        private RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano;
+
+        public ServicoPlanoDeCobranca(RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano)
         {
-            throw new NotImplementedException();
+            this.repositorioPlano = repositorioPlano;
         }
 
-        public ValidationResult Inserir(PlanoDeCobrancas arg)
+        public ValidationResult Inserir(PlanoDeCobranca plano)
         {
-            throw new NotImplementedException();
+            ValidationResult resultadoValidacao = Validar(plano);
+
+            if (resultadoValidacao.IsValid)
+                repositorioPlano.Inserir(plano);
+
+            return resultadoValidacao;
         }
+
+        public ValidationResult Editar(PlanoDeCobranca plano)
+        {
+            ValidationResult resultadoValidacao = Validar(plano);
+
+            if (resultadoValidacao.IsValid)
+                repositorioPlano.Editar(plano);
+
+            return resultadoValidacao;
+        }
+
+        private ValidationResult Validar(PlanoDeCobranca plano)
+        {
+            var validador = new ValidadorPlanoDeCobranca();
+
+            var resultadoValidacao = validador.Validate(plano);
+
+            //if (NomeDuplicado(grupo))
+            //    resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Grupo já cadastrado"));
+
+            return resultadoValidacao;
+        }
+
+        //private bool NomeDuplicado(GrupoDeVeiculos grupo)
+        //{
+        //    var grupoEncontrado = repositorioDeGrupoVeiculos.SelecionarGrupoPorNome(grupo.Nome);
+
+        //    return grupoEncontrado != null &&
+        //           grupoEncontrado.Nome == grupo.Nome &&
+        //           grupoEncontrado.Id != grupo.Id;
+        //}
     }
 }

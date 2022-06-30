@@ -35,7 +35,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "ValorDiaria", HeaderText = "Diária"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "KmIncluso", HeaderText = "KM Incluso"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "KmIncluso", HeaderText = "KM Inclu."},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "PrecoKm", HeaderText = "Preço/KM"},
 
@@ -49,7 +49,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
             return grid.SelecionarNumero<int>();
         }
 
-        internal void AtualizarRegistros(List<PlanoDeCobrancas> planos)
+        internal void AtualizarRegistros(List<PlanoDeCobranca> planos)
         {
             grid.Rows.Clear();
 

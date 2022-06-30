@@ -9,7 +9,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
     public class ControladorPlanoDeCobrancas : ControladorBase
     {
         private readonly RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano;
-        private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
+        private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
         private TabelaPlanoDeCobrancaControl tabelaPlano;
         private readonly ServicoPlanoDeCobranca servicoPlano;
         public ControladorPlanoDeCobrancas(RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano, ServicoPlanoDeCobranca servicoPlano)
@@ -23,7 +23,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
             var grupos = repositorioGrupo.SelecionarTodos();
 
             TelaCadastroPlanoDeCobranca tela = new TelaCadastroPlanoDeCobranca(grupos);
-            tela.Plano = new PlanoDeCobrancas();
+            tela.Plano = new PlanoDeCobranca();
 
             tela.GravarRegistro = servicoPlano.Inserir;
 
@@ -37,7 +37,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
         public override void Editar()
         {
-            PlanoDeCobrancas planoSelecionado = ObtemPlanoSelecionado();
+            PlanoDeCobranca planoSelecionado = ObtemPlanoSelecionado();
 
             if (planoSelecionado == null)
             {
@@ -64,7 +64,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
         public override void Excluir()
         {
-            PlanoDeCobrancas planoSelecionado = ObtemPlanoSelecionado();
+            PlanoDeCobranca planoSelecionado = ObtemPlanoSelecionado();
 
             if (planoSelecionado == null)
             {
@@ -97,7 +97,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
             return new ConfiguracaoToolboxPlanoDeCobranca();
         }
 
-        private PlanoDeCobrancas ObtemPlanoSelecionado()
+        private PlanoDeCobranca ObtemPlanoSelecionado()
         {
             var numero = tabelaPlano.ObtemNumeroPlanoSelecionado();
 
@@ -106,7 +106,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
         private void CarregarPlanos()
         {
-            List<PlanoDeCobrancas> planos = repositorioPlano.SelecionarTodos();
+            List<PlanoDeCobranca> planos = repositorioPlano.SelecionarTodos();
 
             tabelaPlano.AtualizarRegistros(planos);
 

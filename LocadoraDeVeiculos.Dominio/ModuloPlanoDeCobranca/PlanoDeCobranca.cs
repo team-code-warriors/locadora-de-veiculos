@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
 {
-    public class PlanoDeCobrancas : EntidadeBase<PlanoDeCobrancas>
+    public class PlanoDeCobranca : EntidadeBase<PlanoDeCobranca>
     {
-        public PlanoDeCobrancas() { }
+        public PlanoDeCobranca() { }
 
         public GrupoDeVeiculos GrupoVeiculo { get; set; }
         public string TipoPlano { get; set; }
@@ -18,7 +18,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
         public int KmIncluso { get; set; }
         public Decimal PrecoKm { get; set; }
 
-        public PlanoDeCobrancas(GrupoDeVeiculos grupoVeiculo, string tipoPlano, decimal valorDiaria, int kmIncluso, decimal precoKm)
+        public PlanoDeCobranca(GrupoDeVeiculos grupoVeiculo, string tipoPlano, decimal valorDiaria, int kmIncluso, decimal precoKm)
         {
             GrupoVeiculo = grupoVeiculo;
             TipoPlano = tipoPlano;
@@ -29,7 +29,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
 
         public override bool Equals(object? obj)
         {
-            return obj is PlanoDeCobrancas cobrancas &&
+            return obj is PlanoDeCobranca cobrancas &&
                    Id == cobrancas.Id &&
                    EqualityComparer<GrupoDeVeiculos>.Default.Equals(GrupoVeiculo, cobrancas.GrupoVeiculo) &&
                    TipoPlano == cobrancas.TipoPlano &&
@@ -38,9 +38,9 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
                    PrecoKm == cobrancas.PrecoKm;
         }
 
-        public PlanoDeCobrancas Clonar()
+        public PlanoDeCobranca Clonar()
         {
-            return MemberwiseClone() as PlanoDeCobrancas;
+            return MemberwiseClone() as PlanoDeCobranca;
         }
 
     }
