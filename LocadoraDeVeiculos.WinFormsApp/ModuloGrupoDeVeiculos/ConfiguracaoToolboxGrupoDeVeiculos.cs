@@ -11,7 +11,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
     {
         public override string TipoMenu => "Cadastro de Grupo de Veículos";
 
-        public override string TooltipInserir { get { return "Inserir uma novo grupo"; } }
+        public override string TooltipInserir { get { return "Inserir um novo grupo"; } }
 
         public override string TooltipEditar { get { return "Editar um grupo existente"; } }
 
