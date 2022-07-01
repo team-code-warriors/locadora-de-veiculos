@@ -52,13 +52,7 @@
             // lNumero
             // 
             this.lNumero.AutoSize = true;
-            this.lNumero.Location = new System.Drawing.Point(110, 48);
-            this.lNumero.Name = "lId";
-            this.lNumero.Size = new System.Drawing.Size(29, 20);
-            this.lNumero.TabIndex = 0;
-            this.lNumero.Text = "Id: ";
-            this.lNumero.AutoSize = true;
-            this.lNumero.Location = new System.Drawing.Point(20, 17);
+            this.lNumero.Location = new System.Drawing.Point(53, 15);
             this.lNumero.Name = "lNumero";
             this.lNumero.Size = new System.Drawing.Size(70, 20);
             this.lNumero.TabIndex = 0;
@@ -67,7 +61,7 @@
             // lNome
             // 
             this.lNome.AutoSize = true;
-            this.lNome.Location = new System.Drawing.Point(86, 173);
+            this.lNome.Location = new System.Drawing.Point(70, 108);
             this.lNome.Name = "lNome";
             this.lNome.Size = new System.Drawing.Size(53, 20);
             this.lNome.TabIndex = 2;
@@ -76,7 +70,7 @@
             // lEmail
             // 
             this.lEmail.AutoSize = true;
-            this.lEmail.Location = new System.Drawing.Point(84, 330);
+            this.lEmail.Location = new System.Drawing.Point(68, 265);
             this.lEmail.Name = "lEmail";
             this.lEmail.Size = new System.Drawing.Size(55, 20);
             this.lEmail.TabIndex = 4;
@@ -85,7 +79,7 @@
             // lTelefone
             // 
             this.lTelefone.AutoSize = true;
-            this.lTelefone.Location = new System.Drawing.Point(70, 383);
+            this.lTelefone.Location = new System.Drawing.Point(54, 318);
             this.lTelefone.Name = "lTelefone";
             this.lTelefone.Size = new System.Drawing.Size(69, 20);
             this.lTelefone.TabIndex = 5;
@@ -93,7 +87,7 @@
             // 
             // tfNome
             // 
-            this.tfNome.Location = new System.Drawing.Point(145, 170);
+            this.tfNome.Location = new System.Drawing.Point(129, 105);
             this.tfNome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfNome.Name = "tfNome";
             this.tfNome.Size = new System.Drawing.Size(337, 27);
@@ -101,7 +95,7 @@
             // 
             // tfEmail
             // 
-            this.tfEmail.Location = new System.Drawing.Point(145, 327);
+            this.tfEmail.Location = new System.Drawing.Point(129, 262);
             this.tfEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfEmail.Name = "tfEmail";
             this.tfEmail.Size = new System.Drawing.Size(334, 27);
@@ -109,8 +103,7 @@
             // 
             // tfId
             // 
-            this.tfId.Location = new System.Drawing.Point(145, 45);
-            this.tfId.Location = new System.Drawing.Point(96, 14);
+            this.tfId.Location = new System.Drawing.Point(129, 12);
             this.tfId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfId.Name = "tfId";
             this.tfId.ReadOnly = true;
@@ -119,7 +112,7 @@
             // 
             // tfTelefone
             // 
-            this.tfTelefone.Location = new System.Drawing.Point(145, 380);
+            this.tfTelefone.Location = new System.Drawing.Point(129, 315);
             this.tfTelefone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfTelefone.Mask = "(99) 00000-0000";
             this.tfTelefone.Name = "tfTelefone";
@@ -129,7 +122,7 @@
             // tfCpf
             // 
             this.tfCpf.Enabled = false;
-            this.tfCpf.Location = new System.Drawing.Point(145, 221);
+            this.tfCpf.Location = new System.Drawing.Point(129, 156);
             this.tfCpf.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfCpf.Mask = "000.000.000-00";
             this.tfCpf.Name = "tfCpf";
@@ -139,7 +132,7 @@
             // btnGravar
             // 
             this.btnGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGravar.Location = new System.Drawing.Point(247, 500);
+            this.btnGravar.Location = new System.Drawing.Point(245, 435);
             this.btnGravar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(106, 46);
@@ -151,10 +144,10 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(359, 500);
+            this.btnCancelar.Location = new System.Drawing.Point(357, 435);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(106, 44);
+            this.btnCancelar.Size = new System.Drawing.Size(106, 46);
             this.btnCancelar.TabIndex = 40;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -162,7 +155,7 @@
             // lCpf
             // 
             this.lCpf.AutoSize = true;
-            this.lCpf.Location = new System.Drawing.Point(103, 224);
+            this.lCpf.Location = new System.Drawing.Point(87, 159);
             this.lCpf.Name = "lCpf";
             this.lCpf.Size = new System.Drawing.Size(36, 20);
             this.lCpf.TabIndex = 41;
@@ -171,7 +164,7 @@
             // lEndereco
             // 
             this.lEndereco.AutoSize = true;
-            this.lEndereco.Location = new System.Drawing.Point(65, 433);
+            this.lEndereco.Location = new System.Drawing.Point(49, 368);
             this.lEndereco.Name = "lEndereco";
             this.lEndereco.Size = new System.Drawing.Size(74, 20);
             this.lEndereco.TabIndex = 43;
@@ -179,7 +172,7 @@
             // 
             // tfEndereco
             // 
-            this.tfEndereco.Location = new System.Drawing.Point(145, 430);
+            this.tfEndereco.Location = new System.Drawing.Point(129, 365);
             this.tfEndereco.Name = "tfEndereco";
             this.tfEndereco.Size = new System.Drawing.Size(334, 27);
             this.tfEndereco.TabIndex = 44;
@@ -187,7 +180,7 @@
             // lCpnj
             // 
             this.lCpnj.AutoSize = true;
-            this.lCpnj.Location = new System.Drawing.Point(95, 278);
+            this.lCpnj.Location = new System.Drawing.Point(79, 213);
             this.lCpnj.Name = "lCpnj";
             this.lCpnj.Size = new System.Drawing.Size(44, 20);
             this.lCpnj.TabIndex = 45;
@@ -196,7 +189,7 @@
             // tfCnpj
             // 
             this.tfCnpj.Enabled = false;
-            this.tfCnpj.Location = new System.Drawing.Point(145, 275);
+            this.tfCnpj.Location = new System.Drawing.Point(129, 210);
             this.tfCnpj.Mask = " 00. 000. 000/0000-00";
             this.tfCnpj.Name = "tfCnpj";
             this.tfCnpj.Size = new System.Drawing.Size(159, 27);
@@ -205,7 +198,7 @@
             // rbPessoaFisica
             // 
             this.rbPessoaFisica.AutoSize = true;
-            this.rbPessoaFisica.Location = new System.Drawing.Point(172, 119);
+            this.rbPessoaFisica.Location = new System.Drawing.Point(131, 58);
             this.rbPessoaFisica.Name = "rbPessoaFisica";
             this.rbPessoaFisica.Size = new System.Drawing.Size(66, 24);
             this.rbPessoaFisica.TabIndex = 47;
@@ -217,7 +210,7 @@
             // rbPessoaJuridica
             // 
             this.rbPessoaJuridica.AutoSize = true;
-            this.rbPessoaJuridica.Location = new System.Drawing.Point(270, 119);
+            this.rbPessoaJuridica.Location = new System.Drawing.Point(203, 58);
             this.rbPessoaJuridica.Name = "rbPessoaJuridica";
             this.rbPessoaJuridica.Size = new System.Drawing.Size(80, 24);
             this.rbPessoaJuridica.TabIndex = 48;
@@ -229,7 +222,7 @@
             // lTipo
             // 
             this.lTipo.AutoSize = true;
-            this.lTipo.Location = new System.Drawing.Point(28, 123);
+            this.lTipo.Location = new System.Drawing.Point(12, 60);
             this.lTipo.Name = "lTipo";
             this.lTipo.Size = new System.Drawing.Size(111, 20);
             this.lTipo.TabIndex = 49;
@@ -239,7 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 567);
+            this.ClientSize = new System.Drawing.Size(478, 494);
             this.Controls.Add(this.lTipo);
             this.Controls.Add(this.rbPessoaJuridica);
             this.Controls.Add(this.rbPessoaFisica);

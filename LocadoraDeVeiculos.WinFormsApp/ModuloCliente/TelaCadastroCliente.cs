@@ -48,12 +48,43 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
+            if (rbPessoaFisica.Checked == false && rbPessoaJuridica.Checked == false)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione pessoa 'Física' ou pessoa 'Jurídica'.");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+
             cliente.Nome = tfNome.Text;
             cliente.Email = tfEmail.Text;
-            cliente.Endereco = tfEndereco.Text;
-            cliente.Cpf = tfCpf.Text;
-            cliente.Cnpj = tfCnpj.Text;
             cliente.Telefone = tfTelefone.Text;
+            cliente.Endereco = tfEndereco.Text;
+
+            if (tfCpf.Text == "   ,   ,   -")
+            {
+                cliente.Cpf = "              ";
+            }else
+            {
+                cliente.Cpf = tfCpf.Text;
+            }
+
+            if (tfCnpj.Text == "   ,    ,    /    -")
+            {
+                cliente.Cnpj = "                  ";
+            }else
+            {
+                cliente.Cnpj = tfCnpj.Text;
+            }
+
+            if (cliente.Cnpj == "                  " && cliente.Cpf == "              ")
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Cpf ou Cnpf deve ser informado.");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
 
             if(!validador.ApenasLetras(tfNome.Text))
             {
@@ -77,14 +108,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
-
+            tfCnpj.Clear();
             tfCnpj.Enabled = false;
             tfCpf.Enabled = true;
         }
 
         private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
         {
-
+            tfCpf.Clear();
             tfCpf.Enabled=false;
             tfCnpj.Enabled = true;
         }

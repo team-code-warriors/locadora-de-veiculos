@@ -44,19 +44,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 
             var resultadoValidacao = validador.Validate(condutor);
 
-            if (CnhDuplicado(condutor))
-                resultadoValidacao.Errors.Add(new ValidationFailure("CNH", "CNH já cadastrado"));
+            //if (CnhDuplicado(condutor))
+            //    resultadoValidacao.Errors.Add(new ValidationFailure("CNH", "CNH já cadastrado"));
 
             return resultadoValidacao;
         }
 
-        private bool CnhDuplicado(Condutor condutor)
-        {
-            var condutorEncontrado = repositorioCondutor.SelecionarCondutorPorCnh(condutor.Cnh);
+        //private bool CnhDuplicado(Condutor condutor)
+        //{
+        //    var condutorEncontrado = repositorioCondutor.SelecionarCondutorPorCnh(condutor.Cnh);
 
-            return condutorEncontrado != null &&
-                   condutorEncontrado.Cnh == condutor.Cnh &&
-                   condutorEncontrado.Id != condutor.Id;
-        }
+        //    return condutorEncontrado != null &&
+        //           condutorEncontrado.Cnh == condutor.Cnh &&
+        //           condutorEncontrado.Id != condutor.Id;
+        //}
     }
 }

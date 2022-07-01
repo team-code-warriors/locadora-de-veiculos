@@ -51,8 +51,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
                 condutor = value;
 
                 tfNome.Text = Condutor.Cliente.Nome;
-                tfCpfCnpj.Text = Condutor.Cliente.Cpf;
-                tfCpfCnpj.Text = Condutor.Cliente.Cnpj;
+                tfCpf.Text = Condutor.Cliente.Cpf;
                 tfCnh.Text = Condutor.Cnh;
                 dtpData.Value = DateTime.Now.Date;
                 tfEmail.Text = Condutor.Cliente.Email;
@@ -78,8 +77,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
                 foreach (var c in clientes)
                 {
                     tfNome.Text = c.Nome;
-                    tfCpfCnpj.Text = c.Cpf;
-                    tfCpfCnpj.Text = c.Cnpj;
+                    //tfCpfCnpj.Text = c.Cpf;
+                    //tfCpfCnpj.Text = c.Cnpj;
                     tfEmail.Text = c.Email;
                     tfTelefone.Text = c.Telefone;
                     tfEndereco.Text = c.Endereco;
@@ -90,15 +89,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
         private void btnCadastro_Click(object sender, EventArgs e)
         {
             condutor.Cliente.Nome = tfNome.Text;
-            condutor.Cliente.Cpf = tfCpfCnpj.Text;
-            condutor.Cliente.Cnpj = tfCpfCnpj.Text;
+            //condutor.Cliente.Cpf = tfCpfCnpj.Text;
+            //condutor.Cliente.Cnpj = tfCpfCnpj.Text;
             condutor.Cnh = tfCnh.Text;
             condutor.DataValidadeCnh = dtpData.Value;
             condutor.Cliente.Email = tfEmail.Text;
             condutor.Cliente.Telefone = tfTelefone.Text;
             condutor.Cliente.Endereco = tfEndereco.Text;
 
-            if (!validador.ApenasNumeros(tfCnh.Text))
+            if (!validador.ApenasNumerosInteiros(tfCnh.Text))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
                 DialogResult = DialogResult.None;
