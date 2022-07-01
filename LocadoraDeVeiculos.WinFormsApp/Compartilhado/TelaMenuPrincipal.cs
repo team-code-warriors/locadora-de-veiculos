@@ -13,6 +13,9 @@ using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
+using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {
@@ -61,6 +64,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
         }
 
         private void taxasMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+        }
+
+        private void planoDeCobrançasMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
@@ -140,11 +148,13 @@ namespace LocadoraDeVeiculos.WinFormsApp
             var repositorioCliente = new RepositorioClienteEmBancoDeDados();
             var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
             var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            var repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaEmBancoDeDados();
 
             var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario);
             var servicoCliente = new ServicoCliente(repositorioCliente);
             var servicoGrupoVeiculo = new ServicoGrupoDeVeiculo(repositorioGrupoDeVeiculos);
             var servicoTaxa = new ServicoTaxa(repositorioTaxa);
+            var servicoPlanoCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca);
 
             controladores = new Dictionary<string, ControladorBase>();
 
@@ -152,6 +162,8 @@ namespace LocadoraDeVeiculos.WinFormsApp
             controladores.Add("Clientes", new ControladorCliente(repositorioCliente, servicoCliente));
             controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa, servicoTaxa));
             controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos, servicoGrupoVeiculo));
+            controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(repositorioPlanoDeCobranca, servicoPlanoCobranca));
         }
+
     }
 }

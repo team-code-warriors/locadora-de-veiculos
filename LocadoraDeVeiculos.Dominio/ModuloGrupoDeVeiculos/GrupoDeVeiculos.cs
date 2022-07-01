@@ -23,5 +23,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos
         {
             return MemberwiseClone() as GrupoDeVeiculos;
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }

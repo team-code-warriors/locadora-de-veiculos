@@ -5,7 +5,7 @@ using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 {
-    internal class ControladorGrupoDeVeiculos : ControladorBase
+    public class ControladorGrupoDeVeiculos : ControladorBase
     {
         private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
         private TabelaGrupoDeVeiculosControl tabelaGrupo;
