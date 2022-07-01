@@ -39,11 +39,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
             var resultadoValidacao = validador.Validate(funcionario);
 
-            if (NomeDuplicado(funcionario))
-                resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Funcionário já cadastrado"));
+            if (resultadoValidacao.IsValid)
+            {
+                if (NomeDuplicado(funcionario))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Funcionário já cadastrado"));
 
-            if (UsuarioDuplicado(funcionario))
-                resultadoValidacao.Errors.Add(new ValidationFailure("Login", "Login já cadastrado"));
+                if (UsuarioDuplicado(funcionario))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("Login", "Login já cadastrado"));
+
+            }
 
             return resultadoValidacao;
         }

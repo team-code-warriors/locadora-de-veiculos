@@ -39,11 +39,14 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
 
             var resultadoValidacao = validador.Validate(cliente);
 
-            if (CpfDuplicado(cliente))
-                resultadoValidacao.Errors.Add(new ValidationFailure("CPF", "CPF já cadastrado"));
+            if(resultadoValidacao.IsValid)
+            {
+                if (CpfDuplicado(cliente))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("CPF", "CPF já cadastrado"));
 
-            if(CnpjDuplicado(cliente))
-                resultadoValidacao.Errors.Add(new ValidationFailure("CNJP", "CNPJ já cadastrado"));
+                if (CnpjDuplicado(cliente))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("CNJP", "CNPJ já cadastrado"));
+            }
 
             return resultadoValidacao;
         }

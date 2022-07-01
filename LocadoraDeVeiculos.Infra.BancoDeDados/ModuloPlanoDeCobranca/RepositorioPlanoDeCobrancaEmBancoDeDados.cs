@@ -1,5 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
+using System.Data.SqlClient;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
 {
@@ -52,7 +53,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
 		            [TBPLANODECOBRANCA]
 		        WHERE
                     [ID] = @ID";
-
         protected override string sqlSelecionarTodos =>
             @"SELECT 
                     [ID],
@@ -64,5 +64,41 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
 	            FROM 
 		            [TBPLANODECOBRANCA]";
 
+        private string sqlSelecionarPorGrupo =>
+            @"SELECT
+                    [ID],
+		            [GRUPO_ID],       
+                    [TIPOPLANO], 
+                    [VALORDIARIA],
+                    [KMINCLUSO],                    
+                    [PRECOKM]   
+	            FROM 
+		            [TBPLANODECOBRANCA]
+                WHERE 
+                    [GRUPO_ID] = @GRUPO_ID";
+
+        private string sqlSelecionarPorTipoPlano =>
+            @"SELECT
+                    [ID],
+		            [GRUPO_ID],       
+                    [TIPOPLANO], 
+                    [VALORDIARIA],
+                    [KMINCLUSO],                    
+                    [PRECOKM]   
+	            FROM 
+		            [TBPLANODECOBRANCA]
+                WHERE 
+                    [TIPOPLANO] = @TIPOPLANO";
+
+
+        public PlanoDeCobranca SelecionarPlanoPorGrupo(int id)
+        {
+            return SelecionarPorParametro(sqlSelecionarPorGrupo, new SqlParameter("GRUPO_ID", id));
+        }
+
+        public PlanoDeCobranca SelecionarPlanoPorTipoPlano(string tipoPlano)
+        {
+            return SelecionarPorParametro(sqlSelecionarPorTipoPlano, new SqlParameter("TIPOPLANO", tipoPlano));
+        }
     }
 }

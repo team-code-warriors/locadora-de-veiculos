@@ -44,19 +44,30 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
 
             var resultadoValidacao = validador.Validate(plano);
 
-            //if (NomeDuplicado(grupo))
-            //    resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Grupo já cadastrado"));
+            if (resultadoValidacao.IsValid)
+                if (GrupoDuplicado(plano) && TipoPlanoDuplicado(plano))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("Plano", "Plano para este Grupo já cadastrado"));
 
             return resultadoValidacao;
         }
 
-        //private bool NomeDuplicado(GrupoDeVeiculos grupo)
-        //{
-        //    var grupoEncontrado = repositorioDeGrupoVeiculos.SelecionarGrupoPorNome(grupo.Nome);
+        private bool GrupoDuplicado(PlanoDeCobranca plano)
+        {
+            var planoEncontrado = repositorioPlano.SelecionarPlanoPorGrupo(plano.GrupoVeiculo.Id);
 
-        //    return grupoEncontrado != null &&
-        //           grupoEncontrado.Nome == grupo.Nome &&
-        //           grupoEncontrado.Id != grupo.Id;
-        //}
+            return planoEncontrado != null &&
+                   planoEncontrado.GrupoVeiculo.Id == plano.GrupoVeiculo.Id &&
+                   planoEncontrado.Id != plano.Id;
+        }
+
+        private bool TipoPlanoDuplicado(PlanoDeCobranca plano)
+        {
+            var planoEncontrado = repositorioPlano.SelecionarPlanoPorTipoPlano(plano.TipoPlano);
+
+            return planoEncontrado != null &&
+                   planoEncontrado.TipoPlano == plano.TipoPlano &&
+                   planoEncontrado.Id != plano.Id;
+        }
+
     }
 }
