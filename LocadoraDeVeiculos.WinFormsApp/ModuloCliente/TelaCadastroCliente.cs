@@ -63,14 +63,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 return;
             }
 
-            //if (!validador.ApenasNumeros(tfCnh.Text))
-            //{
-            //    TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
-            //    DialogResult = DialogResult.None;
-
-            //    return;
-            //}
-
             var resultadoValidacao = GravarRegistro(cliente);
 
             if (resultadoValidacao.IsValid == false)

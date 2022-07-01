@@ -11,7 +11,6 @@
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloGrupoDeVeiculos\" />
     <Folder Include="ModuloVeiculo\" />
-    <Folder Include="ModuloCondutor\" />
   </ItemGroup>
 
   <ItemGroup>
