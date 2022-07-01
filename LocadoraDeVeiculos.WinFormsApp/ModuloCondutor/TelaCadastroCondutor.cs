@@ -44,7 +44,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
         {
             get
             {
-                return Condutor;
+                return condutor;
             }
             set
             {

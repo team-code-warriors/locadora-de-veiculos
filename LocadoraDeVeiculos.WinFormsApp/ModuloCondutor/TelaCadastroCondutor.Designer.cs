@@ -35,7 +35,6 @@
             this.lNome = new System.Windows.Forms.Label();
             this.tfNome = new System.Windows.Forms.TextBox();
             this.lCpfCnpj = new System.Windows.Forms.Label();
-            this.tfCnh = new System.Windows.Forms.TextBox();
             this.lCnh = new System.Windows.Forms.Label();
             this.lData = new System.Windows.Forms.Label();
             this.dtpData = new System.Windows.Forms.DateTimePicker();
@@ -49,6 +48,7 @@
             this.Cancelar = new System.Windows.Forms.Button();
             this.tfCpf = new System.Windows.Forms.MaskedTextBox();
             this.tfTelefone = new System.Windows.Forms.MaskedTextBox();
+            this.tfCnh = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // lId
@@ -111,13 +111,6 @@
             this.lCpfCnpj.Size = new System.Drawing.Size(36, 20);
             this.lCpfCnpj.TabIndex = 6;
             this.lCpfCnpj.Text = "CPF:";
-            // 
-            // tfCnh
-            // 
-            this.tfCnh.Location = new System.Drawing.Point(124, 214);
-            this.tfCnh.Name = "tfCnh";
-            this.tfCnh.Size = new System.Drawing.Size(404, 27);
-            this.tfCnh.TabIndex = 8;
             // 
             // lCnh
             // 
@@ -234,11 +227,22 @@
             this.tfTelefone.Size = new System.Drawing.Size(112, 27);
             this.tfTelefone.TabIndex = 39;
             // 
+            // tfCnh
+            // 
+            this.tfCnh.Enabled = false;
+            this.tfCnh.Location = new System.Drawing.Point(120, 214);
+            this.tfCnh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tfCnh.Mask = "00000000000";
+            this.tfCnh.Name = "tfCnh";
+            this.tfCnh.Size = new System.Drawing.Size(112, 27);
+            this.tfCnh.TabIndex = 40;
+            // 
             // TelaCadastroCondutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 550);
+            this.Controls.Add(this.tfCnh);
             this.Controls.Add(this.tfTelefone);
             this.Controls.Add(this.tfCpf);
             this.Controls.Add(this.Cancelar);
@@ -252,7 +256,6 @@
             this.Controls.Add(this.dtpData);
             this.Controls.Add(this.lData);
             this.Controls.Add(this.lCnh);
-            this.Controls.Add(this.tfCnh);
             this.Controls.Add(this.lCpfCnpj);
             this.Controls.Add(this.tfNome);
             this.Controls.Add(this.lNome);
@@ -261,7 +264,7 @@
             this.Controls.Add(this.lCliente);
             this.Controls.Add(this.lId);
             this.Name = "TelaCadastroCondutor";
-            this.Text = "TelaCadastroCondutor";
+            this.Text = "Cadastro de Condutor";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,7 +279,6 @@
         private Label lNome;
         private TextBox tfNome;
         private Label lCpfCnpj;
-        private TextBox tfCnh;
         private Label lCnh;
         private Label lData;
         private DateTimePicker dtpData;
@@ -290,5 +292,6 @@
         private Button Cancelar;
         private MaskedTextBox tfCpf;
         private MaskedTextBox tfTelefone;
+        private MaskedTextBox tfCnh;
     }
 }

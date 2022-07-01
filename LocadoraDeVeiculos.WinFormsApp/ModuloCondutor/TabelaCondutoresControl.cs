@@ -35,7 +35,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Cnpj", HeaderText = "CNPJ"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "CNH", HeaderText = "Cnh"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "CNH", HeaderText = "CNH"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "DataValidadeCnh", HeaderText = "Validade Cnh"},
 

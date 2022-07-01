@@ -20,7 +20,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 
         public ValidationResult Inserir(Condutor condutor)
         {
-            var resultadoValidacao = ValidarCondutor(condutor);
+            var resultadoValidacao = Validar(condutor);
 
             if (resultadoValidacao.IsValid)
                 repositorioCondutor.Inserir(condutor);
@@ -30,7 +30,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 
         public ValidationResult Editar(Condutor condutor)
         {
-            var resultadoValidacao = ValidarCondutor(condutor);
+            var resultadoValidacao = Validar(condutor);
 
             if (resultadoValidacao.IsValid)
                 repositorioCondutor.Editar(condutor);
@@ -38,7 +38,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             return resultadoValidacao;
         }
 
-        private ValidationResult ValidarCondutor(Condutor condutor)
+        private ValidationResult Validar(Condutor condutor)
         {
             ValidadorCondutor validador = new ValidadorCondutor();
 

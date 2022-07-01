@@ -55,34 +55,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
                 tbKmIncluso.Text = plano.KmIncluso.ToString();
                 tbPrecoKm.Text = plano.PrecoKm.ToString();
 
-
-
-                //if (plano.ValorDiaria == 0)
-                //{
-                //    tbValorDiaria.Text = "";
-                //}
-                //else
-                //{
-                //    tbValorDiaria.Text = plano.ValorDiaria.ToString();
-                //}
-
-                //if (plano.KmIncluso == 0)
-                //{
-                //    tbKmIncluso.Text = "";
-                //}
-                //else
-                //{
-                //    tbKmIncluso.Text = plano.KmIncluso.ToString();
-                //}
-
-                //if (plano.PrecoKm == 0)
-                //{
-                //    tbPrecoKm.Text = "";
-                //}
-                //else
-                //{
-                //    tbPrecoKm.Text = plano.PrecoKm.ToString();
-                //}
             }
         }
 

@@ -14,16 +14,33 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         {
         }
 
-        public Condutor(Cliente cliente, string cnh, DateTime dataValidadeCnh)
+        public Condutor(Cliente cliente, string nome, string cpf, string cnh, DateTime dataValidadeCnh, string email, string telefone, string endereco)
         {
             Cliente = cliente;
+            Nome = nome;
+            Cpf = cpf;
             Cnh = cnh;
             DataValidadeCnh = dataValidadeCnh;
+            Email = email;
+            Telefone = telefone;
+            Endereco = endereco;
         }
 
         public Cliente Cliente { get; set; }
+
+        public string Nome { get; set; }
+
+        public string Cpf { get; set; }
+
         public string Cnh { get; set; }
+
         public DateTime DataValidadeCnh { get; set; }
+
+        public string Email { get; set; }
+
+        public string Telefone { get; set; }
+
+        public string Endereco { get; set; }
 
         public Condutor Clonar()
         {
@@ -34,9 +51,14 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         {
             return obj is Condutor condutor &&
                    Id == condutor.Id &&
-                   Cliente == condutor.Cliente &&
+                   EqualityComparer<Cliente>.Default.Equals(Cliente, condutor.Cliente) &&
+                   Nome == condutor.Nome &&
+                   Cpf == condutor.Cpf &&
                    Cnh == condutor.Cnh &&
-                   DataValidadeCnh == condutor.DataValidadeCnh;
+                   DataValidadeCnh == condutor.DataValidadeCnh &&
+                   Email == condutor.Email &&
+                   Telefone == condutor.Telefone &&
+                   Endereco == condutor.Endereco;
         }
     }
 }
