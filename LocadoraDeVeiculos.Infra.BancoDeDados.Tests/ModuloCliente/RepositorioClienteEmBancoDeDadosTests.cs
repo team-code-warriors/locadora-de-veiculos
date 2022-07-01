@@ -100,7 +100,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
         public void Deve_selecionar_todos_os_clientes()
         {
             //arrange
-            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658 / 0001 - 49", "(11) 99999-9999");
+            var c0 = new Cliente("Lucas", "lucas@gmail.com", "Lages", "111.222.333-44", "33.367.658/3333-33", "(11) 99999-9999");
             var c1 = new Cliente("Ane", "ane@gmail.com", "Lages", "555.666.777-88", "43.367.658/0001-49", "(22) 99999-9999");
             var c2 = new Cliente("Daniel", "daniel@gmail.com", "Lages", "999.888.777-66", "43.367.658/0001-49", "(33) 99999-9999");
 
