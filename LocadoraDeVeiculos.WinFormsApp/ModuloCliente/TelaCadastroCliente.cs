@@ -70,7 +70,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 cliente.Cpf = tfCpf.Text;
             }
 
-            if (tfCnpj.Text == "   ,    ,    /    -")
+            if (tfCnpj.Text == "  ,   ,   /    -")
             {
                 cliente.Cnpj = "                  ";
             }else

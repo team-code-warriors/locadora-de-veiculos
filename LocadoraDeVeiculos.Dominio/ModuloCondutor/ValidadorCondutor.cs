@@ -14,7 +14,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             RuleFor(x => x.Cnh)
                 .NotNull().
                 NotEmpty().
-                Length(15).WithMessage("'CNH' deve ter 11 caracteres.");
+                Length(11).WithMessage("'CNH' deve ter 11 caracteres.");
 
             RuleFor(x => x.DataValidadeCnh)
                 .NotNull().NotEmpty();

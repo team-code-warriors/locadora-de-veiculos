@@ -37,7 +37,6 @@
             this.lCpfCnpj = new System.Windows.Forms.Label();
             this.lCnh = new System.Windows.Forms.Label();
             this.lData = new System.Windows.Forms.Label();
-            this.dtpData = new System.Windows.Forms.DateTimePicker();
             this.lEmail = new System.Windows.Forms.Label();
             this.tfEmail = new System.Windows.Forms.TextBox();
             this.lTelefone = new System.Windows.Forms.Label();
@@ -49,6 +48,7 @@
             this.tfCpf = new System.Windows.Forms.MaskedTextBox();
             this.tfTelefone = new System.Windows.Forms.MaskedTextBox();
             this.tfCnh = new System.Windows.Forms.MaskedTextBox();
+            this.dtpData = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // lId
@@ -71,11 +71,13 @@
             // 
             // cbCliente
             // 
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCliente.FormattingEnabled = true;
             this.cbCliente.Location = new System.Drawing.Point(122, 62);
             this.cbCliente.Name = "cbCliente";
             this.cbCliente.Size = new System.Drawing.Size(247, 28);
             this.cbCliente.TabIndex = 2;
+            this.cbCliente.SelectedIndexChanged += new System.EventHandler(this.cbCliente_SelectedIndexChanged);
             // 
             // cbxClienteCondutor
             // 
@@ -86,6 +88,7 @@
             this.cbxClienteCondutor.TabIndex = 3;
             this.cbxClienteCondutor.Text = "Cliente Condutor";
             this.cbxClienteCondutor.UseVisualStyleBackColor = true;
+            this.cbxClienteCondutor.CheckedChanged += new System.EventHandler(this.cbxClienteCondutor_CheckedChanged);
             // 
             // lNome
             // 
@@ -129,15 +132,6 @@
             this.lData.Size = new System.Drawing.Size(105, 20);
             this.lData.TabIndex = 11;
             this.lData.Text = "Validade CNH:";
-            // 
-            // dtpData
-            // 
-            this.dtpData.Location = new System.Drawing.Point(122, 267);
-            this.dtpData.MaxDate = new System.DateTime(2022, 6, 29, 0, 0, 0, 0);
-            this.dtpData.Name = "dtpData";
-            this.dtpData.Size = new System.Drawing.Size(406, 27);
-            this.dtpData.TabIndex = 12;
-            this.dtpData.Value = new System.DateTime(2022, 6, 29, 0, 0, 0, 0);
             // 
             // lEmail
             // 
@@ -197,6 +191,7 @@
             this.button1.TabIndex = 22;
             this.button1.Text = "Cadastrar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnCadastro_Click);
             // 
             // Cancelar
             // 
@@ -210,7 +205,6 @@
             // 
             // tfCpf
             // 
-            this.tfCpf.Enabled = false;
             this.tfCpf.Location = new System.Drawing.Point(124, 163);
             this.tfCpf.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfCpf.Mask = "000.000.000-00";
@@ -229,7 +223,6 @@
             // 
             // tfCnh
             // 
-            this.tfCnh.Enabled = false;
             this.tfCnh.Location = new System.Drawing.Point(120, 214);
             this.tfCnh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfCnh.Mask = "00000000000";
@@ -237,11 +230,19 @@
             this.tfCnh.Size = new System.Drawing.Size(112, 27);
             this.tfCnh.TabIndex = 40;
             // 
+            // dtpData
+            // 
+            this.dtpData.Location = new System.Drawing.Point(119, 267);
+            this.dtpData.Name = "dtpData";
+            this.dtpData.Size = new System.Drawing.Size(409, 27);
+            this.dtpData.TabIndex = 41;
+            // 
             // TelaCadastroCondutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 550);
+            this.Controls.Add(this.dtpData);
             this.Controls.Add(this.tfCnh);
             this.Controls.Add(this.tfTelefone);
             this.Controls.Add(this.tfCpf);
@@ -253,7 +254,6 @@
             this.Controls.Add(this.lTelefone);
             this.Controls.Add(this.tfEmail);
             this.Controls.Add(this.lEmail);
-            this.Controls.Add(this.dtpData);
             this.Controls.Add(this.lData);
             this.Controls.Add(this.lCnh);
             this.Controls.Add(this.lCpfCnpj);
@@ -281,7 +281,6 @@
         private Label lCpfCnpj;
         private Label lCnh;
         private Label lData;
-        private DateTimePicker dtpData;
         private Label lEmail;
         private TextBox tfEmail;
         private Label lTelefone;
@@ -293,5 +292,6 @@
         private MaskedTextBox tfCpf;
         private MaskedTextBox tfTelefone;
         private MaskedTextBox tfCnh;
+        private DateTimePicker dtpData;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -17,23 +18,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
     public partial class TelaCadastroCondutor : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
+        RepositorioClienteEmBancoDeDados repositorioCliente = new RepositorioClienteEmBancoDeDados();
 
         public TelaCadastroCondutor(List<Cliente> clientes)
         {
             InitializeComponent();
             CarregarClientes(clientes);
-            PreencherCampos(clientes);
             this.ConfigurarTela();
-
-            dtpData.MaxDate = DateTime.Now.Date;
-        }
-
-        public TelaCadastroCondutor()
-        {
-            InitializeComponent();
-            this.ConfigurarTela();
-
-            dtpData.MaxDate = DateTime.Now.Date;
         }
 
         private Condutor condutor;
@@ -50,13 +41,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             {
                 condutor = value;
 
-                tfNome.Text = Condutor.Cliente.Nome;
-                tfCpf.Text = Condutor.Cliente.Cpf;
-                tfCnh.Text = Condutor.Cnh;
-                dtpData.Value = DateTime.Now.Date;
-                tfEmail.Text = Condutor.Cliente.Email;
-                tfTelefone.Text = Condutor.Cliente.Telefone;
-                tfEndereco.Text = Condutor.Cliente.Endereco;
+                cbCliente.SelectedItem = condutor.Cliente;
+                tfNome.Text = condutor.Nome;
+                tfCpf.Text = condutor.Cpf;
+                tfCnh.Text = condutor.Cnh;
+                //dtpData.Value = DateTime.Now.Date;
+                tfEmail.Text = condutor.Email;
+                tfTelefone.Text = condutor.Telefone;
+                tfEndereco.Text = condutor.Telefone;
             }
         }
 
@@ -70,36 +62,28 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             }
         }
 
-        public void PreencherCampos(List<Cliente> clientes)
-        {
-            if (cbCliente.Items.Count == 0 && cbxClienteCondutor.Checked)
-            {
-                foreach (var c in clientes)
-                {
-                    tfNome.Text = c.Nome;
-                    //tfCpfCnpj.Text = c.Cpf;
-                    //tfCpfCnpj.Text = c.Cnpj;
-                    tfEmail.Text = c.Email;
-                    tfTelefone.Text = c.Telefone;
-                    tfEndereco.Text = c.Endereco;
-                }
-            }
-        }
-
         private void btnCadastro_Click(object sender, EventArgs e)
         {
-            condutor.Cliente.Nome = tfNome.Text;
-            //condutor.Cliente.Cpf = tfCpfCnpj.Text;
-            //condutor.Cliente.Cnpj = tfCpfCnpj.Text;
+            condutor.Cliente = (Cliente)cbCliente.SelectedItem;
+            condutor.Nome = tfNome.Text;
+            condutor.Cpf = tfCpf.Text;
             condutor.Cnh = tfCnh.Text;
             condutor.DataValidadeCnh = dtpData.Value;
-            condutor.Cliente.Email = tfEmail.Text;
-            condutor.Cliente.Telefone = tfTelefone.Text;
-            condutor.Cliente.Endereco = tfEndereco.Text;
+            condutor.Email = tfEmail.Text;
+            condutor.Telefone = tfTelefone.Text;
+            condutor.Endereco = tfEndereco.Text;
 
             if (!validador.ApenasNumerosInteiros(tfCnh.Text))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            if (dtpData.Value < DateTime.Today)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("A 'CNH' está vencida.");
                 DialogResult = DialogResult.None;
 
                 return;
@@ -115,6 +99,73 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
                 DialogResult = DialogResult.None;
             }
-        } 
+        }
+
+        private void cbxClienteCondutor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCliente.SelectedIndex == -1)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione um 'Cliente' primeiro");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            if(cbxClienteCondutor.Checked == true)
+            {
+                BuscarCliente();
+            }
+
+            if (cbxClienteCondutor.Checked == false)
+            {
+                LimparCampos();
+            }
+        }
+
+        private void LimparCampos()
+        {
+            tfNome.Clear();
+            tfCpf.Clear();
+            tfEmail.Clear();
+            tfTelefone.Clear();
+            tfEndereco.Clear();
+        }
+
+        private void BuscarCliente()
+        {
+            var clientes = repositorioCliente.SelecionarTodos();
+
+            var clienteSelecionado = (Cliente)cbCliente.SelectedItem;
+
+            foreach (var cliente in clientes)
+            {
+                if (clienteSelecionado.Nome == cliente.Nome)
+                {
+                    if(clienteSelecionado.Cpf != "              ")
+                    {
+                        tfNome.Text = cliente.Nome;
+                        tfCpf.Text = cliente.Cpf;
+                        tfEmail.Text = cliente.Email;
+                        tfTelefone.Text = cliente.Telefone;
+                        tfEndereco.Text = cliente.Endereco;
+                    }
+                    else
+                    {
+                        cbxClienteCondutor.Checked = false;
+                        TelaMenuPrincipal.Instancia.AtualizarRodape("Você não pode cadastrar uma Empresa como Condutor. Preencha os dados.");
+                        DialogResult = DialogResult.None;
+
+                        return;
+                    }
+
+                }
+            }
+        }
+
+        private void cbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LimparCampos();
+            cbxClienteCondutor.Checked = false;
+        }
     }
 }

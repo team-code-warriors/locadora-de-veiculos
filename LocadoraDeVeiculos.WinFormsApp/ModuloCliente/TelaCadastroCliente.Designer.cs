@@ -190,7 +190,7 @@
             // 
             this.tfCnpj.Enabled = false;
             this.tfCnpj.Location = new System.Drawing.Point(129, 210);
-            this.tfCnpj.Mask = " 00. 000. 000/0000-00";
+            this.tfCnpj.Mask = "00.000.000/0000-00";
             this.tfCnpj.Name = "tfCnpj";
             this.tfCnpj.Size = new System.Drawing.Size(159, 27);
             this.tfCnpj.TabIndex = 46;

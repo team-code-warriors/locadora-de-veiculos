@@ -29,21 +29,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Cliente", HeaderText = "Cliente"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Condutor"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Cpf", HeaderText = "CPF"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Cnpj", HeaderText = "CNPJ"},
-
-                new DataGridViewTextBoxColumn { DataPropertyName = "CNH", HeaderText = "CNH"},
-
-                new DataGridViewTextBoxColumn { DataPropertyName = "DataValidadeCnh", HeaderText = "Validade Cnh"},
-
-                new DataGridViewTextBoxColumn { DataPropertyName = "Email", HeaderText = "E-mail"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Cnh", HeaderText = "CNH"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Telefone", HeaderText = "Telefone"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Endereco", HeaderText = "Endereço"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Email", HeaderText = "E-mail"},
+
             };
             return colunas;
         }
@@ -59,7 +56,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
             foreach (var condutor in condutores)
             {
-                grid.Rows.Add(condutor.Id, condutor.Cliente.Nome, condutor.Cliente.Cpf, condutor.Cliente.Cnpj, condutor.Cnh, condutor.DataValidadeCnh, condutor.Cliente.Email, condutor.Cliente.Telefone, condutor.Cliente.Endereco);
+                grid.Rows.Add(condutor.Id, condutor.Cliente.Nome, condutor.Nome, condutor.Cpf, condutor.Cnh, condutor.Telefone, condutor.Email);
             }
         }
     }

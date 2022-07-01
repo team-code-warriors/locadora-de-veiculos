@@ -23,9 +23,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                 .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Cpf)
+                .NotNull()
                 .Length(14).WithMessage("'CPF' deve ter 14 caracteres.");
 
             RuleFor(x => x.Cnpj)
+                .NotNull()
                 .Length(18).WithMessage("'CNPJ' deve ter 18 caracteres.");
 
             RuleFor(x => x.Telefone)
