@@ -31,7 +31,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos
                     [ID] = @ID";
 
         protected override string sqlExcluir =>
-            @"DELETE FROM [TBGRUPODEVEICULOS]
+            @"DELETE FROM [TBPLANODECOBRANCA]
+                WHERE
+                    [GRUPO_ID] = @ID
+
+            DELETE FROM [TBGRUPODEVEICULOS]
                 WHERE
                     [ID] = @ID";
 

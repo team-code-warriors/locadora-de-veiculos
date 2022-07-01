@@ -8,9 +8,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado
 {
     public class ValidadorRegex
     {
-        public bool ApenasNumeros(string numero)
+        public bool ApenasNumerosInteirosOuDecimais(string numero)
         {
             bool estaValido = System.Text.RegularExpressions.Regex.IsMatch(numero, @"^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$");
+
+            return estaValido;
+        }
+        public bool ApenasNumerosInteiros(string numero)
+        {
+            bool estaValido = System.Text.RegularExpressions.Regex.IsMatch(numero, @"(^[0-9])");
 
             return estaValido;
         }

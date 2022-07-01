@@ -29,7 +29,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
             int idGrupo = Convert.ToInt32(leitorRegistro["GRUPO_ID"]);
             string tipoPlano = Convert.ToString(leitorRegistro["TIPOPLANO"]);
             Decimal valorDiaria = Convert.ToDecimal(leitorRegistro["VALORDIARIA"]);
-            int kmIncluso = Convert.ToInt32(leitorRegistro["KMINCLUSO"]);
+            Decimal kmIncluso = Convert.ToDecimal(leitorRegistro["KMINCLUSO"]);
             Decimal precoKm = Convert.ToDecimal(leitorRegistro["PRECOKM"]);
 
             var plano = new PlanoDeCobranca

@@ -43,14 +43,10 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         {
             //arrange
             var grupo = NovoGrupo();
-
-            //action
             repositorio.Inserir(grupo);
 
-            //assert
-            grupo.Nome = "Uber Eats 2.0";
-
             //action 
+            grupo.Nome = "Uber Eats 2.0";
             repositorio.Editar(grupo);
 
             //assert
@@ -66,8 +62,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         {        
             //arrange
             var grupo = NovoGrupo();
-
-            //action
             repositorio.Inserir(grupo);
 
             //action           
@@ -82,45 +76,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         public void Deve_selecionar_apenas_um_grupo()
         {
             //arrange
-            var grupo = NovoGrupo();
-            repositorio.Inserir(grupo);
-
-            //action
-            var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
-
-            //assert
-            Assert.IsNotNull(grupoEncontrado);
-            Assert.AreEqual(grupo, grupoEncontrado);
-        }
-
-        [TestMethod]
-        public void Deve_selecionar_todos_os_grupos()
-        {
-            //arrange           
-            var grupo = NovoGrupo();
-            repositorio.Inserir(grupo);
-
-            //arrange
-            var g0 = new GrupoDeVeiculos("0 Kms");
-            var g1 = new GrupoDeVeiculos("Antigos usados");
-            var g2 = new GrupoDeVeiculos("Seminovos");
-
-            repositorio.Inserir(g0);
-            repositorio.Inserir(g1);
-            repositorio.Inserir(g2);
-
-            //action
-            var grupos = repositorio.SelecionarTodos();
-
-            //assert
-            repositorio.SelecionarPorId(grupo.Id)
-                .Should().BeNull();
-        }
-
-        [TestMethod]
-        public void Deve_selecionar_apenas_um_grupo_de_veiculos()
-        {
-            //arrange          
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
 

@@ -97,6 +97,7 @@
             this.cbGrupo.Name = "cbGrupo";
             this.cbGrupo.Size = new System.Drawing.Size(279, 28);
             this.cbGrupo.TabIndex = 5;
+            this.cbGrupo.SelectedIndexChanged += new System.EventHandler(this.cbGrupo_SelectedIndexChanged);
             // 
             // cbTipoPlano
             // 
@@ -110,6 +111,7 @@
             this.cbTipoPlano.Name = "cbTipoPlano";
             this.cbTipoPlano.Size = new System.Drawing.Size(279, 28);
             this.cbTipoPlano.TabIndex = 6;
+            this.cbTipoPlano.SelectedIndexChanged += new System.EventHandler(this.cbTipoPlano_SelectedIndexChanged);
             // 
             // tbValorDiaria
             // 

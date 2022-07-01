@@ -24,6 +24,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
         {
             InitializeComponent();
             this.ConfigurarTela();
+            ConfiguracoesIniciaisTela();
             CarregarGrupos(grupos);
         }
 
@@ -50,42 +51,81 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
                 cbGrupo.SelectedItem = plano.GrupoVeiculo;
                 cbTipoPlano.SelectedItem = plano.TipoPlano;
 
-                if (plano.ValorDiaria == 0)
-                {
-                    tbValorDiaria.Text = "";
-                }
-                else
-                {
-                    tbValorDiaria.Text = plano.ValorDiaria.ToString();
-                }
+                tbValorDiaria.Text = plano.ValorDiaria.ToString();
+                tbKmIncluso.Text = plano.KmIncluso.ToString();
+                tbPrecoKm.Text = plano.PrecoKm.ToString();
 
-                if (plano.KmIncluso == 0)
-                {
-                    tbKmIncluso.Text = "";
-                }
-                else
-                {
-                    tbKmIncluso.Text = plano.KmIncluso.ToString();
-                }
 
-                if (plano.PrecoKm == 0)
-                {
-                    tbPrecoKm.Text = "";
-                }
-                else
-                {
-                    tbPrecoKm.Text = plano.PrecoKm.ToString();
-                }
+
+                //if (plano.ValorDiaria == 0)
+                //{
+                //    tbValorDiaria.Text = "";
+                //}
+                //else
+                //{
+                //    tbValorDiaria.Text = plano.ValorDiaria.ToString();
+                //}
+
+                //if (plano.KmIncluso == 0)
+                //{
+                //    tbKmIncluso.Text = "";
+                //}
+                //else
+                //{
+                //    tbKmIncluso.Text = plano.KmIncluso.ToString();
+                //}
+
+                //if (plano.PrecoKm == 0)
+                //{
+                //    tbPrecoKm.Text = "";
+                //}
+                //else
+                //{
+                //    tbPrecoKm.Text = plano.PrecoKm.ToString();
+                //}
             }
         }
 
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
+            string valorComPontoDiaria = tbValorDiaria.Text.Replace(",", ".");
+            string valorComVirgulaDiaria = tbValorDiaria.Text.Replace(".", ",");
+
+            if (!validador.ApenasNumerosInteirosOuDecimais(valorComPontoDiaria))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Valor da Diária'.");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            string valorComPontoKmIncluso = tbKmIncluso.Text.Replace(",", ".");
+            string valorComVirgulaKmIncluso = tbKmIncluso.Text.Replace(".", ",");
+
+            if (!validador.ApenasNumerosInteirosOuDecimais(valorComPontoKmIncluso))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'KM Incluso'.");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            string valorComPontoPrecoKm = tbPrecoKm.Text.Replace(",", ".");
+            string valorComVirgulaPrecoKm = tbPrecoKm.Text.Replace(".", ",");
+
+            if (!validador.ApenasNumerosInteirosOuDecimais(valorComPontoPrecoKm))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Preço por KM'.");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+
             plano.GrupoVeiculo = (GrupoDeVeiculos)cbGrupo.SelectedItem;
             plano.TipoPlano = (string)cbTipoPlano.SelectedItem;
-            plano.ValorDiaria = Convert.ToDecimal(tbValorDiaria.Text);
-            plano.KmIncluso = Convert.ToInt32(tbKmIncluso.Text);
-            plano.PrecoKm = Convert.ToDecimal(tbPrecoKm.Text);
+            plano.ValorDiaria = Convert.ToDecimal(valorComVirgulaDiaria);
+            plano.KmIncluso = Convert.ToDecimal(valorComVirgulaKmIncluso);
+            plano.PrecoKm = Convert.ToDecimal(valorComVirgulaPrecoKm);
 
             var resultadoValidacao = GravarRegistro(plano);
 
@@ -107,6 +147,59 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
         private void TelaCadastroContatosForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             TelaMenuPrincipal.Instancia.AtualizarRodape("");
+        }
+
+        private void cbGrupo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbTipoPlano.Enabled = true;
+        }
+
+        private void ConfiguracoesIniciaisTela()
+        {
+            cbTipoPlano.Enabled = false;
+            tbValorDiaria.Enabled = false;
+            tbKmIncluso.Enabled = false;
+            tbPrecoKm.Enabled = false;
+        }
+
+        private void cbTipoPlano_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbTipoPlano.SelectedItem == "Plano Diário")
+            {
+                tbValorDiaria.Clear();
+                tbKmIncluso.Clear();
+                tbPrecoKm.Clear();
+
+                tbKmIncluso.Text = "0";
+                tbKmIncluso.Enabled = false;
+
+                tbValorDiaria.Enabled = true;
+                tbPrecoKm.Enabled = true;
+            }
+            else if (cbTipoPlano.SelectedItem == "KM Controlado")
+            {
+                tbValorDiaria.Clear();
+                tbKmIncluso.Clear();
+                tbPrecoKm.Clear();
+
+                tbValorDiaria.Enabled = true;
+                tbKmIncluso.Enabled = true;
+                tbPrecoKm.Enabled = true;
+
+            }
+            else if (cbTipoPlano.SelectedItem == "KM Livre")
+            {
+                tbValorDiaria.Clear();
+                tbKmIncluso.Clear();
+                tbPrecoKm.Clear();
+
+                tbKmIncluso.Text = "0";
+                tbKmIncluso.Enabled = false;
+                tbPrecoKm.Text = "0";
+                tbPrecoKm.Enabled = false;
+
+                tbValorDiaria.Enabled = true;
+            }
         }
     }
 }

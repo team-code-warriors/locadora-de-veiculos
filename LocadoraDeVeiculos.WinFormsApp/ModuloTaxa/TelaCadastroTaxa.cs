@@ -56,7 +56,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
             string valorComPonto = tbValor.Text.Replace(",", ".");
             string valorComVirgula = tbValor.Text.Replace(".", ",");
 
-            if (!validador.ApenasNumeros(valorComPonto))
+            if (!validador.ApenasNumerosInteirosOuDecimais(valorComPonto))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Valor'.");
                 DialogResult = DialogResult.None;

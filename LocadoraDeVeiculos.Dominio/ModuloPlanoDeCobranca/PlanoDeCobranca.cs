@@ -15,10 +15,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
         public GrupoDeVeiculos GrupoVeiculo { get; set; }
         public string TipoPlano { get; set; }
         public Decimal ValorDiaria { get; set; }
-        public int KmIncluso { get; set; }
+        public Decimal KmIncluso { get; set; }
         public Decimal PrecoKm { get; set; }
 
-        public PlanoDeCobranca(GrupoDeVeiculos grupoVeiculo, string tipoPlano, decimal valorDiaria, int kmIncluso, decimal precoKm)
+        public PlanoDeCobranca(GrupoDeVeiculos grupoVeiculo, string tipoPlano, decimal valorDiaria, decimal kmIncluso, decimal precoKm)
         {
             GrupoVeiculo = grupoVeiculo;
             TipoPlano = tipoPlano;
