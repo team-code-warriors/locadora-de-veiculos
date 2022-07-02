@@ -32,8 +32,8 @@ git clone https://github.com/team-code-warriors/locadora-de-veiculos.git
 ![icons8-c-afiado-logotipo-2-48](https://user-images.githubusercontent.com/85200696/177006773-58b320bc-0a84-4c99-b0f6-4ed7324ec3c0.png)
 ![icons8-sql-server-48](https://user-images.githubusercontent.com/85200696/177006790-4da79574-3dc6-4fc9-aa1a-2efa0ffa14c1.png)
 
-### Desenvolvedores/Contribuintes :octocat:
-<div> Ane Luisy Grizotti <div>
-<div> Daniel Zanoni <div>
-<div> Lucas Bleyer <div>
+### Desenvolvedores/Contribuintes
+<div> :octocat: Ane Luisy Grizotti <div>
+<div> :octocat: Daniel Zanoni <div>
+<div> :octocat: Lucas Bleyer <div>
 
