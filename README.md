@@ -1,6 +1,5 @@
-#Locadora de Veículos - Equipe Code Warriors 🟨🟦
+<h1 align="center"> Locadora de Veículos - Equipe Code Warriors 🟨🟦 </h1>
        
-
 #Status do Projeto: ⚒ Em desenvolvimento
 
 #Tópicos
