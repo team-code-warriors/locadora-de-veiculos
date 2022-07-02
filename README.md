@@ -1,6 +1,6 @@
 <h1 align="center"> Locadora de Veículos - Equipe Code Warriors 🟨🟦 </h1>
        
-#Status do Projeto: ⚒ Em desenvolvimento
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
 #Tópicos
 🔹 Descrição do projeto
