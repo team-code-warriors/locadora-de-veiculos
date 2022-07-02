@@ -2,6 +2,7 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
     public class ControladorCliente : ControladorBase
     {
         private readonly RepositorioClienteEmBancoDeDados repositorioCliente;
+        private readonly RepositorioCondutorEmBancoDeDados repositorioCondutor = new RepositorioCondutorEmBancoDeDados();
         private TabelaClientesControl tabelaClientes;
         private readonly ServicoCliente servicoCliente;
 
@@ -72,6 +74,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 MessageBox.Show("Selecione um cliente primeiro",
                 "Exclusão de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+
+            var condutores = repositorioCondutor.SelecionarTodos();
+
+            foreach (var item in condutores)
+            {
+                if (item.Cliente.Nome == clienteSelecionado.Nome)
+                {
+                    MessageBox.Show("Este Cliente esta atrelado a um Condutor e não pode ser excluído",
+                    "Exclusão de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             }
 
             DialogResult resultado = MessageBox.Show("Deseja realmente excluir este cliente?",
