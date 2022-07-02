@@ -22,10 +22,10 @@ Projeto de desenvolvimento da Academia do Programador 2022. A proposta desta apl
 
 
 ### Como rodar a aplicação ▶️
-No terminal, clone o projeto:
+1⃣ No terminal, clone o projeto:
 git clone https://github.com/team-code-warriors/locadora-de-veiculos.git
 
-Após, abra o projeto com o Microsoft Visual Studio.
+2⃣ Após, abra o projeto com o Microsoft Visual Studio.
 
 
 ### Tecnologias utilizadas no projeto:
