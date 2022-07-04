@@ -17,6 +17,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
     public partial class TelaCadastroCliente : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
+        //retirarcomentario
         public TelaCadastroCliente()
         {
             InitializeComponent();
