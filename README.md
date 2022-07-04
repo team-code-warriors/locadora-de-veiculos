@@ -27,7 +27,7 @@ A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programa
 1⃣ No terminal, clone o projeto:
 git clone https://github.com/team-code-warriors/locadora-de-veiculos.git
 
-2⃣ Após, abra o projeto com o Microsoft Visual Studio.
+2⃣ Após, abra o projeto com o Microsoft Visual Studio e rode a aplicação (será necessário efetuar o PUBLISH no projeto de banco de dados).
 
 
 ### Tecnologias utilizadas no projeto
