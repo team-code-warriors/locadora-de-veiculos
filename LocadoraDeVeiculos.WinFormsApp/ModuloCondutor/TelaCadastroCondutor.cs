@@ -129,6 +129,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             tfCpf.Clear();
             tfEmail.Clear();
             tfTelefone.Clear();
+            tfCnh.Clear();
             tfEndereco.Clear();
         }
 
