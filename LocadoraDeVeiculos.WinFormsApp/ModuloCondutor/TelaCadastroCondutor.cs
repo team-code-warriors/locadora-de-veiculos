@@ -73,13 +73,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             condutor.Telefone = tfTelefone.Text;
             condutor.Endereco = tfEndereco.Text;
 
-            if (!validador.ApenasNumerosInteiros(tfCnh.Text))
+            if (!validador.ApenasLetras(tfNome.Text))
             {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'CNH'");
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
                 DialogResult = DialogResult.None;
 
                 return;
             }
+
 
             if (dtpData.Value < DateTime.Today)
             {
