@@ -9,7 +9,7 @@
 
        
 ### Descrição do projeto
-A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programador 2022. A proposta desta aplicação é entregar um software de uma locadora de veículos, a fim de automatizar processos, otimizar funções e armazenar de forma computacional todos os registros do comercio em questão. 
+A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programador 2022. A proposta desta aplicação é entregar um software de locação de veículos (carros), a fim de automatizar processos, otimizar funções e armazenar de forma computacional todos os registros do comercio em questão. 
 
 
 ### Funcionalidades
