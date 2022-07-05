@@ -16,7 +16,7 @@ namespace LocadoraDeVeiculos.Dominio.Tests.ModuloVeiculo
             {
                 Modelo = "Aventador",
                 Fabricante = "Lamborghini",
-                Ano = "2017",
+                Ano = 2017,
                 Cambio = "Automático",
                 Cor = "Amarelo",
                 Placa = "5678-ABCD",

@@ -39,18 +39,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
 
             var resultadoValidacao = validador.Validate(veiculo);
 
-            if (DescricaoDuplicada(veiculo))
-                resultadoValidacao.Errors.Add(new ValidationFailure("Veículo", "Veículo já cadastrado"));
+            if(resultadoValidacao.IsValid)
+                if (PlacaDuplicada(veiculo))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("Veículo", "Veículo já cadastrado"));
 
             return resultadoValidacao;
         }
 
-        private bool DescricaoDuplicada(Veiculo veiculo)
+        private bool PlacaDuplicada(Veiculo veiculo)
         {
-            var veiculoEncontrado = repositorioVeiculo.SelecionarVeiculoPorModelo(veiculo.Modelo);
+            var veiculoEncontrado = repositorioVeiculo.SelecionarVeiculoPorPlaca(veiculo.Placa);
 
             return veiculoEncontrado != null &&
-                   veiculoEncontrado.Modelo == veiculo.Modelo &&
+                   veiculoEncontrado.Placa == veiculo.Placa &&
                    veiculoEncontrado.Id != veiculo.Id;
         }
     }

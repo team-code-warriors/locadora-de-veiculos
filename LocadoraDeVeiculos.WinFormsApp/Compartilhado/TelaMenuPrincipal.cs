@@ -17,6 +17,9 @@ using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
+using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
+using LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {
@@ -70,6 +73,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
         }
 
         private void taxasMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+        }
+
+        private void veículosMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
@@ -156,7 +164,9 @@ namespace LocadoraDeVeiculos.WinFormsApp
             var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
             var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
             var repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaEmBancoDeDados();
+            var repositorioVeiculo = new RepositorioVeiculoEmBancoDeDados();
 
+            var servicoVeiculo = new ServicoVeiculo(repositorioVeiculo);
             var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario);
             var servicoCliente = new ServicoCliente(repositorioCliente);
             var servicoCondutor = new ServicoCondutor(repositorioCondutor);
@@ -172,6 +182,9 @@ namespace LocadoraDeVeiculos.WinFormsApp
             controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa, servicoTaxa));
             controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos, servicoGrupoVeiculo));
             controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(repositorioPlanoDeCobranca, servicoPlanoCobranca));
+            controladores.Add("Veículos", new ControladorVeiculo(repositorioVeiculo, servicoVeiculo));
         }
+
+
     }
 }

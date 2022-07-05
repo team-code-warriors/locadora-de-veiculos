@@ -9,7 +9,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
 
         public string Modelo { get; set; }
         public string Fabricante { get; set; }
-        public string Ano { get; set; }
+        public int Ano { get; set; }
         public string Cambio { get; set; }
         public string Cor { get; set; }
         public string Placa { get; set; }
@@ -19,7 +19,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
         public GrupoDeVeiculos GrupoDeVeiculos { get; set; }
 
 
-        public Veiculo(string modelo, string fabricante, string ano, string cambio,
+        public Veiculo(string modelo, string fabricante, int ano, string cambio,
             string cor, string placa, int kilometragem, string tipoDeCombustivel,
             decimal capacidadeDoTanque, GrupoDeVeiculos grupoDeVeiculos)
         {

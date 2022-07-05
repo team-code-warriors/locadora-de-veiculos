@@ -19,7 +19,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPOID]
+                    [GRUPO_ID]
                 )
                 VALUES
                 (
@@ -29,10 +29,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     @CAMBIO,
                     @COR,
                     @PLACA,
-                    @KILOMETRAGEM
+                    @KILOMETRAGEM,
                     @TIPODECOMBUSTIVEL,
                     @CAPACIDADEDOTANQUE,
-                    @GRUPOID
+                    @GRUPO_ID
+
                 );SELECT SCOPE_IDENTITY();";
 
         protected override string sqlEditar =>
@@ -47,7 +48,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM] = @KILOMETRAGEM,
                     [TIPODECOMBUSTIVEL] = @TIPODECOMBUSTIVEL,
                     [CAPACIDADEDOTANQUE] = @CAPACIDADEDOTANQUE,
-                    [GRUPOID] = @GRUPOID
+                    [GRUPO_ID] = @GRUPO_ID
 
                 WHERE
                     [ID] = @ID";
@@ -69,7 +70,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPOID]
+                    [GRUPO_ID]
 	            FROM 
 		            [TBVEICULO]
 		        WHERE
@@ -87,22 +88,31 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPOID]
+                    [GRUPO_ID]
 	            FROM 
 		            [TBVEICULO]";
 
-        private string sqlSelecionarPorModelo =>
+        private string sqlSelecionarPorPlaca =>
             @"SELECT
-                    [ID], 
-		            [MODELO]
+                    [ID],
+		            [MODELO],
+                    [FABRICANTE],
+                    [ANO],
+                    [CAMBIO],
+                    [COR],
+                    [PLACA],
+                    [KILOMETRAGEM],
+                    [TIPODECOMBUSTIVEL],
+                    [CAPACIDADEDOTANQUE],
+                    [GRUPO_ID]
 	            FROM 
 		            [TBVEICULO]
                 WHERE 
-                    [NOME] = @NOME";
+                    [PLACA] = @PLACA";
 
-        public Veiculo SelecionarVeiculoPorModelo(string modelo)
+        public Veiculo SelecionarVeiculoPorPlaca(string placa)
         {
-            return SelecionarPorParametro(sqlSelecionarPorModelo, new SqlParameter("MODELO", modelo));
+            return SelecionarPorParametro(sqlSelecionarPorPlaca, new SqlParameter("PLACA", placa));
         }
     }
 }

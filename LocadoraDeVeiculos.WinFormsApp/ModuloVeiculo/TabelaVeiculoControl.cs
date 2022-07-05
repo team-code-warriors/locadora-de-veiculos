@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
+﻿using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 {
@@ -19,9 +20,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número" },
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número" },
+                new DataGridViewTextBoxColumn { DataPropertyName = "Modelo", HeaderText = "Modelo" },
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número" },
+                new DataGridViewTextBoxColumn { DataPropertyName = "Fabricante", HeaderText = "Fabricante" },
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Ano", HeaderText = "Ano" },
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Cor", HeaderText = "Cor" },
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "GrupoDeVeiculos", HeaderText = "Grupo" },
             };
 
             return colunas;
@@ -30,14 +37,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
         {
             return grid.SelecionarNumero<int>();
         }
-        //internal void AtualizarRegistros(List<Veiculo> veiculo)
-        //{
-        //    grid.Rows.Clear();
 
-        //    foreach (var Veiculo in veiculo)
-        //    {
-        //        grid.Rows.Add(veiculo.Id, veiculo.Nome);
-        //    }
-        //}
+        internal void AtualizarRegistros(List<Veiculo> veiculos)
+        {
+            grid.Rows.Clear();
+
+            foreach (var veiculo in veiculos)
+            {
+                grid.Rows.Add(veiculo.Id, veiculo.Modelo, veiculo.Fabricante, veiculo.Ano, veiculo.Cor, veiculo.GrupoDeVeiculos.Nome);
+            }
+        }
     }
 }

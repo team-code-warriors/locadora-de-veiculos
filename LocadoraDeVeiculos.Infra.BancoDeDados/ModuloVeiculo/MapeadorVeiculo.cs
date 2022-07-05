@@ -8,25 +8,25 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
 {
     public class MapeadorVeiculo : MapeadorBase<Veiculo>
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
-        public override void ConfigurarParametros(Veiculo veiculo, SqlCommand comando)
+        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+        public override void ConfigurarParametros(Veiculo registro, SqlCommand comando)
         {
-            comando.Parameters.AddWithValue("ID", veiculo.Id);
-            comando.Parameters.AddWithValue("GRUPOID", veiculo.GrupoDeVeiculos);
-            comando.Parameters.AddWithValue("MODELO", veiculo.Modelo);
-            comando.Parameters.AddWithValue("FABRICANTE", veiculo.Fabricante);
-            comando.Parameters.AddWithValue("ANO", veiculo.Ano);
-            comando.Parameters.AddWithValue("CAMBIO", veiculo.Cambio);
-            comando.Parameters.AddWithValue("COR", veiculo.Cor);
-            comando.Parameters.AddWithValue("PLACA", veiculo.Placa);
-            comando.Parameters.AddWithValue("KILOMETRAGEM", veiculo.Kilometragem);
-            comando.Parameters.AddWithValue("COMBUSTIVEL", veiculo.TipoDeCombustivel);
-            comando.Parameters.AddWithValue("CAPACIDADETANQUE", veiculo.CapacidadeDoTanque);
+            comando.Parameters.AddWithValue("ID", registro.Id);
+            comando.Parameters.AddWithValue("GRUPO_ID", registro.GrupoDeVeiculos.Id);
+            comando.Parameters.AddWithValue("MODELO", registro.Modelo);
+            comando.Parameters.AddWithValue("FABRICANTE", registro.Fabricante);
+            comando.Parameters.AddWithValue("ANO", registro.Ano);
+            comando.Parameters.AddWithValue("CAMBIO", registro.Cambio);
+            comando.Parameters.AddWithValue("COR", registro.Cor);
+            comando.Parameters.AddWithValue("PLACA", registro.Placa);
+            comando.Parameters.AddWithValue("KILOMETRAGEM", registro.Kilometragem);
+            comando.Parameters.AddWithValue("TIPODECOMBUSTIVEL", registro.TipoDeCombustivel);
+            comando.Parameters.AddWithValue("CAPACIDADEDOTANQUE", registro.CapacidadeDoTanque);
         }
         public override Veiculo ConverterRegistro(SqlDataReader leitorVeiculo)
         {
             int id = Convert.ToInt32(leitorVeiculo["ID"]);
-            int idGrupo = Convert.ToInt32(leitorVeiculo["GRUPOID"]);
+            int idGrupo = Convert.ToInt32(leitorVeiculo["GRUPO_ID"]);
             string modelo = Convert.ToString(leitorVeiculo["MODELO"]);
             string fabricante = Convert.ToString(leitorVeiculo["FABRICANTE"]);
             int ano = Convert.ToInt32(leitorVeiculo["ANO"]);
@@ -34,8 +34,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
             string cor = Convert.ToString(leitorVeiculo["COR"]);
             string placa = Convert.ToString(leitorVeiculo["PLACA"]);
             int kilometragem = Convert.ToInt32(leitorVeiculo["KILOMETRAGEM"]);
-            string combustivel = Convert.ToString(leitorVeiculo["COMBUSTIVEL"]);
-            decimal capacidadeDoTanque = Convert.ToDecimal(leitorVeiculo["CAPACIDADETANQUE"]);
+            string combustivel = Convert.ToString(leitorVeiculo["TIPODECOMBUSTIVEL"]);
+            decimal capacidadeDoTanque = Convert.ToDecimal(leitorVeiculo["CAPACIDADEDOTANQUE"]);
 
             return new Veiculo()
             {

@@ -27,5 +27,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado
 
             return estaValido;
         }
+
+        public bool ApenasLetrasENumeros(string letraENumero)
+        {
+            bool estaValido = System.Text.RegularExpressions.Regex.IsMatch(letraENumero, @"^[A-Za-z0-9]*\d+[A-Za-z0-9]*$");
+
+            return estaValido;
+        }
+  
     }
 }

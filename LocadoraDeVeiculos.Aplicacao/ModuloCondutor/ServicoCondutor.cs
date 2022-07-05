@@ -43,6 +43,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             ValidadorCondutor validador = new ValidadorCondutor();
 
             var resultadoValidacao = validador.Validate(condutor);
+
             if(resultadoValidacao.IsValid)
                 if (ClienteDuplicado(condutor) && CpfDuplicado(condutor))
                     resultadoValidacao.Errors.Add(new ValidationFailure("Condutor", "Este Condutor já esta cadastrado para este Cliente"));
