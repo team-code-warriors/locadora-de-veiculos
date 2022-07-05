@@ -30,14 +30,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
         {
             return grid.SelecionarNumero<int>();
         }
-        internal void AtualizarRegistros(List<Veiculo> veiculo)
-        {
-            grid.Rows.Clear();
+        //internal void AtualizarRegistros(List<Veiculo> veiculo)
+        //{
+        //    grid.Rows.Clear();
 
-            foreach (var Veiculo in veiculo)
-            {
-                grid.Rows.Add(veiculo.Id, veiculo.Nome);
-            }
-        }
+        //    foreach (var Veiculo in veiculo)
+        //    {
+        //        grid.Rows.Add(veiculo.Id, veiculo.Nome);
+        //    }
+        //}
     }
 }

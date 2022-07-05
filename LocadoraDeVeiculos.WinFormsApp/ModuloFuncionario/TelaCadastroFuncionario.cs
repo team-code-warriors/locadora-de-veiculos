@@ -61,7 +61,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             string valorComPonto = tbSalario.Text.Replace(",", ".");
             string valorComVirgula = tbSalario.Text.Replace(".", ",");
 
-            if (!validador.ApenasNumeros(valorComPonto))
+            if (!validador.ApenasNumerosInteirosOuDecimais(valorComPonto))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Salário'.");
                 DialogResult = DialogResult.None;

@@ -47,5 +47,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
                    Cnpj == cliente.Cnpj &&
                    Telefone == cliente.Telefone;
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }

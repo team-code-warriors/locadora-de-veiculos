@@ -41,9 +41,11 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grupoDeVeículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planoDeCobrançasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
+            this.condutoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbox.SuspendLayout();
             this.menu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -130,8 +132,10 @@
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.funcionáriosToolStripMenuItem,
             this.clientesToolStripMenuItem,
+            this.condutoresToolStripMenuItem,
             this.grupoDeVeículosToolStripMenuItem,
-            this.taxasToolStripMenuItem});
+            this.taxasToolStripMenuItem,
+            this.planoDeCobrançasToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.cadastrosToolStripMenuItem.Text = "Menus";
@@ -139,30 +143,37 @@
             // funcionáriosToolStripMenuItem
             // 
             this.funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.funcionáriosToolStripMenuItem.Text = "Funcionários";
             this.funcionáriosToolStripMenuItem.Click += new System.EventHandler(this.funcionariosMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesMenuItem_Click);
             // 
             // grupoDeVeículosToolStripMenuItem
             // 
             this.grupoDeVeículosToolStripMenuItem.Name = "grupoDeVeículosToolStripMenuItem";
-            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.grupoDeVeículosToolStripMenuItem.Text = "Grupo de Veículos";
             this.grupoDeVeículosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeVeiculosMenuItem_Click);
             // 
             // taxasToolStripMenuItem
             // 
             this.taxasToolStripMenuItem.Name = "taxasToolStripMenuItem";
-            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.taxasToolStripMenuItem.Text = "Taxas";
             this.taxasToolStripMenuItem.Click += new System.EventHandler(this.taxasMenuItem_Click);
+            // 
+            // planoDeCobrançasToolStripMenuItem
+            // 
+            this.planoDeCobrançasToolStripMenuItem.Name = "planoDeCobrançasToolStripMenuItem";
+            this.planoDeCobrançasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.planoDeCobrançasToolStripMenuItem.Text = "Plano de Cobranças";
+            this.planoDeCobrançasToolStripMenuItem.Click += new System.EventHandler(this.planoDeCobrançasMenuItem_Click);
             // 
             // panelRegistros
             // 
@@ -190,6 +201,13 @@
             this.labelRodape.Name = "labelRodape";
             this.labelRodape.Size = new System.Drawing.Size(67, 20);
             this.labelRodape.Text = "[rodapé]";
+            // 
+            // condutoresToolStripMenuItem
+            // 
+            this.condutoresToolStripMenuItem.Name = "condutoresToolStripMenuItem";
+            this.condutoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.condutoresToolStripMenuItem.Text = "Condutores";
+            this.condutoresToolStripMenuItem.Click += new System.EventHandler(this.condutoresToolStripMenuItem_Click);
             // 
             // TelaMenuPrincipal
             // 
@@ -231,5 +249,7 @@
         private Panel panelRegistros;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel labelRodape;
+        private ToolStripMenuItem planoDeCobrançasToolStripMenuItem;
+        private ToolStripMenuItem condutoresToolStripMenuItem;
     }
 }

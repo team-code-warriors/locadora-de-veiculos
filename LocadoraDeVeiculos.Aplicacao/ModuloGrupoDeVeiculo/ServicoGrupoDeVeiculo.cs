@@ -39,8 +39,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 
             var resultadoValidacao = validador.Validate(grupo);
 
-            if (NomeDuplicado(grupo))
-                resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Grupo já cadastrado"));
+            if(resultadoValidacao.IsValid)
+            {
+                if (NomeDuplicado(grupo))
+                    resultadoValidacao.Errors.Add(new ValidationFailure("Nome", "Grupo já cadastrado"));
+            }
 
             return resultadoValidacao;
         }

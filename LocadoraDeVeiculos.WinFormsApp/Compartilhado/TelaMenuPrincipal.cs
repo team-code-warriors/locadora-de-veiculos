@@ -1,11 +1,9 @@
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario;
-using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
@@ -13,6 +11,12 @@ using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
+using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
+using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {
@@ -50,6 +54,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
+        private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+        }
+
         private void funcionariosMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
@@ -61,6 +70,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
         }
 
         private void taxasMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+        }
+
+        private void planoDeCobrançasMenuItem_Click(object sender, EventArgs e)
         {
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
@@ -138,20 +152,26 @@ namespace LocadoraDeVeiculos.WinFormsApp
         {
             var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
             var repositorioCliente = new RepositorioClienteEmBancoDeDados();
+            var repositorioCondutor = new RepositorioCondutorEmBancoDeDados();
             var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
             var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            var repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaEmBancoDeDados();
 
             var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario);
             var servicoCliente = new ServicoCliente(repositorioCliente);
+            var servicoCondutor = new ServicoCondutor(repositorioCondutor);
             var servicoGrupoVeiculo = new ServicoGrupoDeVeiculo(repositorioGrupoDeVeiculos);
             var servicoTaxa = new ServicoTaxa(repositorioTaxa);
+            var servicoPlanoCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca);
 
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Funcionários", new ControladorFuncionario(repositorioFuncionario, servicoFuncionario));
             controladores.Add("Clientes", new ControladorCliente(repositorioCliente, servicoCliente));
+            controladores.Add("Condutores", new ControladorCondutor(repositorioCondutor, servicoCondutor));
             controladores.Add("Taxas", new ControladorTaxa(repositorioTaxa, servicoTaxa));
             controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos, servicoGrupoVeiculo));
+            controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(repositorioPlanoDeCobranca, servicoPlanoCobranca));
         }
     }
 }

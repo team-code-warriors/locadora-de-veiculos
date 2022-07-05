@@ -1,13 +1,15 @@
 ﻿using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 {
-    internal class ControladorGrupoDeVeiculos : ControladorBase
+    public class ControladorGrupoDeVeiculos : ControladorBase
     {
         private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
+        private readonly RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano = new RepositorioPlanoDeCobrancaEmBancoDeDados();
         private TabelaGrupoDeVeiculosControl tabelaGrupo;
         private readonly ServicoGrupoDeVeiculo servicoGrupo;
         public ControladorGrupoDeVeiculos(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo, ServicoGrupoDeVeiculo servicoGrupo)
@@ -65,6 +67,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
                 MessageBox.Show("Selecione um grupo primeiro",
                 "Exclusão de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
+            }
+
+            var planos = repositorioPlano.SelecionarTodos();
+
+            foreach (var item in planos)
+            {
+                if (item.GrupoVeiculo.Nome == grupoSelecionado.Nome)
+                {
+                    MessageBox.Show("Este Grupo de Veículos esta atrelado a um Plano de Cobrança e não pode ser excluído",
+                    "Exclusão de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             }
 
             DialogResult resultado = MessageBox.Show("Deseja realmente excluir o grupo?",
