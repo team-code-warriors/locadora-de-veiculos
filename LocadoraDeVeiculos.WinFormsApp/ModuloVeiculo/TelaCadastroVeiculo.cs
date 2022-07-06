@@ -100,10 +100,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            veiculo.Modelo = tfModelo.Text;
             veiculo.Fabricante = tfFabricante.Text;
 
-            #region Verificação
+            #region Verificação se o ano está correto
             string anoSemEspaco = tfAno.Text.Replace(" ", "");
 
             if (anoSemEspaco.Length != 4)
@@ -118,9 +117,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             veiculo.Ano = Convert.ToInt32(tfAno.Text);
             veiculo.Cambio = Convert.ToString(cbCambio.SelectedItem);
             veiculo.Cor = tfCor.Text;
-            veiculo.Placa = tfPlaca.Text;
 
-            #region Verificação
+            #region Verificação se a kilometragem esta correta
             string kilometragemSemEspaco = tfKilometragem.Text.Replace(" ", "");
 
            if(kilometragemSemEspaco.Length == 0)
@@ -136,26 +134,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             veiculo.TipoDeCombustivel = Convert.ToString(cbCombustivel.SelectedItem);
             veiculo.GrupoDeVeiculos = (GrupoDeVeiculos)cbGrupoDeVeiculos.SelectedItem;
 
-            #region Verificações
+            #region Verificações se o modelo e a placa estão corretos
             if (!validador.ApenasLetrasENumeros(tfModelo.Text))
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um modelo válido no campo 'Modelo'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
-            if (!validador.ApenasLetras(tfFabricante.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um fabricante válido no campo 'Fabricante'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
-            if (!validador.ApenasLetras(tfCor.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira uma cor válida no campo 'Cor'");
                 DialogResult = DialogResult.None;
 
                 return;
@@ -168,7 +150,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
                 return;
             }
-
 
             string valorComPonto = tfCapacidadeDoTanque.Text.Replace(",", ".");
             string valorComVirgula = tfCapacidadeDoTanque.Text.Replace(".", ",");
@@ -183,6 +164,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
             #endregion
 
+            veiculo.Modelo = tfModelo.Text;
+            veiculo.Placa = tfPlaca.Text;
             veiculo.CapacidadeDoTanque = Convert.ToDecimal(valorComVirgula);
 
             if (caminhoFoto != "")

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos
 {
@@ -7,7 +8,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos
         public ValidadorGrupoDeVeiculos()
         {
             RuleFor(x => x.Nome)
-                .NotNull().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2).Matches(new Regex (@"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$"));
         }
     }
 }

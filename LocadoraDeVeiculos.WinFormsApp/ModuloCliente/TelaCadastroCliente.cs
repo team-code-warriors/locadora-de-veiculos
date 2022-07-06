@@ -17,7 +17,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
     public partial class TelaCadastroCliente : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        //retirarcomentario
         public TelaCadastroCliente()
         {
             InitializeComponent();
@@ -49,6 +48,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
+            #region Verificação se algum radiobutton está selecionado
+
             if (rbPessoaFisica.Checked == false && rbPessoaJuridica.Checked == false)
             {
                 TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione pessoa 'Física' ou pessoa 'Jurídica'.");
@@ -57,11 +58,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 return;
             }
 
+            #endregion
 
             cliente.Nome = tfNome.Text;
             cliente.Email = tfEmail.Text;
             cliente.Telefone = tfTelefone.Text;
             cliente.Endereco = tfEndereco.Text;
+
+            #region Verificações se o cpf ou o cnpj está informado
 
             if (tfCpf.Text == "   ,   ,   -")
             {
@@ -87,13 +91,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
                 return;
             }
 
-            if(!validador.ApenasLetras(tfNome.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
+            #endregion
 
             var resultadoValidacao = GravarRegistro(cliente);
 

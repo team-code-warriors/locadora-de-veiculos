@@ -58,6 +58,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             funcionario.Nome = tbNome.Text;
             funcionario.Login = tbLogin.Text;
 
+            #region Verificação se o salário esta correto
+
             string valorComPonto = tbSalario.Text.Replace(",", ".");
             string valorComVirgula = tbSalario.Text.Replace(".", ",");
 
@@ -68,6 +70,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 
                 return;
             }
+
+            #endregion
 
             funcionario.Salario = Convert.ToDouble(valorComVirgula);
             funcionario.DataAdmissao = dtpData.Value;

@@ -53,6 +53,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
         {
             taxa.Descricao = tbDescricao.Text;
 
+            #region Validação se o valor esta correto
+
             string valorComPonto = tbValor.Text.Replace(",", ".");
             string valorComVirgula = tbValor.Text.Replace(".", ",");
 
@@ -63,6 +65,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
                 return;
             }
+
+            #endregion
 
             taxa.Valor = Convert.ToDecimal(valorComVirgula);
             taxa.TipoCalculo = (string)cbTipoCalculo.SelectedItem;
