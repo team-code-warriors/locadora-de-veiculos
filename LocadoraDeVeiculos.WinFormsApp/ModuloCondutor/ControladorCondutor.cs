@@ -22,7 +22,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
         public ControladorCondutor(RepositorioCondutorEmBancoDeDados repositorioCondutor, ServicoCondutor servicoCondutor)
         {
             this.repositorioCondutor = repositorioCondutor;
-            this.repositorioCliente = repositorioCliente;
             this.servicoCondutor = servicoCondutor;
         }
 

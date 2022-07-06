@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
-using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
-using FluentAssertions;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using FluentAssertions;
 
@@ -18,6 +15,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         {
             repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
         }
+
         private GrupoDeVeiculos NovoGrupo()
         {
             return new GrupoDeVeiculos("Econômico");
@@ -59,7 +57,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
         [TestMethod]
         public void Deve_excluir_grupo()
-        {        
+        {
             //arrange
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);

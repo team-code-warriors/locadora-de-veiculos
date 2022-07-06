@@ -7,25 +7,34 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
         public ValidadorVeiculo()
         {
             RuleFor(x => x.Modelo)
-                .Null().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Fabricante)
-                .Null().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Ano)
-                .Null().NotEmpty().MinimumLength(3);
+                .NotNull().NotEmpty();
+
+            RuleFor(x => x.Cambio)
+                .NotNull().NotEmpty();
 
             RuleFor(x => x.Cor)
-                .Null().NotEmpty().MinimumLength(3);
+                .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Placa)
-                .Null().NotEmpty().MinimumLength(7);
+                .NotNull().NotEmpty().Length(7);
 
             RuleFor(x => x.Kilometragem)
-                .Null().NotEmpty();
+                .NotNull();
+
+            RuleFor(x => x.TipoDeCombustivel)
+                .NotNull().NotEmpty();
 
             RuleFor(x => x.CapacidadeDoTanque)
-                .Null().NotEmpty();
+                .NotNull().NotEmpty().GreaterThan(0);
+
+            RuleFor(x => x.GrupoDeVeiculos)
+                .NotNull().NotEmpty();
         }
     }
 }

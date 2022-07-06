@@ -118,8 +118,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             var planos = repositorio.SelecionarTodos();
 
             //assert
-            Assert.AreEqual(3, planos.Count);
-
             Assert.AreEqual(p0.TipoPlano, planos[0].TipoPlano);
             Assert.AreEqual(p1.TipoPlano, planos[1].TipoPlano);
             Assert.AreEqual(p2.TipoPlano, planos[2].TipoPlano);
