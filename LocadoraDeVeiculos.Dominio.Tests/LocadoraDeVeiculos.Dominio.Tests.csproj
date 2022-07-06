@@ -19,7 +19,6 @@
     <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloFuncionario\" />
     <Folder Include="ModuloVeiculo\" />
-    <Folder Include="ModuloCondutor\" />
   </ItemGroup>
 
   <ItemGroup>

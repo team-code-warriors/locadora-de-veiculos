@@ -103,6 +103,7 @@
             // 
             // tfId
             // 
+            this.tfId.Enabled = false;
             this.tfId.Location = new System.Drawing.Point(129, 12);
             this.tfId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfId.Name = "tfId";
