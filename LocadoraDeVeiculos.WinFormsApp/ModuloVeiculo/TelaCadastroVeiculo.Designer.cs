@@ -52,6 +52,10 @@
             this.cbCambio = new System.Windows.Forms.ComboBox();
             this.lCambio = new System.Windows.Forms.Label();
             this.tfKilometragem = new System.Windows.Forms.MaskedTextBox();
+            this.lImagem = new System.Windows.Forms.Label();
+            this.pictureBoxImagem = new System.Windows.Forms.PictureBox();
+            this.btnSelecionarImagem = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagem)).BeginInit();
             this.SuspendLayout();
             // 
             // lModelo
@@ -206,7 +210,7 @@
             // btnCadastrar
             // 
             this.btnCadastrar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCadastrar.Location = new System.Drawing.Point(207, 639);
+            this.btnCadastrar.Location = new System.Drawing.Point(207, 863);
             this.btnCadastrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(96, 50);
@@ -218,7 +222,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(309, 640);
+            this.btnCancelar.Location = new System.Drawing.Point(309, 863);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(96, 49);
@@ -288,11 +292,45 @@
             this.tfKilometragem.Size = new System.Drawing.Size(125, 27);
             this.tfKilometragem.TabIndex = 26;
             // 
+            // lImagem
+            // 
+            this.lImagem.AutoSize = true;
+            this.lImagem.Location = new System.Drawing.Point(107, 614);
+            this.lImagem.Name = "lImagem";
+            this.lImagem.Size = new System.Drawing.Size(67, 20);
+            this.lImagem.TabIndex = 27;
+            this.lImagem.Text = "Imagem:";
+            // 
+            // pictureBoxImagem
+            // 
+            this.pictureBoxImagem.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pictureBoxImagem.Location = new System.Drawing.Point(180, 614);
+            this.pictureBoxImagem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBoxImagem.Name = "pictureBoxImagem";
+            this.pictureBoxImagem.Size = new System.Drawing.Size(225, 146);
+            this.pictureBoxImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxImagem.TabIndex = 28;
+            this.pictureBoxImagem.TabStop = false;
+            // 
+            // btnSelecionarImagem
+            // 
+            this.btnSelecionarImagem.Location = new System.Drawing.Point(178, 768);
+            this.btnSelecionarImagem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSelecionarImagem.Name = "btnSelecionarImagem";
+            this.btnSelecionarImagem.Size = new System.Drawing.Size(227, 31);
+            this.btnSelecionarImagem.TabIndex = 29;
+            this.btnSelecionarImagem.Text = "Selecionar Imagem";
+            this.btnSelecionarImagem.UseVisualStyleBackColor = true;
+            this.btnSelecionarImagem.Click += new System.EventHandler(this.btnSelecionarImagem_Click);
+            // 
             // TelaCadastroVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 700);
+            this.ClientSize = new System.Drawing.Size(419, 924);
+            this.Controls.Add(this.btnSelecionarImagem);
+            this.Controls.Add(this.pictureBoxImagem);
+            this.Controls.Add(this.lImagem);
             this.Controls.Add(this.tfKilometragem);
             this.Controls.Add(this.cbCambio);
             this.Controls.Add(this.lCambio);
@@ -323,6 +361,7 @@
             this.Name = "TelaCadastroVeiculo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Veículo";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,5 +393,8 @@
         private ComboBox cbCambio;
         private Label lCambio;
         private MaskedTextBox tfKilometragem;
+        private Label lImagem;
+        private PictureBox pictureBoxImagem;
+        private Button btnSelecionarImagem;
     }
 }

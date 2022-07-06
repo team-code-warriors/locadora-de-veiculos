@@ -69,14 +69,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
                 return;
             }
 
-            if (!validador.ApenasLetras(tbNome.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
             funcionario.Salario = Convert.ToDouble(valorComVirgula);
             funcionario.DataAdmissao = dtpData.Value;
             funcionario.Senha = tbSenha.Text;

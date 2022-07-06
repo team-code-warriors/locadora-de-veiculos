@@ -1,5 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
+using System.Drawing;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
 {
@@ -18,6 +19,18 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
         public decimal CapacidadeDoTanque { get; set; }
         public GrupoDeVeiculos GrupoDeVeiculos { get; set; }
 
+        public byte[] Foto { get; set; }
+
+        //public Bitmap Foto
+        //{
+        //    get
+        //    {
+        //        using (var stream = new MemoryStream(FotoB))
+        //        {
+        //            return new Bitmap(stream);
+        //        }
+        //    }
+        //}
 
         public Veiculo(string modelo, string fabricante, int ano, string cambio,
             string cor, string placa, int kilometragem, string tipoDeCombustivel,

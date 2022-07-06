@@ -19,7 +19,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID]
+                    [GRUPO_ID],
+                    [FOTO]
                 )
                 VALUES
                 (
@@ -32,7 +33,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     @KILOMETRAGEM,
                     @TIPODECOMBUSTIVEL,
                     @CAPACIDADEDOTANQUE,
-                    @GRUPO_ID
+                    @GRUPO_ID,
+                    @FOTO
 
                 );SELECT SCOPE_IDENTITY();";
 
@@ -48,7 +50,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM] = @KILOMETRAGEM,
                     [TIPODECOMBUSTIVEL] = @TIPODECOMBUSTIVEL,
                     [CAPACIDADEDOTANQUE] = @CAPACIDADEDOTANQUE,
-                    [GRUPO_ID] = @GRUPO_ID
+                    [GRUPO_ID] = @GRUPO_ID,
+                    [FOTO] = @FOTO
 
                 WHERE
                     [ID] = @ID";
@@ -70,7 +73,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID]
+                    [GRUPO_ID],
+                    [FOTO]
 	            FROM 
 		            [TBVEICULO]
 		        WHERE
@@ -88,7 +92,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID]
+                    [GRUPO_ID],
+                    [FOTO]
 	            FROM 
 		            [TBVEICULO]";
 
@@ -104,7 +109,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     [KILOMETRAGEM],
                     [TIPODECOMBUSTIVEL],
                     [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID]
+                    [GRUPO_ID],
+                    [FOTO]
 	            FROM 
 		            [TBVEICULO]
                 WHERE 

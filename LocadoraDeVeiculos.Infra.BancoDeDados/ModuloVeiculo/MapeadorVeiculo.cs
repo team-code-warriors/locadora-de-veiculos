@@ -22,6 +22,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
             comando.Parameters.AddWithValue("KILOMETRAGEM", registro.Kilometragem);
             comando.Parameters.AddWithValue("TIPODECOMBUSTIVEL", registro.TipoDeCombustivel);
             comando.Parameters.AddWithValue("CAPACIDADEDOTANQUE", registro.CapacidadeDoTanque);
+            comando.Parameters.AddWithValue("FOTO", registro.Foto);
         }
         public override Veiculo ConverterRegistro(SqlDataReader leitorVeiculo)
         {
@@ -36,6 +37,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
             int kilometragem = Convert.ToInt32(leitorVeiculo["KILOMETRAGEM"]);
             string combustivel = Convert.ToString(leitorVeiculo["TIPODECOMBUSTIVEL"]);
             decimal capacidadeDoTanque = Convert.ToDecimal(leitorVeiculo["CAPACIDADEDOTANQUE"]);
+            var imagem = (byte[])(leitorVeiculo["FOTO"]);
 
             return new Veiculo()
             {
@@ -49,7 +51,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                 Kilometragem = kilometragem,
                 TipoDeCombustivel = combustivel,
                 CapacidadeDoTanque = capacidadeDoTanque,
-                GrupoDeVeiculos = repositorioGrupo.SelecionarPorId(idGrupo)
+                GrupoDeVeiculos = repositorioGrupo.SelecionarPorId(idGrupo),
+                Foto = imagem
             };
         }
     }
