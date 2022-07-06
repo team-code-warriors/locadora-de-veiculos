@@ -2,6 +2,7 @@
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
@@ -10,6 +11,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
     {
         private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
         private readonly RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano = new RepositorioPlanoDeCobrancaEmBancoDeDados();
+        private readonly RepositorioVeiculoEmBancoDeDados repositorioVeiculo = new RepositorioVeiculoEmBancoDeDados();
         private TabelaGrupoDeVeiculosControl tabelaGrupo;
         private readonly ServicoGrupoDeVeiculo servicoGrupo;
         public ControladorGrupoDeVeiculos(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo, ServicoGrupoDeVeiculo servicoGrupo)
@@ -76,6 +78,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
                 if (item.GrupoVeiculo.Nome == grupoSelecionado.Nome)
                 {
                     MessageBox.Show("Este Grupo de Veículos esta atrelado a um Plano de Cobrança e não pode ser excluído",
+                    "Exclusão de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
+            var veiculos = repositorioVeiculo.SelecionarTodos();
+
+            foreach (var item in veiculos)
+            {
+                if (item.GrupoDeVeiculos.Nome == grupoSelecionado.Nome)
+                {
+                    MessageBox.Show("Este Grupo de Veículos esta atrelado a um Veículo e não pode ser excluído",
                     "Exclusão de Grupos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
