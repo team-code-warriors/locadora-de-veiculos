@@ -35,24 +35,42 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
             GrupoDeVeiculos = grupoDeVeiculos;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Veiculo veiculo &&
-                Id == veiculo.Id &&
-                Modelo == veiculo.Modelo &&
-                Fabricante == veiculo.Fabricante &&
-                Ano == veiculo.Ano &&
-                Cambio == veiculo.Cambio &&
-                Cor == veiculo.Cor &&
-                Placa == veiculo.Placa &&
-                Kilometragem == veiculo.Kilometragem &&
-                TipoDeCombustivel == veiculo.TipoDeCombustivel &&
-                CapacidadeDoTanque == veiculo.CapacidadeDoTanque &&
-                GrupoDeVeiculos == veiculo.GrupoDeVeiculos;
-        }
         public Veiculo Clonar()
         {
             return MemberwiseClone() as Veiculo;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Veiculo veiculo &&
+                   Id == veiculo.Id &&
+                   Modelo == veiculo.Modelo &&
+                   Fabricante == veiculo.Fabricante &&
+                   Ano == veiculo.Ano &&
+                   Cambio == veiculo.Cambio &&
+                   Cor == veiculo.Cor &&
+                   Placa == veiculo.Placa &&
+                   Kilometragem == veiculo.Kilometragem &&
+                   TipoDeCombustivel == veiculo.TipoDeCombustivel &&
+                   CapacidadeDoTanque == veiculo.CapacidadeDoTanque &&
+                   EqualityComparer<GrupoDeVeiculos>.Default.Equals(GrupoDeVeiculos, veiculo.GrupoDeVeiculos);
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Modelo);
+            hash.Add(Fabricante);
+            hash.Add(Ano);
+            hash.Add(Cambio);
+            hash.Add(Cor);
+            hash.Add(Placa);
+            hash.Add(Kilometragem);
+            hash.Add(TipoDeCombustivel);
+            hash.Add(CapacidadeDoTanque);
+            hash.Add(GrupoDeVeiculos);
+            return hash.ToHashCode();
         }
     }
 }

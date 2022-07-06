@@ -1,127 +1,132 @@
-﻿//using FluentAssertions;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
-//using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
-//using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
-//using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 
-//namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
-//{
-//    [TestClass]
-//    public class RepositorioVeiculoEmBancoDeDadosTest : IntegrationTestBase
-//    {
-//        private RepositorioVeiculoEmBancoDeDados repositorio;
-//        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
+namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
+{
+    [TestClass]
+    public class RepositorioVeiculoEmBancoDeDadosTest : IntegrationTestBase
+    {
+        private RepositorioVeiculoEmBancoDeDados repositorio;
+        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
 
-//        public RepositorioVeiculoEmBancoDeDadosTest()
-//        {
-//            repositorio = new RepositorioVeiculoEmBancoDeDados();
-//        }
+        public RepositorioVeiculoEmBancoDeDadosTest()
+        {
+            repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            repositorio = new RepositorioVeiculoEmBancoDeDados();
+        }
 
-//        private Veiculo NovoVeiculo()
-//        {
-//            return new Veiculo("Spider", "Ferrari", "2021", "Automático", "Vermelho", "333-BCD",
-//                0, "Gasolina", 100, repositorioGrupo.SelecionarPorId(0));
-//        }
+        private GrupoDeVeiculos NovoGrupo()
+        {
+            GrupoDeVeiculos grupo = new GrupoDeVeiculos("SUV");
+            repositorioGrupo.Inserir(grupo);
 
-//        [TestMethod]
-//        public void Deve_inserir_um_veiculo()
-//        {
-//            //arrange
-//            var veiculo = NovoVeiculo();
+            return grupo;
+        }
 
-//            //action
-//            repositorio.Inserir(veiculo);
+        private Veiculo NovoVeiculo()
+        {
+            return new Veiculo("Spider", "Ferrari", 2021, "Automático", "Vermelho", "333ABCD",
+                0, "Gasolina", 10.00m, NovoGrupo());
+        }
 
-//            //assert
-//            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
+        [TestMethod]
+        public void Deve_inserir_um_veiculo()
+        {
+            //arrange
+            var veiculo = NovoVeiculo();
 
-//            veiculoEncontrado.Should().NotBeNull();
-//            veiculoEncontrado.Should().Be(veiculo);
-//        }
+            //action
+            repositorio.Inserir(veiculo);
 
-//        [TestMethod]
-//        public void Deve_editar_informacoes_veiculo()
-//        {
-//            //arrange
-//            var veiculo = NovoVeiculo();
-//            repositorio.Inserir(veiculo);
+            //assert
+            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
 
-//            //action
-//            veiculo.Modelo = "Ferrari Italia 458";
-//            veiculo.GrupoDeVeiculos = repositorioGrupo.SelecionarPorId(1);
-//            veiculo.Fabricante = "Ferrari";
-//            veiculo.Ano = "2012";
-//            veiculo.Cambio = "Manual";
-//            veiculo.Placa = "4445-CCC";
-//            veiculo.Kilometragem = 31000;
-//            veiculo.TipoDeCombustivel = "Gasolina";
-//            veiculo.CapacidadeDoTanque = 95;
-//            repositorio.Editar(veiculo);
+            veiculoEncontrado.Should().NotBeNull();
+            veiculoEncontrado.Should().Be(veiculo);
+        }
 
-//            //assert
-//            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
+        [TestMethod]
+        public void Deve_editar_informacoes_veiculo()
+        {
+            //arrange
+            var veiculo = NovoVeiculo();
+            repositorio.Inserir(veiculo);
 
-//            veiculoEncontrado.Should().NotBeNull();
-//            veiculoEncontrado.Should().Be(veiculo);
-//        }
+            //action
+            veiculo.Modelo = "Ferrari Italia 458";
+            veiculo.Fabricante = "Ferrari";
+            veiculo.Ano = 2012;
+            veiculo.Cambio = "Manual";
+            veiculo.Placa = "4445CCC";
+            veiculo.Kilometragem = 31000;
+            veiculo.TipoDeCombustivel = "Gasolina";
+            veiculo.CapacidadeDoTanque = 95;
+            repositorio.Editar(veiculo);
 
-//        [TestMethod]
-//        public void Deve_excluir_grupo()
-//        {
-//            //arrange
-//            var veiculo = NovoVeiculo();
-//            repositorio.Inserir(veiculo);
+            //assert
+            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
 
-//            //action
-//            repositorio.Excluir(veiculo);
+            veiculoEncontrado.Should().NotBeNull();
+            veiculoEncontrado.Should().Be(veiculo);
+        }
 
-//            //assert
-//            repositorio.SelecionarPorId(veiculo.Id)
-//                .Should().BeNull();
-//        }
+        [TestMethod]
+        public void Deve_excluir_grupo()
+        {
+            //arrange
+            var veiculo = NovoVeiculo();
+            repositorio.Inserir(veiculo);
 
-//        [TestMethod]
-//        public void Deve_selecionar_apenas_um_veiculo()
-//        {
-//            //arrange
-//            var veiculo = NovoVeiculo();
-//            repositorio.Inserir(veiculo);
+            //action
+            repositorio.Excluir(veiculo);
 
-//            //action
-//            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
+            //assert
+            repositorio.SelecionarPorId(veiculo.Id)
+                .Should().BeNull();
+        }
 
-//            //assert
-//            Assert.IsNotNull(veiculoEncontrado);
-//            Assert.AreEqual(veiculo, veiculoEncontrado);
-//        }
+        [TestMethod]
+        public void Deve_selecionar_apenas_um_veiculo()
+        {
+            //arrange
+            var veiculo = NovoVeiculo();
+            repositorio.Inserir(veiculo);
 
-//        [TestMethod]
-//        public void Deve_selecionar_todos_os_veiculos()
-//        {
-//            //arrange
-//            var v0 = new Veiculo("Roma", "Ferrari", "2015", "Automático", "Preto", "1234-BCD",
-//                0, "Gasolina", 100, repositorioGrupo.SelecionarPorId(0));
-//            var v1 = new Veiculo("SF90", "Ferrari", "2010", "Automático", "Amarelo", "1234-BCD",
-//                0, "Gasolina", 100, repositorioGrupo.SelecionarPorId(0));
+            //action
+            var veiculoEncontrado = repositorio.SelecionarPorId(veiculo.Id);
 
-//            var repositorio = new RepositorioVeiculoEmBancoDeDados();
-//            repositorio.Inserir(v0);
-//            repositorio.Inserir(v1);
+            //assert
+            Assert.IsNotNull(veiculoEncontrado);
+            Assert.AreEqual(veiculo, veiculoEncontrado);
+        }
 
-//            //action
-//            var veiculos = repositorio.SelecionarTodos();
-//            var grupos = repositorioGrupo.SelecionarTodos();
+        [TestMethod]
+        public void Deve_selecionar_todos_os_veiculos()
+        {
+            //arrange
+            var v0 = new Veiculo("Roma", "Ferrari", 2015, "Automático", "Preto", "6789BCD", 0, "Gasolina", 100, NovoGrupo());
+            var v1 = new Veiculo("SF90", "Ferrari", 2010, "Automático", "Amarelo", "1234BCD", 10, "Gasolina", 100, NovoGrupo());
+            var v2 = new Veiculo("Focus", "Ford", 2000, "Manual", "Preto", "0000BCD", 80, "Gasolina", 100, NovoGrupo());
 
-//            //assert
-//            Assert.AreEqual(2, veiculos.Count);
+            var repositorio = new RepositorioVeiculoEmBancoDeDados();
+            repositorio.Inserir(v0);
+            repositorio.Inserir(v1);
+            repositorio.Inserir(v2);
 
-//            Assert.AreEqual(v0.Modelo, v0.Fabricante, v0.Ano, v0.Cambio, v0.Cor, v0.Placa,
-//                v0.TipoDeCombustivel, v0.CapacidadeDoTanque, grupos[0].Nome);
-//            Assert.AreEqual(v1.Modelo, v1.Fabricante, v1.Ano, v1.Cambio, v1.Cor, v1.Placa,
-//                v1.TipoDeCombustivel, v1.CapacidadeDoTanque, grupos[1].Nome);
-//            Assert.AreEqual(2, veiculos.Count);
-//        }
-//    }
-//}
+            //action
+            var veiculos = repositorio.SelecionarTodos();
+
+            //assert
+            Assert.AreEqual(v0.Placa, veiculos[0].Placa);
+            Assert.AreEqual(v1.Placa, veiculos[1].Placa);
+            Assert.AreEqual(v2.Placa, veiculos[2].Placa);
+            Assert.AreEqual(3, veiculos.Count);
+        }
+    }
+}

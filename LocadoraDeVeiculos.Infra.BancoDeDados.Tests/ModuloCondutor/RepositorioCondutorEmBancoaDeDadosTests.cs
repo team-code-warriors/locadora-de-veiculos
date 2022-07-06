@@ -66,7 +66,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             condutor.Endereco = "Lages";
             condutor.Cpf = "111.999.333-44";
             condutor.Cnh = "12345678901";
-            condutor.Telefone = "12988754461";
+            condutor.Telefone = "(52) 23456-1234";
 
             //action
             repositorio.Editar(condutor);

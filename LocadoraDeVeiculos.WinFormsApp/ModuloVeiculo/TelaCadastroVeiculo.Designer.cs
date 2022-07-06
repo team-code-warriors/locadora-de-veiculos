@@ -38,7 +38,6 @@
             this.lPlaca = new System.Windows.Forms.Label();
             this.tfPlaca = new System.Windows.Forms.TextBox();
             this.lKilometragem = new System.Windows.Forms.Label();
-            this.tfKilometragem = new System.Windows.Forms.TextBox();
             this.lCombustivel = new System.Windows.Forms.Label();
             this.cbCombustivel = new System.Windows.Forms.ComboBox();
             this.lCapacidadeDoTanque = new System.Windows.Forms.Label();
@@ -52,6 +51,7 @@
             this.tfAno = new System.Windows.Forms.MaskedTextBox();
             this.cbCambio = new System.Windows.Forms.ComboBox();
             this.lCambio = new System.Windows.Forms.Label();
+            this.tfKilometragem = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // lModelo
@@ -139,14 +139,6 @@
             this.lKilometragem.Size = new System.Drawing.Size(107, 20);
             this.lKilometragem.TabIndex = 10;
             this.lKilometragem.Text = "Kilometragem:";
-            // 
-            // tfKilometragem
-            // 
-            this.tfKilometragem.Location = new System.Drawing.Point(182, 400);
-            this.tfKilometragem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tfKilometragem.Name = "tfKilometragem";
-            this.tfKilometragem.Size = new System.Drawing.Size(117, 27);
-            this.tfKilometragem.TabIndex = 11;
             // 
             // lCombustivel
             // 
@@ -257,6 +249,7 @@
             this.tfAno.Location = new System.Drawing.Point(180, 180);
             this.tfAno.Mask = "0000";
             this.tfAno.Name = "tfAno";
+            this.tfAno.PromptChar = ' ';
             this.tfAno.Size = new System.Drawing.Size(49, 27);
             this.tfAno.TabIndex = 23;
             this.tfAno.Tag = "";
@@ -286,11 +279,21 @@
             this.lCambio.TabIndex = 24;
             this.lCambio.Text = "Cambio:";
             // 
+            // tfKilometragem
+            // 
+            this.tfKilometragem.Location = new System.Drawing.Point(178, 400);
+            this.tfKilometragem.Mask = "000000000000";
+            this.tfKilometragem.Name = "tfKilometragem";
+            this.tfKilometragem.PromptChar = ' ';
+            this.tfKilometragem.Size = new System.Drawing.Size(125, 27);
+            this.tfKilometragem.TabIndex = 26;
+            // 
             // TelaCadastroVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 700);
+            this.Controls.Add(this.tfKilometragem);
             this.Controls.Add(this.cbCambio);
             this.Controls.Add(this.lCambio);
             this.Controls.Add(this.tfAno);
@@ -304,7 +307,6 @@
             this.Controls.Add(this.lCapacidadeDoTanque);
             this.Controls.Add(this.cbCombustivel);
             this.Controls.Add(this.lCombustivel);
-            this.Controls.Add(this.tfKilometragem);
             this.Controls.Add(this.lKilometragem);
             this.Controls.Add(this.tfPlaca);
             this.Controls.Add(this.lPlaca);
@@ -338,7 +340,6 @@
         private Label lPlaca;
         private TextBox tfPlaca;
         private Label lKilometragem;
-        private TextBox tfKilometragem;
         private Label lCombustivel;
         private ComboBox cbCombustivel;
         private Label lCapacidadeDoTanque;
@@ -352,5 +353,6 @@
         private MaskedTextBox tfAno;
         private ComboBox cbCambio;
         private Label lCambio;
+        private MaskedTextBox tfKilometragem;
     }
 }

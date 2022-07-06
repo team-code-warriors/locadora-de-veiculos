@@ -43,13 +43,34 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
                 tfModelo.Text = veiculo.Modelo;
                 tfFabricante.Text = veiculo.Fabricante;
-                tfAno.Text = veiculo.Ano.ToString();
+                if (veiculo.Ano == 0)
+                {
+                    tfAno.Text = "";
+                }
+                else
+                {
+                    tfAno.Text = veiculo.Ano.ToString();
+                }
                 cbCambio.SelectedItem = veiculo.Cambio;
                 tfCor.Text = veiculo.Cor;
                 tfPlaca.Text = veiculo.Placa;
-                tfKilometragem.Text = veiculo.Kilometragem.ToString();
+                if (veiculo.Kilometragem == 0)
+                {
+                    tfKilometragem.Text = "";
+                }
+                else
+                {
+                    tfKilometragem.Text = veiculo.Kilometragem.ToString();
+                }
                 cbCombustivel.SelectedItem = veiculo.TipoDeCombustivel;
-                tfCapacidadeDoTanque.Text = veiculo.CapacidadeDoTanque.ToString();
+                if (veiculo.CapacidadeDoTanque == 0)
+                {
+                    tfCapacidadeDoTanque.Text = "";
+                }
+                else
+                {
+                    tfCapacidadeDoTanque.Text = veiculo.CapacidadeDoTanque.ToString();
+                }
                 cbGrupoDeVeiculos.SelectedItem = veiculo.GrupoDeVeiculos;
             }
         }
@@ -65,16 +86,52 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             }
         }
 
-        private void ValidaCampos()
+        private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            //if (!validador.ApenasLetrasENumeros(tfModelo.Text))
-            //{
-            //    TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um modelo válido no campo 'Modelo'");
-            //    DialogResult = DialogResult.None;
+            veiculo.Modelo = tfModelo.Text;
+            veiculo.Fabricante = tfFabricante.Text;
 
-            //    return;
-            //}
+            #region Verificação
+            string anoSemEspaco = tfAno.Text.Replace(" ", "");
 
+            if (anoSemEspaco.Length != 4)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um ano válido no campo 'Ano'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+            #endregion
+
+            veiculo.Ano = Convert.ToInt32(tfAno.Text);
+            veiculo.Cambio = Convert.ToString(cbCambio.SelectedItem);
+            veiculo.Cor = tfCor.Text;
+            veiculo.Placa = tfPlaca.Text;
+
+            #region Verificação
+            string kilometragemSemEspaco = tfKilometragem.Text.Replace(" ", "");
+
+           if(kilometragemSemEspaco.Length == 0)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'Kilometragem'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
+            #endregion
+
+            veiculo.Kilometragem = Convert.ToInt32(tfKilometragem.Text);
+            veiculo.TipoDeCombustivel = Convert.ToString(cbCombustivel.SelectedItem);
+            veiculo.GrupoDeVeiculos = (GrupoDeVeiculos)cbGrupoDeVeiculos.SelectedItem;
+
+            #region Verificações
+            if (!validador.ApenasLetrasENumeros(tfModelo.Text))
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um modelo válido no campo 'Modelo'");
+                DialogResult = DialogResult.None;
+
+                return;
+            }
 
             if (!validador.ApenasLetras(tfFabricante.Text))
             {
@@ -92,37 +149,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
                 return;
             }
 
-            //if (!validador.ApenasLetrasENumeros(tfPlaca.Text))
-            //{
-            //    TelaMenuPrincipal.Instancia.AtualizarRodape("Insira uma placa válida no campo 'Placa'");
-            //    DialogResult = DialogResult.None;
-
-            //    return;
-            //}
-
-
-            if (!validador.ApenasNumerosInteiros(tfKilometragem.Text))
+            if (!validador.ApenasLetrasENumeros(tfPlaca.Text))
             {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira uma kilometragem válida no campo 'Kilometragem'");
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira uma placa válida no campo 'Placa'");
                 DialogResult = DialogResult.None;
 
                 return;
             }
-        }
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
-        {
-            veiculo.Modelo = tfModelo.Text;
-            veiculo.Fabricante = tfFabricante.Text;
-            veiculo.Ano = Convert.ToInt32(tfAno.Text);
-            veiculo.Cambio = Convert.ToString(cbCambio.SelectedItem);
-            veiculo.Cor = tfCor.Text;
-            veiculo.Placa = tfPlaca.Text;
-            veiculo.Kilometragem = Convert.ToInt32(tfKilometragem.Text);
-            veiculo.TipoDeCombustivel = Convert.ToString(cbCombustivel.SelectedItem);
-            veiculo.GrupoDeVeiculos = (GrupoDeVeiculos)cbGrupoDeVeiculos.SelectedItem;
 
-            ValidaCampos();
             string valorComPonto = tfCapacidadeDoTanque.Text.Replace(",", ".");
             string valorComVirgula = tfCapacidadeDoTanque.Text.Replace(".", ",");
 
@@ -133,6 +168,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
                 return;
             }
+
+            #endregion
 
             veiculo.CapacidadeDoTanque = Convert.ToDecimal(valorComVirgula);
 
