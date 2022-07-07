@@ -22,6 +22,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
         public RepositorioCondutorEmBancoDeDadosTests()
         {
             repositorio = new RepositorioCondutorEmBancoDeDados();
+            repositorioCliente = new RepositorioClienteEmBancoDeDados();
         }
 
         private Cliente NovoCliente()
@@ -34,7 +35,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
 
         private Condutor NovoCondutor()
         {
-            return new Condutor(NovoCliente(), "Lucas Bleyer", "111.222.333-44", "43.367.658/0001-49", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
+            return new Condutor(NovoCliente(), "Lucas Bleyer", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
         }
 
 
@@ -64,9 +65,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             condutor.Email = "lucas@gmail.com";
             condutor.Endereco = "Lages";
             condutor.Cpf = "111.999.333-44";
-            condutor.Cnpj = "43.367.658/0001-49";
             condutor.Cnh = "12345678901";
-            condutor.Telefone = "12988754461";
+            condutor.Telefone = "(51) 12345-1234";
 
             //action
             repositorio.Editar(condutor);
@@ -112,9 +112,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
         public void Deve_selecionar_todos_os_condutores()
         {
             //arrange
-            var c0 = new Condutor();
-            var c1 = new Condutor();
-            var c2 = new Condutor();
+            var c0 = new Condutor(NovoCliente(), "Lucas Bleyer", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
+            var c1 = new Condutor(NovoCliente(), "Ane Luisy", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
+            var c2 = new Condutor(NovoCliente(), "Daniel", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
 
             var repositorio = new RepositorioCondutorEmBancoDeDados();
             repositorio.Inserir(c0);

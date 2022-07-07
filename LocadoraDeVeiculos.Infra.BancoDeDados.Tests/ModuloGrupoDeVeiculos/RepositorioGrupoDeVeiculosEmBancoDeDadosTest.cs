@@ -44,7 +44,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             repositorio.Inserir(grupo);
 
             //action 
-            grupo.Nome = "Uber Eats 2.0";
+            grupo.Nome = "Esportivo";
             repositorio.Editar(grupo);
 
             //assert

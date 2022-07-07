@@ -1,3 +1,5 @@
+using LocadoraDeVeiculos.Infra.Logging;
+
 namespace LocadoraDeVeiculos.WinFormsApp
 {
     internal static class Program
@@ -8,6 +10,7 @@ namespace LocadoraDeVeiculos.WinFormsApp
         [STAThread]
         static void Main()
         {
+            ConfiguracaoLogs.ConfigurarEscritaLogs();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

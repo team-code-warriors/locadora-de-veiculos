@@ -14,12 +14,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         {
         }
 
-        public Condutor(Cliente cliente, string nome, string cpf, string cnpj, string cnh, DateTime dataValidadeCnh, string email, string telefone, string endereco)
+        public Condutor(Cliente cliente, string nome, string cpf, string cnh, DateTime dataValidadeCnh, string email, string telefone, string endereco)
         {
             Cliente = cliente;
             Nome = nome;
             Cpf = cpf;
-            Cnpj = cnpj;
             Cnh = cnh;
             DataValidadeCnh = dataValidadeCnh;
             Email = email;
@@ -32,8 +31,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         public string Nome { get; set; }
 
         public string Cpf { get; set; }
-
-        public string Cnpj { get; set; }
 
         public string Cnh { get; set; }
 
@@ -57,7 +54,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
                    EqualityComparer<Cliente>.Default.Equals(Cliente, condutor.Cliente) &&
                    Nome == condutor.Nome &&
                    Cpf == condutor.Cpf &&
-                   Cnpj == condutor.Cnpj &&
                    Cnh == condutor.Cnh &&
                    DataValidadeCnh == condutor.DataValidadeCnh &&
                    Email == condutor.Email &&

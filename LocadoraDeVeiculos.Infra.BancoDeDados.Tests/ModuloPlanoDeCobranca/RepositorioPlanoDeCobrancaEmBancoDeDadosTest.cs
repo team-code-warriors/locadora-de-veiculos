@@ -61,7 +61,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             plano.TipoPlano = "KM Livre";
             plano.ValorDiaria = 1000;
             plano.KmIncluso = 0;
-            plano.PrecoKm = 0;
+            plano.PrecoKm = 10;
 
             repositorio.Editar(plano);
 
@@ -106,7 +106,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
         public void Deve_selecionar_todos_os_planos()
         {
             //arrange
-            var p0 = new PlanoDeCobranca(NovoGrupo(), "KM Livre", 1090, 0, 0);
+            var p0 = new PlanoDeCobranca(NovoGrupo(), "KM Livre", 1090, 10, 10);
             var p1 = new PlanoDeCobranca(NovoGrupo(), "KM Controlado", 100, 150, 10);
             var p2 = new PlanoDeCobranca(NovoGrupo(), "Plano Diário", 50, 10, 10);
 

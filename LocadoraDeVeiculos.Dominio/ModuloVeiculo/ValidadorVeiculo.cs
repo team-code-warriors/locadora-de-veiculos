@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
 {
@@ -10,7 +11,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
                 .NotNull().NotEmpty().MinimumLength(2);
 
             RuleFor(x => x.Fabricante)
-                .NotNull().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2).Matches(new Regex (@"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$"));
 
             RuleFor(x => x.Ano)
                 .NotNull().NotEmpty();
@@ -19,13 +20,13 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
                 .NotNull().NotEmpty();
 
             RuleFor(x => x.Cor)
-                .NotNull().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2).Matches(new Regex(@"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$"));
 
             RuleFor(x => x.Placa)
                 .NotNull().NotEmpty().Length(7);
 
             RuleFor(x => x.Kilometragem)
-                .NotNull();
+                .NotNull().GreaterThanOrEqualTo(0);
 
             RuleFor(x => x.TipoDeCombustivel)
                 .NotNull().NotEmpty();

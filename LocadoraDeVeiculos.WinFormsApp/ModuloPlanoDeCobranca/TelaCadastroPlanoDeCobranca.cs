@@ -60,6 +60,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
+            #region Validações se preço da diária, km incluso e preço km estão no formato correto
             string valorComPontoDiaria = tbValorDiaria.Text.Replace(",", ".");
             string valorComVirgulaDiaria = tbValorDiaria.Text.Replace(".", ",");
 
@@ -92,6 +93,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
                 return;
             }
+
+            #endregion
 
             plano.GrupoVeiculo = (GrupoDeVeiculos)cbGrupo.SelectedItem;
             plano.TipoPlano = (string)cbTipoPlano.SelectedItem;

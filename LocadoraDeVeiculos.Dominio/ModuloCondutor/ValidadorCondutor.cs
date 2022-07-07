@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
@@ -16,7 +17,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
                 .NotNull().NotEmpty();
 
             RuleFor(x => x.Nome)
-                .NotNull().NotEmpty().MinimumLength(2);
+                .NotNull().NotEmpty().MinimumLength(2).Matches(new Regex (@"^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$"));
 
             RuleFor(x => x.Cpf)
                 .NotNull()

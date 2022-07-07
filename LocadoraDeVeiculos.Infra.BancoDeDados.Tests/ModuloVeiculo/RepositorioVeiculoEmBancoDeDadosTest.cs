@@ -14,6 +14,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
     {
         private RepositorioVeiculoEmBancoDeDados repositorio;
         private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
+        byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
         public RepositorioVeiculoEmBancoDeDadosTest()
         {
@@ -32,7 +33,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
         private Veiculo NovoVeiculo()
         {
             return new Veiculo("Spider", "Ferrari", 2021, "Automático", "Vermelho", "333ABCD",
-                0, "Gasolina", 10.00m, NovoGrupo());
+                0, "Gasolina", 10.00m, NovoGrupo(), byteItems);
         }
 
         [TestMethod]
@@ -110,9 +111,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
         public void Deve_selecionar_todos_os_veiculos()
         {
             //arrange
-            var v0 = new Veiculo("Roma", "Ferrari", 2015, "Automático", "Preto", "6789BCD", 0, "Gasolina", 100, NovoGrupo());
-            var v1 = new Veiculo("SF90", "Ferrari", 2010, "Automático", "Amarelo", "1234BCD", 10, "Gasolina", 100, NovoGrupo());
-            var v2 = new Veiculo("Focus", "Ford", 2000, "Manual", "Preto", "0000BCD", 80, "Gasolina", 100, NovoGrupo());
+            var v0 = new Veiculo("Roma", "Ferrari", 2015, "Automático", "Preto", "6789BCD", 0, "Gasolina", 100, NovoGrupo(), byteItems);
+            var v1 = new Veiculo("SF90", "Ferrari", 2010, "Automático", "Amarelo", "1234BCD", 10, "Gasolina", 100, NovoGrupo(), byteItems);
+            var v2 = new Veiculo("Focus", "Ford", 2000, "Manual", "Preto", "0000BCD", 80, "Gasolina", 100, NovoGrupo(), byteItems);
 
             var repositorio = new RepositorioVeiculoEmBancoDeDados();
             repositorio.Inserir(v0);

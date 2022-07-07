@@ -67,20 +67,12 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             condutor.Cliente = (Cliente)cbCliente.SelectedItem;
             condutor.Nome = tfNome.Text;
             condutor.Cpf = tfCpf.Text;
-            condutor.Cnh = tfCnh.Text;
             condutor.DataValidadeCnh = dtpData.Value;
             condutor.Email = tfEmail.Text;
             condutor.Telefone = tfTelefone.Text;
             condutor.Endereco = tfEndereco.Text;
 
-            if (!validador.ApenasLetras(tfNome.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
+            #region Verifica se a CNH esta na validade
 
             if (dtpData.Value < DateTime.Today)
             {
@@ -89,6 +81,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
                 return;
             }
+
+            #endregion
+
+            condutor.Cnh = tfCnh.Text;
 
             var resultadoValidacao = GravarRegistro(condutor);
 

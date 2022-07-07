@@ -39,14 +39,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
         }
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
-            if (!validador.ApenasLetras(textBoxNome.Text))
-            {
-                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um nome válido no campo 'Nome'");
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
             grupo.Nome = textBoxNome.Text;
 
             var resultadoValidacao = GravarRegistro(grupo);
