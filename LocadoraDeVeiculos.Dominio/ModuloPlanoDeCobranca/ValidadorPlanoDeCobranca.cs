@@ -19,6 +19,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
 
             RuleFor(x => x.ValorDiaria)
                 .NotNull().NotEmpty().GreaterThan(0);
+
+            RuleFor(x => x.KmIncluso)
+                .GreaterThanOrEqualTo(0);
+
+            RuleFor(x => x.PrecoKm)
+                .GreaterThan(0);
         }
     }
 }

@@ -21,20 +21,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
 
         public byte[] Foto { get; set; }
 
-        //public Bitmap Foto
-        //{
-        //    get
-        //    {
-        //        using (var stream = new MemoryStream(FotoB))
-        //        {
-        //            return new Bitmap(stream);
-        //        }
-        //    }
-        //}
-
-        public Veiculo(string modelo, string fabricante, int ano, string cambio,
-            string cor, string placa, int kilometragem, string tipoDeCombustivel,
-            decimal capacidadeDoTanque, GrupoDeVeiculos grupoDeVeiculos)
+        public Veiculo(string modelo, string fabricante, int ano, string cambio, string cor, string placa, int kilometragem, string tipoDeCombustivel, decimal capacidadeDoTanque, GrupoDeVeiculos grupoDeVeiculos, byte[] foto)
         {
             Modelo = modelo;
             Fabricante = fabricante;
@@ -46,6 +33,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
             TipoDeCombustivel = tipoDeCombustivel;
             CapacidadeDoTanque = capacidadeDoTanque;
             GrupoDeVeiculos = grupoDeVeiculos;
+            Foto = foto;
         }
 
         public Veiculo Clonar()

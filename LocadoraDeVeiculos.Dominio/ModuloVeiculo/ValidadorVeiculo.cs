@@ -26,7 +26,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
                 .NotNull().NotEmpty().Length(7);
 
             RuleFor(x => x.Kilometragem)
-                .NotNull();
+                .NotNull().GreaterThanOrEqualTo(0);
 
             RuleFor(x => x.TipoDeCombustivel)
                 .NotNull().NotEmpty();
