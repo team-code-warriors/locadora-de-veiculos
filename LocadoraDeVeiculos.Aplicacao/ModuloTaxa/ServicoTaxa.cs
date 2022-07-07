@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +23,45 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
 
         public ValidationResult Inserir(Taxa taxa)
         {
+            Log.Logger.Debug("Tentando inserir taxa... {@t}", taxa);
+
             ValidationResult resultadoValidacao = Validar(taxa);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioTaxa.Inserir(taxa);
+                Log.Logger.Debug("Taxa {TaxaNome} inserida com sucesso", taxa.Descricao);
+            }else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar inserir uma Taxa {TaxaNome} - {Motivo}",
+                        taxa.Descricao, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }
 
         public ValidationResult Editar(Taxa taxa)
         {
+            Log.Logger.Debug("Tentando editar taxa... {@t}", taxa);
+
             ValidationResult resultadoValidacao = Validar(taxa);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioTaxa.Editar(taxa);
+                Log.Logger.Debug("Taxa {TaxaNome} editada com sucesso", taxa.Descricao);
+            }
+            else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar editar uma Taxa {TaxaNome} - {Motivo}",
+                        taxa.Descricao, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }

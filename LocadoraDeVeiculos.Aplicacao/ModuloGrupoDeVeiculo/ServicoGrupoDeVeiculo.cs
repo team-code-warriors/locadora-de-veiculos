@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
+using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 {
@@ -15,20 +16,45 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 
         public ValidationResult Inserir(GrupoDeVeiculos grupo)
         {
+            Log.Logger.Debug("Tentando inserir grupo... {@g}", grupo);
+
             ValidationResult resultadoValidacao = Validar(grupo);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioDeGrupoVeiculos.Inserir(grupo);
+                Log.Logger.Debug("Grupo {GrupoNome} inserido com sucesso", grupo.Nome);
+            }else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar inserir um Grupo {GrupoNome} - {Motivo}",
+                        grupo.Nome, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }
 
         public ValidationResult Editar(GrupoDeVeiculos grupo)
         {
+            Log.Logger.Debug("Tentando editar grupo... {@g}", grupo);
+
             ValidationResult resultadoValidacao = Validar(grupo);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioDeGrupoVeiculos.Editar(grupo);
+                Log.Logger.Debug("Grupo {GrupoNome} editado com sucesso", grupo.Nome);
+            }
+            else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar editar um Grupo {GrupoNome} - {Motivo}",
+                        grupo.Nome, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }

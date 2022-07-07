@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
+using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
 {
@@ -15,20 +16,46 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
 
         public ValidationResult Inserir(Veiculo veiculo)
         {
+            Log.Logger.Debug("Tentando inserir veículo... {@v}", veiculo);
+
             ValidationResult resultadoValidacao = Validar(veiculo);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioVeiculo.Inserir(veiculo);
+                Log.Logger.Debug("Veículo {VeiculoPlaca} inserido com sucesso", veiculo.Placa);
+            }
+            else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar inserir um Veículo {VeiculoPlaca} - {Motivo}",
+                        veiculo.Placa, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }
 
         public ValidationResult Editar(Veiculo veiculo)
         {
+            Log.Logger.Debug("Tentando editar veículo... {@v}", veiculo);
+
             ValidationResult resultadoValidacao = Validar(veiculo);
 
             if (resultadoValidacao.IsValid)
+            {
                 repositorioVeiculo.Editar(veiculo);
+                Log.Logger.Debug("Veículo {VeiculoPlaca} editado com sucesso", veiculo.Placa);
+            }
+            else
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar editar um Veículo {VeiculoPlaca} - {Motivo}",
+                        veiculo.Placa, erro.ErrorMessage);
+                }
+            }
 
             return resultadoValidacao;
         }
