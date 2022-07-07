@@ -20,7 +20,7 @@ A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programa
 
        
 ### Layout da Aplicação 💨
-![image](https://user-images.githubusercontent.com/85200696/177006577-72d0d50e-8009-456c-a384-b9013df3ab65.png)
+![telaprincipal](https://user-images.githubusercontent.com/85200696/177874493-546a7b78-094d-4026-bf49-238e26302d89.png)
 
 
 ### Como rodar a aplicação ▶️
