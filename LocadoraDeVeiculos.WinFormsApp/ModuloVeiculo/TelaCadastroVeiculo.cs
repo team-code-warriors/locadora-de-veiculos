@@ -213,8 +213,5 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
             return imagem;
         }
-
-
-        
     }
 }
