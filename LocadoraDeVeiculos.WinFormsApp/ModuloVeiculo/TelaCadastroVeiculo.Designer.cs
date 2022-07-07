@@ -61,6 +61,7 @@
             // lModelo
             // 
             this.lModelo.AutoSize = true;
+            this.lModelo.Location = new System.Drawing.Point(22, 71);
             this.lModelo.Location = new System.Drawing.Point(44, 64);
             this.lModelo.Name = "lModelo";
             this.lModelo.Size = new System.Drawing.Size(51, 15);
@@ -70,6 +71,7 @@
             // lFabricante
             // 
             this.lFabricante.AutoSize = true;
+            this.lFabricante.Location = new System.Drawing.Point(6, 127);
             this.lFabricante.Location = new System.Drawing.Point(30, 106);
             this.lFabricante.Name = "lFabricante";
             this.lFabricante.Size = new System.Drawing.Size(65, 15);
@@ -78,6 +80,8 @@
             // 
             // tfModelo
             // 
+            this.tfModelo.Location = new System.Drawing.Point(94, 68);
+            this.tfModelo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfModelo.Location = new System.Drawing.Point(107, 62);
             this.tfModelo.Name = "tfModelo";
             this.tfModelo.Size = new System.Drawing.Size(197, 23);
@@ -85,6 +89,8 @@
             // 
             // tfFabricante
             // 
+            this.tfFabricante.Location = new System.Drawing.Point(92, 124);
+            this.tfFabricante.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfFabricante.Location = new System.Drawing.Point(106, 104);
             this.tfFabricante.Name = "tfFabricante";
             this.tfFabricante.Size = new System.Drawing.Size(197, 23);
@@ -93,6 +99,7 @@
             // lAno
             // 
             this.lAno.AutoSize = true;
+            this.lAno.Location = new System.Drawing.Point(47, 183);
             this.lAno.Location = new System.Drawing.Point(66, 148);
             this.lAno.Name = "lAno";
             this.lAno.Size = new System.Drawing.Size(32, 15);
@@ -102,6 +109,7 @@
             // lCor
             // 
             this.lCor.AutoSize = true;
+            this.lCor.Location = new System.Drawing.Point(51, 294);
             this.lCor.Location = new System.Drawing.Point(70, 231);
             this.lCor.Name = "lCor";
             this.lCor.Size = new System.Drawing.Size(29, 15);
@@ -110,6 +118,8 @@
             // 
             // tfCor
             // 
+            this.tfCor.Location = new System.Drawing.Point(92, 291);
+            this.tfCor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfCor.Location = new System.Drawing.Point(106, 229);
             this.tfCor.Name = "tfCor";
             this.tfCor.Size = new System.Drawing.Size(199, 23);
@@ -118,6 +128,7 @@
             // lPlaca
             // 
             this.lPlaca.AutoSize = true;
+            this.lPlaca.Location = new System.Drawing.Point(39, 349);
             this.lPlaca.Location = new System.Drawing.Point(59, 273);
             this.lPlaca.Name = "lPlaca";
             this.lPlaca.Size = new System.Drawing.Size(38, 15);
@@ -126,6 +137,8 @@
             // 
             // tfPlaca
             // 
+            this.tfPlaca.Location = new System.Drawing.Point(92, 346);
+            this.tfPlaca.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfPlaca.Location = new System.Drawing.Point(106, 271);
             this.tfPlaca.Name = "tfPlaca";
             this.tfPlaca.Size = new System.Drawing.Size(103, 23);
@@ -134,6 +147,7 @@
             // lKilometragem
             // 
             this.lKilometragem.AutoSize = true;
+            this.lKilometragem.Location = new System.Drawing.Point(445, 15);
             this.lKilometragem.Location = new System.Drawing.Point(10, 318);
             this.lKilometragem.Name = "lKilometragem";
             this.lKilometragem.Size = new System.Drawing.Size(85, 15);
@@ -143,6 +157,7 @@
             // lCombustivel
             // 
             this.lCombustivel.AutoSize = true;
+            this.lCombustivel.Location = new System.Drawing.Point(457, 70);
             this.lCombustivel.Location = new System.Drawing.Point(416, 25);
             this.lCombustivel.Name = "lCombustivel";
             this.lCombustivel.Size = new System.Drawing.Size(77, 15);
@@ -157,6 +172,8 @@
             "Gasolina",
             "Diesel",
             "Alcool"});
+            this.cbCombustivel.Location = new System.Drawing.Point(559, 66);
+            this.cbCombustivel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbCombustivel.Location = new System.Drawing.Point(512, 22);
             this.cbCombustivel.Name = "cbCombustivel";
             this.cbCombustivel.Size = new System.Drawing.Size(103, 23);
@@ -165,6 +182,7 @@
             // lCapacidadeDoTanque
             // 
             this.lCapacidadeDoTanque.AutoSize = true;
+            this.lCapacidadeDoTanque.Location = new System.Drawing.Point(387, 121);
             this.lCapacidadeDoTanque.Location = new System.Drawing.Point(363, 64);
             this.lCapacidadeDoTanque.Name = "lCapacidadeDoTanque";
             this.lCapacidadeDoTanque.Size = new System.Drawing.Size(130, 15);
@@ -173,6 +191,8 @@
             // 
             // tfCapacidadeDoTanque
             // 
+            this.tfCapacidadeDoTanque.Location = new System.Drawing.Point(559, 118);
+            this.tfCapacidadeDoTanque.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tfCapacidadeDoTanque.Location = new System.Drawing.Point(511, 62);
             this.tfCapacidadeDoTanque.Name = "tfCapacidadeDoTanque";
             this.tfCapacidadeDoTanque.Size = new System.Drawing.Size(104, 23);
@@ -181,6 +201,7 @@
             // lGrupoDeVeiculos
             // 
             this.lGrupoDeVeiculos.AutoSize = true;
+            this.lGrupoDeVeiculos.Location = new System.Drawing.Point(417, 176);
             this.lGrupoDeVeiculos.Location = new System.Drawing.Point(387, 104);
             this.lGrupoDeVeiculos.Name = "lGrupoDeVeiculos";
             this.lGrupoDeVeiculos.Size = new System.Drawing.Size(106, 15);
@@ -195,6 +216,8 @@
             "Gasolina",
             "Diesel",
             "Alcool"});
+            this.cbGrupoDeVeiculos.Location = new System.Drawing.Point(557, 172);
+            this.cbGrupoDeVeiculos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbGrupoDeVeiculos.Location = new System.Drawing.Point(512, 102);
             this.cbGrupoDeVeiculos.Name = "cbGrupoDeVeiculos";
             this.cbGrupoDeVeiculos.Size = new System.Drawing.Size(103, 23);
@@ -203,6 +226,8 @@
             // btnCadastrar
             // 
             this.btnCadastrar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnCadastrar.Location = new System.Drawing.Point(584, 465);
+            this.btnCadastrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCadastrar.Location = new System.Drawing.Point(418, 308);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(84, 38);
@@ -214,6 +239,8 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(686, 465);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancelar.Location = new System.Drawing.Point(531, 308);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(84, 37);
@@ -224,6 +251,7 @@
             // lNumero
             // 
             this.lNumero.AutoSize = true;
+            this.lNumero.Location = new System.Drawing.Point(20, 18);
             this.lNumero.Location = new System.Drawing.Point(42, 25);
             this.lNumero.Name = "lNumero";
             this.lNumero.Size = new System.Drawing.Size(54, 15);
@@ -233,6 +261,8 @@
             // tbNumero
             // 
             this.tbNumero.Enabled = false;
+            this.tbNumero.Location = new System.Drawing.Point(92, 15);
+            this.tbNumero.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbNumero.Location = new System.Drawing.Point(106, 22);
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(74, 23);
@@ -240,6 +270,7 @@
             // 
             // tfAno
             // 
+            this.tfAno.Location = new System.Drawing.Point(92, 180);
             this.tfAno.Location = new System.Drawing.Point(106, 146);
             this.tfAno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tfAno.Mask = "0000";
@@ -259,6 +290,8 @@
             this.cbCambio.Items.AddRange(new object[] {
             "Manual",
             "Automático"});
+            this.cbCambio.Location = new System.Drawing.Point(92, 236);
+            this.cbCambio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbCambio.Location = new System.Drawing.Point(106, 188);
             this.cbCambio.Name = "cbCambio";
             this.cbCambio.Size = new System.Drawing.Size(103, 23);
@@ -267,6 +300,7 @@
             // lCambio
             // 
             this.lCambio.AutoSize = true;
+            this.lCambio.Location = new System.Drawing.Point(23, 240);
             this.lCambio.Location = new System.Drawing.Point(45, 191);
             this.lCambio.Name = "lCambio";
             this.lCambio.Size = new System.Drawing.Size(52, 15);
@@ -275,6 +309,7 @@
             // 
             // tfKilometragem
             // 
+            this.tfKilometragem.Location = new System.Drawing.Point(555, 12);
             this.tfKilometragem.Location = new System.Drawing.Point(106, 315);
             this.tfKilometragem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tfKilometragem.Mask = "000000000000";
@@ -286,6 +321,7 @@
             // lImagem
             // 
             this.lImagem.AutoSize = true;
+            this.lImagem.Location = new System.Drawing.Point(484, 226);
             this.lImagem.Location = new System.Drawing.Point(358, 142);
             this.lImagem.Name = "lImagem";
             this.lImagem.Size = new System.Drawing.Size(54, 15);
@@ -295,6 +331,8 @@
             // pictureBoxImagem
             // 
             this.pictureBoxImagem.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pictureBoxImagem.Location = new System.Drawing.Point(557, 226);
+            this.pictureBoxImagem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBoxImagem.Location = new System.Drawing.Point(418, 142);
             this.pictureBoxImagem.Name = "pictureBoxImagem";
             this.pictureBoxImagem.Size = new System.Drawing.Size(197, 110);
@@ -304,6 +342,8 @@
             // 
             // btnSelecionarImagem
             // 
+            this.btnSelecionarImagem.Location = new System.Drawing.Point(555, 380);
+            this.btnSelecionarImagem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelecionarImagem.Location = new System.Drawing.Point(416, 258);
             this.btnSelecionarImagem.Name = "btnSelecionarImagem";
             this.btnSelecionarImagem.Size = new System.Drawing.Size(199, 23);
@@ -316,6 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(793, 525);
             this.ClientSize = new System.Drawing.Size(654, 375);
             this.Controls.Add(this.btnSelecionarImagem);
             this.Controls.Add(this.pictureBoxImagem);
