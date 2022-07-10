@@ -63,58 +63,70 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
 
         protected override string sqlSelecionarPorId =>
                 @"SELECT 
-                    [ID],
-		            [MODELO],
-                    [FABRICANTE],
-                    [ANO],
-                    [CAMBIO],
-                    [COR],
-                    [PLACA],
-                    [KILOMETRAGEM],
-                    [TIPODECOMBUSTIVEL],
-                    [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID],
-                    [FOTO]
+                    VEICULO.[ID],
+		            VEICULO.[MODELO],
+                    VEICULO.[FABRICANTE],
+                    VEICULO.[ANO],
+                    VEICULO.[CAMBIO],
+                    VEICULO.[COR],
+                    VEICULO.[PLACA],
+                    VEICULO.[KILOMETRAGEM],
+                    VEICULO.[TIPODECOMBUSTIVEL],
+                    VEICULO.[CAPACIDADEDOTANQUE],
+                    VEICULO.[GRUPO_ID],
+                    VEICULO.[FOTO],
+
+                    GRUPO.[ID] AS GRUPO_ID,
+                    GRUPO.[NOME] AS GRUPO_NOME
 	            FROM 
-		            [TBVEICULO]
+		            [TBVEICULO] AS VEICULO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON GRUPO.ID = VEICULO.GRUPO_ID
 		        WHERE
-                    [ID] = @ID";
+                    VEICULO.[ID] = @ID";
 
         protected override string sqlSelecionarTodos =>
-            @"SELECT 
-                    [ID],
-		            [MODELO],
-                    [FABRICANTE],
-                    [ANO],
-                    [CAMBIO],
-                    [COR],
-                    [PLACA],
-                    [KILOMETRAGEM],
-                    [TIPODECOMBUSTIVEL],
-                    [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID],
-                    [FOTO]
+                @"SELECT 
+                    VEICULO.[ID],
+		            VEICULO.[MODELO],
+                    VEICULO.[FABRICANTE],
+                    VEICULO.[ANO],
+                    VEICULO.[CAMBIO],
+                    VEICULO.[COR],
+                    VEICULO.[PLACA],
+                    VEICULO.[KILOMETRAGEM],
+                    VEICULO.[TIPODECOMBUSTIVEL],
+                    VEICULO.[CAPACIDADEDOTANQUE],
+                    VEICULO.[GRUPO_ID],
+                    VEICULO.[FOTO],
+
+                    GRUPO.[ID] AS GRUPO_ID,
+                    GRUPO.[NOME] AS GRUPO_NOME
 	            FROM 
-		            [TBVEICULO]";
+		            [TBVEICULO] AS VEICULO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON GRUPO.ID = VEICULO.GRUPO_ID";
 
         private string sqlSelecionarPorPlaca =>
-            @"SELECT
-                    [ID],
-		            [MODELO],
-                    [FABRICANTE],
-                    [ANO],
-                    [CAMBIO],
-                    [COR],
-                    [PLACA],
-                    [KILOMETRAGEM],
-                    [TIPODECOMBUSTIVEL],
-                    [CAPACIDADEDOTANQUE],
-                    [GRUPO_ID],
-                    [FOTO]
+                @"SELECT 
+                    VEICULO.[ID],
+		            VEICULO.[MODELO],
+                    VEICULO.[FABRICANTE],
+                    VEICULO.[ANO],
+                    VEICULO.[CAMBIO],
+                    VEICULO.[COR],
+                    VEICULO.[PLACA],
+                    VEICULO.[KILOMETRAGEM],
+                    VEICULO.[TIPODECOMBUSTIVEL],
+                    VEICULO.[CAPACIDADEDOTANQUE],
+                    VEICULO.[GRUPO_ID],
+                    VEICULO.[FOTO],
+
+                    GRUPO.[ID] AS GRUPO_ID,
+                    GRUPO.[NOME] AS GRUPO_NOME
 	            FROM 
-		            [TBVEICULO]
+		            [TBVEICULO] AS VEICULO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON GRUPO.ID = VEICULO.GRUPO_ID
                 WHERE 
-                    [PLACA] = @PLACA";
+                    VEICULO.[PLACA] = @PLACA";
 
         public Veiculo SelecionarVeiculoPorPlaca(string placa)
         {

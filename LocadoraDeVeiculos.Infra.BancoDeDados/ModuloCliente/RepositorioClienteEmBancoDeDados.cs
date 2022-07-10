@@ -54,13 +54,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-                    [ID],
-		            [NOME],
-                    [EMAIL],
-                    [ENDERECO],
-                    [CPF],
-                    [CNPJ],
-                    [TELEFONE]
+                    [ID] AS CLIENTE_ID,
+		            [NOME] AS CLIENTE_NOME,
+                    [EMAIL] AS CLIENTE_EMAIL,
+                    [ENDERECO] AS CLIENTE_ENDERECO,
+                    [CPF] AS CLIENTE_CPF,
+                    [CNPJ] AS CLIENTE_CNPJ,
+                    [TELEFONE] AS CLIENTE_TELEFONE
 	            FROM 
 		            [TBCLIENTE]
 		        WHERE
@@ -68,25 +68,25 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 
         protected override string sqlSelecionarTodos =>
             @"SELECT
-                    [ID], 
-		            [NOME],
-                    [EMAIL],
-                    [ENDERECO],
-                    [CPF],
-                    [CNPJ],
-                    [TELEFONE]
+                    [ID] AS CLIENTE_ID,
+		            [NOME] AS CLIENTE_NOME,
+                    [EMAIL] AS CLIENTE_EMAIL,
+                    [ENDERECO] AS CLIENTE_ENDERECO,
+                    [CPF] AS CLIENTE_CPF,
+                    [CNPJ] AS CLIENTE_CNPJ,
+                    [TELEFONE] AS CLIENTE_TELEFONE
 	            FROM 
 		            [TBCLIENTE]";
 
         private string sqlSelecionarPorCpf =>
             @"SELECT
-                    [ID], 
-		            [NOME],
-                    [EMAIL],
-                    [ENDERECO],
-                    [CPF],
-                    [CNPJ],
-                    [TELEFONE]
+                    [ID] AS CLIENTE_ID,
+		            [NOME] AS CLIENTE_NOME,
+                    [EMAIL] AS CLIENTE_EMAIL,
+                    [ENDERECO] AS CLIENTE_ENDERECO,
+                    [CPF] AS CLIENTE_CPF,
+                    [CNPJ] AS CLIENTE_CNPJ,
+                    [TELEFONE] AS CLIENTE_TELEFONE
 	            FROM 
 		            [TBCLIENTE]
                 WHERE 
@@ -94,13 +94,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 
         private string sqlSelecionarPorCnpj =>
             @"SELECT
-                    [ID], 
-		            [NOME],
-                    [EMAIL],
-                    [ENDERECO],
-                    [CPF],
-                    [CNPJ],
-                    [TELEFONE]
+                    [ID] AS CLIENTE_ID,
+		            [NOME] AS CLIENTE_NOME,
+                    [EMAIL] AS CLIENTE_EMAIL,
+                    [ENDERECO] AS CLIENTE_ENDERECO,
+                    [CPF] AS CLIENTE_CPF,
+                    [CNPJ] AS CLIENTE_CNPJ,
+                    [TELEFONE] AS CLIENTE_TELEFONE
 	            FROM 
 		            [TBCLIENTE]
                 WHERE 

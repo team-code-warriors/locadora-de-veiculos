@@ -57,65 +57,105 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-                    [ID],
-		            [CLIENTE_ID],       
-                    [NOME], 
-                    [CPF],
-                    [CNH],                    
-                    [DATAVALIDADECNH],
-                    [EMAIL],
-                    [TELEFONE],                    
-                    [ENDERECO] 
+                    CONDUTOR.ID AS CONDUTOR_ID,
+                    CONDUTOR.NOME AS CONDUTOR_NOME,
+                    CONDUTOR.CPF AS CONDUTOR_CPF,
+                    CONDUTOR.CNH AS CONDUTOR_CNH,
+                    CONDUTOR.DATAVALIDADECNH AS CONDUTOR_DATAVALIDADECNH,
+                    CONDUTOR.EMAIL AS CONDUTOR_EMAIL,
+                    CONDUTOR.TELEFONE AS CONDUTOR_TELEFONE,
+                    CONDUTOR.ENDERECO AS CONDUTOR_ENDERECO,
+
+                    CLIENTE.ID AS CLIENTE_ID,
+                    CLIENTE.NOME AS CLIENTE_NOME,
+                    CLIENTE.EMAIL AS CLIENTE_EMAIL,
+                    CLIENTE.ENDERECO AS CLIENTE_ENDERECO,
+                    CLIENTE.CPF AS CLIENTE_CPF,
+                    CLIENTE.CNPJ AS CLIENTE_CNPJ,
+                    CLIENTE.TELEFONE AS CLIENTE_TELEFONE
+
 	            FROM 
-		            [TBCONDUTOR]
+		            [TBCONDUTOR] AS CONDUTOR INNER JOIN [TBCLIENTE] AS CLIENTE
+                ON 
+                    CONDUTOR.[CLIENTE_ID] = CLIENTE.[ID]
 		        WHERE
-                    [ID] = @ID";
+                    CONDUTOR.[ID] = @ID";
 
         protected override string sqlSelecionarTodos =>
             @"SELECT 
-                    [ID],
-		            [CLIENTE_ID],       
-                    [NOME], 
-                    [CPF],
-                    [CNH],                    
-                    [DATAVALIDADECNH],
-                    [EMAIL],
-                    [TELEFONE],                    
-                    [ENDERECO] 
+                    CONDUTOR.ID AS CONDUTOR_ID,
+                    CONDUTOR.NOME AS CONDUTOR_NOME,
+                    CONDUTOR.CPF AS CONDUTOR_CPF,
+                    CONDUTOR.CNH AS CONDUTOR_CNH,
+                    CONDUTOR.DATAVALIDADECNH AS CONDUTOR_DATAVALIDADECNH,
+                    CONDUTOR.EMAIL AS CONDUTOR_EMAIL,
+                    CONDUTOR.TELEFONE AS CONDUTOR_TELEFONE,
+                    CONDUTOR.ENDERECO AS CONDUTOR_ENDERECO,
+
+                    CLIENTE.ID AS CLIENTE_ID,
+                    CLIENTE.NOME AS CLIENTE_NOME,
+                    CLIENTE.EMAIL AS CLIENTE_EMAIL,
+                    CLIENTE.ENDERECO AS CLIENTE_ENDERECO,
+                    CLIENTE.CPF AS CLIENTE_CPF,
+                    CLIENTE.CNPJ AS CLIENTE_CNPJ,
+                    CLIENTE.TELEFONE AS CLIENTE_TELEFONE
+
 	            FROM 
-		            [TBCONDUTOR]";
+		            [TBCONDUTOR] AS CONDUTOR INNER JOIN [TBCLIENTE] AS CLIENTE
+                ON 
+                    CONDUTOR.[CLIENTE_ID] = CLIENTE.[ID]";
 
         private string sqlSelecionarPorCliente =>
-            @"SELECT
-                    [ID],
-		            [CLIENTE_ID],       
-                    [NOME], 
-                    [CPF],
-                    [CNH],                    
-                    [DATAVALIDADECNH],
-                    [EMAIL],
-                    [TELEFONE],                    
-                    [ENDERECO] 
+            @"SELECT 
+                    CONDUTOR.ID AS CONDUTOR_ID,
+                    CONDUTOR.NOME AS CONDUTOR_NOME,
+                    CONDUTOR.CPF AS CONDUTOR_CPF,
+                    CONDUTOR.CNH AS CONDUTOR_CNH,
+                    CONDUTOR.DATAVALIDADECNH AS CONDUTOR_DATAVALIDADECNH,
+                    CONDUTOR.EMAIL AS CONDUTOR_EMAIL,
+                    CONDUTOR.TELEFONE AS CONDUTOR_TELEFONE,
+                    CONDUTOR.ENDERECO AS CONDUTOR_ENDERECO,
+
+                    CLIENTE.ID AS CLIENTE_ID,
+                    CLIENTE.NOME AS CLIENTE_NOME,
+                    CLIENTE.EMAIL AS CLIENTE_EMAIL,
+                    CLIENTE.ENDERECO AS CLIENTE_ENDERECO,
+                    CLIENTE.CPF AS CLIENTE_CPF,
+                    CLIENTE.CNPJ AS CLIENTE_CNPJ,
+                    CLIENTE.TELEFONE AS CLIENTE_TELEFONE
+
 	            FROM 
-		            [TBCONDUTOR]
-                WHERE 
-                    [CLIENTE_ID] = @CLIENTE_ID";
+		            [TBCONDUTOR] AS CONDUTOR INNER JOIN [TBCLIENTE] AS CLIENTE
+                ON 
+                    CONDUTOR.[CLIENTE_ID] = CLIENTE.[ID]
+		        WHERE
+                    CONDUTOR.[CLIENTE_ID] = @CLIENTE_ID";
 
         private string sqlSelecionarCpf =>
-            @"SELECT
-                    [ID],
-		            [CLIENTE_ID],       
-                    [NOME], 
-                    [CPF],
-                    [CNH],                    
-                    [DATAVALIDADECNH],
-                    [EMAIL],
-                    [TELEFONE],                    
-                    [ENDERECO] 
+            @"SELECT 
+                    CONDUTOR.ID AS CONDUTOR_ID,
+                    CONDUTOR.NOME AS CONDUTOR_NOME,
+                    CONDUTOR.CPF AS CONDUTOR_CPF,
+                    CONDUTOR.CNH AS CONDUTOR_CNH,
+                    CONDUTOR.DATAVALIDADECNH AS CONDUTOR_DATAVALIDADECNH,
+                    CONDUTOR.EMAIL AS CONDUTOR_EMAIL,
+                    CONDUTOR.TELEFONE AS CONDUTOR_TELEFONE,
+                    CONDUTOR.ENDERECO AS CONDUTOR_ENDERECO,
+
+                    CLIENTE.ID AS CLIENTE_ID,
+                    CLIENTE.NOME AS CLIENTE_NOME,
+                    CLIENTE.EMAIL AS CLIENTE_EMAIL,
+                    CLIENTE.ENDERECO AS CLIENTE_ENDERECO,
+                    CLIENTE.CPF AS CLIENTE_CPF,
+                    CLIENTE.CNPJ AS CLIENTE_CNPJ,
+                    CLIENTE.TELEFONE AS CLIENTE_TELEFONE
+
 	            FROM 
-		            [TBCONDUTOR]
-                WHERE 
-                    [CPF] = @CPF";
+		            [TBCONDUTOR] AS CONDUTOR INNER JOIN [TBCLIENTE] AS CLIENTE
+                ON 
+                    CONDUTOR.[CLIENTE_ID] = CLIENTE.[ID]
+		        WHERE
+                    CONDUTOR.[CPF] = @CPF";
 
 
         public Condutor SelecionarCondutorPorCliente(int id)

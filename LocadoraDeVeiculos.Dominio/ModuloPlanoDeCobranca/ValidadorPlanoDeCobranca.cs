@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
                 .GreaterThanOrEqualTo(0);
 
             RuleFor(x => x.PrecoKm)
-                .GreaterThan(0);
+                .GreaterThanOrEqualTo(0);
         }
     }
 }

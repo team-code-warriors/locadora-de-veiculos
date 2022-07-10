@@ -24,13 +24,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
 
         public override Cliente ConverterRegistro(SqlDataReader leitorCliente)
         {
-            int id = Convert.ToInt32(leitorCliente["ID"]);
-            string nome = Convert.ToString(leitorCliente["NOME"]);
-            string email = Convert.ToString(leitorCliente["EMAIL"]);
-            string endereco = Convert.ToString(leitorCliente["ENDERECO"]);
-            string cpf = Convert.ToString(leitorCliente["CPF"]);
-            string cnpj = Convert.ToString(leitorCliente["CNPJ"]);
-            string telefone = Convert.ToString(leitorCliente["TELEFONE"]);
+            int id = Convert.ToInt32(leitorCliente["CLIENTE_ID"]);
+            string nome = Convert.ToString(leitorCliente["CLIENTE_NOME"]);
+            string email = Convert.ToString(leitorCliente["CLIENTE_EMAIL"]);
+            string endereco = Convert.ToString(leitorCliente["CLIENTE_ENDERECO"]);
+            string cpf = Convert.ToString(leitorCliente["CLIENTE_CPF"]);
+            string cnpj = Convert.ToString(leitorCliente["CLIENTE_CNPJ"]);
+            string telefone = Convert.ToString(leitorCliente["CLIENTE_TELEFONE"]);
 
             return new Cliente()
             {

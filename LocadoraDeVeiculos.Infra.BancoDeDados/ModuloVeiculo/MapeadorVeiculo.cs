@@ -27,7 +27,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
         public override Veiculo ConverterRegistro(SqlDataReader leitorVeiculo)
         {
             int id = Convert.ToInt32(leitorVeiculo["ID"]);
-            int idGrupo = Convert.ToInt32(leitorVeiculo["GRUPO_ID"]);
             string modelo = Convert.ToString(leitorVeiculo["MODELO"]);
             string fabricante = Convert.ToString(leitorVeiculo["FABRICANTE"]);
             int ano = Convert.ToInt32(leitorVeiculo["ANO"]);
@@ -51,9 +50,10 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                 Kilometragem = kilometragem,
                 TipoDeCombustivel = combustivel,
                 CapacidadeDoTanque = capacidadeDoTanque,
-                GrupoDeVeiculos = repositorioGrupo.SelecionarPorId(idGrupo),
+                GrupoDeVeiculos = new MapeadorGrupoDeVeiculos().ConverterRegistro(leitorVeiculo),
                 Foto = imagem
             };
+
         }
     }
 }

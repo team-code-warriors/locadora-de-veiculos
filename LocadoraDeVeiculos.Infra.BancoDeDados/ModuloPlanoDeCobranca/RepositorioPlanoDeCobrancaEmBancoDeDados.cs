@@ -43,52 +43,68 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
 
         protected override string sqlSelecionarPorId =>
             @"SELECT 
-                    [ID],
-		            [GRUPO_ID],       
-                    [TIPOPLANO], 
-                    [VALORDIARIA],
-                    [KMINCLUSO],                    
-                    [PRECOKM]   
+                    PLANO.ID AS PLANO_ID,
+                    PLANO.TIPOPLANO AS PLANO_TIPOPLANO,
+                    PLANO.VALORDIARIA AS PLANO_VALORDIARIA,
+                    PLANO.KMINCLUSO AS PLANO_KMINCLUSO,
+                    PLANO.PRECOKM AS PLANO_PRECOKM,
+
+                    GRUPO.ID AS GRUPO_ID,
+                    GRUPO.NOME AS GRUPO_NOME
 	            FROM 
-		            [TBPLANODECOBRANCA]
+		            [TBPLANODECOBRANCA] AS PLANO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON 
+                    PLANO.[GRUPO_ID] = GRUPO.[ID]
 		        WHERE
-                    [ID] = @ID";
+                    PLANO.[ID] = @ID";
         protected override string sqlSelecionarTodos =>
             @"SELECT 
-                    [ID],
-		            [GRUPO_ID],       
-                    [TIPOPLANO], 
-                    [VALORDIARIA],
-                    [KMINCLUSO],                    
-                    [PRECOKM]   
+                    PLANO.ID AS PLANO_ID,
+                    PLANO.TIPOPLANO AS PLANO_TIPOPLANO,
+                    PLANO.VALORDIARIA AS PLANO_VALORDIARIA,
+                    PLANO.KMINCLUSO AS PLANO_KMINCLUSO,
+                    PLANO.PRECOKM AS PLANO_PRECOKM,
+
+                    GRUPO.ID AS GRUPO_ID,
+                    GRUPO.NOME AS GRUPO_NOME
 	            FROM 
-		            [TBPLANODECOBRANCA]";
+		            [TBPLANODECOBRANCA] AS PLANO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON 
+                    PLANO.[GRUPO_ID] = GRUPO.[ID]";
 
         private string sqlSelecionarPorGrupo =>
-            @"SELECT
-                    [ID],
-		            [GRUPO_ID],       
-                    [TIPOPLANO], 
-                    [VALORDIARIA],
-                    [KMINCLUSO],                    
-                    [PRECOKM]   
+            @"SELECT 
+                    PLANO.ID AS PLANO_ID,
+                    PLANO.TIPOPLANO AS PLANO_TIPOPLANO,
+                    PLANO.VALORDIARIA AS PLANO_VALORDIARIA,
+                    PLANO.KMINCLUSO AS PLANO_KMINCLUSO,
+                    PLANO.PRECOKM AS PLANO_PRECOKM,
+
+                    GRUPO.ID AS GRUPO_ID,
+                    GRUPO.NOME AS GRUPO_NOME
 	            FROM 
-		            [TBPLANODECOBRANCA]
-                WHERE 
-                    [GRUPO_ID] = @GRUPO_ID";
+		            [TBPLANODECOBRANCA] AS PLANO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON 
+                    PLANO.[GRUPO_ID] = GRUPO.[ID]
+		        WHERE
+                    PLANO.[GRUPO_ID] = @GRUPO_ID";
 
         private string sqlSelecionarPorTipoPlano =>
-            @"SELECT
-                    [ID],
-		            [GRUPO_ID],       
-                    [TIPOPLANO], 
-                    [VALORDIARIA],
-                    [KMINCLUSO],                    
-                    [PRECOKM]   
+            @"SELECT 
+                    PLANO.ID AS PLANO_ID,
+                    PLANO.TIPOPLANO AS PLANO_TIPOPLANO,
+                    PLANO.VALORDIARIA AS PLANO_VALORDIARIA,
+                    PLANO.KMINCLUSO AS PLANO_KMINCLUSO,
+                    PLANO.PRECOKM AS PLANO_PRECOKM,
+
+                    GRUPO.ID AS GRUPO_ID,
+                    GRUPO.NOME AS GRUPO_NOME
 	            FROM 
-		            [TBPLANODECOBRANCA]
-                WHERE 
-                    [TIPOPLANO] = @TIPOPLANO";
+		            [TBPLANODECOBRANCA] AS PLANO INNER JOIN [TBGRUPODEVEICULOS] AS GRUPO
+                ON 
+                    PLANO.[GRUPO_ID] = GRUPO.[ID]
+		        WHERE
+                    PLANO.[TIPOPLANO] = @TIPOPLANO";
 
 
         public PlanoDeCobranca SelecionarPlanoPorGrupo(int id)

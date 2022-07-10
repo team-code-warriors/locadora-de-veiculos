@@ -12,8 +12,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
 {
     public class MapeadorCondutor : MapeadorBase<Condutor>
     {
-        RepositorioClienteEmBancoDeDados repositorioCliente = new RepositorioClienteEmBancoDeDados();
-
         public override void ConfigurarParametros(Condutor registro, SqlCommand comando)
         {
             comando.Parameters.AddWithValue("ID", registro.Id);
@@ -29,15 +27,14 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
 
         public override Condutor ConverterRegistro(SqlDataReader leitorRegistro)
         {
-            int id = Convert.ToInt32(leitorRegistro["ID"]);
-            int idCliente = Convert.ToInt32(leitorRegistro["CLIENTE_ID"]);
-            string nome = Convert.ToString(leitorRegistro["NOME"]);
-            string cpf = Convert.ToString(leitorRegistro["CPF"]);
-            string cnh = Convert.ToString(leitorRegistro["CNH"]);
-            DateTime dataValidadeCnh = Convert.ToDateTime(leitorRegistro["DATAVALIDADECNH"]);
-            string email = Convert.ToString(leitorRegistro["EMAIL"]);
-            string telefone = Convert.ToString(leitorRegistro["TELEFONE"]);
-            string endereco = Convert.ToString(leitorRegistro["ENDERECO"]);
+            int id = Convert.ToInt32(leitorRegistro["CONDUTOR_ID"]);
+            string nome = Convert.ToString(leitorRegistro["CONDUTOR_NOME"]);
+            string cpf = Convert.ToString(leitorRegistro["CONDUTOR_CPF"]);
+            string cnh = Convert.ToString(leitorRegistro["CONDUTOR_CNH"]);
+            DateTime dataValidadeCnh = Convert.ToDateTime(leitorRegistro["CONDUTOR_DATAVALIDADECNH"]);
+            string email = Convert.ToString(leitorRegistro["CONDUTOR_EMAIL"]);
+            string telefone = Convert.ToString(leitorRegistro["CONDUTOR_TELEFONE"]);
+            string endereco = Convert.ToString(leitorRegistro["CONDUTOR_ENDERECO"]);
 
             var condutor = new Condutor
             {
@@ -49,9 +46,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
                 Email = email,
                 Telefone = telefone,
                 Endereco = endereco,
-                Cliente = repositorioCliente.SelecionarPorId(idCliente)
             };
-            
+
+            var cliente = new MapeadorCliente().ConverterRegistro(leitorRegistro);
+            condutor.Cliente = cliente;
+
             return condutor;
         }
     }
