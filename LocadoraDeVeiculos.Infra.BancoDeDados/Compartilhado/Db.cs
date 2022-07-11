@@ -9,11 +9,10 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado
 {
     public static class Db
     {
-        public static string enderecoBanco =
-            @"Data Source=(LocalDB)\MSSQLLocalDB;
-                Initial Catalog=DbLocadoraDeVeiculos;
-                Integrated Security=True;
-                Pooling=False";
+        private static string enderecoBanco =
+        @"Data Source=(LocalDB)\MSSQLLocalDB;
+            Initial Catalog=DbLocadoraDeVeiculosTestes;
+            Integrated Security=True;Pooling=False";
 
         public static void ExecutarSql(string sql)
         {
