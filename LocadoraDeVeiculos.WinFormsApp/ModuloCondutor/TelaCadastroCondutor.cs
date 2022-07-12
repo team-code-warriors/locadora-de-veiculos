@@ -41,15 +41,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             {
                 condutor = value;
 
-                cbCliente.SelectedItem = condutor.Cliente;
-                tfNome.Text = condutor.Nome;
-                tfCpf.Text = condutor.Cpf;
-                tfCnh.Text = condutor.Cnh;
-                //dtpData.Value = DateTime.Now.Date;
-                tfEmail.Text = condutor.Email;
-                tfTelefone.Text = condutor.Telefone;
-                tfEndereco.Text = condutor.Telefone;
+                CarregaTela();
             }
+        }
+
+        private void CarregaTela()
+        {
+            cbCliente.SelectedItem = condutor.Cliente;
+            tfNome.Text = condutor.Nome;
+            tfCpf.Text = condutor.Cpf;
+            tfCnh.Text = condutor.Cnh;
+            //dtpData.Value = DateTime.Now.Date;
+            tfEmail.Text = condutor.Email;
+            tfTelefone.Text = condutor.Telefone;
+            tfEndereco.Text = condutor.Telefone;
         }
 
         private void CarregarClientes(List<Cliente> clientes)

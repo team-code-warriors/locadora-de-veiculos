@@ -43,41 +43,46 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             {
                 veiculo = value;
 
-                tfModelo.Text = veiculo.Modelo;
-                tfFabricante.Text = veiculo.Fabricante;
-                if (veiculo.Ano == 0)
-                {
-                    tfAno.Text = "";
-                }
-                else
-                {
-                    tfAno.Text = veiculo.Ano.ToString();
-                }
-                cbCambio.SelectedItem = veiculo.Cambio;
-                tfCor.Text = veiculo.Cor;
-                tfPlaca.Text = veiculo.Placa;
-                if (veiculo.Kilometragem == 0)
-                {
-                    tfKilometragem.Text = "";
-                }
-                else
-                {
-                    tfKilometragem.Text = veiculo.Kilometragem.ToString();
-                }
-                cbCombustivel.SelectedItem = veiculo.TipoDeCombustivel;
-                if (veiculo.CapacidadeDoTanque == 0)
-                {
-                    tfCapacidadeDoTanque.Text = "";
-                }
-                else
-                {
-                    tfCapacidadeDoTanque.Text = veiculo.CapacidadeDoTanque.ToString();
-                }
-                cbGrupoDeVeiculos.SelectedItem = veiculo.GrupoDeVeiculos;
-
-                //if (veiculo.Id != 0)
-                        CarregaImagem();
+                CarregaTela();
             }
+        }
+
+        private void CarregaTela()
+        {
+            tfModelo.Text = veiculo.Modelo;
+            tfFabricante.Text = veiculo.Fabricante;
+            if (veiculo.Ano == 0)
+            {
+                tfAno.Text = "";
+            }
+            else
+            {
+                tfAno.Text = veiculo.Ano.ToString();
+            }
+            cbCambio.SelectedItem = veiculo.Cambio;
+            tfCor.Text = veiculo.Cor;
+            tfPlaca.Text = veiculo.Placa;
+            if (veiculo.Kilometragem == 0)
+            {
+                tfKilometragem.Text = "";
+            }
+            else
+            {
+                tfKilometragem.Text = veiculo.Kilometragem.ToString();
+            }
+            cbCombustivel.SelectedItem = veiculo.TipoDeCombustivel;
+            if (veiculo.CapacidadeDoTanque == 0)
+            {
+                tfCapacidadeDoTanque.Text = "";
+            }
+            else
+            {
+                tfCapacidadeDoTanque.Text = veiculo.CapacidadeDoTanque.ToString();
+            }
+            cbGrupoDeVeiculos.SelectedItem = veiculo.GrupoDeVeiculos;
+
+            if (veiculo.Foto != null)
+                CarregaImagem();
         }
 
         private void CarregaImagem()

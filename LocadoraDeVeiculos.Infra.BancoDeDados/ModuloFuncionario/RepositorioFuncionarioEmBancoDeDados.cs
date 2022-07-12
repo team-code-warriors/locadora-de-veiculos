@@ -16,6 +16,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
         protected override string sqlInserir =>
             @"INSERT INTO [TBFUNCIONARIO] 
                 (
+                    [ID],
                     [NOME],
                     [SALARIO],
                     [DATAADMISSAO],
@@ -26,6 +27,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
 	            )
 	            VALUES
                 (
+                    @ID,
                     @NOME,
                     @SALARIO,
                     @DATAADMISSAO,
@@ -33,7 +35,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
                     @SENHA,
                     @TIPOPERFIL
 
-                );SELECT SCOPE_IDENTITY();";
+                )";
 
         protected override string sqlEditar =>
             @"UPDATE [TBFUNCIONARIO]	

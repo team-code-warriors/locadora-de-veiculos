@@ -27,7 +27,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
 
         public override Condutor ConverterRegistro(SqlDataReader leitorRegistro)
         {
-            int id = Convert.ToInt32(leitorRegistro["CONDUTOR_ID"]);
+            var id = Guid.Parse(leitorRegistro["CONDUTOR_ID"].ToString());
             string nome = Convert.ToString(leitorRegistro["CONDUTOR_NOME"]);
             string cpf = Convert.ToString(leitorRegistro["CONDUTOR_CPF"]);
             string cnh = Convert.ToString(leitorRegistro["CONDUTOR_CNH"]);

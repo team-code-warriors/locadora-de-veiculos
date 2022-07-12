@@ -48,14 +48,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
             set
             {
                 plano = value;
-                cbGrupo.SelectedItem = plano.GrupoVeiculo;
-                cbTipoPlano.SelectedItem = plano.TipoPlano;
-
-                tbValorDiaria.Text = plano.ValorDiaria.ToString();
-                tbKmIncluso.Text = plano.KmIncluso.ToString();
-                tbPrecoKm.Text = plano.PrecoKm.ToString();
+                CarregaTela();
 
             }
+        }
+
+        private void CarregaTela()
+        {
+            cbGrupo.SelectedItem = plano.GrupoVeiculo;
+            cbTipoPlano.SelectedItem = plano.TipoPlano;
+
+            tbValorDiaria.Text = plano.ValorDiaria.ToString();
+            tbKmIncluso.Text = plano.KmIncluso.ToString();
+            tbPrecoKm.Text = plano.PrecoKm.ToString();
         }
 
         private void btnGravar_Click(object sender, System.EventArgs e)

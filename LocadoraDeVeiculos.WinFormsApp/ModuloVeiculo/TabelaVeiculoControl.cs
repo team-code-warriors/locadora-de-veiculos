@@ -33,9 +33,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
             return colunas;
         }
-        public int ObtemNumeroVeiculoSelecionado()
+        public Guid ObtemNumeroVeiculoSelecionado()
         {
-            return grid.SelecionarNumero<int>();
+            return grid.SelecionarNumero<Guid>();
         }
 
         internal void AtualizarRegistros(List<Veiculo> veiculos)

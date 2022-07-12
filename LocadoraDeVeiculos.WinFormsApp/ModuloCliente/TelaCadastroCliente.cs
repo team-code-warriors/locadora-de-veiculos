@@ -33,17 +33,22 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             { 
                 return cliente; 
             }
-            set 
-            { 
-                cliente = value; 
+            set
+            {
+                cliente = value;
 
-                tfNome.Text = cliente.Nome;
-                tfEmail.Text = cliente.Email;
-                tfEndereco.Text = cliente.Endereco;
-                tfCpf.Text = cliente.Cpf;
-                tfCnpj.Text = cliente.Cnpj;
-                tfTelefone.Text = cliente.Telefone;
+                CarregaTela();
             }
+        }
+
+        private void CarregaTela()
+        {
+            tfNome.Text = cliente.Nome;
+            tfEmail.Text = cliente.Email;
+            tfEndereco.Text = cliente.Endereco;
+            tfCpf.Text = cliente.Cpf;
+            tfCnpj.Text = cliente.Cnpj;
+            tfTelefone.Text = cliente.Telefone;
         }
 
         private void btnGravar_Click(object sender, System.EventArgs e)

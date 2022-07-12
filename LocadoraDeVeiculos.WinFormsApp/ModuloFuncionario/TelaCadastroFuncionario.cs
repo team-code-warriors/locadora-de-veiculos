@@ -36,21 +36,26 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             {
                 funcionario = value;
 
-                tbNumero.Text = funcionario.Id.ToString();
-                tbNome.Text = funcionario.Nome;
-                if (funcionario.Salario == 0)
-                {
-                    tbSalario.Text = "";
-                }
-                else
-                {
-                    tbSalario.Text = funcionario.Salario.ToString();
-                }
-                dtpData.Value = DateTime.Now.Date;
-                tbLogin.Text = funcionario.Login;
-                tbSenha.Text = funcionario.Senha;
-                cbTipoPerfil.SelectedItem = funcionario.TipoPerfil;
+                CarregaTela();
             }
+        }
+
+        private void CarregaTela()
+        {
+            tbNumero.Text = funcionario.Id.ToString();
+            tbNome.Text = funcionario.Nome;
+            if (funcionario.Salario == 0)
+            {
+                tbSalario.Text = "";
+            }
+            else
+            {
+                tbSalario.Text = funcionario.Salario.ToString();
+            }
+            dtpData.Value = DateTime.Now.Date;
+            tbLogin.Text = funcionario.Login;
+            tbSenha.Text = funcionario.Senha;
+            cbTipoPerfil.SelectedItem = funcionario.TipoPerfil;
         }
 
         private void btnGravar_Click(object sender, System.EventArgs e)

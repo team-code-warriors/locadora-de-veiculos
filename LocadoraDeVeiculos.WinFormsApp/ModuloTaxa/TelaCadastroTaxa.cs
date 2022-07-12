@@ -34,21 +34,26 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
             set
             {
                 taxa = value;
-
-                tbNumero.Text = taxa.Id.ToString();
-                tbDescricao.Text = taxa.Descricao;
-
-                if (taxa.Valor == 0)
-                {
-                    tbValor.Text = "";
-                }
-                else
-                {
-                    tbValor.Text = taxa.Valor.ToString();
-                }
-                cbTipoCalculo.SelectedItem = taxa.TipoCalculo;
+                CarregaTela();
             }
         }
+
+        private void CarregaTela()
+        {
+            tbNumero.Text = taxa.Id.ToString();
+            tbDescricao.Text = taxa.Descricao;
+
+            if (taxa.Valor == 0)
+            {
+                tbValor.Text = "";
+            }
+            else
+            {
+                tbValor.Text = taxa.Valor.ToString();
+            }
+            cbTipoCalculo.SelectedItem = taxa.TipoCalculo;
+        }
+
         private void btnGravar_Click(object sender, System.EventArgs e)
         {
             taxa.Descricao = tbDescricao.Text;

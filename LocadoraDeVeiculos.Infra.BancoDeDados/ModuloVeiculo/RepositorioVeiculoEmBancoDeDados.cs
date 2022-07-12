@@ -10,6 +10,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
         protected override string sqlInserir =>
             @"INSERT INTO [TBVEICULO]
                 (
+                    [ID],
                     [MODELO],
                     [FABRICANTE],
                     [ANO],
@@ -24,6 +25,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                 )
                 VALUES
                 (
+                    @ID,
                     @MODELO,
                     @FABRICANTE,
                     @ANO,
@@ -36,7 +38,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
                     @GRUPO_ID,
                     @FOTO
 
-                );SELECT SCOPE_IDENTITY();";
+                )";
 
         protected override string sqlEditar =>
             @"UPDATE [TBVEICULO]

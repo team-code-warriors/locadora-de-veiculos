@@ -11,19 +11,19 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado
     {
         public IntegrationTestBase()
         {
-            Db.ExecutarSql("DELETE FROM TBTAXA; DBCC CHECKIDENT (TBTAXA, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBTAXA;");
 
-            Db.ExecutarSql("DELETE FROM TBCONDUTOR; DBCC CHECKIDENT (TBCONDUTOR, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBCONDUTOR;");
 
-            Db.ExecutarSql("DELETE FROM TBCLIENTE; DBCC CHECKIDENT (TBCLIENTE, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBCLIENTE;");
 
-            Db.ExecutarSql("DELETE FROM TBFUNCIONARIO; DBCC CHECKIDENT (TBFUNCIONARIO, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBFUNCIONARIO;");
             
-            Db.ExecutarSql("DELETE FROM TBPLANODECOBRANCA; DBCC CHECKIDENT (TBPLANODECOBRANCA, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBPLANODECOBRANCA;");
 
-            Db.ExecutarSql("DELETE FROM TBVEICULO; DBCC CHECKIDENT (TBVEICULO, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBVEICULO;");
 
-            Db.ExecutarSql("DELETE FROM TBGRUPODEVEICULOS; DBCC CHECKIDENT (TBGRUPODEVEICULOS, RESEED, 0)");
+            Db.ExecutarSql("DELETE FROM TBGRUPODEVEICULOS;");
         }
     }
 }

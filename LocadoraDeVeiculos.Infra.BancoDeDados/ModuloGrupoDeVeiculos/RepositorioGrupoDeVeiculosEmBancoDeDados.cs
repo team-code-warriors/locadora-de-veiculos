@@ -16,12 +16,14 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos
         protected override string sqlInserir =>
             @"INSERT INTO [TBGRUPODEVEICULOS]
                 (
+                    [ID],
                     [NOME]
                 )
                 VALUES
                 (
+                    @ID,
                     @NOME
-                );SELECT SCOPE_IDENTITY();";
+                )";
         protected override string sqlEditar =>
             @"UPDATE [TBGRUPODEVEICULOS]
                 SET
@@ -31,11 +33,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos
                     [ID] = @ID";
 
         protected override string sqlExcluir =>
-            @"DELETE FROM [TBPLANODECOBRANCA]
-                WHERE
-                    [GRUPO_ID] = @ID
-
-            DELETE FROM [TBGRUPODEVEICULOS]
+            @"DELETE FROM [TBGRUPODEVEICULOS]
                 WHERE
                     [ID] = @ID";
 

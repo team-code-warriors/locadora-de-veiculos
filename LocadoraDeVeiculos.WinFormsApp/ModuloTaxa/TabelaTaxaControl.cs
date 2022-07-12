@@ -39,9 +39,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
             return colunas;
         }
 
-        public int ObtemNumeroTaxaSelecionada()
+        public Guid ObtemNumeroTaxaSelecionada()
         {
-            return grid.SelecionarNumero<int>();
+            return grid.SelecionarNumero<Guid>();
         }
 
         internal void AtualizarRegistros(List<Taxa> taxas)
