@@ -107,7 +107,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
                     PLANO.[TIPOPLANO] = @TIPOPLANO";
 
 
-        public PlanoDeCobranca SelecionarPlanoPorGrupo(int id)
+        public PlanoDeCobranca SelecionarPlanoPorGrupo(Guid id)
         {
             return SelecionarPorParametro(sqlSelecionarPorGrupo, new SqlParameter("GRUPO_ID", id));
         }

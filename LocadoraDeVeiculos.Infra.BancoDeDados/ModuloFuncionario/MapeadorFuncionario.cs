@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
 
         public override Funcionario ConverterRegistro(SqlDataReader leitorFuncionario)
         {
-            int id = Convert.ToInt32(leitorFuncionario["ID"]);
+            var id = Guid.Parse(leitorFuncionario["ID"].ToString());
             string nome = Convert.ToString(leitorFuncionario["NOME"]);
             double salario = Convert.ToDouble(leitorFuncionario["SALARIO"]);
             DateTime dataAdmissao = Convert.ToDateTime(leitorFuncionario["DATAADMISSAO"]);

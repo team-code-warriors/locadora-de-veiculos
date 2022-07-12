@@ -75,7 +75,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
                 }
                 cbGrupoDeVeiculos.SelectedItem = veiculo.GrupoDeVeiculos;
 
-                if (veiculo.Id != 0)
+                //if (veiculo.Id != 0)
                         CarregaImagem();
             }
         }
