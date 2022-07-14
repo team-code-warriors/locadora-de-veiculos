@@ -181,7 +181,7 @@ namespace LocadoraDeVeiculos.WinFormsApp
             controladores.Add("Condutores", new ControladorCondutor(repositorioCondutor, servicoCondutor));
             controladores.Add("Taxas", new ControladorTaxa(servicoTaxa));
             controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(repositorioGrupoDeVeiculos, servicoGrupoVeiculo));
-            controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(repositorioPlanoDeCobranca, servicoPlanoCobranca));
+            controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(servicoPlanoCobranca));
             controladores.Add("Veículos", new ControladorVeiculo(repositorioVeiculo, servicoVeiculo));
         }
 
