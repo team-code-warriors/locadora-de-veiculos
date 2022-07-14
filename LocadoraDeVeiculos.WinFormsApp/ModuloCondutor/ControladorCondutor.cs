@@ -15,21 +15,18 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
     {
 
         private readonly RepositorioCondutorEmBancoDeDados repositorioCondutor;
-        private readonly RepositorioClienteEmBancoDeDados repositorioCliente = new RepositorioClienteEmBancoDeDados();
-        private TabelaCondutoresControl tabelaCondutor;
+        private TabelaCondutoresControl tabelaCondutores;
         private readonly ServicoCondutor servicoCondutor;
 
-        public ControladorCondutor(RepositorioCondutorEmBancoDeDados repositorioCondutor, ServicoCondutor servicoCondutor)
+        public ControladorCondutor(ServicoCondutor servicoCondutor)
         {
-            this.repositorioCondutor = repositorioCondutor;
             this.servicoCondutor = servicoCondutor;
         }
 
         public override void Inserir()
         {
-            var clientes = repositorioCliente.SelecionarTodos();
+            TelaCadastroCondutor tela = new TelaCadastroCondutor();
 
-            TelaCadastroCondutor tela = new TelaCadastroCondutor(clientes);
             tela.Condutor = new Condutor();
 
             tela.GravarRegistro = servicoCondutor.Inserir;
@@ -44,49 +41,61 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
         public override void Editar()
         {
-            Condutor condutorSelecionado = ObtemCondutorSelecionado();
+            var id = tabelaCondutores.ObtemIdCondutorSelecionado();
 
-            if (condutorSelecionado == null)
+            if (id == Guid.Empty)
             {
                 MessageBox.Show("Selecione um condutor primeiro",
-                "Edição de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    "Edição de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            var clientes = repositorioCliente.SelecionarTodos();
+            var resultado = servicoCondutor.SelecionarPorId(id);
 
-            TelaCadastroCondutor tela = new TelaCadastroCondutor(clientes);
+            if (resultado.IsFailed)
+            {
+                MessageBox.Show(resultado.Errors[0].Message,
+                    "Edição de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            tela.Condutor = condutorSelecionado.Clonar();
+            var funcionarioSelecionado = resultado.Value;
+
+            var tela = new TelaCadastroCondutor();
+
+            tela.Condutor = funcionarioSelecionado.Clonar();
 
             tela.GravarRegistro = servicoCondutor.Editar;
 
-            DialogResult resultado = tela.ShowDialog();
-
-            if (resultado == DialogResult.OK)
-            {
+            if (tela.ShowDialog() == DialogResult.OK)
                 CarregarCondutores();
-            }
         }
 
         public override void Excluir()
         {
-            Condutor condutorSelecionado = ObtemCondutorSelecionado();
+            var id = tabelaCondutores.ObtemIdCondutorSelecionado();
 
-            if (condutorSelecionado == null)
+            var resultadoSelecao = servicoCondutor.SelecionarPorId(id);
+
+            if (resultadoSelecao.IsFailed)
             {
-                MessageBox.Show("Selecione um condutor primeiro",
-                "Exclusão de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(resultadoSelecao.Errors[0].Message,
+                    "Exclusão de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DialogResult resultado = MessageBox.Show("Deseja realmente excluir este condutor?",
-                "Exclusão de Condutor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var funcionarioSelecionado = resultadoSelecao.Value;
 
-            if (resultado == DialogResult.OK)
+            if (MessageBox.Show("Deseja realmente excluir o condutor?", "Exclusão de condutor",
+                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                repositorioCondutor.Excluir(condutorSelecionado);
-                CarregarCondutores();
+                var resultadoExclusao = servicoCondutor.Excluir(funcionarioSelecionado);
+
+                if (resultadoExclusao.IsSuccess)
+                    CarregarCondutores();
+                else
+                    MessageBox.Show(resultadoExclusao.Errors[0].Message,
+                        "Exclusão de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -97,28 +106,28 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
         public override UserControl ObtemListagem()
         {
-            tabelaCondutor = new TabelaCondutoresControl();
+            tabelaCondutores = new TabelaCondutoresControl();
 
             CarregarCondutores();
 
-            return tabelaCondutor;
+            return tabelaCondutores;
         }
-
-        private Condutor ObtemCondutorSelecionado()
-        {
-            var numero = tabelaCondutor.ObtemNumeroCondutorSelecionado();
-
-            return repositorioCondutor.SelecionarPorId(numero);
-        }
-
         private void CarregarCondutores()
         {
-            List<Condutor> condutores = repositorioCondutor.SelecionarTodos();
+            var resultado = servicoCondutor.SelecionarTodos();
 
-            tabelaCondutor.AtualizarRegistros(condutores);
+            if (resultado.IsSuccess)
+            {
+                List<Condutor> condutores = repositorioCondutor.SelecionarTodos();
 
-            TelaMenuPrincipal.Instancia.AtualizarRodape($"Visualizando {condutores.Count} condutor(es)");
+                tabelaCondutores.AtualizarRegistros(condutores);
 
+                TelaMenuPrincipal.Instancia.AtualizarRodape($"Visualizando {condutores.Count} condutor(es)");
+            } 
+            else if (resultado.IsFailed)
+            {
+                MessageBox.Show(resultado.Errors[0].Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
@@ -27,9 +28,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             this.ConfigurarTela();
         }
 
+        public TelaCadastroCondutor()
+        {
+            InitializeComponent();
+            this.ConfigurarTela();
+        }
+
         private Condutor condutor;
 
-        public Func<Condutor, ValidationResult> GravarRegistro { get; set; }
+        public Func<Condutor, Result<Condutor>> GravarRegistro { get; set; }
 
         public Condutor Condutor
         {
