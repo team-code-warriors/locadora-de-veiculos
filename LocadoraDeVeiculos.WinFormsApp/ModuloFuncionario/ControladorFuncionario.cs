@@ -12,25 +12,22 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 {
     public class ControladorFuncionario : ControladorBase
     {
-        private readonly RepositorioFuncionarioEmBancoDeDados repositorioFuncionario;
         private TabelaFuncionarioControl tabelaFuncionarios;
         private readonly ServicoFuncionario servicoFuncionario;
-        public ControladorFuncionario(RepositorioFuncionarioEmBancoDeDados repositorioFuncionario, ServicoFuncionario servicoFuncionario)
+        public ControladorFuncionario(ServicoFuncionario servicoFuncionario)
         {
-            this.repositorioFuncionario = repositorioFuncionario;
             this.servicoFuncionario = servicoFuncionario;
         }
 
         public override void Inserir()
         {
-            TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+            var tela = new TelaCadastroFuncionario();
+
             tela.Funcionario = new Funcionario();
 
             tela.GravarRegistro = servicoFuncionario.Inserir;
 
-            DialogResult resultado = tela.ShowDialog();
-
-            if (resultado == DialogResult.OK)
+            if (tela.ShowDialog() == DialogResult.OK)
             {
                 CarregarFuncionarios();
             }
@@ -38,47 +35,68 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 
         public override void Editar()
         {
-            Funcionario funcionarioSelecionado = ObtemFuncionarioSelecionado();
+            var id = tabelaFuncionarios.ObtemNumeroFuncionarioSelecionado();
 
-            if (funcionarioSelecionado == null)
+            if (id == Guid.Empty)
             {
                 MessageBox.Show("Selecione um funcionário primeiro",
-                "Edição de Funcionários", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    "Edição de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+            var resultado = servicoFuncionario.SelecionarPorId(id);
+
+            if (resultado.IsFailed)
+            {
+                MessageBox.Show(resultado.Errors[0].Message,
+                    "Edição de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var funcionarioSelecionado = resultado.Value;
+
+            var tela = new TelaCadastroFuncionario();
 
             tela.Funcionario = funcionarioSelecionado.Clonar();
 
             tela.GravarRegistro = servicoFuncionario.Editar;
 
-            DialogResult resultado = tela.ShowDialog();
-
-            if (resultado == DialogResult.OK)
-            {
+            if (tela.ShowDialog() == DialogResult.OK)
                 CarregarFuncionarios();
-            }
         }
 
         public override void Excluir()
         {
-            Funcionario funcionarioSelecionado = ObtemFuncionarioSelecionado();
+            var id = tabelaFuncionarios.ObtemNumeroFuncionarioSelecionado();
 
-            if (funcionarioSelecionado == null)
+            if (id == Guid.Empty)
             {
                 MessageBox.Show("Selecione um funcionário primeiro",
-                "Exclusão de Funcionários", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    "Exclusão de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult resultado = MessageBox.Show("Deseja realmente excluir o funcionário?",
-                "Exclusão de Funcionários", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var resultadoSelecao = servicoFuncionario.SelecionarPorId(id);
 
-            if (resultado == DialogResult.OK)
+            if (resultadoSelecao.IsFailed)
             {
-                repositorioFuncionario.Excluir(funcionarioSelecionado);
-                CarregarFuncionarios();
+                MessageBox.Show(resultadoSelecao.Errors[0].Message,
+                    "Exclusão de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var funcionarioSelecionado = resultadoSelecao.Value;
+
+            if (MessageBox.Show("Deseja realmente excluir o funcionário?", "Exclusão de Funcionário",
+                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                var resultadoExclusao = servicoFuncionario.Excluir(funcionarioSelecionado);
+
+                if (resultadoExclusao.IsSuccess)
+                    CarregarFuncionarios();
+                else
+                    MessageBox.Show(resultadoExclusao.Errors[0].Message,
+                        "Exclusão de Funcionário", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -96,21 +114,23 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
             return new ConfiguracaoToolboxFuncionario();
         }
 
-        private Funcionario ObtemFuncionarioSelecionado()
-        {
-            var numero = tabelaFuncionarios.ObtemNumeroFuncionarioSelecionado();
-
-            return repositorioFuncionario.SelecionarPorId(numero);
-        }
-
         private void CarregarFuncionarios()
         {
-            List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
+            var resultado = servicoFuncionario.SelecionarTodos();
 
-            tabelaFuncionarios.AtualizarRegistros(funcionarios);
+            if (resultado.IsSuccess)
+            {
+                List<Funcionario> funcionarios = resultado.Value;
 
-            TelaMenuPrincipal.Instancia.AtualizarRodape($"Visualizando {funcionarios.Count} funcionário(s)");
+                tabelaFuncionarios.AtualizarRegistros(funcionarios);
 
+                TelaMenuPrincipal.Instancia.AtualizarRodape($"Visualizando {funcionarios.Count} funcionário(s)");
+            }
+            else
+            {
+                MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Funcionário",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
