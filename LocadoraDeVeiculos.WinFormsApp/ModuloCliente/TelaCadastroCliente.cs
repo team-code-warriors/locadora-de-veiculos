@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
@@ -25,7 +26,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
         private Cliente cliente;
 
-        public Func<Cliente, ValidationResult> GravarRegistro { get; set; }
+        public Func<Cliente, Result<Cliente>> GravarRegistro { get; set; }
 
         public Cliente Cliente
         {
@@ -100,13 +101,21 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 
             var resultadoValidacao = GravarRegistro(cliente);
 
-            if (resultadoValidacao.IsValid == false)
+            if (resultadoValidacao.IsFailed)
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                string erro = resultadoValidacao.Errors[0].Message;
 
-                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+                if(erro.StartsWith("Falha no sistema"))
+                {
+                    MessageBox.Show(erro,
+                    "Inserção de Clientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
 
-                DialogResult = DialogResult.None;
+                    DialogResult = DialogResult.None;
+                }
             }
         }
 
