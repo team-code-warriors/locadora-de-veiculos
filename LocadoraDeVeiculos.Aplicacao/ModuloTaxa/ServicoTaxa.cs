@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
@@ -21,62 +22,148 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             this.repositorioTaxa = repositorioTaxa;
         }
 
-        public ValidationResult Inserir(Taxa taxa)
+        public Result<Taxa> Inserir(Taxa taxa)
         {
             Log.Logger.Debug("Tentando inserir taxa... {@t}", taxa);
 
-            ValidationResult resultadoValidacao = Validar(taxa);
+            Result resultadoValidacao = ValidarTaxa(taxa);
 
-            if (resultadoValidacao.IsValid)
-            {
-                repositorioTaxa.Inserir(taxa);
-                Log.Logger.Debug("Taxa {TaxaNome} inserida com sucesso", taxa.Descricao);
-            }else
+            if (resultadoValidacao.IsFailed)
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar inserir uma Taxa {TaxaNome} - {Motivo}",
-                        taxa.Descricao, erro.ErrorMessage);
+                    Log.Logger.Warning("Falha ao tentar inserir a Taxa {TaxaId} - {Motivo}",
+                       taxa.Id, erro.Message);
                 }
+
+                return Result.Fail(resultadoValidacao.Errors);
             }
 
-            return resultadoValidacao;
+            try
+            {
+                repositorioTaxa.Inserir(taxa);
+
+                Log.Logger.Information("Taxa {TaxaId} inserida com sucesso", taxa.Id);
+
+                return Result.Ok(taxa);
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar inserir a taxa";
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
+            }
         }
 
-        public ValidationResult Editar(Taxa taxa)
+        public Result<Taxa> Editar(Taxa taxa)
         {
             Log.Logger.Debug("Tentando editar taxa... {@t}", taxa);
 
-            ValidationResult resultadoValidacao = Validar(taxa);
+            Result resultadoValidacao = ValidarTaxa(taxa);
 
-            if (resultadoValidacao.IsValid)
-            {
-                repositorioTaxa.Editar(taxa);
-                Log.Logger.Debug("Taxa {TaxaNome} editada com sucesso", taxa.Descricao);
-            }
-            else
+            if (resultadoValidacao.IsFailed)
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar editar uma Taxa {TaxaNome} - {Motivo}",
-                        taxa.Descricao, erro.ErrorMessage);
+                    Log.Logger.Warning("Falha ao tentar editar a Taxa {TaxaId} - {Motivo}",
+                       taxa.Id, erro.Message);
                 }
+
+                return Result.Fail(resultadoValidacao.Errors);
             }
 
-            return resultadoValidacao;
+            try
+            {
+                repositorioTaxa.Editar(taxa);
+
+                Log.Logger.Information("Taxa {TaxaId} editada com sucesso", taxa.Id);
+
+                return Result.Ok(taxa);
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar editar a taxa";
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
+            }
         }
 
-        private ValidationResult Validar(Taxa taxa)
+        public Result Excluir(Taxa taxa)
+        {
+            Log.Logger.Debug("Tentando excluir taxa... {@t}", taxa);
+
+            try
+            {
+                repositorioTaxa.Excluir(taxa);
+
+                Log.Logger.Information("Taxa {TaxaId} excluída com sucesso", taxa.Id);
+
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar excluir a taxa";
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
+            }
+        }
+
+        public Result<List<Taxa>> SelecionarTodos()
+        {
+            try
+            {
+                return Result.Ok(repositorioTaxa.SelecionarTodos());
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar selecionar todas as taxas";
+
+                Log.Logger.Error(ex, msgErro);
+
+                return Result.Fail(msgErro);
+            }
+        }
+
+        public Result<Taxa> SelecionarPorId(Guid id)
+        {
+            try
+            {
+                return Result.Ok(repositorioTaxa.SelecionarPorId(id));
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar selecionar a taxa";
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", id);
+
+                return Result.Fail(msgErro);
+            }
+        }
+
+        private Result ValidarTaxa(Taxa taxa)
         {
             var validador = new ValidadorTaxa();
 
             var resultadoValidacao = validador.Validate(taxa);
 
-            if(resultadoValidacao.IsValid)
-                if (DescricaoDuplicada(taxa))
-                    resultadoValidacao.Errors.Add(new ValidationFailure("Taxa", "Taxa já cadastrada"));
+            List<Error> erros = new List<Error>(); //FluentResult
 
-            return resultadoValidacao;
+            foreach (ValidationFailure item in resultadoValidacao.Errors) //FluentValidation            
+                erros.Add(new Error(item.ErrorMessage));
+
+            if (DescricaoDuplicada(taxa))
+                erros.Add(new Error("Descrição duplicada"));
+
+            if (erros.Any())
+                return Result.Fail(erros);
+
+            return Result.Ok();
         }
 
         private bool DescricaoDuplicada(Taxa taxa)
