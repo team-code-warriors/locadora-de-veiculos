@@ -44,7 +44,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
             return colunas;
         }
 
-        public Guid ObtemNumeroClienteSelecionado()
+        public Guid ObtemIdClienteSelecionado()
         {
             return grid.SelecionarNumero<Guid>();
         }
