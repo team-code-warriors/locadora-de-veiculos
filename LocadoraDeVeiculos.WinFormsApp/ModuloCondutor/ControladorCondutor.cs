@@ -13,8 +13,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 {
     public class ControladorCondutor : ControladorBase
     {
-
-        private readonly RepositorioCondutorEmBancoDeDados repositorioCondutor;
+        private readonly RepositorioClienteEmBancoDeDados repositorioCliente = new RepositorioClienteEmBancoDeDados();
         private TabelaCondutoresControl tabelaCondutores;
         private readonly ServicoCondutor servicoCondutor;
 
@@ -25,7 +24,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
         public override void Inserir()
         {
-            TelaCadastroCondutor tela = new TelaCadastroCondutor();
+            var clientes = repositorioCliente.SelecionarTodos();
+
+            TelaCadastroCondutor tela = new TelaCadastroCondutor(clientes);
 
             tela.Condutor = new Condutor();
 
@@ -59,11 +60,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
                 return;
             }
 
-            var funcionarioSelecionado = resultado.Value;
+            var condutorSelecionado = resultado.Value;
 
-            var tela = new TelaCadastroCondutor();
+            var clientes = repositorioCliente.SelecionarTodos();
 
-            tela.Condutor = funcionarioSelecionado.Clonar();
+            var tela = new TelaCadastroCondutor(clientes);
+
+            tela.Condutor = condutorSelecionado.Clonar();
 
             tela.GravarRegistro = servicoCondutor.Editar;
 
@@ -84,12 +87,12 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
                 return;
             }
 
-            var funcionarioSelecionado = resultadoSelecao.Value;
+            var condutorSelecionado = resultadoSelecao.Value;
 
             if (MessageBox.Show("Deseja realmente excluir o condutor?", "Exclusão de condutor",
                  MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                var resultadoExclusao = servicoCondutor.Excluir(funcionarioSelecionado);
+                var resultadoExclusao = servicoCondutor.Excluir(condutorSelecionado);
 
                 if (resultadoExclusao.IsSuccess)
                     CarregarCondutores();
@@ -118,7 +121,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
             if (resultado.IsSuccess)
             {
-                List<Condutor> condutores = repositorioCondutor.SelecionarTodos();
+                List<Condutor> condutores = resultado.Value;
 
                 tabelaCondutores.AtualizarRegistros(condutores);
 

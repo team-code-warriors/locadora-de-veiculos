@@ -23,7 +23,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 
         public Result<Condutor> Inserir(Condutor condutor)
         {
-            Log.Logger.Debug("Tentando inserir cliente... {@c}", condutor);
+            Log.Logger.Debug("Tentando inserir condutor... {@c}", condutor);
 
             Result resultadoValidacao = ValidarCondutor(condutor);
 
@@ -31,7 +31,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar inserir o cliente {ClienteId} - {Motivo}",
+                    Log.Logger.Warning("Falha ao tentar inserir o condutor {CondutorId} - {Motivo}",
                        condutor.Id, erro.Message);
                 }
 
@@ -42,15 +42,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             {
                 repositorioCondutor.Inserir(condutor);
 
-                Log.Logger.Information("Cliente {ClienteId} inserido com sucesso", condutor.Id);
+                Log.Logger.Information("Condutor {CondutorId} inserido com sucesso", condutor.Id);
 
                 return Result.Ok(condutor);
             }
             catch (Exception ex)
             {
-                string msgErro = "Falha no sistema ao tentar inserir o cliente";
+                string msgErro = "Falha no sistema ao tentar inserir o condutor";
 
-                Log.Logger.Error(ex, msgErro + "{ClienteId}", condutor.Id);
+                Log.Logger.Error(ex, msgErro + "{CondutorId}", condutor.Id);
 
                 return Result.Fail(msgErro);
             }
@@ -58,7 +58,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 
         public Result<Condutor> Editar(Condutor condutor)
         {
-            Log.Logger.Debug("Tentando editar cliente... {@c}", condutor);
+            Log.Logger.Debug("Tentando editar condutor... {@c}", condutor);
 
             Result resultadoValidacao = ValidarCondutor(condutor);
 
@@ -66,7 +66,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar editar o Cliente {ClienteId} - {Motivo}",
+                    Log.Logger.Warning("Falha ao tentar editar o Condutor {CondutorId} - {Motivo}",
                        condutor.Id, erro.Message);
                 }
                 return Result.Fail(resultadoValidacao.Errors);
@@ -76,13 +76,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             {
                 repositorioCondutor.Editar(condutor);
 
-                Log.Logger.Information("Cliente {ClienteId} editado com sucesso", condutor.Id);
+                Log.Logger.Information("Condutor {CondutorId} editado com sucesso", condutor.Id);
 
                 return Result.Ok(condutor);
             }
             catch (Exception ex)
             {
-                string msgErro = "Falha no sistema ao tentar editar o cliente";
+                string msgErro = "Falha no sistema ao tentar editar o condutor";
 
                 Log.Logger.Error(ex, msgErro + "{ClienteId}", condutor.Id);
 
@@ -104,7 +104,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             }
             catch (NaoPodeExcluirEsteRegistroException ex)
             {
-                string msgErro = $"O condutor {condutor.Nome} está relacionado com um condutor e não pode ser excluídol";
+                string msgErro = $"O condutor {condutor.Nome} está relacionado com um registro e não pode ser excluídol";
 
                 Log.Logger.Error(ex, msgErro + "{CondutorId}", condutor.Id);
 
@@ -136,8 +136,8 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             if (resultadoValidacao.IsValid)
             {
                 if (condutor.Cpf != "              ")
-                    if (CpfDuplicado(condutor))
-                        errors.Add(new Error("CPF já cadastrado"));
+                    if (CpfDuplicado(condutor) && ClienteDuplicado(condutor))
+                        errors.Add(new Error("CPF do Condutor já cadastrado para o Cliente"));
             }
 
             if (errors.Any())

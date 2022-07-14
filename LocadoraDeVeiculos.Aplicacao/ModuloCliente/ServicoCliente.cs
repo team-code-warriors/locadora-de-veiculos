@@ -99,7 +99,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
             }
             catch (NaoPodeExcluirEsteRegistroException ex)
             {
-                string msgErro = $"O cliente {cliente.Nome} está relacionado com um condutor e não pode ser excluído";
+                string msgErro = $"O cliente {cliente.Nome} está relacionado com um registro e não pode ser excluído";
 
                 Log.Logger.Error(ex, msgErro + "{ClienteId}", cliente.Id);
 

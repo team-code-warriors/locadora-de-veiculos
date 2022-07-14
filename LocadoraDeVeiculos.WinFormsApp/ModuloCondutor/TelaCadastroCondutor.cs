@@ -28,12 +28,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             this.ConfigurarTela();
         }
 
-        public TelaCadastroCondutor()
-        {
-            InitializeComponent();
-            this.ConfigurarTela();
-        }
-
         private Condutor condutor;
 
         public Func<Condutor, Result<Condutor>> GravarRegistro { get; set; }
@@ -100,13 +94,21 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
             var resultadoValidacao = GravarRegistro(condutor);
 
-            if (resultadoValidacao.IsValid == false)
+            if (resultadoValidacao.IsFailed)
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                string erro = resultadoValidacao.Errors[0].Message;
 
-                TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+                if (erro.StartsWith("Falha no sistema"))
+                {
+                    MessageBox.Show(erro,
+                    "Inserção de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
 
-                DialogResult = DialogResult.None;
+                    DialogResult = DialogResult.None;
+                }
             }
         }
 
