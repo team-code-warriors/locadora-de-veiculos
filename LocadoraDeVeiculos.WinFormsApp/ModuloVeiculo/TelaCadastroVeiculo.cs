@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FluentResults;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 {
@@ -31,7 +32,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
         private Veiculo veiculo;
 
-        public Func<Veiculo, ValidationResult> GravarRegistro { get; set; }
+        public Func<Veiculo, Result<Veiculo>> GravarRegistro { get; set; }
 
         public Veiculo Veiculo
         {
@@ -178,9 +179,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
             var resultadoValidacao = GravarRegistro(veiculo);
 
-            if (resultadoValidacao.IsValid == false)
+            if (resultadoValidacao.IsSuccess == false)
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                string erro = resultadoValidacao.Errors[0].Message;
 
                 TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
 
