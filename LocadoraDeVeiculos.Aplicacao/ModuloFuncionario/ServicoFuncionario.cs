@@ -176,11 +176,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             {
                 var funcionarioEncontrado = repositorioFuncionario.SelecionarFuncionarioPorLogin(funcionario.Login);
 
-                bool resultadoComparacao =  funcionarioEncontrado != null &&
+                bool resultadoValidacao =  funcionarioEncontrado != null &&
                        funcionarioEncontrado.Login == funcionario.Login &&
                        funcionarioEncontrado.Id != funcionario.Id;
 
-                return Result.Ok(resultadoComparacao);
+                return Result.Ok(resultadoValidacao);
             }
             catch(NaoPodeInserirEsteRegistroException ex)
             {

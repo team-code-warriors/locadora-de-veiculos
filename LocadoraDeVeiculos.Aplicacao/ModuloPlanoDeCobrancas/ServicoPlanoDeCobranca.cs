@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using Serilog;
@@ -155,11 +156,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
             foreach (ValidationFailure item in resultadoValidacao.Errors) //FluentValidation            
                 erros.Add(new Error(item.ErrorMessage));
 
-            if (resultadoValidacao.IsValid)
-            {
-                if (GrupoDuplicado(plano) && TipoPlanoDuplicado(plano))
-                    erros.Add(new Error("Tipo de Plano já cadastrado para o Grupo"));
+            Result<bool> validaGrupoETipoPlano = GrupoDuplicado(plano).Value && TipoPlanoDuplicado(plano).Value;
 
+            if (validaGrupoETipoPlano.IsSuccess)
+            {
+                if (validaGrupoETipoPlano.Value == true)
+                {
+                    erros.Add(new Error("Grupo já cadastrado com o Plano selecionado"));
+                }
+            }
+            else
+            {
+                erros.Add(new Error(validaGrupoETipoPlano.Errors[0].Message));
             }
 
             if (erros.Any())
@@ -168,22 +176,48 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
             return Result.Ok();
         }
 
-        private bool GrupoDuplicado(PlanoDeCobranca plano)
+        private Result<bool> GrupoDuplicado(PlanoDeCobranca plano)
         {
-            var planoEncontrado = repositorioPlano.SelecionarPlanoPorGrupo(plano.GrupoVeiculo.Id);
+            try
+            {
+                var planoEncontrado = repositorioPlano.SelecionarPlanoPorGrupo(plano.GrupoVeiculo.Id);
 
-            return planoEncontrado != null &&
-                   planoEncontrado.GrupoVeiculo.Id == plano.GrupoVeiculo.Id &&
-                   planoEncontrado.Id != plano.Id;
+                bool resultadoValidacao = planoEncontrado != null &&
+                       planoEncontrado.GrupoVeiculo.Id == plano.GrupoVeiculo.Id &&
+                       planoEncontrado.Id != plano.Id;
+
+                return Result.Ok(resultadoValidacao);
+            }
+            catch (NaoPodeInserirEsteRegistroException ex)
+            {
+                string msgErro = "Falha no sistema ao tentar validar o Grupo do plano";
+
+                Log.Logger.Error(ex, msgErro + "{PlanoId}", plano.Id);
+
+                return Result.Fail(msgErro);
+            }
         }
 
-        private bool TipoPlanoDuplicado(PlanoDeCobranca plano)
+        private Result<bool> TipoPlanoDuplicado(PlanoDeCobranca plano)
         {
-            var planoEncontrado = repositorioPlano.SelecionarPlanoPorTipoPlano(plano.TipoPlano);
+            try
+            {
+                var planoEncontrado = repositorioPlano.SelecionarPlanoPorTipoPlano(plano.TipoPlano);
 
-            return planoEncontrado != null &&
-                   planoEncontrado.TipoPlano == plano.TipoPlano &&
-                   planoEncontrado.Id != plano.Id;
+                bool resultadoValidacao = planoEncontrado != null &&
+                       planoEncontrado.TipoPlano == plano.TipoPlano &&
+                       planoEncontrado.Id != plano.Id;
+
+                return Result.Ok(resultadoValidacao);
+            }
+            catch (NaoPodeInserirEsteRegistroException ex)
+            {
+                string msgErro = "Falha no sistema ao tentar validar o Grupo do plano";
+
+                Log.Logger.Error(ex, msgErro + "{PlanoId}", plano.Id);
+
+                return Result.Fail(msgErro);
+            }
         }
 
     }

@@ -134,6 +134,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
             SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos, conexaoComBanco);
+
             conexaoComBanco.Open();
 
             SqlDataReader leitorRegistro = comandoSelecao.ExecuteReader();

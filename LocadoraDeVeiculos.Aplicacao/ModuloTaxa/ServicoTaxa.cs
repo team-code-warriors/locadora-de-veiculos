@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
@@ -157,8 +158,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             foreach (ValidationFailure item in resultadoValidacao.Errors) //FluentValidation            
                 erros.Add(new Error(item.ErrorMessage));
 
-            if (DescricaoDuplicada(taxa))
-                erros.Add(new Error("Descrição duplicada"));
+            var validaDescricao = DescricaoDuplicada(taxa);
+
+            if (validaDescricao.IsSuccess)
+            {
+                if (validaDescricao.Value == true)
+                {
+                    erros.Add(new Error("Descrição já cadastrada"));
+                }
+            }
+            else
+            {
+                erros.Add(new Error(validaDescricao.Errors[0].Message));
+            }
 
             if (erros.Any())
                 return Result.Fail(erros);
@@ -166,13 +178,27 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             return Result.Ok();
         }
 
-        private bool DescricaoDuplicada(Taxa taxa)
+        private Result<bool> DescricaoDuplicada(Taxa taxa)
         {
-            var taxaEncontrada = repositorioTaxa.SelecionarTaxaPorDescricao(taxa.Descricao);
+            try
+            {
+                var taxaEncontrada = repositorioTaxa.SelecionarTaxaPorDescricao(taxa.Descricao);
 
-            return taxaEncontrada != null &&
-                   taxaEncontrada.Descricao == taxa.Descricao &&
-                   taxaEncontrada.Id != taxa.Id;
+                bool resultadoValidacao = taxaEncontrada != null &&
+                       taxaEncontrada.Descricao == taxa.Descricao &&
+                       taxaEncontrada.Id != taxa.Id;
+
+                return Result.Ok(resultadoValidacao);
+            }
+            catch (NaoPodeInserirEsteRegistroException ex)
+            {
+                string msgErro = "Falha no sistema ao tentar validar a Descrição da taxa";
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
+            }
+
         }
     }
 }
