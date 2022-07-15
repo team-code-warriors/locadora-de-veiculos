@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using Serilog;
@@ -8,11 +9,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 {
     public class ServicoGrupoDeVeiculo
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioDeGrupoVeiculos;
+        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
 
         public ServicoGrupoDeVeiculo(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupoVeiculos)
         {
-            this.repositorioDeGrupoVeiculos = repositorioGrupoVeiculos;
+            this.repositorioGrupo = repositorioGrupoVeiculos;
         }
 
         public Result<GrupoDeVeiculos> Inserir(GrupoDeVeiculos grupo)
@@ -25,7 +26,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar inserir o grupo de veículos {GrupoId} - {Motivo}",
+                    Log.Logger.Warning("Falha ao tentar inserir o grupo {GrupoId} - {Motivo}",
                         grupo.Id, erro.Message);
                 }
 
@@ -34,7 +35,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 
             try
             {
-                repositorioDeGrupoVeiculos.Inserir(grupo);
+                repositorioGrupo.Inserir(grupo);
 
                 Log.Logger.Information("Grupo {GrupoId} inserido com sucesso", grupo.Id);
 
@@ -59,7 +60,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             {
                 foreach (var erro in resultadoValidacao.Errors)
                 {
-                    Log.Logger.Warning("Falha ao tentar editar o Grupo {GrupoId} - {Motivo}",
+                    Log.Logger.Warning("Falha ao tentar editar o grupo {GrupoId} - {Motivo}",
                         grupo.Id, erro.Message);
                 }
             }
@@ -67,7 +68,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 
             try
             {
-                repositorioDeGrupoVeiculos.Excluir(grupo);
+                repositorioGrupo.Editar(grupo);
 
                 Log.Logger.Information("Grupo {GrupoId} editado com sucesso", grupo.Id);
 
@@ -75,7 +76,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             }
             catch (Exception ex)
             {
-                string msgErro = "Falha no sistema ao tentar editaro o grupo";
+                string msgErro = "Falha no sistema ao tentar editar o grupo";
 
                 Log.Logger.Error(ex, msgErro + "{GrupoId}", grupo.Id);
 
@@ -84,21 +85,29 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
         }
         public Result Excluir(GrupoDeVeiculos grupo)
         {
-            Log.Logger.Debug("Tentando excluir grupo... {@t}", grupo);
+            Log.Logger.Debug("Tentando excluir grupo... {@g}", grupo);
 
             try
             {
-                repositorioDeGrupoVeiculos.Excluir(grupo);
+                repositorioGrupo.Excluir(grupo);
 
                 Log.Logger.Information("Grupo {GrupoId} excluído com sucesso", grupo.Id);
 
                 return Result.Ok();
             }
+            catch (NaoPodeExcluirEsteRegistroException ex)
+            {
+                string msgErro = $"O grupo {grupo.Nome} está relacionado com um registro e não pode ser excluído";
+
+                Log.Logger.Error(ex, msgErro + "{GrupoId}", grupo.Id);
+
+                return Result.Fail(msgErro);
+            }
             catch (Exception ex)
             {
                 string msgErro = "Falha no sistema ao tentar excluir o grupo";
 
-                Log.Logger.Error(ex, msgErro, "{GrupoId}", grupo.Id);
+                Log.Logger.Error(ex, msgErro + "{GrupoId}", grupo.Id);
 
                 return Result.Fail(msgErro);
             }
@@ -107,7 +116,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
         {
             try
             {
-                return Result.Ok(repositorioDeGrupoVeiculos.SelecionarTodos());
+                return Result.Ok(repositorioGrupo.SelecionarTodos());
             }
             catch (Exception ex)
             {
@@ -123,7 +132,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
         {
             try
             {
-                return Result.Ok(repositorioDeGrupoVeiculos.SelecionarPorId(id));
+                return Result.Ok(repositorioGrupo.SelecionarPorId(id));
             }
             catch (Exception ex)
             {
@@ -157,7 +166,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 
         private bool NomeDuplicado(GrupoDeVeiculos grupo)
         {
-            var grupoEncontrado = repositorioDeGrupoVeiculos.SelecionarGrupoPorNome(grupo.Nome);
+            var grupoEncontrado = repositorioGrupo.SelecionarGrupoPorNome(grupo.Nome);
 
             return grupoEncontrado != null &&
                    grupoEncontrado.Nome == grupo.Nome &&

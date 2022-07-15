@@ -74,7 +74,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             }
             catch(Exception ex)
             {
-                string msgErro = "Falha no sistema ao tentar editaro o veículo";
+                string msgErro = "Falha no sistema ao tentar editar o veículo";
 
                 Log.Logger.Error(ex, msgErro + "{VeiculoId}", veiculo.Id);
 
