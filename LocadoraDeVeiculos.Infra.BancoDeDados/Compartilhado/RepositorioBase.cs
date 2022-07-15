@@ -170,15 +170,27 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado
 
             comandoSelecao.Parameters.Add(parametro);
 
-            conexaoComBanco.Open();
-            SqlDataReader leitorRegistro = comandoSelecao.ExecuteReader();
-
-            var mapeador = new TMapeador();
             T registro = null;
-            if (leitorRegistro.Read())
-                registro = mapeador.ConverterRegistro(leitorRegistro);
 
-            conexaoComBanco.Close();
+            try
+            {
+                conexaoComBanco.Open();
+                SqlDataReader leitorRegistro = comandoSelecao.ExecuteReader();
+
+                var mapeador = new TMapeador();
+
+                if (leitorRegistro.Read())
+                    registro = mapeador.ConverterRegistro(leitorRegistro);
+
+                conexaoComBanco.Close();
+            }
+            catch (Exception ex)
+            {
+                if (ex != null && ex.Message.Contains("Cannot open database"))
+                    throw new NaoPodeInserirEsteRegistroException(ex);
+
+                throw;
+            }
 
             return registro;
         }

@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using Serilog;
@@ -150,34 +151,46 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             foreach (ValidationFailure item in resultadoValidacao.Errors) //FluentValidation            
                 erros.Add(new Error(item.ErrorMessage));
 
-            if (NomeDuplicado(funcionario))
-                erros.Add(new Error("Nome duplicado"));
+            var validaUsuario = UsuarioDuplicado(funcionario);
 
-            if (UsuarioDuplicado(funcionario))
-                erros.Add(new Error("Login duplicado"));
+            if (validaUsuario.IsSuccess)
+            {
+                if(validaUsuario.Value == true)
+                {
+                    erros.Add(new Error("Login já cadastrado"));
+                }
+            }
+            else
+            {
+                erros.Add(new Error(validaUsuario.Errors[0].Message));
+            }
 
             if (erros.Any())
                 return Result.Fail(erros);
 
             return Result.Ok();
         }
-
-        private bool NomeDuplicado(Funcionario funcionario)
+        private Result<bool> UsuarioDuplicado(Funcionario funcionario)
         {
-            var funcionarioEncontrado = repositorioFuncionario.SelecionarFuncionarioPorNome(funcionario.Nome);
+            try
+            {
+                var funcionarioEncontrado = repositorioFuncionario.SelecionarFuncionarioPorLogin(funcionario.Login);
 
-            return funcionarioEncontrado != null &&
-                   funcionarioEncontrado.Nome == funcionario.Nome &&
-                   funcionarioEncontrado.Id != funcionario.Id;
-        }
+                bool resultadoComparacao =  funcionarioEncontrado != null &&
+                       funcionarioEncontrado.Login == funcionario.Login &&
+                       funcionarioEncontrado.Id != funcionario.Id;
 
-        private bool UsuarioDuplicado(Funcionario funcionario)
-        {
-            var funcionarioEncontrado = repositorioFuncionario.SelecionarFuncionarioPorLogin(funcionario.Login);
+                return Result.Ok(resultadoComparacao);
+            }
+            catch(NaoPodeInserirEsteRegistroException ex)
+            {
+                string msgErro = "Falha no sistema ao tentar validar o Login do funcionário";
 
-            return funcionarioEncontrado != null &&
-                   funcionarioEncontrado.Login == funcionario.Login &&
-                   funcionarioEncontrado.Id != funcionario.Id;
+                Log.Logger.Error(ex, msgErro + "{FuncionarioId}", funcionario.Id);
+
+                return Result.Fail(msgErro);
+            }
+
         }
     }
 }
