@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
@@ -26,7 +27,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
         private GrupoDeVeiculos grupo;
 
-        public Func<GrupoDeVeiculos, ValidationResult> GravarRegistro { get; set; }
+        public Func<GrupoDeVeiculos, Result<GrupoDeVeiculos>> GravarRegistro { get; set; }
 
         public GrupoDeVeiculos Grupo
         {
@@ -43,9 +44,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
             var resultadoValidacao = GravarRegistro(grupo);
 
-            if (resultadoValidacao.IsValid == false)
+            if (resultadoValidacao.IsSuccess == false)
             {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+                string erro = resultadoValidacao.Errors[0].Message;
 
                 TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
 
