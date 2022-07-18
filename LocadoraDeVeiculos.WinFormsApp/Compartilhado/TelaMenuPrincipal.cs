@@ -1,24 +1,10 @@
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario;
 using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
-using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
-using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
-using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
-using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
-using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
 using LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo;
 
 namespace LocadoraDeVeiculos.WinFormsApp
@@ -26,19 +12,19 @@ namespace LocadoraDeVeiculos.WinFormsApp
     public partial class TelaMenuPrincipal : Form
     {
         private ControladorBase controlador;
-        private Dictionary<string, ControladorBase> controladores;
+        private IServiceLocator serviceLocator;
 
-        public TelaMenuPrincipal()
+        public TelaMenuPrincipal(IServiceLocator serviceLocator)
         {
             InitializeComponent();
             this.ConfigurarTela();
 
             Instancia = this;
 
+            this.serviceLocator = serviceLocator;
+
             labelRodape.Text = string.Empty;
             labelTipoCadastro.Text = string.Empty;
-
-            InicializarControladores();
         }
 
         public static TelaMenuPrincipal Instancia
@@ -54,37 +40,37 @@ namespace LocadoraDeVeiculos.WinFormsApp
 
         private void clientesMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorCliente>());
         }
 
         private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorCondutor>());
         }
 
         private void funcionariosMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorFuncionario>());
         }
 
         private void grupoDeVeiculosMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorGrupoDeVeiculos>());
         }
 
         private void taxasMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorTaxa>());
         }
 
         private void veículosMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorVeiculo>());
         }
 
         private void planoDeCobrançasMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorPlanoDeCobrancas>());
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
@@ -116,11 +102,9 @@ namespace LocadoraDeVeiculos.WinFormsApp
             btnExcluir.ToolTipText = configuracao.TooltipExcluir;
         }
 
-        private void ConfigurarTelaPrincipal(ToolStripMenuItem opcaoSelecionada)
+        private void ConfigurarTelaPrincipal(ControladorBase controlador)
         {
-            var tipo = opcaoSelecionada.Text;
-
-            controlador = controladores[tipo];
+            this.controlador = controlador;
 
             ConfigurarToolbox();
 
@@ -154,35 +138,6 @@ namespace LocadoraDeVeiculos.WinFormsApp
             listagemControl.Dock = DockStyle.Fill;
 
             panelRegistros.Controls.Add(listagemControl);
-        }
-
-        private void InicializarControladores()
-        {
-            var repositorioFuncionario = new RepositorioFuncionarioEmBancoDeDados();
-            var repositorioCliente = new RepositorioClienteEmBancoDeDados();
-            var repositorioCondutor = new RepositorioCondutorEmBancoDeDados();
-            var repositorioTaxa = new RepositorioTaxaEmBancoDeDados();
-            var repositorioGrupoDeVeiculos = new RepositorioGrupoDeVeiculosEmBancoDeDados();
-            var repositorioPlanoDeCobranca = new RepositorioPlanoDeCobrancaEmBancoDeDados();
-            var repositorioVeiculo = new RepositorioVeiculoEmBancoDeDados();
-
-            var servicoVeiculo = new ServicoVeiculo(repositorioVeiculo);
-            var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario);
-            var servicoCliente = new ServicoCliente(repositorioCliente);
-            var servicoCondutor = new ServicoCondutor(repositorioCondutor);
-            var servicoGrupoVeiculo = new ServicoGrupoDeVeiculo(repositorioGrupoDeVeiculos);
-            var servicoTaxa = new ServicoTaxa(repositorioTaxa);
-            var servicoPlanoCobranca = new ServicoPlanoDeCobranca(repositorioPlanoDeCobranca);
-
-            controladores = new Dictionary<string, ControladorBase>();
-
-            controladores.Add("Funcionários", new ControladorFuncionario(servicoFuncionario));
-            controladores.Add("Clientes", new ControladorCliente(servicoCliente));
-            controladores.Add("Condutores", new ControladorCondutor(servicoCondutor));
-            controladores.Add("Taxas", new ControladorTaxa(servicoTaxa));
-            controladores.Add("Grupo de Veículos", new ControladorGrupoDeVeiculos(servicoGrupoVeiculo));
-            controladores.Add("Plano de Cobranças", new ControladorPlanoDeCobrancas(servicoPlanoCobranca));
-            controladores.Add("Veículos", new ControladorVeiculo(servicoVeiculo));
         }
     }
 }

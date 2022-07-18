@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
+using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
@@ -8,19 +9,30 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 {
     public class ControladorPlanoDeCobrancas : ControladorBase
     {
-        private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+        private readonly ServicoGrupoDeVeiculo servicoGrupo;
         private TabelaPlanoDeCobrancaControl tabelaPlano;
         private readonly ServicoPlanoDeCobranca servicoPlano;
-        public ControladorPlanoDeCobrancas(ServicoPlanoDeCobranca servicoPlano)
+        public ControladorPlanoDeCobrancas(ServicoPlanoDeCobranca servicoPlano, ServicoGrupoDeVeiculo servicoGrupo)
         {
             this.servicoPlano = servicoPlano;
+            this.servicoGrupo = servicoGrupo;
         }
 
         public override void Inserir()
         {
-            var grupos = repositorioGrupo.SelecionarTodos();
+            var resultadoSelecaoGrupos = servicoGrupo.SelecionarTodos();
 
-            var tela = new TelaCadastroPlanoDeCobranca(grupos);
+            if (resultadoSelecaoGrupos.IsFailed)
+            {
+                string erro = resultadoSelecaoGrupos.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Planos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroPlanoDeCobranca tela = new TelaCadastroPlanoDeCobranca(resultadoSelecaoGrupos.Value);
 
             tela.Plano = new PlanoDeCobranca();
 
@@ -54,9 +66,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
             var planoSelecionado = resultado.Value;
 
-            var grupos = repositorioGrupo.SelecionarTodos();
+            var resultadoSelecaoGrupos = servicoGrupo.SelecionarTodos();
 
-            var tela = new TelaCadastroPlanoDeCobranca(grupos);
+            if (resultadoSelecaoGrupos.IsFailed)
+            {
+                string erro = resultadoSelecaoGrupos.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroPlanoDeCobranca tela = new TelaCadastroPlanoDeCobranca(resultadoSelecaoGrupos.Value);
 
             tela.Plano = planoSelecionado.Clonar();
 

@@ -1,32 +1,37 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
+using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 {
     public class ControladorCondutor : ControladorBase
     {
-        private readonly RepositorioClienteEmBancoDeDados repositorioCliente = new RepositorioClienteEmBancoDeDados();
+        private readonly ServicoCliente servicoCliente;
         private TabelaCondutoresControl tabelaCondutores;
         private readonly ServicoCondutor servicoCondutor;
 
-        public ControladorCondutor(ServicoCondutor servicoCondutor)
+        public ControladorCondutor(ServicoCondutor servicoCondutor, ServicoCliente servicoCliente)
         {
             this.servicoCondutor = servicoCondutor;
+            this.servicoCliente = servicoCliente;
         }
 
         public override void Inserir()
         {
-            var clientes = repositorioCliente.SelecionarTodos();
+            var resultadoSelecaoClientes = servicoCliente.SelecionarTodos();
 
-            TelaCadastroCondutor tela = new TelaCadastroCondutor(clientes);
+            if (resultadoSelecaoClientes.IsFailed)
+            {
+                string erro = resultadoSelecaoClientes.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroCondutor tela = new TelaCadastroCondutor(resultadoSelecaoClientes.Value);
 
             tela.Condutor = new Condutor();
 
@@ -62,9 +67,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
 
             var condutorSelecionado = resultado.Value;
 
-            var clientes = repositorioCliente.SelecionarTodos();
+            var resultadoSelecaoClientes = servicoCliente.SelecionarTodos();
 
-            var tela = new TelaCadastroCondutor(clientes);
+            if (resultadoSelecaoClientes.IsFailed)
+            {
+                string erro = resultadoSelecaoClientes.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroCondutor tela = new TelaCadastroCondutor(resultadoSelecaoClientes.Value);
 
             tela.Condutor = condutorSelecionado.Clonar();
 
