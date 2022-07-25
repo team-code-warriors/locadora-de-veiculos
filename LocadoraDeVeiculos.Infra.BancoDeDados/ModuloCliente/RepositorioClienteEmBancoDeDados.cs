@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using System;
@@ -118,6 +119,5 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente
         {
             return SelecionarPorParametro(sqlSelecionarPorCnpj, new SqlParameter("CNPJ", cnpj));
         }
-
     }
 }

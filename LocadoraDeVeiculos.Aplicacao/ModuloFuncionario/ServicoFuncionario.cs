@@ -3,17 +3,20 @@ using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
+using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 {
     public class ServicoFuncionario
     {
-        private RepositorioFuncionarioEmBancoDeDados repositorioFuncionario;
+        private RepositorioFuncionarioOrm repositorioFuncionario;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoFuncionario(RepositorioFuncionarioEmBancoDeDados repositorioFuncionario)
+        public ServicoFuncionario(RepositorioFuncionarioOrm repositorioFuncionario, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioFuncionario = repositorioFuncionario;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<Funcionario> Inserir(Funcionario funcionario)
@@ -36,6 +39,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             try
             {
                 repositorioFuncionario.Inserir(funcionario);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Funcionário {FuncionarioId} inserido com sucesso", funcionario.Id);
 
@@ -71,6 +75,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             try
             {
                 repositorioFuncionario.Editar(funcionario);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Funcionário {FuncionarioId} editado com sucesso", funcionario.Id);
 
@@ -93,6 +98,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             try
             {
                 repositorioFuncionario.Excluir(funcionario);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Funcionário {FuncionarioId} excluído com sucesso", funcionario.Id);
 
