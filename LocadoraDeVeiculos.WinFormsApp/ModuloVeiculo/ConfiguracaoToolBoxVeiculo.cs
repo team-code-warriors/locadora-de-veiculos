@@ -11,5 +11,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
         public override string TooltipEditar { get { return "Editar um veículo existente"; } }
 
         public override string TooltipExcluir { get { return "Excluir um veículo existente"; } }
+
+        public override string TooltipDevolver => "Botão especifíco para devoluções";
+
+        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
     }
 }

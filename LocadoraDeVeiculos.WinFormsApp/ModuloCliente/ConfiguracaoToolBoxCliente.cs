@@ -16,5 +16,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
         public override string TooltipEditar => "Editar um cliente existente";
 
         public override string TooltipExcluir => "Excluir um cliente existente";
+
+        public override string TooltipDevolver => "Botão especifíco para devoluções";
+
+        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
     }
 }

@@ -16,5 +16,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
         public override string TooltipEditar => "Editar um condutor existente";
 
         public override string TooltipExcluir => "Excluir um condutor existente";
+
+        public override string TooltipDevolver => "Botão especifíco para devoluções";
+
+        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
     }
 }
