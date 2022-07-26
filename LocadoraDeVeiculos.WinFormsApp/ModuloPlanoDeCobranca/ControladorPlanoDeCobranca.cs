@@ -80,7 +80,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 
             TelaCadastroPlanoDeCobranca tela = new TelaCadastroPlanoDeCobranca(resultadoSelecaoGrupos.Value);
 
-            tela.Plano = planoSelecionado.Clonar();
+            tela.Plano = planoSelecionado;
 
             tela.GravarRegistro = servicoPlano.Editar;
 
