@@ -74,7 +74,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
 
             var repositorioVeiculo = new RepositorioVeiculoOrm(contextoDadosOrm);
             var servicoVeiculo = new ServicoVeiculo(repositorioVeiculo, contextoDadosOrm);
-            controladores.Add("ControladorVeiculo", new ControladorVeiculo(servicoVeiculo));
+            controladores.Add("ControladorVeiculo", new ControladorVeiculo(servicoVeiculo, servicoGrupo));
         }
     }
 }

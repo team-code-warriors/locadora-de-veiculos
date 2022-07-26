@@ -19,7 +19,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo
             builder.Property(x => x.Kilometragem).IsRequired();
             builder.Property(x => x.TipoDeCombustivel).HasColumnType("varchar(50)").IsRequired();
             builder.Property(x => x.CapacidadeDoTanque).IsRequired();
-            builder.Property(x => x.GrupoDeVeiculos);
+            builder.HasOne(x => x.GrupoDeVeiculos);
+            builder.Property(x => x.Foto);
         }
     }
 }

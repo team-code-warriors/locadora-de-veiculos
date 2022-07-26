@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
+using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
@@ -8,20 +9,32 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 {
     public class ControladorVeiculo : ControladorBase
     {
-        private readonly RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+        private readonly ServicoGrupoDeVeiculo servicoGrupo;
         private TabelaVeiculoControl tabelaVeiculo;
         private readonly ServicoVeiculo servicoVeiculo;
 
-        public ControladorVeiculo(ServicoVeiculo servicoVeiculo)
+        public ControladorVeiculo(ServicoVeiculo servicoVeiculo, ServicoGrupoDeVeiculo servicoGrupo)
         {
             this.servicoVeiculo = servicoVeiculo;
+            this.servicoGrupo = servicoGrupo;
         }
 
         public override void Inserir()
         {
-            var grupos = repositorioGrupo.SelecionarTodos();
+            var resultadoSelecaoGrupos = servicoGrupo.SelecionarTodos();
 
-            TelaCadastroVeiculo tela = new TelaCadastroVeiculo(grupos);
+            if (resultadoSelecaoGrupos.IsFailed)
+            {
+                string erro = resultadoSelecaoGrupos.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Veículos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroVeiculo tela = new TelaCadastroVeiculo(resultadoSelecaoGrupos.Value);
+
             tela.Veiculo = new Veiculo();
 
             tela.GravarRegistro = servicoVeiculo.Inserir;
@@ -56,9 +69,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
 
             var veiculoSelecionado = resultadoSelecao.Value;
 
-            var grupos = repositorioGrupo.SelecionarTodos();
+            var resultadoSelecaoGrupos = servicoGrupo.SelecionarTodos();
 
-            var tela = new TelaCadastroVeiculo(grupos);
+            if (resultadoSelecaoGrupos.IsFailed)
+            {
+                string erro = resultadoSelecaoGrupos.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Veículos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroVeiculo tela = new TelaCadastroVeiculo(resultadoSelecaoGrupos.Value);
 
             tela.Veiculo = veiculoSelecionado;
 
