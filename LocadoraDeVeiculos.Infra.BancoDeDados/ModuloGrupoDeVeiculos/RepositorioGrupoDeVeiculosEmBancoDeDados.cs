@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos
 {
     public class RepositorioGrupoDeVeiculosEmBancoDeDados :
-        RepositorioBase<GrupoDeVeiculos, ValidadorGrupoDeVeiculos, MapeadorGrupoDeVeiculos>
+        RepositorioBase<GrupoDeVeiculos, MapeadorGrupoDeVeiculos>, IRepositorioGrupoDeVeiculos
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBGRUPODEVEICULOS]

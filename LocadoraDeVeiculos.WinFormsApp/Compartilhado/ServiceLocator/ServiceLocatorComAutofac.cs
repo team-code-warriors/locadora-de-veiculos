@@ -58,7 +58,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
 
             builder.RegisterType<RepositorioPlanoDeCobrancaEmBancoDeDados>().AsSelf();
             builder.RegisterType<ServicoPlanoDeCobranca>().AsSelf();
-            builder.RegisterType<ControladorPlanoDeCobrancas>().AsSelf();
+            builder.RegisterType<ControladorPlanoDeCobranca>().AsSelf();
 
             builder.RegisterType<RepositorioVeiculoEmBancoDeDados>().AsSelf();
             builder.RegisterType<ServicoVeiculo>().AsSelf();

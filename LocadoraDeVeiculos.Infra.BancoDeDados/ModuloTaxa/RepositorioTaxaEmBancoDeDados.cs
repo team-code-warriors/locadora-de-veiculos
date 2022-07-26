@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa
 {
     public class RepositorioTaxaEmBancoDeDados :
-        RepositorioBase<Taxa, ValidadorTaxa, MapeadorTaxa>
+        RepositorioBase<Taxa, MapeadorTaxa>, IRepositorioTaxa
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBTAXA] 

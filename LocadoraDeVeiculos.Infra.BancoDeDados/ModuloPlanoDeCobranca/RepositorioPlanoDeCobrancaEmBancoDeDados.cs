@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca
 {
     public class RepositorioPlanoDeCobrancaEmBancoDeDados :
-        RepositorioBase<PlanoDeCobranca, ValidadorPlanoDeCobranca, MapeadorPlanoDeCobranca>
+        RepositorioBase<PlanoDeCobranca, MapeadorPlanoDeCobranca>, IRepositorioPlanoDeCobranca
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBPLANODECOBRANCA]

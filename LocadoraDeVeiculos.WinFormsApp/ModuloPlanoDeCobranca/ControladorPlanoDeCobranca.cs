@@ -7,12 +7,12 @@ using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
 {
-    public class ControladorPlanoDeCobrancas : ControladorBase
+    public class ControladorPlanoDeCobranca : ControladorBase
     {
         private readonly ServicoGrupoDeVeiculo servicoGrupo;
         private TabelaPlanoDeCobrancaControl tabelaPlano;
         private readonly ServicoPlanoDeCobranca servicoPlano;
-        public ControladorPlanoDeCobrancas(ServicoPlanoDeCobranca servicoPlano, ServicoGrupoDeVeiculo servicoGrupo)
+        public ControladorPlanoDeCobranca(ServicoPlanoDeCobranca servicoPlano, ServicoGrupoDeVeiculo servicoGrupo)
         {
             this.servicoPlano = servicoPlano;
             this.servicoGrupo = servicoGrupo;

@@ -5,6 +5,7 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
+using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
 {
     public class ServicoTaxa
     {
-        private RepositorioTaxaEmBancoDeDados repositorioTaxa;
+        private RepositorioTaxaOrm repositorioTaxa;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoTaxa(RepositorioTaxaEmBancoDeDados repositorioTaxa)
+        public ServicoTaxa(RepositorioTaxaOrm repositorioTaxa, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioTaxa = repositorioTaxa;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<Taxa> Inserir(Taxa taxa)
@@ -43,6 +46,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             try
             {
                 repositorioTaxa.Inserir(taxa);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Taxa {TaxaId} inserida com sucesso", taxa.Id);
 
@@ -78,6 +82,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             try
             {
                 repositorioTaxa.Editar(taxa);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Taxa {TaxaId} editada com sucesso", taxa.Id);
 
@@ -100,6 +105,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
             try
             {
                 repositorioTaxa.Excluir(taxa);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Taxa {TaxaId} excluída com sucesso", taxa.Id);
 

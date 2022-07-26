@@ -3,17 +3,20 @@ using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
+using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 {
     public class ServicoGrupoDeVeiculo
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
+        private RepositorioGrupoDeVeiculoOrm repositorioGrupo;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoGrupoDeVeiculo(RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupoVeiculos)
+        public ServicoGrupoDeVeiculo(RepositorioGrupoDeVeiculoOrm repositorioGrupoVeiculos, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioGrupo = repositorioGrupoVeiculos;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<GrupoDeVeiculos> Inserir(GrupoDeVeiculos grupo)
@@ -36,6 +39,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             try
             {
                 repositorioGrupo.Inserir(grupo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Grupo {GrupoId} inserido com sucesso", grupo.Id);
 
@@ -69,6 +73,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             try
             {
                 repositorioGrupo.Editar(grupo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Grupo {GrupoId} editado com sucesso", grupo.Id);
 
@@ -90,6 +95,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
             try
             {
                 repositorioGrupo.Excluir(grupo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Grupo {GrupoId} excluído com sucesso", grupo.Id);
 

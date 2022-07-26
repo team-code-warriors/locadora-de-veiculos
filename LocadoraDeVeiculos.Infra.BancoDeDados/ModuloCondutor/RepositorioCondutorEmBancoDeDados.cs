@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor
 {
     public class RepositorioCondutorEmBancoDeDados :
-        RepositorioBase<Condutor, ValidadorCondutor, MapeadorCondutor>
+        RepositorioBase<Condutor, MapeadorCondutor>, IRepositorioCondutor
     {
         protected override string sqlInserir =>
             @"INSERT INTO [TBCONDUTOR]

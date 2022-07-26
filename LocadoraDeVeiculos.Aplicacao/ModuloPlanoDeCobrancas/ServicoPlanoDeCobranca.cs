@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
 {
     public class ServicoPlanoDeCobranca
     {
-        private RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano;
+        private RepositorioPlanoDeCobrancaOrm repositorioPlano;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoPlanoDeCobranca(RepositorioPlanoDeCobrancaEmBancoDeDados repositorioPlano)
+        public ServicoPlanoDeCobranca(RepositorioPlanoDeCobrancaOrm repositorioPlano, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioPlano = repositorioPlano;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<PlanoDeCobranca> Inserir(PlanoDeCobranca plano)
@@ -41,6 +44,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
             try
             {
                 repositorioPlano.Inserir(plano);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Plano {PlanoId} inserido com sucesso", plano.Id);
 
@@ -76,6 +80,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
             try
             {
                 repositorioPlano.Editar(plano);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Plano {PlanoId} editado com sucesso", plano.Id);
 
@@ -98,6 +103,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
             try
             {
                 repositorioPlano.Excluir(plano);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Plano {PlanoId} excluído com sucesso", plano.Id);
 

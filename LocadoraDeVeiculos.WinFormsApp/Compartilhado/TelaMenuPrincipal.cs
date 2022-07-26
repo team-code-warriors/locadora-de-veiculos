@@ -70,7 +70,7 @@ namespace LocadoraDeVeiculos.WinFormsApp
 
         private void planoDeCobrançasMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorPlanoDeCobrancas>());
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorPlanoDeCobranca>());
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
