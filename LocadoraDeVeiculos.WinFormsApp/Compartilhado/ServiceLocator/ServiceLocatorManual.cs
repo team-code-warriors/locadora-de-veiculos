@@ -1,22 +1,20 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
+using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
+using LocadoraDeVeiculos.WinFormsApp.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario;
 using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
 {
@@ -66,6 +64,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
             var repositorioPlano = new RepositorioPlanoDeCobrancaOrm(contextoDadosOrm);
             var servicoPlano = new ServicoPlanoDeCobranca(repositorioPlano, contextoDadosOrm);
             controladores.Add("ControladorPlanoDeCobranca", new ControladorPlanoDeCobranca(servicoPlano, servicoGrupo));
+
+            var repositorioCliente = new RepositorioClienteOrm(contextoDadosOrm);
+            var servicoCliente = new ServicoCliente(repositorioCliente, contextoDadosOrm);
+            controladores.Add("ControladorCliente", new ControladorCliente(servicoCliente));
         }
     }
 }
