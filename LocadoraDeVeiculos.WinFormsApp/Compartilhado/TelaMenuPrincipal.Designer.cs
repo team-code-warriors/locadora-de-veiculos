@@ -43,10 +43,13 @@
             this.grupoDeVeículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planoDeCobrançasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.veículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.locaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
-            this.veículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDevolver = new System.Windows.Forms.ToolStripButton();
+            this.btnPdf = new System.Windows.Forms.ToolStripButton();
             this.toolbox.SuspendLayout();
             this.menu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -60,6 +63,8 @@
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
+            this.btnDevolver,
+            this.btnPdf,
             this.toolStripSeparator1,
             this.labelTipoCadastro});
             this.toolbox.Location = new System.Drawing.Point(0, 30);
@@ -137,7 +142,8 @@
             this.grupoDeVeículosToolStripMenuItem,
             this.taxasToolStripMenuItem,
             this.planoDeCobrançasToolStripMenuItem,
-            this.veículosToolStripMenuItem});
+            this.veículosToolStripMenuItem,
+            this.locaçõesToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.cadastrosToolStripMenuItem.Text = "Menus";
@@ -145,44 +151,58 @@
             // funcionáriosToolStripMenuItem
             // 
             this.funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.funcionáriosToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.funcionáriosToolStripMenuItem.Text = "Funcionários";
             this.funcionáriosToolStripMenuItem.Click += new System.EventHandler(this.funcionariosMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesMenuItem_Click);
             // 
             // condutoresToolStripMenuItem
             // 
             this.condutoresToolStripMenuItem.Name = "condutoresToolStripMenuItem";
-            this.condutoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.condutoresToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.condutoresToolStripMenuItem.Text = "Condutores";
             this.condutoresToolStripMenuItem.Click += new System.EventHandler(this.condutoresToolStripMenuItem_Click);
             // 
             // grupoDeVeículosToolStripMenuItem
             // 
             this.grupoDeVeículosToolStripMenuItem.Name = "grupoDeVeículosToolStripMenuItem";
-            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.grupoDeVeículosToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.grupoDeVeículosToolStripMenuItem.Text = "Grupo de Veículos";
             this.grupoDeVeículosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeVeiculosMenuItem_Click);
             // 
             // taxasToolStripMenuItem
             // 
             this.taxasToolStripMenuItem.Name = "taxasToolStripMenuItem";
-            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.taxasToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.taxasToolStripMenuItem.Text = "Taxas";
             this.taxasToolStripMenuItem.Click += new System.EventHandler(this.taxasMenuItem_Click);
             // 
             // planoDeCobrançasToolStripMenuItem
             // 
             this.planoDeCobrançasToolStripMenuItem.Name = "planoDeCobrançasToolStripMenuItem";
-            this.planoDeCobrançasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.planoDeCobrançasToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.planoDeCobrançasToolStripMenuItem.Text = "Plano de Cobranças";
             this.planoDeCobrançasToolStripMenuItem.Click += new System.EventHandler(this.planoDeCobrançasMenuItem_Click);
+            // 
+            // veículosToolStripMenuItem
+            // 
+            this.veículosToolStripMenuItem.Name = "veículosToolStripMenuItem";
+            this.veículosToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.veículosToolStripMenuItem.Text = "Veículos";
+            this.veículosToolStripMenuItem.Click += new System.EventHandler(this.veículosMenuItem_Click);
+            // 
+            // locaçõesToolStripMenuItem
+            // 
+            this.locaçõesToolStripMenuItem.Name = "locaçõesToolStripMenuItem";
+            this.locaçõesToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.locaçõesToolStripMenuItem.Text = "Locações";
+            this.locaçõesToolStripMenuItem.Click += new System.EventHandler(this.locaçõesMenuItem_Click);
             // 
             // panelRegistros
             // 
@@ -211,12 +231,29 @@
             this.labelRodape.Size = new System.Drawing.Size(67, 20);
             this.labelRodape.Text = "[rodapé]";
             // 
-            // veículosToolStripMenuItem
+            // btnDevolver
             // 
-            this.veículosToolStripMenuItem.Name = "veículosToolStripMenuItem";
-            this.veículosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.veículosToolStripMenuItem.Text = "Veículos";
-            this.veículosToolStripMenuItem.Click += new System.EventHandler(this.veículosMenuItem_Click);
+            this.btnDevolver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDevolver.Image = ((System.Drawing.Image)(resources.GetObject("btnDevolver.Image")));
+            this.btnDevolver.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDevolver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDevolver.Name = "btnDevolver";
+            this.btnDevolver.Padding = new System.Windows.Forms.Padding(5);
+            this.btnDevolver.Size = new System.Drawing.Size(62, 62);
+            this.btnDevolver.Text = "Devolver";
+            this.btnDevolver.Click += new System.EventHandler(this.btnDevolver_Click);
+            // 
+            // btnPdf
+            // 
+            this.btnPdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnPdf.Image")));
+            this.btnPdf.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPdf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Padding = new System.Windows.Forms.Padding(5);
+            this.btnPdf.Size = new System.Drawing.Size(62, 62);
+            this.btnPdf.Text = "Pdf";
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
             // TelaMenuPrincipal
             // 
@@ -261,5 +298,8 @@
         private ToolStripMenuItem planoDeCobrançasToolStripMenuItem;
         private ToolStripMenuItem condutoresToolStripMenuItem;
         private ToolStripMenuItem veículosToolStripMenuItem;
+        private ToolStripMenuItem locaçõesToolStripMenuItem;
+        private ToolStripButton btnDevolver;
+        private ToolStripButton btnPdf;
     }
 }

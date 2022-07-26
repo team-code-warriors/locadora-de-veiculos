@@ -16,11 +16,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado
 
         public abstract string TooltipExcluir { get; }
 
+        public abstract string TooltipDevolver { get; }
+
+        public abstract string TooltipGerarPdf { get; }
+
         public virtual bool InserirHabilitado { get { return true; } }
 
         public virtual bool EditarHabilitado { get { return true; } }
 
         public virtual bool ExcluirHabilitado { get { return true; } }
+
+        public virtual bool DevolverHabilitado { get { return false; } }
+
+        public virtual bool GerarPdfHabilitado { get { return false; } }
 
     }
 }

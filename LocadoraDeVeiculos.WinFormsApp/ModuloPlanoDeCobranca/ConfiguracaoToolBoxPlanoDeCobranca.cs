@@ -16,5 +16,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
         public override string TooltipEditar { get { return "Editar um plano existente"; } }
 
         public override string TooltipExcluir { get { return "Excluir um plano existente"; } }
+
+        public override string TooltipDevolver => "Botão especifíco para devoluções";
+
+        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
     }
 }

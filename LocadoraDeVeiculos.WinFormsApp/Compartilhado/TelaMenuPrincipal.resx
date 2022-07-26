@@ -92,6 +92,31 @@
         oJor1IxvkQ9g6kvUzvj1mKk3EQUswXwS8G79pL5YLBZMtu0PY3fq1F8CDzcAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnDevolver.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAEjSURBVGhD7Za7SsRQFEXzAzaiYGFhoSKIKIP+hpVoIaIf
+        4N9aWFhYKIz47n2uzXjgEgZ1CE7ukb1gwU0gyd4ncJPGGGOMMcZUxw4ej5b5GOAzvuOpTmRiGxX+48tr
+        nMEUxOQj/BUuYQocvi/+Vfghpg6/jCnoJfwJro+WnVD4J4zwN7iKf8oBvuEtdpnUBpaT73q/XzGH8cCY
+        2ApOyhY+YtznDtdwKuziC8bDJ90tNPkHjOs1+amFD1TiFSOE9utF/Ikqwgd7WJa4xO9KVBU+GFdiAdu0
+        w2vde/igXeIC5zEYF17nqkIlIqA8x1lMET7Yx7LEGd4Xx9o2N7Fq9Cb0kSuLyKon3+YQyxL62qYJH0QJ
+        hdf/TkqOMG14Y4wxxph8NM0nu8GAhzx2LXEAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnPdf.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAHDSURBVGhD7ZfRTcQwEERTAiVQAiVQAiVQAh1ACXQAHUAH
+        RyfQAXQAOx8rrSw/5TYXre+QnzQfXo893ijJ5ZbJZJLi0fRt+i2WMpV9Ek+m3uaV0hk2M+LKt/o0bSZu
+        VM0u2btsspFdsnfZZCOpbDJTvYJUNpmpXkEqm8xUryCVTWaqV5DKJjPVK0hlk5nqFaSyyUz1e9Oh0Yvp
+        yiRuTO38m0l159kU5zWOUHYXMlOdvpH8u+XW1Jt/NzkfpjincSTOrUJmqnsD7YH9EO1YtPt4A/L2cH9c
+        g5CZ6v+mAd27+mbX/a/xq0lkGtBa7aHnKuL+uAYhM9W9gVZ3JpFpwBW9Is6tQmaqewO64jqsdG1yMg08
+        mOSPbyjh/rgGITPV22egJdOAvD3cH9cgZKb6sQ3o35Tub0njH5NzEQ208odcDG1AoTo8het50HxU+5bR
+        WPX47EQouwuZqV5BKpvMVK8glU1mqleQyiYz1StIZZOZ6hWksslM9QpS2WSmegWpbDJTvYJUNpn10x/n
+        RujLtEpcENEvZZwbIZ1hlbigRRvoKkRPhZR51OFFXHiRzAZGcw5vG2kz5/C2kU5i1NsmajKZrLIsf08R
+        nQdz0xB4AAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>12, 17</value>
   </metadata>

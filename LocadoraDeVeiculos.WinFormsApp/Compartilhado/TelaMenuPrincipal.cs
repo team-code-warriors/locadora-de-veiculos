@@ -6,6 +6,7 @@ using LocadoraDeVeiculos.WinFormsApp.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo;
+using LocadoraDeVeiculos.WinFormsApp.ModuloLocacao;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {
@@ -73,6 +74,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
             ConfigurarTelaPrincipal(serviceLocator.Get<ControladorPlanoDeCobranca>());
         }
 
+        private void locaçõesMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorLocacao>());
+        }
+
         private void btnInserir_Click(object sender, EventArgs e)
         {
             controlador.Inserir();
@@ -88,6 +94,16 @@ namespace LocadoraDeVeiculos.WinFormsApp
             controlador.Excluir();
         }
 
+        private void btnDevolver_Click(object sender, EventArgs e)
+        {
+            controlador.Devolver();
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            controlador.GerarPdf();
+        }
+
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
         {
             btnInserir.Enabled = configuracao.InserirHabilitado;
@@ -100,6 +116,8 @@ namespace LocadoraDeVeiculos.WinFormsApp
             btnInserir.ToolTipText = configuracao.TooltipInserir;
             btnEditar.ToolTipText = configuracao.TooltipEditar;
             btnExcluir.ToolTipText = configuracao.TooltipExcluir;
+            btnDevolver.ToolTipText = configuracao.TooltipDevolver;
+            btnPdf.ToolTipText = configuracao.TooltipGerarPdf;
         }
 
         private void ConfigurarTelaPrincipal(ControladorBase controlador)
