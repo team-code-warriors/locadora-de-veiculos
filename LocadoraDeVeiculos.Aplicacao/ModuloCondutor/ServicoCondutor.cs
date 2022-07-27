@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
+using LocadoraDeVeiculos.Infra.Orm.ModuloCondutor;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 {
     public class ServicoCondutor
     {
-        private RepositorioCondutorEmBancoDeDados repositorioCondutor;
+        private RepositorioCondutorOrm repositorioCondutor;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCondutor(RepositorioCondutorEmBancoDeDados repositorioCondutor)
+        public ServicoCondutor(RepositorioCondutorOrm repositorioCondutor, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCondutor = repositorioCondutor;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<Condutor> Inserir(Condutor condutor)

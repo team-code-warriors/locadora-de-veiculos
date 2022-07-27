@@ -2,6 +2,8 @@
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using Serilog;
 
@@ -10,12 +12,12 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
     public class ServicoVeiculo
     {
         private RepositorioVeiculoOrm repositorioVeiculo;
-        private IContextoPersistencia contextoPersistencia;
+        private LocadoraDeVeiculosDbContext contextoDadosOrm;
 
-        public ServicoVeiculo(RepositorioVeiculoOrm repositorioVeiculo, IContextoPersistencia contextoPersistencia)
+        public ServicoVeiculo(RepositorioVeiculoOrm repositorioVeiculo1, LocadoraDeVeiculosDbContext contextoDadosOrm)
         {
-            this.repositorioVeiculo = repositorioVeiculo;
-            this.contextoPersistencia = contextoPersistencia;
+            this.repositorioVeiculo = repositorioVeiculo1;
+            this.contextoDadosOrm = contextoDadosOrm;
         }
 
         public Result<Veiculo> Inserir(Veiculo veiculo)
@@ -36,7 +38,6 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Inserir(veiculo);
-                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} inserido com sucesso", veiculo.Id);
 
@@ -70,7 +71,6 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Editar(veiculo);
-                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} editado com sucesso", veiculo.Id);
 
@@ -92,7 +92,6 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Excluir(veiculo);
-                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} excluído com sucesso", veiculo.Id);
 
