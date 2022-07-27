@@ -17,9 +17,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 
         public override string TooltipExcluir { get { return "Excluir uma taxa existente"; } }
 
-        public override string TooltipDevolver => "Botão especifíco para devoluções";
+        public override string TooltipDevolver => "Botão especifíco para locações";
 
-        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
+        public override string TooltipGerarPdf => "Botão especifíco para locações";
 
     }
 }

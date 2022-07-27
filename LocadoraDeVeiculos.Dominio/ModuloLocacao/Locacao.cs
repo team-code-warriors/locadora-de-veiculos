@@ -24,10 +24,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloLocacao
         public PlanoDeCobranca Plano { get; set; }
         public List<Taxa> Taxas { get; set; }
         public DateTime DataLocacao { get; set; }
+
+        public DateTime DataDevolucao { get; set; }
         public int KmCarro { get; set; }
         public StatusLocacaoEnum Status { get; set; }
 
-        public Locacao(Funcionario funcionario, Condutor condutor, Veiculo veiculo, PlanoDeCobranca plano, List<Taxa> taxas, DateTime dataLocacao, int kmCarro, StatusLocacaoEnum status)
+        public Locacao(Funcionario funcionario, Condutor condutor, Veiculo veiculo, PlanoDeCobranca plano, List<Taxa> taxas, DateTime dataLocacao, DateTime dataDevolucao, int kmCarro, StatusLocacaoEnum status)
         {
             Funcionario = funcionario;
             Condutor = condutor;
@@ -35,11 +37,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloLocacao
             Plano = plano;
             Taxas = taxas;
             DataLocacao = dataLocacao;
+            DataDevolucao = dataDevolucao;
             KmCarro = kmCarro;
             Status = status;
         }
-
-        
 
         public Locacao Clonar()
         {
@@ -56,6 +57,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloLocacao
                    EqualityComparer<PlanoDeCobranca>.Default.Equals(Plano, locacao.Plano) &&
                    EqualityComparer<List<Taxa>>.Default.Equals(Taxas, locacao.Taxas) &&
                    DataLocacao == locacao.DataLocacao &&
+                   DataDevolucao == locacao.DataDevolucao &&
                    KmCarro == locacao.KmCarro &&
                    Status == locacao.Status;
         }

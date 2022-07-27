@@ -13,7 +13,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         public override string TooltipInserir { get { return "Inserir uma nova locação"; } }
 
-        public override string TooltipEditar { get { return "Editar uma locação existente"; } }
+        public override string TooltipEditar { get { return "Não é possível editar uma locação existente"; } }
 
         public override string TooltipExcluir { get { return "Excluir uma locação existente"; } }
 
@@ -21,8 +21,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         public override string TooltipGerarPdf { get { return "Gerar PDF de uma locação/devolução"; } }
 
-        public virtual bool DevolverHabilitado { get { return true; } }
+        public override bool EditarHabilitado { get { return false; } }
 
-        public virtual bool GerarPdfHabilitado { get { return true; } }
+        public override bool DevolverHabilitado { get { return true; } }
+
+        public override bool GerarPdfHabilitado { get { return true; } }
     }
 }

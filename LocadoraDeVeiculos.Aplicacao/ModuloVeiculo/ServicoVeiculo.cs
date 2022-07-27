@@ -12,12 +12,12 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
     public class ServicoVeiculo
     {
         private RepositorioVeiculoOrm repositorioVeiculo;
-        private LocadoraDeVeiculosDbContext contextoDadosOrm;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoVeiculo(RepositorioVeiculoOrm repositorioVeiculo1, LocadoraDeVeiculosDbContext contextoDadosOrm)
+        public ServicoVeiculo(RepositorioVeiculoOrm repositorioVeiculo1, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioVeiculo = repositorioVeiculo1;
-            this.contextoDadosOrm = contextoDadosOrm;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public Result<Veiculo> Inserir(Veiculo veiculo)
@@ -38,6 +38,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Inserir(veiculo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} inserido com sucesso", veiculo.Id);
 
@@ -71,6 +72,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Editar(veiculo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} editado com sucesso", veiculo.Id);
 
@@ -92,6 +94,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
             try
             {
                 repositorioVeiculo.Excluir(veiculo);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Veículo {VeiculoId} excluído com sucesso", veiculo.Id);
 

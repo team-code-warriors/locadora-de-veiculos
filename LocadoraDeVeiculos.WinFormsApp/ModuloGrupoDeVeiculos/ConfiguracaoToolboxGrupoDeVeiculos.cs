@@ -12,8 +12,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 
         public override string TooltipExcluir { get { return "Excluir um grupo existente"; } }
 
-        public override string TooltipDevolver => "Botão especifíco para devoluções";
+        public override string TooltipDevolver => "Botão especifíco para locações";
 
-        public override string TooltipGerarPdf => "Botão especifíco para devoluções";
+        public override string TooltipGerarPdf => "Botão especifíco para locações";
     }
 }

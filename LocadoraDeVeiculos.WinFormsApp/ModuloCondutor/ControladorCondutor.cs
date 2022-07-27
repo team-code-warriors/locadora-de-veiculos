@@ -17,11 +17,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloCondutor
             this.servicoCliente = servicoCliente;
         }
 
-        public ControladorCondutor(ServicoCondutor servicoCondutor)
-        {
-            this.servicoCondutor = servicoCondutor;
-        }
-
         public override void Inserir()
         {
             var resultadoSelecaoClientes = servicoCliente.SelecionarTodos();
