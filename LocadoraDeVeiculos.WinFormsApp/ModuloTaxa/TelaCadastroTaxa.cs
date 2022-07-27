@@ -96,7 +96,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
                 }
             }
         }
-
         private void TelaCadastroContatosForm_Load(object sender, EventArgs e)
         {
             TelaMenuPrincipal.Instancia.AtualizarRodape("");
