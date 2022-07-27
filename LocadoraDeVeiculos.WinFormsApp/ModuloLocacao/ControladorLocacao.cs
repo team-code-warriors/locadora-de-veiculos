@@ -24,6 +24,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             throw new NotImplementedException();
         }
 
+        public override void Devolver()
+        {
+            throw new NotImplementedException();
+        }
+
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
         {
             throw new NotImplementedException();

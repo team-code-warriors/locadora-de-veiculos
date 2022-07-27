@@ -109,6 +109,8 @@ namespace LocadoraDeVeiculos.WinFormsApp
             btnInserir.Enabled = configuracao.InserirHabilitado;
             btnEditar.Enabled = configuracao.EditarHabilitado;
             btnExcluir.Enabled = configuracao.ExcluirHabilitado;
+            btnPdf.Enabled = configuracao.GerarPdfHabilitado;
+            btnDevolver.Enabled = configuracao.DevolverHabilitado;
         }
 
         private void ConfigurarTooltips(ConfiguracaoToolboxBase configuracao)
