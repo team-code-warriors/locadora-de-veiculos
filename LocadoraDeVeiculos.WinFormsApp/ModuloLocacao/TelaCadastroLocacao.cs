@@ -158,7 +158,22 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
+            labelValor.Text = "R$ " + CalculaValor();
+        }
 
+        private decimal CalculaValor()
+        {
+            int diasDeAluguel = (dtpDevolucao.Value.Day - dtpLocacao.Value.Day);
+            decimal valorTaxas = 0;
+
+            decimal valorDiaria = ((PlanoDeCobranca)cbPlano.SelectedItem).ValorDiaria;
+
+            foreach (var item in taxas)
+            {
+                valorTaxas = +item.Valor;
+            }
+
+            return valorTaxas + (diasDeAluguel * valorDiaria);
         }
     }
 }
