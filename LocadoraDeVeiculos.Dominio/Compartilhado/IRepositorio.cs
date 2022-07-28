@@ -10,8 +10,6 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
     {
         void Inserir(T novoRegistro);
 
-        void Editar(T registro);
-
         void Excluir(T registro);
 
         List<T> SelecionarTodos();

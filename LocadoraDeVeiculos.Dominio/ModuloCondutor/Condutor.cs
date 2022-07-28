@@ -60,5 +60,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
                    Telefone == condutor.Telefone &&
                    Endereco == condutor.Endereco;
         }
+
+        public override string ToString()
+        {
+            return $"{Nome} - {Cpf}";
+        }
     }
 }

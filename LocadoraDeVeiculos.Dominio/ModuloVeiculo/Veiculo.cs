@@ -73,5 +73,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
             hash.Add(GrupoDeVeiculos);
             return hash.ToHashCode();
         }
+
+        public override string ToString()
+        {
+            return Placa;
+        }
     }
 }

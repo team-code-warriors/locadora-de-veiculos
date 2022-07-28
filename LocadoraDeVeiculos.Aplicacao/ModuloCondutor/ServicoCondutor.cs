@@ -44,6 +44,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             try
             {
                 repositorioCondutor.Inserir(condutor);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Condutor {CondutorId} inserido com sucesso", condutor.Id);
 
@@ -78,6 +79,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             try
             {
                 repositorioCondutor.Editar(condutor);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Condutor {CondutorId} editado com sucesso", condutor.Id);
 
@@ -100,6 +102,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
             try
             {
                 repositorioCondutor.Excluir(condutor);
+                contextoPersistencia.GravarDados();
 
                 Log.Logger.Information("Condutor {CondutorId} excluído com sucesso", condutor.Id);
 

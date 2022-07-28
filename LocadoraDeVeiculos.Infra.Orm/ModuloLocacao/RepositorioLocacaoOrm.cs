@@ -1,37 +1,43 @@
-﻿//using LocadoraDeVeiculos.Dominio.ModuloLocacao;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
-//{
-//    public class RepositorioLocacaoOrm : IRepositorioLocacao
-//    {
-//        public void Editar(Locacao registro)
-//        {
-//            throw new NotImplementedException();
-//        }
+namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
+{
+    public class RepositorioLocacaoOrm : IRepositorioLocacao
+    {
+        private DbSet<Locacao> locacoes;
+        private readonly LocadoraDeVeiculosDbContext dbContext;
 
-//        public void Excluir(Locacao registro)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public RepositorioLocacaoOrm(LocadoraDeVeiculosDbContext dbContext)
+        {
+            locacoes = dbContext.Set<Locacao>();
+            this.dbContext = dbContext;
+        }
 
-//        public void Inserir(Locacao novoRegistro)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public void Excluir(Locacao registro)
+        {
+            locacoes.Update(registro);
+        }
 
-//        public Locacao SelecionarPorId(Guid id)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public void Inserir(Locacao novoRegistro)
+        {
+            locacoes.Add(novoRegistro);
+        }
 
-//        public List<Locacao> SelecionarTodos()
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        public Locacao SelecionarPorId(Guid id)
+        {
+            return locacoes.SingleOrDefault(x => x.Id == id);
+        }
+
+        public List<Locacao> SelecionarTodos()
+        {
+            return locacoes.ToList();
+        }
+    }
+}

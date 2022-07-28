@@ -9,7 +9,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado
     public abstract class ControladorBase
     {
         public abstract void Inserir();
-        public abstract void Editar();
+        public virtual void Editar() { }
         public abstract void Excluir();
         public virtual void Devolver() { }
         public virtual void GerarPdf() { }

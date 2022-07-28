@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
+﻿using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     {
         public TabelaLocacaoControl()
         {
+            InitializeComponent();
+
             grid.ConfigurarGridSomenteLeitura();
             grid.ConfigurarGridZebrado();
             grid.Columns.AddRange(ObterColunas());
@@ -22,12 +25,35 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private DataGridViewColumn[] ObterColunas()
         {
-            throw new NotImplementedException();
+            var colunas = new DataGridViewColumn[]
+{
+                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Funcionario", HeaderText = "Funcionário"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Condutor", HeaderText = "Condutor"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Veiculo", HeaderText = "Veículo"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Status", HeaderText = "Status"},
+
+        };
+            return colunas;
         }
 
-        public Guid ObtemIdCondutorSelecionada()
+        public Guid ObtemIdLocacaoSelecionada()
         {
-            throw new NotImplementedException();
+            return grid.SelecionarNumero<Guid>();
+        }
+
+        internal void AtualizarRegistros(List<Locacao> locacoes)
+        {
+            grid.Rows.Clear();
+
+            foreach (var locacao in locacoes)
+            {
+                grid.Rows.Add(locacao.Id, locacao.Funcionario.Nome, locacao.Condutor.Nome, locacao.Veiculo.Placa, locacao.Status);
+            }
         }
     }
 }

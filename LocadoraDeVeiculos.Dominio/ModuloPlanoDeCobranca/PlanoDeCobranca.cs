@@ -43,5 +43,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
             return MemberwiseClone() as PlanoDeCobranca;
         }
 
+        public override string ToString()
+        {
+            return $"{GrupoVeiculo.Nome} - {TipoPlano}";
+        }
+
     }
 }
