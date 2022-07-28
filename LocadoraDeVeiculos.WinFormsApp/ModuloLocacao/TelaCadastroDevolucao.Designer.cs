@@ -78,6 +78,12 @@
             // cbNivel
             // 
             this.cbNivel.FormattingEnabled = true;
+            this.cbNivel.Items.AddRange(new object[] {
+            "0",
+            "25",
+            "50",
+            "75",
+            "100"});
             this.cbNivel.Location = new System.Drawing.Point(142, 105);
             this.cbNivel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbNivel.Name = "cbNivel";
@@ -132,7 +138,6 @@
             this.btnCancelar.TabIndex = 32;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnCadastrar
             // 
