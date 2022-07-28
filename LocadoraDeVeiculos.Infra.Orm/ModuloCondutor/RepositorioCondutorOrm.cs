@@ -11,47 +11,47 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloCondutor
 {
     public class RepositorioCondutorOrm : IRepositorioCondutor
     {
-        private DbSet<Condutor> planos;
+        private DbSet<Condutor> condutores;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
         public RepositorioCondutorOrm(LocadoraDeVeiculosDbContext dbContext)
         {
-            planos = dbContext.Set<Condutor>();
+            condutores = dbContext.Set<Condutor>();
             this.dbContext = dbContext;
         }
         public void Editar(Condutor registro)
         {
-            planos.Update(registro);
+            condutores.Update(registro);
         }
 
         public void Excluir(Condutor registro)
         {
-            planos.Remove(registro);
+            condutores.Remove(registro);
         }
 
         public void Inserir(Condutor novoRegistro)
         {
-            planos.Add(novoRegistro);
+            condutores.Add(novoRegistro);
         }
 
         public Condutor SelecionarPorId(Guid id)
         {
-            return planos.SingleOrDefault(x => x.Id == id);
+            return condutores.SingleOrDefault(x => x.Id == id);
         }
 
         public List<Condutor> SelecionarTodos()
         {
-            return planos.ToList();
+            return condutores.Include(x => x.Cliente).ToList();
         }
 
         public Condutor SelecionarCondutorPorCliente(Guid id)
         {
-            return planos.FirstOrDefault(x => x.Cliente.Id == id);
+            return condutores.FirstOrDefault(x => x.Cliente.Id == id);
         }
 
         public Condutor SelecionarCondutorPorCpf (string cpf)
         {
-            return planos.FirstOrDefault(x => x.Cpf == cpf);
+            return condutores.FirstOrDefault(x => x.Cpf == cpf);
         }
     }
 }

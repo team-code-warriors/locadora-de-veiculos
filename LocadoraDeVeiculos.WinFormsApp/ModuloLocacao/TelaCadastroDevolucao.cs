@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
+using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using System;
@@ -16,17 +17,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     public partial class TelaCadastroDevolucao : Form
     {
         Locacao locacao;
+        ServicoLocacao servico;
         private const decimal precoGasolina = 5;
 
-        public TelaCadastroDevolucao(Locacao locacao)
+        public TelaCadastroDevolucao(Locacao locacao, ServicoLocacao servico)
         {
             this.locacao = locacao;
+            this.servico = servico;
             InitializeComponent();
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
+            locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
+            //servico.Devolver(locacao);
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -46,7 +50,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
             decimal resultado = resultadoPrecoKm + resultadoDiaria + resultadoCapacidadeDoTanque + cont;
 
-            labelValor.Text = Convert.ToString("R$ "+resultado);
+            labelValor.Text = Convert.ToString("R$ "+ resultado);
         }
     }   
 }
