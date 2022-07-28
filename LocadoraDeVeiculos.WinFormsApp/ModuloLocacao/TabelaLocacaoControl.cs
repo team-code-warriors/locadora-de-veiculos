@@ -24,5 +24,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         {
             throw new NotImplementedException();
         }
+
+        public Guid ObtemIdCondutorSelecionada()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
