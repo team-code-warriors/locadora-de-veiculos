@@ -190,7 +190,19 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
             var locacaoSelecionada = resultado.Value;
 
-            TelaCadastroDevolucao tela = new TelaCadastroDevolucao();
+            var resultadoSelecaoTaxas = servicoTaxa.SelecionarTodos();
+
+            if (resultadoSelecaoTaxas.IsFailed)
+            {
+                string erro = resultadoSelecaoTaxas.Errors[0].Message;
+
+                MessageBox.Show(erro,
+                    "Inserção de Locações", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            TelaCadastroDevolucao tela = new TelaCadastroDevolucao(resultadoSelecaoTaxas.Value, locacaoSelecionada);
 
             tela.Locacao = locacaoSelecionada;
 

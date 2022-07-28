@@ -20,9 +20,29 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         Locacao locacao;
         private const decimal precoGasolina = 5;
 
-        public TelaCadastroDevolucao()
+        public TelaCadastroDevolucao(List<Taxa> taxas, Locacao locacao)
         {
             InitializeComponent();
+            CarregarTaxas(taxas);
+            CarregarTaxasJaAdicionadas(locacao);
+        }
+
+        private void CarregarTaxas(List<Taxa> taxas)
+        {
+            cbTaxa.Items.Clear();
+
+            foreach (var item in taxas)
+            {
+                cbTaxa.Items.Add(item);
+            }
+        }
+
+        private void CarregarTaxasJaAdicionadas(Locacao locacao)
+        {
+            foreach (var item in locacao.Taxas)
+            {
+                listTaxas.Items.Add(item);
+            }
         }
 
         public Func<Locacao, Result<Locacao>> GravarRegistro { get; set; }
@@ -92,6 +112,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             valorDoKmRodado = (Convert.ToInt32(tbKm.Text) - locacao.KmCarro) * locacao.Plano.PrecoKm;
 
             return locacao.Valor + valorDoKmRodado;
+        }
+
+        private void btnAdicionarTaxa_Click(object sender, EventArgs e)
+        {
+            listTaxas.Items.Add(cbTaxa.SelectedItem);
+            locacao.Taxas.Add((Taxa)cbTaxa.SelectedItem);
+            cbTaxa.SelectedIndex = -1;
         }
     }   
 }
