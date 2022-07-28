@@ -40,8 +40,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            //locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
-
             var resultadoValidacao = GravarRegistro(locacao);
 
             if (resultadoValidacao.IsFailed)
@@ -65,24 +63,35 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            labelValor.Text = "R$0";
+            labelValor.Text = "R$ " + CalculaValor();
         }
 
         private decimal CalculaValor()
         {
-            //int diasDeAluguel = (dtpDevolucao.Value < locacao.DataDevolucao);
-            //decimal valorTaxas = 0;
+            decimal valorDoCombustivel = 0;
+            decimal valorDoKmRodado = 0;
+            decimal multa = locacao.Valor/10;
 
-            //decimal valorDiaria = ((PlanoDeCobranca)cbPlano.SelectedItem).ValorDiaria;
+            if (dtpDevolucao.Value.Date > locacao.DataDevolucao.Date)
+            {
+                locacao.Valor = locacao.Valor + multa;
+            }
 
-            //foreach (var item in taxas)
-            //{
-            //    valorTaxas = +item.Valor;
-            //}
+            if (cbNivel.Text != "100" && cbNivel.Text != "0")
+            {
+                valorDoCombustivel = ((locacao.Veiculo.CapacidadeDoTanque * Convert.ToDecimal(cbNivel.Text)) / 100) * precoGasolina;
+                locacao.Valor = locacao.Valor + valorDoCombustivel;
+            }
 
-            //return valorTaxas + (diasDeAluguel * valorDiaria);
+            if (cbNivel.Text == "0")
+            {
+                valorDoCombustivel = locacao.Veiculo.CapacidadeDoTanque * precoGasolina;
+                locacao.Valor = locacao.Valor + valorDoCombustivel;
+            }
 
-            return 0;
+            valorDoKmRodado = (Convert.ToInt32(tbKm.Text) - locacao.KmCarro) * locacao.Plano.PrecoKm;
+
+            return locacao.Valor + valorDoKmRodado;
         }
     }   
 }

@@ -164,7 +164,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private decimal CalculaValor()
         {
-            int diasDeAluguel = (dtpDevolucao.Value.Day - dtpLocacao.Value.Day);
+            TimeSpan diasDeAluguel = (dtpDevolucao.Value.Subtract(dtpLocacao.Value));
+            int dias = Convert.ToInt32(diasDeAluguel.Days);
+
             decimal valorTaxas = 0;
 
             decimal valorDiaria = ((PlanoDeCobranca)cbPlano.SelectedItem).ValorDiaria;
@@ -174,7 +176,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
                 valorTaxas = +item.Valor;
             }
 
-            return valorTaxas + (diasDeAluguel * valorDiaria);
+            return valorTaxas + (dias * valorDiaria);
         }
     }
 }
