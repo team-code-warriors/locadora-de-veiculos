@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
+﻿using FluentResults;
+using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
@@ -17,40 +18,71 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     public partial class TelaCadastroDevolucao : Form
     {
         Locacao locacao;
-        ServicoLocacao servico;
         private const decimal precoGasolina = 5;
 
-        public TelaCadastroDevolucao(Locacao locacao, ServicoLocacao servico)
+        public TelaCadastroDevolucao()
         {
-            this.locacao = locacao;
-            this.servico = servico;
             InitializeComponent();
+        }
+
+        public Func<Locacao, Result<Locacao>> GravarRegistro { get; set; }
+        public Locacao Locacao
+        {
+            get
+            {
+                return locacao;
+            }
+            set
+            {
+                locacao = value;
+            }
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
-            //servico.Devolver(locacao);
+            //locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
+
+            var resultadoValidacao = GravarRegistro(locacao);
+
+            if (resultadoValidacao.IsFailed)
+            {
+                string erro = resultadoValidacao.Errors[0].Message;
+
+                if (erro.StartsWith("Falha no sistema"))
+                {
+                    MessageBox.Show(erro,
+                    "Inserção de Devolução", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                    DialogResult = DialogResult.None;
+                }
+            }
         }
+    
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int resultadoComparacaoDatas = (locacao.DataLocacao - dtpDevolucao.Value).Days;
-            int resultadoComparacaoKm = (locacao.KmCarro - Convert.ToInt32(tbKm.Text));
+            labelValor.Text = "R$0";
+        }
 
-            decimal resultadoPrecoKm = locacao.Plano.PrecoKm * resultadoComparacaoKm;
-            decimal resultadoDiaria = locacao.Plano.ValorDiaria * resultadoComparacaoDatas;
-            decimal resultadoCapacidadeDoTanque = (((locacao.Veiculo.CapacidadeDoTanque * Convert.ToInt32(cbNivel.Text)) / 100) * precoGasolina);
+        private decimal CalculaValor()
+        {
+            //int diasDeAluguel = (dtpDevolucao.Value < locacao.DataDevolucao);
+            //decimal valorTaxas = 0;
 
-            decimal cont = 0;
-            foreach (var item in locacao.Taxas)
-            {
-                cont =+ item.Valor;
-            }
+            //decimal valorDiaria = ((PlanoDeCobranca)cbPlano.SelectedItem).ValorDiaria;
 
-            decimal resultado = resultadoPrecoKm + resultadoDiaria + resultadoCapacidadeDoTanque + cont;
+            //foreach (var item in taxas)
+            //{
+            //    valorTaxas = +item.Valor;
+            //}
 
-            labelValor.Text = Convert.ToString("R$ "+ resultado);
+            //return valorTaxas + (diasDeAluguel * valorDiaria);
+
+            return 0;
         }
     }   
 }

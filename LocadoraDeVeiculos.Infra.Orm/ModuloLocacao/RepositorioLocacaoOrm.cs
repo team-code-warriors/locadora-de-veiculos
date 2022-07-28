@@ -25,6 +25,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
             locacoes.Update(registro);
         }
 
+        public void Devolver(Locacao registro)
+        {
+            locacoes.Update(registro);
+        }
         public void Inserir(Locacao novoRegistro)
         {
             locacoes.Add(novoRegistro);

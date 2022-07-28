@@ -184,13 +184,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             if (resultado.IsFailed)
             {
                 MessageBox.Show(resultado.Errors[0].Message,
-                    "Edição de Condutores", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    "Cadastro de Devolução", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var locacaoSelecionada = resultado.Value;
 
-            locacaoSelecionada.Status = StatusLocacaoEnum.Inativa;
+            TelaCadastroDevolucao tela = new TelaCadastroDevolucao();
+
+            tela.Locacao = locacaoSelecionada;
+
+            tela.GravarRegistro = servicoLocacao.Devolver;
+
+            if (tela.ShowDialog() == DialogResult.OK)
+                CarregarLocacoes();
         }
 
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()

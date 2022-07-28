@@ -110,6 +110,43 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
             }
         }
 
+        public Result<Locacao> Devolver(Locacao locacao)
+        {
+            Log.Logger.Debug("Tentando fazer uma devolução... {@l}", locacao);
+
+            Result resultadoValidacao = ValidarLocacao(locacao);
+
+            if (resultadoValidacao.IsFailed)
+            {
+                foreach (var erro in resultadoValidacao.Errors)
+                {
+                    Log.Logger.Warning("Falha ao tentar realizar a Devolucação {LocacaoId} - {Motivo}",
+                       locacao.Id, erro.Message);
+                }
+                return Result.Fail(resultadoValidacao.Errors);
+            }
+
+            try
+            {
+                locacao.Status = StatusLocacaoEnum.Inativa;
+                repositorioLocacao.Devolver(locacao);
+                contextoPersistencia.GravarDados();
+
+                Log.Logger.Information("Devolução {LocacaoId} realizada com sucesso", locacao.Id);
+
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                string msgErro = "Falha no sistema ao tentar devolver a locação";
+
+                Log.Logger.Error(ex, msgErro + "{LocacaoId}", locacao.Id);
+
+                return Result.Fail(msgErro);
+            }
+        }
+
+
         private Result ValidarLocacao(Locacao locacao)
         {
             return Result.Ok();
