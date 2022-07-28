@@ -15,22 +15,12 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 {
     public partial class TelaCadastroDevolucao : Form
     {
-        public DateTime dataLocacao;
-        public decimal valorDiaria;
-        public int KmCarro;
-        public decimal PrecoKm;
-        public decimal CapacidadeDoTanque;
-        public decimal PrecoGasolina = 5;
-        public List<Taxa> Taxas;
+        Locacao locacao;
+        private const decimal precoGasolina = 5;
 
         public TelaCadastroDevolucao(Locacao locacao)
         {
-            locacao.DataLocacao = dataLocacao;
-            locacao.Plano.ValorDiaria = valorDiaria;
-            locacao.KmCarro = KmCarro;
-            locacao.Plano.PrecoKm = PrecoKm;
-            locacao.Veiculo.CapacidadeDoTanque = CapacidadeDoTanque;
-
+            this.locacao = locacao;
             InitializeComponent();
         }
 
@@ -41,15 +31,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int resultadoComparacaoDatas = (dataLocacao - dtpDevolucao.Value).Days;
-            int resultadoComparacaoKm = (KmCarro - Convert.ToInt32(tbKm.Text));
+            int resultadoComparacaoDatas = (locacao.DataLocacao - dtpDevolucao.Value).Days;
+            int resultadoComparacaoKm = (locacao.KmCarro - Convert.ToInt32(tbKm.Text));
 
-            decimal resultadoPrecoKm = PrecoKm * resultadoComparacaoKm;
-            decimal resultadoDiaria = valorDiaria * resultadoComparacaoDatas;
-            decimal resultadoCapacidadeDoTanque = (((CapacidadeDoTanque * Convert.ToInt32(cbNivel.Text)) / 100) * PrecoGasolina);
+            decimal resultadoPrecoKm = locacao.Plano.PrecoKm * resultadoComparacaoKm;
+            decimal resultadoDiaria = locacao.Plano.ValorDiaria * resultadoComparacaoDatas;
+            decimal resultadoCapacidadeDoTanque = (((locacao.Veiculo.CapacidadeDoTanque * Convert.ToInt32(cbNivel.Text)) / 100) * precoGasolina);
 
             decimal cont = 0;
-            foreach (var item in Taxas)
+            foreach (var item in locacao.Taxas)
             {
                 cont =+ item.Valor;
             }

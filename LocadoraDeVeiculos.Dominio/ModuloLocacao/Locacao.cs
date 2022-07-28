@@ -24,9 +24,9 @@ namespace LocadoraDeVeiculos.Dominio.ModuloLocacao
         public PlanoDeCobranca Plano { get; set; }
         public List<Taxa> Taxas { get; set; }
         public DateTime DataLocacao { get; set; }
-
         public DateTime DataDevolucao { get; set; }
         public int KmCarro { get; set; }
+        public decimal Valor { get; set; }
         public StatusLocacaoEnum Status { get; set; }
 
         public Locacao(Funcionario funcionario, Condutor condutor, Veiculo veiculo, PlanoDeCobranca plano, List<Taxa> taxas, DateTime dataLocacao, DateTime dataDevolucao, int kmCarro, StatusLocacaoEnum status)

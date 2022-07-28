@@ -127,6 +127,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             locacao.DataLocacao = dtpLocacao.Value;
             locacao.DataDevolucao = dtpDevolucao.Value;
             locacao.KmCarro = Convert.ToInt32(tbKm.Text);
+            locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$",""));
             locacao.Taxas = taxas;
 
             var resultadoValidacao = GravarRegistro(locacao);

@@ -19,6 +19,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
             builder.Property(x => x.DataDevolucao).IsRequired();
             builder.Property(x => x.KmCarro).IsRequired();
             builder.Property(x => x.Status).IsRequired();
+            builder.Property(x => x.Valor).IsRequired();
 
             builder.HasOne(x => x.Funcionario)
                 .WithMany().OnDelete(DeleteBehavior.NoAction);
