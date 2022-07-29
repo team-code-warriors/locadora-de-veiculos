@@ -39,9 +39,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
             return locacoes.SingleOrDefault(x => x.Id == id);
         }
 
-        public List<Locacao> SelecionarPorLocacaoAberta()
+        public List<Locacao> SelecionarPorLocacaoAtivaEInativa()
         {
-            return SelecionarTodos().Where(x => x.Status == StatusLocacaoEnum.Ativa).ToList();
+            return SelecionarTodos()
+                .Where(x => x.Status != StatusLocacaoEnum.Fechada).ToList();
         }
 
         public List<Locacao> SelecionarTodos()

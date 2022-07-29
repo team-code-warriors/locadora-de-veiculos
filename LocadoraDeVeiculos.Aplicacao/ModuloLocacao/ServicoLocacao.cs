@@ -168,11 +168,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
             }
         }
 
-        public Result<List<Locacao>> SelecionarPorLocacaoAberta()
+        public Result<List<Locacao>> SelecionarPorLocacaoAtivaEInativa()
         {
             try
             {
-                return Result.Ok(repositorioLocacao.SelecionarPorLocacaoAberta());
+                return Result.Ok(repositorioLocacao.SelecionarPorLocacaoAtivaEInativa());
             }
             catch (Exception e)
             {
