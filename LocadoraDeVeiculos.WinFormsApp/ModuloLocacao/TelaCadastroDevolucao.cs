@@ -90,16 +90,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         {
             decimal valorDoCombustivel = 0;
             decimal valorDoKmRodado = 0;
-            decimal multa = locacao.Valor/10;
-
-            if (dtpDevolucao.Value.Date > locacao.DataDevolucao.Date)
-            {
-                locacao.Valor = locacao.Valor + multa;
-            }
 
             if (cbNivel.Text != "100" && cbNivel.Text != "0")
             {
-                valorDoCombustivel = ((locacao.Veiculo.CapacidadeDoTanque * Convert.ToDecimal(cbNivel.Text)) / 100) * precoGasolina;
+                valorDoCombustivel = ((locacao.Veiculo.CapacidadeDoTanque * (100 - Convert.ToDecimal(cbNivel.Text))) / 100) * precoGasolina;
                 locacao.Valor = locacao.Valor + valorDoCombustivel;
             }
 
@@ -110,14 +104,23 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             }
 
             valorDoKmRodado = (Convert.ToInt32(tbKm.Text) - locacao.KmCarro) * locacao.Plano.PrecoKm;
+            locacao.Valor = locacao.Valor + valorDoKmRodado;
 
-            return locacao.Valor + valorDoKmRodado;
+            decimal multa = locacao.Valor / 10;
+
+            if (dtpDevolucao.Value.Date > locacao.DataDevolucao.Date)
+            {
+                locacao.Valor = locacao.Valor + multa;
+            }
+
+            return locacao.Valor;
         }
 
         private void btnAdicionarTaxa_Click(object sender, EventArgs e)
         {
             listTaxas.Items.Add(cbTaxa.SelectedItem);
             locacao.Taxas.Add((Taxa)cbTaxa.SelectedItem);
+            locacao.Valor = locacao.Valor + ((Taxa)cbTaxa.SelectedItem).Valor;
             cbTaxa.SelectedIndex = -1;
         }
     }   

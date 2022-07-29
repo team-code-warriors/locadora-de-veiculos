@@ -164,7 +164,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private decimal CalculaValor()
         {
-            TimeSpan diasDeAluguel = (dtpDevolucao.Value.Subtract(dtpLocacao.Value));
+            TimeSpan diasDeAluguel = (dtpDevolucao.Value.Date.Subtract(dtpLocacao.Value.Date));
             int dias = Convert.ToInt32(diasDeAluguel.Days);
 
             decimal valorTaxas = 0;
