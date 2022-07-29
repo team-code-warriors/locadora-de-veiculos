@@ -152,7 +152,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void CarregarLocacoes()
         {
-            var resultado = servicoLocacao.SelecionarTodos();
+            var resultado = servicoLocacao.SelecionarPorLocacaoAberta();
 
             if (resultado.IsSuccess)
             {

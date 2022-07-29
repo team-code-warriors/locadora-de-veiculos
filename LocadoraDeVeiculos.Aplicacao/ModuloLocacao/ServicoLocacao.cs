@@ -167,5 +167,21 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
                 return Result.Fail(msgErro);
             }
         }
+
+        public Result<List<Locacao>> SelecionarPorLocacaoAberta()
+        {
+            try
+            {
+                return Result.Ok(repositorioLocacao.SelecionarPorLocacaoAberta());
+            }
+            catch (Exception e)
+            {
+                string msgErro = "Falha no sistema ao tentar selecionar as locações ativas";
+
+                Log.Logger.Error(e, msgErro);
+
+                return Result.Fail(msgErro);
+            }
+        }
     }
 }

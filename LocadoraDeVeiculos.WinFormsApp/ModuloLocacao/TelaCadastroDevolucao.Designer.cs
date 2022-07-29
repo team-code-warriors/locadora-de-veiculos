@@ -47,7 +47,7 @@
             // 
             // dtpDevolucao
             // 
-            this.dtpDevolucao.Location = new System.Drawing.Point(162, 31);
+            this.dtpDevolucao.Location = new System.Drawing.Point(162, 30);
             this.dtpDevolucao.Name = "dtpDevolucao";
             this.dtpDevolucao.Size = new System.Drawing.Size(281, 27);
             this.dtpDevolucao.TabIndex = 19;
@@ -87,7 +87,7 @@
             "50",
             "75",
             "100"});
-            this.cbNivel.Location = new System.Drawing.Point(162, 140);
+            this.cbNivel.Location = new System.Drawing.Point(162, 143);
             this.cbNivel.Name = "cbNivel";
             this.cbNivel.Size = new System.Drawing.Size(281, 28);
             this.cbNivel.TabIndex = 23;
@@ -103,7 +103,7 @@
             // 
             // btnCalcular
             // 
-            this.btnCalcular.Location = new System.Drawing.Point(17, 456);
+            this.btnCalcular.Location = new System.Drawing.Point(17, 450);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(151, 29);
             this.btnCalcular.TabIndex = 30;
@@ -114,7 +114,7 @@
             // labelValor
             // 
             this.labelValor.AutoSize = true;
-            this.labelValor.Location = new System.Drawing.Point(138, 431);
+            this.labelValor.Location = new System.Drawing.Point(138, 425);
             this.labelValor.Name = "labelValor";
             this.labelValor.Size = new System.Drawing.Size(30, 20);
             this.labelValor.TabIndex = 29;
@@ -123,7 +123,7 @@
             // labelValorAPagar
             // 
             this.labelValorAPagar.AutoSize = true;
-            this.labelValorAPagar.Location = new System.Drawing.Point(33, 431);
+            this.labelValorAPagar.Location = new System.Drawing.Point(33, 425);
             this.labelValorAPagar.Name = "labelValorAPagar";
             this.labelValorAPagar.Size = new System.Drawing.Size(99, 20);
             this.labelValorAPagar.TabIndex = 28;
@@ -132,7 +132,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(326, 532);
+            this.btnCancelar.Location = new System.Drawing.Point(329, 530);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(114, 48);
             this.btnCancelar.TabIndex = 32;
@@ -142,7 +142,7 @@
             // btnCadastrar
             // 
             this.btnCadastrar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCadastrar.Location = new System.Drawing.Point(206, 532);
+            this.btnCadastrar.Location = new System.Drawing.Point(209, 530);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(114, 48);
             this.btnCadastrar.TabIndex = 31;
@@ -154,14 +154,14 @@
             // 
             this.listTaxas.FormattingEnabled = true;
             this.listTaxas.ItemHeight = 20;
-            this.listTaxas.Location = new System.Drawing.Point(18, 218);
+            this.listTaxas.Location = new System.Drawing.Point(162, 198);
             this.listTaxas.Name = "listTaxas";
-            this.listTaxas.Size = new System.Drawing.Size(425, 104);
+            this.listTaxas.Size = new System.Drawing.Size(281, 104);
             this.listTaxas.TabIndex = 35;
             // 
             // btnAdicionarTaxa
             // 
-            this.btnAdicionarTaxa.Location = new System.Drawing.Point(18, 365);
+            this.btnAdicionarTaxa.Location = new System.Drawing.Point(162, 342);
             this.btnAdicionarTaxa.Name = "btnAdicionarTaxa";
             this.btnAdicionarTaxa.Size = new System.Drawing.Size(281, 29);
             this.btnAdicionarTaxa.TabIndex = 34;
@@ -173,7 +173,7 @@
             // 
             this.cbTaxa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTaxa.FormattingEnabled = true;
-            this.cbTaxa.Location = new System.Drawing.Point(18, 330);
+            this.cbTaxa.Location = new System.Drawing.Point(162, 308);
             this.cbTaxa.Name = "cbTaxa";
             this.cbTaxa.Size = new System.Drawing.Size(281, 28);
             this.cbTaxa.TabIndex = 33;
@@ -181,7 +181,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 195);
+            this.label1.Location = new System.Drawing.Point(7, 198);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(149, 20);
             this.label1.TabIndex = 36;
@@ -191,7 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 590);
+            this.ClientSize = new System.Drawing.Size(455, 590);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listTaxas);
             this.Controls.Add(this.btnAdicionarTaxa);

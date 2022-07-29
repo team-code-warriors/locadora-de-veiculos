@@ -39,6 +39,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
             return locacoes.SingleOrDefault(x => x.Id == id);
         }
 
+        public List<Locacao> SelecionarPorLocacaoAberta()
+        {
+            return SelecionarTodos().Where(x => x.Status == StatusLocacaoEnum.Ativa).ToList();
+        }
+
         public List<Locacao> SelecionarTodos()
         {
             return locacoes
@@ -48,6 +53,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
                 .Include(x => x.Plano)
                 .Include(x => x.Taxas)
                 .ToList();
+        }
+
+        public Locacao SelecionarLocacaoPorPlacaDoVeiculo(string placa)
+        {
+            return locacoes.FirstOrDefault(x => x.Veiculo.Placa == placa);
         }
     }
 }
