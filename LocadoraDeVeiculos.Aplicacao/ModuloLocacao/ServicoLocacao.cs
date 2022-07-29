@@ -4,11 +4,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
 {
@@ -54,16 +50,21 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
                 }
                 return Result.Fail(resultadoValidacao.Errors);
             }
-
             try
             {
-                locacao.Status = StatusLocacaoEnum.Fechada;
-                repositorioLocacao.Excluir(locacao);
-                contextoPersistencia.GravarDados();
+                if(locacao.Status == StatusLocacaoEnum.Inativa)
+                {
+                    locacao.Status = StatusLocacaoEnum.Fechada;
+                    repositorioLocacao.Excluir(locacao);
+                    contextoPersistencia.GravarDados();
 
-                Log.Logger.Information("Locação {LocacaoId} excluída com sucesso", locacao.Id);
+                    Log.Logger.Information("Locação {LocacaoId} excluída com sucesso", locacao.Id);
 
-                return Result.Ok();
+                    return Result.Ok();
+                }
+                else { 
+                    return Result.Fail("Locação deve ser inativa para excluír");
+                }
             }
             catch (Exception ex)
             {
@@ -182,7 +183,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
             return veiculoEncontrado != null &&
                    veiculoEncontrado.Veiculo.Placa == locacao.Veiculo.Placa &&
                    veiculoEncontrado.Id != locacao.Id &&
-                   locacao.Status == StatusLocacaoEnum.Ativa;
+                   veiculoEncontrado.Status == StatusLocacaoEnum.Ativa;
         }
 
         public Result<List<Locacao>> SelecionarTodos()

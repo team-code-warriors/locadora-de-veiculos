@@ -30,7 +30,6 @@
         {
             this.dtpDevolucao = new System.Windows.Forms.DateTimePicker();
             this.labelDataDevolucao = new System.Windows.Forms.Label();
-            this.tbKm = new System.Windows.Forms.TextBox();
             this.labelKm = new System.Windows.Forms.Label();
             this.cbNivel = new System.Windows.Forms.ComboBox();
             this.labelNivel = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@
             this.btnAdicionarTaxa = new System.Windows.Forms.Button();
             this.cbTaxa = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbKm = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // dtpDevolucao
@@ -61,17 +61,10 @@
             this.labelDataDevolucao.TabIndex = 18;
             this.labelDataDevolucao.Text = "Data da Devolução:";
             // 
-            // tbKm
-            // 
-            this.tbKm.Location = new System.Drawing.Point(162, 85);
-            this.tbKm.Name = "tbKm";
-            this.tbKm.Size = new System.Drawing.Size(281, 27);
-            this.tbKm.TabIndex = 21;
-            // 
             // labelKm
             // 
             this.labelKm.AutoSize = true;
-            this.labelKm.Location = new System.Drawing.Point(59, 88);
+            this.labelKm.Location = new System.Drawing.Point(59, 90);
             this.labelKm.Name = "labelKm";
             this.labelKm.Size = new System.Drawing.Size(96, 20);
             this.labelKm.TabIndex = 20;
@@ -187,11 +180,21 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Taxas já Adicionadas:";
             // 
+            // tbKm
+            // 
+            this.tbKm.Location = new System.Drawing.Point(162, 87);
+            this.tbKm.Mask = "0000000000000";
+            this.tbKm.Name = "tbKm";
+            this.tbKm.PromptChar = ' ';
+            this.tbKm.Size = new System.Drawing.Size(281, 27);
+            this.tbKm.TabIndex = 37;
+            // 
             // TelaCadastroDevolucao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 590);
+            this.Controls.Add(this.tbKm);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listTaxas);
             this.Controls.Add(this.btnAdicionarTaxa);
@@ -203,7 +206,6 @@
             this.Controls.Add(this.labelValorAPagar);
             this.Controls.Add(this.cbNivel);
             this.Controls.Add(this.labelNivel);
-            this.Controls.Add(this.tbKm);
             this.Controls.Add(this.labelKm);
             this.Controls.Add(this.dtpDevolucao);
             this.Controls.Add(this.labelDataDevolucao);
@@ -218,7 +220,6 @@
 
         private DateTimePicker dtpDevolucao;
         private Label labelDataDevolucao;
-        private TextBox tbKm;
         private Label labelKm;
         private ComboBox cbNivel;
         private Label labelNivel;
@@ -231,5 +232,6 @@
         private Button btnAdicionarTaxa;
         private ComboBox cbTaxa;
         private Label label1;
+        private MaskedTextBox tbKm;
     }
 }

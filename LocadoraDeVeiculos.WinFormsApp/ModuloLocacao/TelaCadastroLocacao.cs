@@ -126,13 +126,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             if (countClickBotaoCalcular != 0) {
                 locacao.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
                 locacao.Condutor = (Condutor)cbCondutor.SelectedItem;
+                VerificaValidadeCnhCondutor();
                 locacao.Veiculo = (Veiculo)cbVeiculo.SelectedItem;
                 locacao.Plano = (PlanoDeCobranca)cbPlano.SelectedItem;
                 locacao.DataLocacao = dtpLocacao.Value;
                 locacao.DataDevolucao = dtpDevolucao.Value;
-                locacao.KmCarro = Convert.ToInt32(tbKm.Text);
-                locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
-                locacao.Taxas = taxas;
 
                 #region Verificação se a kilometragem esta correta
                 string kilometragemSemEspaco = tbKm.Text.Replace(" ", "");
@@ -145,6 +143,10 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
                     return;
                 }
                 #endregion
+
+                locacao.KmCarro = Convert.ToInt32(tbKm.Text);
+                locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
+                locacao.Taxas = taxas;
 
                 var resultadoValidacao = GravarRegistro(locacao);
 
@@ -171,8 +173,37 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             }
         }
 
+        private void VerificaValidadeCnhCondutor()
+        {
+            Condutor condutorSelecionado = (Condutor)cbCondutor.SelectedItem;
+
+            if (condutorSelecionado.DataValidadeCnh.Date < DateTime.Today.Date)
+            {
+                MessageBox.Show("A CNH do condutor está expirada",
+                      "Cadastro de Locações", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                DialogResult = DialogResult.Cancel;
+                return;
+            }
+        }
+
         private void btnAdicionarTaxa_Click(object sender, EventArgs e)
         {
+            if (cbTaxa.SelectedIndex == -1)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione uma taxa primeiro");
+                DialogResult = DialogResult.None;
+                return;
+            }
+
+            if (listTaxas.Items.Contains(cbTaxa.SelectedItem))
+            {
+                cbTaxa.SelectedIndex = -1;
+                TelaMenuPrincipal.Instancia.AtualizarRodape("'Taxa' já adicionada");
+                DialogResult = DialogResult.None;
+                return;
+            }
+
             listTaxas.Items.Add(cbTaxa.SelectedItem);
             taxas.Add((Taxa)cbTaxa.SelectedItem);
             cbTaxa.SelectedIndex = -1;

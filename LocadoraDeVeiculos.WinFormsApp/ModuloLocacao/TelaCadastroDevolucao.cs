@@ -19,6 +19,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     {
         Locacao locacao;
         private const decimal precoGasolina = 5;
+        int countClickBotaoCalcular = 0;
+        string kilometragemSemEspaco = "";
 
         public TelaCadastroDevolucao(List<Taxa> taxas, Locacao locacao)
         {
@@ -55,35 +57,55 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             }
             set
             {
+                tbKm.Text = "";
                 locacao = value;
             }
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            var resultadoValidacao = GravarRegistro(locacao);
-
-            if (resultadoValidacao.IsFailed)
+            if (countClickBotaoCalcular != 0)
             {
-                string erro = resultadoValidacao.Errors[0].Message;
-
-                if (erro.StartsWith("Falha no sistema"))
+                if (Convert.ToInt32(kilometragemSemEspaco) < locacao.KmCarro)
                 {
-                    MessageBox.Show(erro,
-                    "Inserção de Devolução", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
+                    TelaMenuPrincipal.Instancia.AtualizarRodape("'Km do Carro' deve ser maior ou igual do que quando retirado na locadora");
                     DialogResult = DialogResult.None;
+                    return;
                 }
+
+                var resultadoValidacao = GravarRegistro(locacao);
+
+                if (resultadoValidacao.IsFailed)
+                {
+                    string erro = resultadoValidacao.Errors[0].Message;
+
+                    if (erro.StartsWith("Falha no sistema"))
+                    {
+                        MessageBox.Show(erro,
+                        "Inserção de Devolução", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                        DialogResult = DialogResult.None;
+                    }
+                }
+            }
+            else
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Calcule o valor da devolução antes de cadastra-lá");
+                DialogResult = DialogResult.None;
             }
         }
     
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
+            if (CalculaValor() == -1)
+                return;
+
+            countClickBotaoCalcular = countClickBotaoCalcular + 1;
             labelValor.Text = "R$ " + CalculaValor();
         }
 
@@ -91,6 +113,26 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         {
             decimal valorDoCombustivel = 0;
             decimal valorDoKmRodado = 0;
+
+            #region Verificação se a kilometragem esta correta
+            kilometragemSemEspaco = tbKm.Text.Replace(" ", "");
+
+            if (kilometragemSemEspaco.Length == 0)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'KM do Carro'");
+                DialogResult = DialogResult.None;
+
+                return -1;
+            }
+
+            if (cbNivel.SelectedIndex == -1)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione o nível do tanque");
+                DialogResult = DialogResult.None;
+
+                return -1;
+            }
+            #endregion
 
             if (cbNivel.Text != "100" && cbNivel.Text != "0")
             {
@@ -119,6 +161,21 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnAdicionarTaxa_Click(object sender, EventArgs e)
         {
+            if(cbTaxa.SelectedIndex == -1)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Selecione uma taxa primeiro");
+                DialogResult = DialogResult.None;
+                return;
+            }
+
+            if (listTaxas.Items.Contains(cbTaxa.SelectedItem))
+            {
+                cbTaxa.SelectedIndex = -1;
+                TelaMenuPrincipal.Instancia.AtualizarRodape("'Taxa' já adicionada");
+                DialogResult = DialogResult.None;
+                return;
+            }
+
             listTaxas.Items.Add(cbTaxa.SelectedItem);
             locacao.Taxas.Add((Taxa)cbTaxa.SelectedItem);
             locacao.Valor = locacao.Valor + ((Taxa)cbTaxa.SelectedItem).Valor;
