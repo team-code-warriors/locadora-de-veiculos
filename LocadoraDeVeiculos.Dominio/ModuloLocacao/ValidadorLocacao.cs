@@ -28,9 +28,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloLocacao
 
             RuleFor(x => x.Valor)
                 .NotNull().NotEmpty().GreaterThan(0);
-
-            RuleFor(x => x.Status)
-                .NotNull().NotEmpty();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         public TelaCadastroDevolucao(List<Taxa> taxas, Locacao locacao)
         {
             InitializeComponent();
+            dtpDevolucao.MinDate = DateTime.Today.Date;
             CarregarTaxas(taxas);
             CarregarTaxasJaAdicionadas(locacao);
         }

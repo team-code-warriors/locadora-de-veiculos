@@ -46,13 +46,13 @@
             this.btnAdicionarTaxa = new System.Windows.Forms.Button();
             this.dtpLocacao = new System.Windows.Forms.DateTimePicker();
             this.dtpDevolucao = new System.Windows.Forms.DateTimePicker();
-            this.tbKm = new System.Windows.Forms.TextBox();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.labelValorEstimado = new System.Windows.Forms.Label();
             this.labelValor = new System.Windows.Forms.Label();
             this.btnCalcular = new System.Windows.Forms.Button();
             this.listTaxas = new System.Windows.Forms.ListBox();
+            this.tbKm = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // labelNumero
@@ -213,13 +213,6 @@
             this.dtpDevolucao.Size = new System.Drawing.Size(281, 27);
             this.dtpDevolucao.TabIndex = 17;
             // 
-            // tbKm
-            // 
-            this.tbKm.Location = new System.Drawing.Point(658, 133);
-            this.tbKm.Name = "tbKm";
-            this.tbKm.Size = new System.Drawing.Size(281, 27);
-            this.tbKm.TabIndex = 18;
-            // 
             // btnCadastrar
             // 
             this.btnCadastrar.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -278,18 +271,27 @@
             this.listTaxas.Size = new System.Drawing.Size(425, 104);
             this.listTaxas.TabIndex = 28;
             // 
+            // tbKm
+            // 
+            this.tbKm.Location = new System.Drawing.Point(658, 134);
+            this.tbKm.Mask = "000000000000000";
+            this.tbKm.Name = "tbKm";
+            this.tbKm.PromptChar = ' ';
+            this.tbKm.Size = new System.Drawing.Size(281, 27);
+            this.tbKm.TabIndex = 29;
+            // 
             // TelaCadastroLocacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 490);
+            this.Controls.Add(this.tbKm);
             this.Controls.Add(this.listTaxas);
             this.Controls.Add(this.btnCalcular);
             this.Controls.Add(this.labelValor);
             this.Controls.Add(this.labelValorEstimado);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnCadastrar);
-            this.Controls.Add(this.tbKm);
             this.Controls.Add(this.dtpDevolucao);
             this.Controls.Add(this.dtpLocacao);
             this.Controls.Add(this.btnAdicionarTaxa);
@@ -335,12 +337,12 @@
         private Button btnAdicionarTaxa;
         private DateTimePicker dtpLocacao;
         private DateTimePicker dtpDevolucao;
-        private TextBox tbKm;
         private Button btnCadastrar;
         private Button btnCancelar;
         private Label labelValorEstimado;
         private Label labelValor;
         private Button btnCalcular;
         private ListBox listTaxas;
+        private MaskedTextBox tbKm;
     }
 }

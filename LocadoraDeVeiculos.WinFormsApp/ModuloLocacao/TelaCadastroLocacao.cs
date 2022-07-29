@@ -21,9 +21,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     public partial class TelaCadastroLocacao : Form
     {
         List<Taxa> taxas = new List<Taxa>();
+        int countClickBotaoCalcular = 0;
         public TelaCadastroLocacao(List<Funcionario> funcionarios, List<Condutor> condutores, List<Veiculo> veiculos, List<PlanoDeCobranca> planos, List<Taxa> taxas)
         {
             InitializeComponent();
+            dtpLocacao.MinDate = DateTime.Today.Date;
+            dtpDevolucao.MinDate = DateTime.Today.Date.AddDays(1);
+            dtpDevolucao.MaxDate = DateTime.Today.Date.AddDays(30);
             CarregarFuncionarios(funcionarios);
             CarregarCondutores(condutores);
             CarregarVeiculos(veiculos);
@@ -45,7 +49,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             set
             {
                 locacao = value;
-
+                tbKm.Text = "";
                 CarregaTela();
             }
         }
@@ -56,7 +60,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             cbCondutor.SelectedItem = locacao.Condutor;
             cbVeiculo.SelectedItem = locacao.Veiculo;
             cbPlano.SelectedItem = locacao.Plano;
-            tbKm.Text = locacao.KmCarro.ToString();
 
             if (locacao.Taxas != null)
             {
@@ -120,33 +123,51 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            locacao.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
-            locacao.Condutor = (Condutor)cbCondutor.SelectedItem;
-            locacao.Veiculo = (Veiculo)cbVeiculo.SelectedItem;
-            locacao.Plano = (PlanoDeCobranca)cbPlano.SelectedItem;
-            locacao.DataLocacao = dtpLocacao.Value;
-            locacao.DataDevolucao = dtpDevolucao.Value;
-            locacao.KmCarro = Convert.ToInt32(tbKm.Text);
-            locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$",""));
-            locacao.Taxas = taxas;
+            if (countClickBotaoCalcular != 0) {
+                locacao.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
+                locacao.Condutor = (Condutor)cbCondutor.SelectedItem;
+                locacao.Veiculo = (Veiculo)cbVeiculo.SelectedItem;
+                locacao.Plano = (PlanoDeCobranca)cbPlano.SelectedItem;
+                locacao.DataLocacao = dtpLocacao.Value;
+                locacao.DataDevolucao = dtpDevolucao.Value;
+                locacao.KmCarro = Convert.ToInt32(tbKm.Text);
+                locacao.Valor = Convert.ToDecimal(labelValor.Text.Replace("R$", ""));
+                locacao.Taxas = taxas;
 
-            var resultadoValidacao = GravarRegistro(locacao);
+                #region Verificação se a kilometragem esta correta
+                string kilometragemSemEspaco = tbKm.Text.Replace(" ", "");
 
-            if (resultadoValidacao.IsFailed)
-            {
-                string erro = resultadoValidacao.Errors[0].Message;
-
-                if (erro.StartsWith("Falha no sistema"))
+                if (kilometragemSemEspaco.Length == 0)
                 {
-                    MessageBox.Show(erro,
-                    "Inserção de Locações", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
-
+                    TelaMenuPrincipal.Instancia.AtualizarRodape("Insira um número válido no campo 'KM do Carro'");
                     DialogResult = DialogResult.None;
+
+                    return;
                 }
+                #endregion
+
+                var resultadoValidacao = GravarRegistro(locacao);
+
+                if (resultadoValidacao.IsFailed)
+                {
+                    string erro = resultadoValidacao.Errors[0].Message;
+
+                    if (erro.StartsWith("Falha no sistema"))
+                    {
+                        MessageBox.Show(erro,
+                        "Inserção de Locações", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        TelaMenuPrincipal.Instancia.AtualizarRodape(erro);
+
+                        DialogResult = DialogResult.None;
+                    }
+                }
+            }else
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("Calcule o valor da locação antes de cadastra-lá");
+                DialogResult = DialogResult.None;
             }
         }
 
@@ -159,6 +180,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
+            countClickBotaoCalcular = countClickBotaoCalcular + 1;
+            if (CalculaValor() == -1)
+            {
+                TelaMenuPrincipal.Instancia.AtualizarRodape("'Plano' não deve ser nulo");
+                DialogResult = DialogResult.None;
+                return;
+            }
             labelValor.Text = "R$ " + CalculaValor();
         }
 
@@ -169,6 +197,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 
             decimal valorTaxas = 0;
 
+            if (cbPlano.SelectedItem == null)
+            {
+                return -1;
+            }
+
             decimal valorDiaria = ((PlanoDeCobranca)cbPlano.SelectedItem).ValorDiaria;
 
             foreach (var item in taxas)
@@ -177,6 +210,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             }
 
             return valorTaxas + (dias * valorDiaria);
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
@@ -149,7 +150,39 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
 
         private Result ValidarLocacao(Locacao locacao)
         {
+            ValidadorLocacao validador = new ValidadorLocacao();
+
+            var resultadoValidacao = validador.Validate(locacao);
+
+            List<Error> errors = new List<Error>();
+
+            foreach (ValidationFailure r in resultadoValidacao.Errors)
+            {
+                errors.Add(new Error(r.ErrorMessage));
+            }
+
+            if (resultadoValidacao.IsValid)
+            {
+                if (VeiculoDuplicado(locacao))
+                    errors.Add(new Error("Este veículo já está em uma locação ativa"));
+            }
+  
+            if (errors.Any())
+            {
+                return Result.Fail(errors);
+            }
+
             return Result.Ok();
+        }
+
+        private bool VeiculoDuplicado(Locacao locacao)
+        {
+            var veiculoEncontrado = repositorioLocacao.SelecionarLocacaoPorPlacaDoVeiculo(locacao.Veiculo.Placa);
+
+            return veiculoEncontrado != null &&
+                   veiculoEncontrado.Veiculo.Placa == locacao.Veiculo.Placa &&
+                   veiculoEncontrado.Id != locacao.Id &&
+                   locacao.Status == StatusLocacaoEnum.Ativa;
         }
 
         public Result<List<Locacao>> SelecionarTodos()
