@@ -79,6 +79,11 @@ namespace LocadoraDeVeiculos.WinFormsApp
             ConfigurarTelaPrincipal(serviceLocator.Get<ControladorLocacao>());
         }
 
+        private void configuraçõesMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal(serviceLocator.Get<ControladorConfiguracao>());
+        }
+
         private void btnInserir_Click(object sender, EventArgs e)
         {
             controlador.Inserir();

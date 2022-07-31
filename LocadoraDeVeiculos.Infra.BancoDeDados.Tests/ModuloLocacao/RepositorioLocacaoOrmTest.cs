@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
@@ -16,6 +18,7 @@ using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -28,35 +31,23 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
     [TestClass]
     public class RepositorioLocacaoOrmTest : IntegrationTestBase
     {
-        private RepositorioFuncionarioOrm repositorioFuncionario;
-        private RepositorioCondutorOrm repositorioCondutor;
-        private RepositorioVeiculoOrm repositorioVeiculo;
-        private RepositorioPlanoDeCobrancaOrm repositorioPlano;
-        private RepositorioTaxaOrm repositorioTaxa;
-        private RepositorioClienteOrm repositorioCliente;
-        private RepositorioLocacaoOrm repositorio;
+        private readonly RepositorioLocacaoOrm repositorio;
+        private readonly ServicoLocacao servico;
         private readonly LocadoraDeVeiculosDbContext dbContext;
+        private IContextoPersistencia contextoPersistencia;
         byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
         public RepositorioLocacaoOrmTest()
         {
-            this.dbContext = dbContext;
-            repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
-            repositorioCondutor = new RepositorioCondutorOrm(dbContext);
-            repositorioVeiculo = new RepositorioVeiculoOrm(dbContext);
-            repositorioPlano = new RepositorioPlanoDeCobrancaOrm(dbContext);
-            repositorioTaxa = new RepositorioTaxaOrm(dbContext);
-            repositorioCliente = new RepositorioClienteOrm(dbContext);
-            repositorio = new RepositorioLocacaoOrm(dbContext);
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            this.repositorio = new RepositorioLocacaoOrm(dbContext);
+            this.servico = new ServicoLocacao(repositorio, contextoPersistencia);
         }
 
         #region criação de instancias
         private Cliente NovoCliente()
         {
-            Cliente c = new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658/0001-49", "(11) 99999-9999");
-            repositorioCliente.Inserir(c);
-
-            return c;
+            return new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658/0001-49", "(11) 99999-9999");
         }
 
         private Condutor NovoCondutor()
@@ -100,12 +91,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
         {
             //arrange
             var locacao = NovaLocacao();
+            locacao.Valor = 100;
 
             //action
-            repositorio.Inserir(locacao);
+            servico.Inserir(locacao);
 
             //assert
-            var locacaoEncontrada = repositorio.SelecionarPorId(locacao.Id);
+            var locacaoEncontrada = servico.SelecionarPorId(locacao.Id);
 
             locacaoEncontrada.Should().NotBeNull();
             locacaoEncontrada.Should().Be(locacao);

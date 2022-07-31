@@ -41,7 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1.1- Sql", "4.1.1- Sql", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1.2- Orm", "4.1.2- Orm", "{70F98BE6-CB1C-45BA-941A-9B4E89276AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Infra.Orm", "LocadoraDeVeiculos.Infra.Orm\LocadoraDeVeiculos.Infra.Orm.csproj", "{EA772CBC-E2D0-4774-A5D2-066512C73E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Infra.Orm", "LocadoraDeVeiculos.Infra.Orm\LocadoraDeVeiculos.Infra.Orm.csproj", "{EA772CBC-E2D0-4774-A5D2-066512C73E70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.3- Configs", "4.3- Configs", "{81600C2C-00D3-48D5-A0F1-8807E7B7BBEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Infra.Configs", "LocadoraDeVeiculos.Infra.Configs\LocadoraDeVeiculos.Infra.Configs.csproj", "{32133D1C-D2BA-4CA1-831F-69E016DE522A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,10 @@ Global
 		{EA772CBC-E2D0-4774-A5D2-066512C73E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA772CBC-E2D0-4774-A5D2-066512C73E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA772CBC-E2D0-4774-A5D2-066512C73E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32133D1C-D2BA-4CA1-831F-69E016DE522A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32133D1C-D2BA-4CA1-831F-69E016DE522A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32133D1C-D2BA-4CA1-831F-69E016DE522A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32133D1C-D2BA-4CA1-831F-69E016DE522A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +115,8 @@ Global
 		{EA03C5D9-1974-407A-A81A-06CEEFA7A47C} = {56FA785F-7DEF-4B7A-A56F-94EB9E269E65}
 		{70F98BE6-CB1C-45BA-941A-9B4E89276AD8} = {56FA785F-7DEF-4B7A-A56F-94EB9E269E65}
 		{EA772CBC-E2D0-4774-A5D2-066512C73E70} = {70F98BE6-CB1C-45BA-941A-9B4E89276AD8}
+		{81600C2C-00D3-48D5-A0F1-8807E7B7BBEE} = {A17117EC-71D5-42C5-B675-B447FD551C00}
+		{32133D1C-D2BA-4CA1-831F-69E016DE522A} = {81600C2C-00D3-48D5-A0F1-8807E7B7BBEE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56785EF7-0895-449E-8F73-91B962E4013F}

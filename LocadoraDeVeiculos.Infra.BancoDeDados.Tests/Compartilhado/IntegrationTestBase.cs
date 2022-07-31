@@ -11,6 +11,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado
     {
         public IntegrationTestBase()
         {
+            Db.ExecutarSql("DELETE FROM TBLOCACAO;");
+
             Db.ExecutarSql("DELETE FROM TBTAXA;");
 
             Db.ExecutarSql("DELETE FROM TBCONDUTOR;");
