@@ -36,8 +36,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao
         private void CarregarValorGasolina()
         {
             textBoxValor.Text = configuracao.ConfiguracaoPrecoGasolina.PrecoGasolina;
-            txtDiretorioLogs.Text = configuracao.ConfiguracaoLogs.DiretorioSaida;
-            tbConnection.Text = configuracao.ConnectionStrings.SqlServer;
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -54,6 +52,8 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao
             #endregion
 
             configuracao.ConfiguracaoPrecoGasolina.PrecoGasolina = textBoxValor.Text;
+            configuracao.ConfiguracaoLogs.DiretorioSaida = txtDiretorioLogs.Text;
+            configuracao.ConnectionStrings.SqlServer = tbConnection.Text;
 
             string caminho = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string caminhoJson = Path.Combine(caminho, "ConfiguracaoAplicacao.json");
