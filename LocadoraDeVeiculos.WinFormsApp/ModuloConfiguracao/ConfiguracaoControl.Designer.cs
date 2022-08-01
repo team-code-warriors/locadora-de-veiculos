@@ -38,7 +38,6 @@
             this.textBoxValor = new System.Windows.Forms.TextBox();
             this.labelValor = new System.Windows.Forms.Label();
             this.btnGravar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.tabControlGasolina.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -132,7 +131,7 @@
             // 
             // btnGravar
             // 
-            this.btnGravar.Location = new System.Drawing.Point(380, 253);
+            this.btnGravar.Location = new System.Drawing.Point(499, 253);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(116, 50);
             this.btnGravar.TabIndex = 1;
@@ -140,20 +139,10 @@
             this.btnGravar.UseVisualStyleBackColor = true;
             this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(502, 253);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(116, 50);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
             // ConfiguracaoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGravar);
             this.Controls.Add(this.tabControlGasolina);
             this.Name = "ConfiguracaoControl";
@@ -174,7 +163,6 @@
         private TabPage tabPage2;
         private Label labelValor;
         private Button btnGravar;
-        private Button btnCancelar;
         private TextBox tbConnection;
         private TextBox txtDiretorioLogs;
         private Label labelConnection;
