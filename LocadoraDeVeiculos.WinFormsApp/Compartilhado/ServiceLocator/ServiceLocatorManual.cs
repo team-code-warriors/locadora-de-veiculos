@@ -6,6 +6,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
 using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCondutor;
@@ -17,6 +18,7 @@ using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
+using LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao;
 using LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario;
 using LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.ModuloLocacao;
@@ -86,9 +88,13 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
             var servicoVeiculo = new ServicoVeiculo(repositorioVeiculo, contextoDadosOrm);
             controladores.Add("ControladorVeiculo", new ControladorVeiculo(servicoVeiculo, servicoGrupo));
 
+            var configuracaoAplicacao = new ConfiguracaoAplicacao();
+            controladores.Add("ControladorConfiguracao", new ControladorConfiguracao(configuracaoAplicacao));
+
             var repositorioLocacao = new RepositorioLocacaoOrm(contextoDadosOrm);
             var servicoLocacao = new ServicoLocacao(repositorioLocacao, contextoDadosOrm);
-            controladores.Add("ControladorLocacao", new ControladorLocacao(servicoLocacao, servicoFuncionario, servicoCondutor, servicoVeiculo, servicoPlano, servicoTaxa));
+            controladores.Add("ControladorLocacao", new ControladorLocacao(servicoLocacao, servicoFuncionario, servicoCondutor, servicoVeiculo, servicoPlano, servicoTaxa, configuracaoAplicacao));
+
         }
     }
 }

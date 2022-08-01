@@ -2,8 +2,10 @@
   "ConfiguracaoLogs": {
     "DiretorioSaida": "C:\\logs"
   },
-
   "ConnectionStrings": {
     "SqlServer": "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculos;Integrated Security=True;Pooling=False"
+  },
+  "ConfiguracaoPrecoGasolina": {
+    "PrecoGasolina": "2.90"
   }
 }

@@ -7,6 +7,7 @@ using LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.WinFormsApp.ModuloCondutor;
 using LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo;
 using LocadoraDeVeiculos.WinFormsApp.ModuloLocacao;
+using LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao;
 
 namespace LocadoraDeVeiculos.WinFormsApp
 {

@@ -5,6 +5,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
 using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         private readonly ServicoVeiculo servicoVeiculo;
         private readonly ServicoPlanoDeCobranca servicoPlano;
         private readonly ServicoTaxa servicoTaxa;
+        ConfiguracaoAplicacao configuracao;
 
-        public ControladorLocacao(ServicoLocacao servicoLocacao, ServicoFuncionario servicoFuncionario, ServicoCondutor servicoCondutor, ServicoVeiculo servicoVeiculo, ServicoPlanoDeCobranca servicoPlano, ServicoTaxa servicoTaxa)
+        public ControladorLocacao(ServicoLocacao servicoLocacao, ServicoFuncionario servicoFuncionario, ServicoCondutor servicoCondutor, ServicoVeiculo servicoVeiculo, ServicoPlanoDeCobranca servicoPlano, ServicoTaxa servicoTaxa, ConfiguracaoAplicacao configuracao)
         {
             this.servicoLocacao = servicoLocacao;
             this.servicoFuncionario = servicoFuncionario;
@@ -32,6 +34,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             this.servicoVeiculo = servicoVeiculo;
             this.servicoPlano = servicoPlano;
             this.servicoTaxa = servicoTaxa;
+            this.configuracao = configuracao;
         }
 
         public override void Excluir()
@@ -202,7 +205,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
                 return;
             }
 
-            TelaCadastroDevolucao tela = new TelaCadastroDevolucao(resultadoSelecaoTaxas.Value, locacaoSelecionada);
+            TelaCadastroDevolucao tela = new TelaCadastroDevolucao(resultadoSelecaoTaxas.Value, locacaoSelecionada, configuracao);
 
             tela.Locacao = locacaoSelecionada;
 

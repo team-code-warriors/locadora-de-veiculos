@@ -25,15 +25,20 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         public TelaCadastroLocacao(List<Funcionario> funcionarios, List<Condutor> condutores, List<Veiculo> veiculos, List<PlanoDeCobranca> planos, List<Taxa> taxas)
         {
             InitializeComponent();
-            dtpLocacao.MinDate = DateTime.Today.Date;
-            dtpDevolucao.MinDate = DateTime.Today.Date.AddDays(1);
-            dtpDevolucao.MaxDate = DateTime.Today.Date.AddDays(30);
+            ConfiguraDatas();
             CarregarFuncionarios(funcionarios);
             CarregarCondutores(condutores);
             CarregarVeiculos(veiculos);
             CarregarPlanos(planos);
             CarregarTaxas(taxas);
             this.ConfigurarTela();
+        }
+
+        private void ConfiguraDatas()
+        {
+            dtpLocacao.MinDate = DateTime.Today.Date;
+            dtpDevolucao.MinDate = DateTime.Today.Date.AddDays(1);
+            dtpDevolucao.MaxDate = DateTime.Today.Date.AddDays(30);
         }
 
         private Locacao locacao;

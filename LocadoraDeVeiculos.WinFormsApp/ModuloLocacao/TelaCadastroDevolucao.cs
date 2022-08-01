@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
+using LocadoraDeVeiculos.Infra.Configs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,14 +19,15 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
     public partial class TelaCadastroDevolucao : Form
     {
         Locacao locacao;
-        private const decimal precoGasolina = 5;
+        private ConfiguracaoAplicacao configuracao;
         int countClickBotaoCalcular = 0;
         string kilometragemSemEspaco = "";
 
-        public TelaCadastroDevolucao(List<Taxa> taxas, Locacao locacao)
+        public TelaCadastroDevolucao(List<Taxa> taxas, Locacao locacao, ConfiguracaoAplicacao configuracao)
         {
             InitializeComponent();
             dtpDevolucao.MinDate = DateTime.Today.Date;
+            this.configuracao = configuracao;
             CarregarTaxas(taxas);
             CarregarTaxasJaAdicionadas(locacao);
         }
@@ -66,12 +68,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
         {
             if (countClickBotaoCalcular != 0)
             {
+                #region verifica a kilometragem
                 if (Convert.ToInt32(kilometragemSemEspaco) < locacao.KmCarro)
                 {
                     TelaMenuPrincipal.Instancia.AtualizarRodape("'Km do Carro' deve ser maior ou igual do que quando retirado na locadora");
                     DialogResult = DialogResult.None;
                     return;
                 }
+                #endregion
 
                 var resultadoValidacao = GravarRegistro(locacao);
 
@@ -134,27 +138,33 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
             }
             #endregion
 
+            #region calcula o valor gasto com gasolina
             if (cbNivel.Text != "100" && cbNivel.Text != "0")
             {
-                valorDoCombustivel = ((locacao.Veiculo.CapacidadeDoTanque * (100 - Convert.ToDecimal(cbNivel.Text))) / 100) * precoGasolina;
+                valorDoCombustivel = ((locacao.Veiculo.CapacidadeDoTanque * (100 - Convert.ToDecimal(cbNivel.Text))) / 100) * Convert.ToDecimal(configuracao.ConfiguracaoPrecoGasolina.PrecoGasolina);
                 locacao.Valor = locacao.Valor + valorDoCombustivel;
             }
 
             if (cbNivel.Text == "0")
             {
-                valorDoCombustivel = locacao.Veiculo.CapacidadeDoTanque * precoGasolina;
+                valorDoCombustivel = locacao.Veiculo.CapacidadeDoTanque * Convert.ToDecimal(configuracao.ConfiguracaoPrecoGasolina.PrecoGasolina);
                 locacao.Valor = locacao.Valor + valorDoCombustivel;
             }
+            #endregion
 
+            #region calcula o valor gasto por km rodado
             valorDoKmRodado = (Convert.ToInt32(tbKm.Text) - locacao.KmCarro) * locacao.Plano.PrecoKm;
             locacao.Valor = locacao.Valor + valorDoKmRodado;
+            #endregion
 
+            #region confere se tem multa
             decimal multa = locacao.Valor / 10;
 
             if (dtpDevolucao.Value.Date > locacao.DataDevolucao.Date)
             {
                 locacao.Valor = locacao.Valor + multa;
             }
+            #endregion
 
             return locacao.Valor;
         }

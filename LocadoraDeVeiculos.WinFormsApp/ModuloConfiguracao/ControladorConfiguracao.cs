@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
+﻿using LocadoraDeVeiculos.Infra.Configs;
+using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao
 {
     public class ControladorConfiguracao : ControladorBase
     {
+
+        private readonly ConfiguracaoAplicacao configuracao;
+
+        public ControladorConfiguracao(ConfiguracaoAplicacao configuracao)
+        {
+            this.configuracao = configuracao;
+        }
+
         public override void Excluir()
         {
 
