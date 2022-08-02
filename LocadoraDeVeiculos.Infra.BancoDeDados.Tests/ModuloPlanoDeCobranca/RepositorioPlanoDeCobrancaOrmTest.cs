@@ -4,21 +4,26 @@ using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
+using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
 {
     [TestClass]
-    public class RepositorioPlanoDeCobrancaEmBancoDeDadosTest : IntegrationTestBase
+    public class RepositorioPlanoDeCobrancaOrmTest : IntegrationTestBase
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo;
-        private RepositorioPlanoDeCobrancaEmBancoDeDados repositorio;
+        private RepositorioGrupoDeVeiculoOrm repositorioGrupo;
+        private RepositorioPlanoDeCobrancaOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioPlanoDeCobrancaEmBancoDeDadosTest()
+        public RepositorioPlanoDeCobrancaOrmTest()
         {
-            repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
-            repositorio = new RepositorioPlanoDeCobrancaEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorioGrupo = new RepositorioGrupoDeVeiculoOrm(dbContext);
+            repositorio = new RepositorioPlanoDeCobrancaOrm(dbContext);
 
         }
 
@@ -26,6 +31,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
         {
             GrupoDeVeiculos grupo = new GrupoDeVeiculos("SUV");
             repositorioGrupo.Inserir(grupo);
+            dbContext.SaveChanges();
 
             return grupo;
         }
@@ -41,6 +47,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             //arrange
             var plano = NovoPlano();
             repositorio.Inserir(plano);
+            dbContext.SaveChanges();
 
             //action
             var planoEncontrado = repositorio.SelecionarPorId(plano.Id);
@@ -56,6 +63,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             //arrange
             var plano = NovoPlano();
             repositorio.Inserir(plano);
+            dbContext.SaveChanges();
 
             //action 
             plano.TipoPlano = "KM Livre";
@@ -64,6 +72,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             plano.PrecoKm = 10;
 
             repositorio.Editar(plano);
+            dbContext.SaveChanges();
 
             //assert
             var planoEncontrado = repositorio.SelecionarPorId(plano.Id);
@@ -78,9 +87,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             //arrange
             var plano = NovoPlano();
             repositorio.Inserir(plano);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(plano);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(plano.Id)
@@ -93,6 +104,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             //arrange
             var plano = NovoPlano();
             repositorio.Inserir(plano);
+            dbContext.SaveChanges();
 
             //action
             var planoEncontrado = repositorio.SelecionarPorId(plano.Id);
@@ -111,8 +123,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
             var p2 = new PlanoDeCobranca(NovoGrupo(), "Plano Diário", 50, 10, 10);
 
             repositorio.Inserir(p0);
+            dbContext.SaveChanges();
             repositorio.Inserir(p1);
+            dbContext.SaveChanges();
             repositorio.Inserir(p2);
+            dbContext.SaveChanges();
 
             //action
             var planos = repositorio.SelecionarTodos();

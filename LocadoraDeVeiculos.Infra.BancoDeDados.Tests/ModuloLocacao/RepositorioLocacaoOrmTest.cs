@@ -113,7 +113,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
             dbContext.SaveChanges();
 
             //action
-            locacao.Status = StatusLocacaoEnum.Fechada;
             repositorio.Excluir(locacao);
             dbContext.SaveChanges();
 
@@ -135,7 +134,6 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
             var locacoes = repositorio.SelecionarTodos();
 
             //action
-            locacao.Status = StatusLocacaoEnum.Inativa;
             repositorio.Devolver(locacao);
             dbContext.SaveChanges();
 

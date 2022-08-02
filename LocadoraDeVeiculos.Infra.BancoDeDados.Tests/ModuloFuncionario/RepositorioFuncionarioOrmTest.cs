@@ -2,6 +2,7 @@
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,15 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
 {
     [TestClass]
-    public class RepositorioFuncionarioEmBancoDeDadosTest : IntegrationTestBase
+    public class RepositorioFuncionarioOrmTest : IntegrationTestBase
     {
-        private RepositorioFuncionarioEmBancoDeDados repositorio;
+        private RepositorioFuncionarioOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioFuncionarioEmBancoDeDadosTest()
+        public RepositorioFuncionarioOrmTest()
         {
-            repositorio = new RepositorioFuncionarioEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorio = new RepositorioFuncionarioOrm();
         }
 
         private Funcionario NovoFuncionario()
@@ -34,6 +37,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
 
             //action
             repositorio.Inserir(funcionario);
+            dbContext.SaveChanges();
 
             //assert
             var taxaEncontrada = repositorio.SelecionarPorId(funcionario.Id);
@@ -48,6 +52,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
             //arrange
             var funcionario = NovoFuncionario();
             repositorio.Inserir(funcionario);
+            dbContext.SaveChanges();
 
             funcionario.Nome = "Lucas";
             funcionario.Salario = 800;
@@ -58,6 +63,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
 
             //action
             repositorio.Editar(funcionario);
+            dbContext.SaveChanges();
 
             //assert
             var taxaEncontrada = repositorio.SelecionarPorId(funcionario.Id);
@@ -72,9 +78,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
             //arrange           
             var funcionario = NovoFuncionario();
             repositorio.Inserir(funcionario);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(funcionario);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(funcionario.Id)
@@ -87,6 +95,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
             //arrange          
             var funcionario = NovoFuncionario();
             repositorio.Inserir(funcionario);
+            dbContext.SaveChanges();
 
             //action
             var funcionarioEncontrado = repositorio.SelecionarPorId(funcionario.Id);
@@ -104,10 +113,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
             var f1 = new Funcionario("Lucas", 1040, DateTime.Now.Date, "lucasbleyer", "senha1999", "Comum");
             var f2 = new Funcionario("Daniel", 2000, DateTime.Now.Date, "danielz", "senha7788", "Administrador");
 
-            var repositorio = new RepositorioFuncionarioEmBancoDeDados();
+            var repositorio = new RepositorioFuncionarioOrm();
             repositorio.Inserir(f0);
+            dbContext.SaveChanges();
             repositorio.Inserir(f1);
+            dbContext.SaveChanges();
             repositorio.Inserir(f2);
+            dbContext.SaveChanges();
 
             //action
             var funcionarios = repositorio.SelecionarTodos();

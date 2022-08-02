@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario
 {
-    public class RepositorioFuncionarioEmBancoDeDados :
+    public class RepositorioFuncionarioOrm :
         RepositorioBase<Funcionario, MapeadorFuncionario>, IRepositorioFuncionario
     {
         protected override string sqlInserir =>

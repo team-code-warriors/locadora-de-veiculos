@@ -63,7 +63,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
             builder.RegisterType<ServicoGrupoDeVeiculo>().AsSelf();
             builder.RegisterType<ControladorGrupoDeVeiculos>().AsSelf();
 
-            builder.RegisterType<RepositorioFuncionarioEmBancoDeDados>().AsSelf();
+            builder.RegisterType<RepositorioFuncionarioOrm>().AsSelf();
             builder.RegisterType<ServicoFuncionario>().AsSelf();
             builder.RegisterType<ControladorFuncionario>().AsSelf();
 

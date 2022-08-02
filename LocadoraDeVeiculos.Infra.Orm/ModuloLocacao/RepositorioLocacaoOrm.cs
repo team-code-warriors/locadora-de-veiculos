@@ -22,11 +22,13 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
 
         public void Excluir(Locacao registro)
         {
+            registro.Status = StatusLocacaoEnum.Fechada;
             locacoes.Update(registro);
         }
 
         public void Devolver(Locacao registro)
         {
+            registro.Status = StatusLocacaoEnum.Inativa;
             locacoes.Update(registro);
         }
         public void Inserir(Locacao novoRegistro)

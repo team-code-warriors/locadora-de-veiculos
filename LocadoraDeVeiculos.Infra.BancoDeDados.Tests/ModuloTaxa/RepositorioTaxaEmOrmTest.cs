@@ -2,19 +2,23 @@
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
 {
     [TestClass]
-    public class RepositorioTaxaEmBancoDeDadosTest : IntegrationTestBase
+    public class RepositorioTaxaEmOrmTest : IntegrationTestBase
     {
 
-        private RepositorioTaxaEmBancoDeDados repositorio;
+        private RepositorioTaxaOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioTaxaEmBancoDeDadosTest()
+        public RepositorioTaxaEmOrmTest()
         {
-            repositorio = new RepositorioTaxaEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorio = new RepositorioTaxaOrm(dbContext);
         }
 
         private Taxa NovaTaxa()
@@ -30,6 +34,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
 
             //action
             repositorio.Inserir(taxa);
+            dbContext.SaveChanges();
 
             //assert
             var taxaEncontrada = repositorio.SelecionarPorId(taxa.Id);
@@ -44,6 +49,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
             //arrange
             var taxa = NovaTaxa();
             repositorio.Inserir(taxa);
+            dbContext.SaveChanges();
 
             taxa.Descricao = "GPS";
             taxa.Valor = 100;
@@ -51,6 +57,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
 
             //action
             repositorio.Editar(taxa);
+            dbContext.SaveChanges();
 
             //assert
             var taxaEncontrada = repositorio.SelecionarPorId(taxa.Id);
@@ -65,9 +72,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
             //arrange           
             var taxa = NovaTaxa();
             repositorio.Inserir(taxa);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(taxa);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(taxa.Id)
@@ -80,6 +89,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
             //arrange          
             var taxa = NovaTaxa();
             repositorio.Inserir(taxa);
+            dbContext.SaveChanges();
 
             //action
             var taxaEncontrada = repositorio.SelecionarPorId(taxa.Id);
@@ -99,8 +109,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
 
             var repositorio = new RepositorioTaxaEmBancoDeDados();
             repositorio.Inserir(t0);
+            dbContext.SaveChanges();
             repositorio.Inserir(t1);
+            dbContext.SaveChanges();
             repositorio.Inserir(t2);
+            dbContext.SaveChanges();
 
             //action
             var taxas = repositorio.SelecionarTodos();

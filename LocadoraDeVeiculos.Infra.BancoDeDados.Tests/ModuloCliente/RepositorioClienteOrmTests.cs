@@ -3,6 +3,8 @@ using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,15 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 {
     [TestClass]
-    public class RepositorioClienteEmBancoDeDadosTests : IntegrationTestBase
+    public class RepositorioClienteOrmTests : IntegrationTestBase
     {
-        private RepositorioClienteEmBancoDeDados repositorio;
+        private RepositorioClienteOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioClienteEmBancoDeDadosTests()
+        public RepositorioClienteOrmTests()
         {
-            repositorio = new RepositorioClienteEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorio = new RepositorioClienteOrm(dbContext);
         }
 
         private Cliente NovoCliente()
@@ -35,6 +39,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
             //action
             repositorio.Inserir(cliente);
+            dbContext.SaveChanges();
 
             //assert
             var clienteEncontrado = repositorio.SelecionarPorId(cliente.Id);
@@ -49,6 +54,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             //arrange
             var cliente = NovoCliente();
             repositorio.Inserir(cliente);
+            dbContext.SaveChanges();
             cliente.Nome = "Lucas Silva";
             cliente.Email = "lucassilva@gmail.com";
             cliente.Endereco = "Lages";
@@ -58,6 +64,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
             //action
             repositorio.Editar(cliente);
+            dbContext.SaveChanges();
 
             //assert
             var clienteEncontrado = repositorio.SelecionarPorId(cliente.Id);
@@ -72,9 +79,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             //arrange           
             var cliente = NovoCliente();
             repositorio.Inserir(cliente);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(cliente);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(cliente.Id)
@@ -87,6 +96,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
             //arrange          
             var cliente = NovoCliente();
             repositorio.Inserir(cliente);
+            dbContext.SaveChanges();
 
             //action
             var clienteEncontrado = repositorio.SelecionarPorId(cliente.Id);
@@ -106,8 +116,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
             var repositorio = new RepositorioClienteEmBancoDeDados();
             repositorio.Inserir(c0);
+            dbContext.SaveChanges();
             repositorio.Inserir(c1);
+            dbContext.SaveChanges();
             repositorio.Inserir(c2);
+            dbContext.SaveChanges();
 
             //action
             var clientes = repositorio.SelecionarTodos();

@@ -17,7 +17,7 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
     public partial class TelaCadastroFuncionario : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        RepositorioFuncionarioEmBancoDeDados repositorio = new RepositorioFuncionarioEmBancoDeDados();
+        RepositorioFuncionarioOrm repositorio = new RepositorioFuncionarioOrm();
         public TelaCadastroFuncionario()
         {
             InitializeComponent();

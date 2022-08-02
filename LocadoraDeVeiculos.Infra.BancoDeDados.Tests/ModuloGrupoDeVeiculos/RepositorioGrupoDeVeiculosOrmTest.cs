@@ -3,17 +3,21 @@ using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using FluentAssertions;
+using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 {
     [TestClass]
-    public class RepositorioGrupoDeVeiculosEmBancoDeDadosTest : IntegrationTestBase
+    public class RepositorioGrupoDeVeiculosOrmTest : IntegrationTestBase
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorio;
+        private RepositorioGrupoDeVeiculoOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioGrupoDeVeiculosEmBancoDeDadosTest()
+        public RepositorioGrupoDeVeiculosOrmTest()
         {
-            repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorio = new RepositorioGrupoDeVeiculoOrm(dbContext);
         }
 
         private GrupoDeVeiculos NovoGrupo()
@@ -29,6 +33,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
             //action
             repositorio.Inserir(grupo);
+            dbContext.SaveChanges();
 
             //assert
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
@@ -42,10 +47,12 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //arrange
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
+            dbContext.SaveChanges();
 
             //action 
             grupo.Nome = "Esportivo";
             repositorio.Editar(grupo);
+            dbContext.SaveChanges();
 
             //assert
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
@@ -61,9 +68,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //arrange
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(grupo);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(grupo.Id)
@@ -76,6 +85,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             //arrange
             var grupo = NovoGrupo();
             repositorio.Inserir(grupo);
+            dbContext.SaveChanges();
 
             //action
             var grupoEncontrado = repositorio.SelecionarPorId(grupo.Id);
@@ -95,8 +105,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 
             var repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
             repositorio.Inserir(g0);
+            dbContext.SaveChanges();
             repositorio.Inserir(g1);
+            dbContext.SaveChanges();
             repositorio.Inserir(g2);
+            dbContext.SaveChanges();
 
             //action
             var grupos = repositorio.SelecionarTodos();
