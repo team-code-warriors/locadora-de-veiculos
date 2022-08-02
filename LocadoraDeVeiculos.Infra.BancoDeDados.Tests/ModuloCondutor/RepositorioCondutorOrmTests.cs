@@ -4,6 +4,9 @@ using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
+using LocadoraDeVeiculos.Infra.Orm.ModuloCondutor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -14,17 +17,20 @@ using System.Threading.Tasks;
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
 {
     [TestClass]
-    public class RepositorioCondutorEmBancoDeDadosTests : IntegrationTestBase
+    public class RepositorioCondutorOrmTests : IntegrationTestBase
     {
-        private RepositorioClienteEmBancoDeDados repositorioCliente;
-        private RepositorioCondutorEmBancoDeDados repositorio;
+        private RepositorioClienteOrm repositorioCliente;
+        private RepositorioCondutorOrm repositorio;
+        private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioCondutorEmBancoDeDadosTests()
+        public RepositorioCondutorOrmTests()
         {
-            repositorio = new RepositorioCondutorEmBancoDeDados();
-            repositorioCliente = new RepositorioClienteEmBancoDeDados();
+            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            repositorio = new RepositorioCondutorOrm(dbContext);
+            repositorioCliente = new RepositorioClienteOrm(dbContext);
         }
 
+        #region criando instancias
         private Cliente NovoCliente()
         {
             Cliente c = new Cliente("Lucas Bleyer", "lucas@gmail.com", "Lages", "111.222.333-44", "43.367.658/0001-49", "(11) 99999-9999");
@@ -37,7 +43,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
         {
             return new Condutor(NovoCliente(), "Lucas Bleyer", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
         }
-
+        #endregion
 
         [TestMethod]
         public void Deve_inserir_novo_condutor()
@@ -47,6 +53,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
 
             //action
             repositorio.Inserir(condutor);
+            dbContext.SaveChanges();
 
             //assert
             var clienteEncontrado = repositorio.SelecionarPorId(condutor.Id);
@@ -61,6 +68,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             //arrange
             var condutor = NovoCondutor();
             repositorio.Inserir(condutor);
+            dbContext.SaveChanges();
             condutor.Nome = "Lucas Bleyer";
             condutor.Email = "lucas@gmail.com";
             condutor.Endereco = "Lages";
@@ -70,6 +78,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
 
             //action
             repositorio.Editar(condutor);
+            dbContext.SaveChanges();
 
             //assert
             var condutorEncontrado = repositorio.SelecionarPorId(condutor.Id);
@@ -84,9 +93,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             //arrange           
             var condutor = NovoCondutor();
             repositorio.Inserir(condutor);
+            dbContext.SaveChanges();
 
             //action           
             repositorio.Excluir(condutor);
+            dbContext.SaveChanges();
 
             //assert
             repositorio.SelecionarPorId(condutor.Id)
@@ -99,6 +110,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             //arrange          
             var condutor = NovoCondutor();
             repositorio.Inserir(condutor);
+            dbContext.SaveChanges();
 
             //action
             var condutorEncontrado = repositorio.SelecionarPorId(condutor.Id);
@@ -116,10 +128,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
             var c1 = new Condutor(NovoCliente(), "Ane Luisy", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
             var c2 = new Condutor(NovoCliente(), "Daniel", "111.222.333-44", "12345678901", DateTime.Now.Date, "lucas@gmail.com", "(11) 99999-9999", "Lages");
 
-            var repositorio = new RepositorioCondutorEmBancoDeDados();
+            var repositorio = new RepositorioCondutorOrm(dbContext);
             repositorio.Inserir(c0);
+            dbContext.SaveChanges();
             repositorio.Inserir(c1);
+            dbContext.SaveChanges();
             repositorio.Inserir(c2);
+            dbContext.SaveChanges();
 
             //action
             var condutores = repositorio.SelecionarTodos();

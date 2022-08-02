@@ -32,16 +32,13 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
     public class RepositorioLocacaoOrmTest : IntegrationTestBase
     {
         private readonly RepositorioLocacaoOrm repositorio;
-        private readonly ServicoLocacao servico;
         private readonly LocadoraDeVeiculosDbContext dbContext;
-        private IContextoPersistencia contextoPersistencia;
         byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
         public RepositorioLocacaoOrmTest()
         {
             dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
             this.repositorio = new RepositorioLocacaoOrm(dbContext);
-            this.servico = new ServicoLocacao(repositorio, contextoPersistencia);
         }
 
         #region criação de instancias
@@ -94,13 +91,133 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
             locacao.Valor = 100;
 
             //action
-            servico.Inserir(locacao);
+            repositorio.Inserir(locacao);
+            dbContext.SaveChanges();
 
             //assert
-            var locacaoEncontrada = servico.SelecionarPorId(locacao.Id);
+            var locacaoEncontrada = repositorio.SelecionarPorId(locacao.Id);
 
             locacaoEncontrada.Should().NotBeNull();
             locacaoEncontrada.Should().Be(locacao);
         }
+
+        [TestMethod]
+        public void Deve_excluir_uma_locacao()
+        {
+            //arrange
+            var locacao = NovaLocacao();
+            locacao.Valor = 100;
+            repositorio.Inserir(locacao);
+            dbContext.SaveChanges();
+            repositorio.Devolver(repositorio.SelecionarPorId(locacao.Id));
+            dbContext.SaveChanges();
+
+            //action
+            locacao.Status = StatusLocacaoEnum.Fechada;
+            repositorio.Excluir(locacao);
+            dbContext.SaveChanges();
+
+            //assert
+            var locacaoEncontrada = repositorio.SelecionarPorId(locacao.Id);
+            locacaoEncontrada.Should().NotBeNull();
+            locacaoEncontrada.Status.Should().Be(StatusLocacaoEnum.Fechada);
+        }
+
+        [TestMethod]
+        public void Deve_devolver_uma_locacao()
+        {
+            //arrange
+            var locacao = NovaLocacao();
+            locacao.Valor = 100;
+            repositorio.Inserir(locacao);
+            dbContext.SaveChanges();
+
+            var locacoes = repositorio.SelecionarTodos();
+
+            //action
+            locacao.Status = StatusLocacaoEnum.Inativa;
+            repositorio.Devolver(locacao);
+            dbContext.SaveChanges();
+
+            //assert
+            var locacaoEncontrada = repositorio.SelecionarPorId(locacao.Id);
+
+            locacaoEncontrada.Should().NotBeNull();
+            locacaoEncontrada.Status.Should().Be(StatusLocacaoEnum.Inativa);
+        }
+
+        [TestMethod]
+        public void Deve_selecionar_uma_locacao()
+        {
+            //arrange
+            var locacao = NovaLocacao();
+            locacao.Valor = 100;
+            repositorio.Inserir(locacao);
+            dbContext.SaveChanges();
+
+            //action
+            var locacaoEncontrada = repositorio.SelecionarPorId(locacao.Id);
+
+            //assert
+            Assert.IsNotNull(locacaoEncontrada);
+            Assert.AreEqual(locacao, locacaoEncontrada);
+        }
+
+        [TestMethod]
+        public void Deve_selecionar_todas_locacacoes()
+        {
+            //arrange
+            var locacao1 = NovaLocacao();
+            locacao1.Valor = 100;
+            repositorio.Inserir(locacao1);
+            dbContext.SaveChanges();
+
+            var locacao2 = NovaLocacao();
+            locacao2.Valor = 200;
+            repositorio.Inserir(locacao2);
+            dbContext.SaveChanges();
+
+            //action
+            var locacoes = repositorio.SelecionarTodos();
+
+            //assert
+            Assert.AreEqual(2, locacoes.Count);
+
+            Assert.AreEqual(locacao1.Valor, locacoes[0].Valor);
+            Assert.AreEqual(locacao2.Valor, locacoes[1].Valor);
+        }
+
+        [TestMethod]
+        public void Deve_selecionar_locacoes_ativas_e_inativas()
+        {
+            //arrange
+            var locacao1 = NovaLocacao();
+            locacao1.Valor = 100;
+            locacao1.Status = StatusLocacaoEnum.Inativa;
+            repositorio.Inserir(locacao1);
+            dbContext.SaveChanges();
+
+            var locacao2 = NovaLocacao();
+            locacao2.Valor = 200;
+            locacao2.Status = StatusLocacaoEnum.Ativa;
+            repositorio.Inserir(locacao2);
+            dbContext.SaveChanges();
+
+            var locacao3 = NovaLocacao();
+            locacao3.Valor = 300;
+            locacao3.Status = StatusLocacaoEnum.Fechada;
+            repositorio.Inserir(locacao3);
+            dbContext.SaveChanges();
+
+            //action
+            var locacoes = repositorio.SelecionarPorLocacaoAtivaEInativa();
+
+            //assert
+            Assert.AreEqual(2, locacoes.Count);
+
+            Assert.AreEqual(locacao1.Status, locacoes[0].Status);
+            Assert.AreEqual(locacao2.Status, locacoes[1].Status);
+        }
+
     }
 }
