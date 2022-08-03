@@ -6,6 +6,7 @@ using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
                 Log.Logger.Information("Taxa {TaxaId} excluída com sucesso", taxa.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"A taxa {taxa.Id} está relacionada com outro registro e não pode ser excluída";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"A taxa {taxa.Id} está relacionada com outro registro e não pode ser excluída";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{TaxaId}", taxa.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (Exception ex)
             {

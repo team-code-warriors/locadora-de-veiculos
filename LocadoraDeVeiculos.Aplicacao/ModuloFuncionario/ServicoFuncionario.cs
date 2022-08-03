@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
@@ -103,6 +104,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
                 Log.Logger.Information("Funcionário {FuncionarioId} excluído com sucesso", funcionario.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"O funcionário {funcionario.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{FuncionarioId}", funcionario.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"O funcionário {funcionario.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{FuncionarioId}", funcionario.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (Exception ex)
             {

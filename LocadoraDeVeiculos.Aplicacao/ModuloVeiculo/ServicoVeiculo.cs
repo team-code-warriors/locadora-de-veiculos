@@ -5,6 +5,7 @@ using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
@@ -99,6 +100,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloVeiculo
                 Log.Logger.Information("Veículo {VeiculoId} excluído com sucesso", veiculo.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"O veículo {veiculo.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{VeiculoId}", veiculo.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"O veículo {veiculo.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{VeiculoId}", veiculo.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (NaoPodeExcluirEsteRegistroException ex)
             {

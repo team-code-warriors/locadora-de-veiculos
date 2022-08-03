@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Xceed.Wpf.Toolkit;
 
@@ -65,6 +66,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
                 else { 
                     return Result.Fail("Locação deve ser inativa para excluír");
                 }
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"A locação {locacao.Id} está relacionada com outro registro e não pode ser excluída";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{LocacaoId}", locacao.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"A locação {locacao.Id} está relacionada com outro registro e não pode ser excluída";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{LocacaoId}", locacao.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (Exception ex)
             {

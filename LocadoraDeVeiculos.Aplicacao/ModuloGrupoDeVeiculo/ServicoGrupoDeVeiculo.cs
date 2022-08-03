@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
@@ -100,6 +101,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
                 Log.Logger.Information("Grupo {GrupoId} excluído com sucesso", grupo.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"O grupo {grupo.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{GrupoId}", grupo.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"O grupo {grupo.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{GrupoId}", grupo.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (NaoPodeExcluirEsteRegistroException ex)
             {

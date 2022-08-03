@@ -21,7 +21,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloCondutor
             builder.Property(x => x.Email).HasColumnType("varchar(200)").IsRequired();
             builder.Property(x => x.Telefone).HasColumnType("varchar(20)").IsRequired();
             builder.Property(x => x.Endereco).HasColumnType("varchar(500)").IsRequired();
-            builder.HasOne(x => x.Cliente);
+            builder.HasOne(x => x.Cliente).WithMany().OnDelete(DeleteBehavior.NoAction);
         }
 
     }

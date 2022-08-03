@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -108,6 +109,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
                 Log.Logger.Information("Plano {PlanoId} excluído com sucesso", plano.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"O plano {plano.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{PlanoId}", plano.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"O plano {plano.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{PlanoId}", plano.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
@@ -102,6 +103,26 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
                 Log.Logger.Information("Cliente {ClienteId} excluído com sucesso", cliente.Id);
 
                 return Result.Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                string msgErro = $"O cliente {cliente.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{ClienteId}", cliente.Id);
+
+                return Result.Fail(msgErro);
+            }
+            catch (InvalidOperationException ex)
+            {
+                string msgErro = $"O cliente {cliente.Id} está relacionado com outro registro e não pode ser excluído";
+
+                contextoPersistencia.RollBack();
+
+                Log.Logger.Error(ex, msgErro + "{ClienteId}", cliente.Id);
+
+                return Result.Fail(msgErro);
             }
             catch (NaoPodeExcluirEsteRegistroException ex)
             {

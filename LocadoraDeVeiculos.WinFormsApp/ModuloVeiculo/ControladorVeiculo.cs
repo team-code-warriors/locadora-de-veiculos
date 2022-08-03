@@ -112,11 +112,11 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
             {
                 var resultadoExclusao = servicoVeiculo.Excluir(veiculoSelecionado);
 
-                if (resultadoSelecao.IsSuccess)
+                if (resultadoExclusao.IsSuccess)
                     CarregarVeiculos();
 
                 else
-                    MessageBox.Show(resultadoSelecao.Errors[0].Message,
+                    MessageBox.Show(resultadoExclusao.Errors[0].Message,
                         "Exclusão de Veículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
