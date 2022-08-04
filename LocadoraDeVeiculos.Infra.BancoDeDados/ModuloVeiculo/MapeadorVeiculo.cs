@@ -8,7 +8,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.ModuloVeiculo
 {
     public class MapeadorVeiculo : MapeadorBase<Veiculo>
     {
-        private RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+        private RepositorioGrupoDeVeiculosOrm repositorioGrupo = new RepositorioGrupoDeVeiculosOrm();
         public override void ConfigurarParametros(Veiculo registro, SqlCommand comando)
         {
             comando.Parameters.AddWithValue("ID", registro.Id);

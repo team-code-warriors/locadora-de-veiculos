@@ -2,15 +2,9 @@
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas
 {

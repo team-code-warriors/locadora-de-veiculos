@@ -2,7 +2,6 @@
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -11,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 {
     public class ServicoFuncionario
     {
-        private Infra.Orm.ModuloFuncionario.RepositorioFuncionarioOrm repositorioFuncionario;
+        private RepositorioFuncionarioOrm repositorioFuncionario;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoFuncionario(Infra.Orm.ModuloFuncionario.RepositorioFuncionarioOrm repositorioFuncionario, IContextoPersistencia contextoPersistencia)
+        public ServicoFuncionario(RepositorioFuncionarioOrm repositorioFuncionario, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioFuncionario = repositorioFuncionario;
             this.contextoPersistencia = contextoPersistencia;

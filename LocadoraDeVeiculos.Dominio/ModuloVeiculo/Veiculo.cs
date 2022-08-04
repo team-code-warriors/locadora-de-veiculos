@@ -1,6 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
-using System.Drawing;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo
 {

@@ -1,18 +1,7 @@
-﻿using FluentValidation.Results;
-using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
+﻿using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
-using System.Drawing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using FluentResults;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
@@ -20,7 +9,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloVeiculo
     public partial class TelaCadastroVeiculo : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        RepositorioGrupoDeVeiculosEmBancoDeDados repositorioGrupo = new RepositorioGrupoDeVeiculosEmBancoDeDados();
         public string caminhoFoto = "";
 
         public TelaCadastroVeiculo(List<GrupoDeVeiculos> grupos)

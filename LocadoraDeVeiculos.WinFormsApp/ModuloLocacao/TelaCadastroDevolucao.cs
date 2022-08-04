@@ -1,18 +1,7 @@
 ﻿using FluentResults;
-using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
-using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Configs;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloLocacao
 {

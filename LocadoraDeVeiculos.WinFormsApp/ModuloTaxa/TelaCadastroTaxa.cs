@@ -1,24 +1,13 @@
 ﻿using FluentResults;
-using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloTaxa
 {
     public partial class TelaCadastroTaxa : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        RepositorioTaxaEmBancoDeDados repositorio = new RepositorioTaxaEmBancoDeDados();
         public TelaCadastroTaxa()
         {
             InitializeComponent();

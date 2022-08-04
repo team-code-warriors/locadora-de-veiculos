@@ -216,7 +216,7 @@
             // btnCadastrar
             // 
             this.btnCadastrar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCadastrar.Location = new System.Drawing.Point(705, 309);
+            this.btnCadastrar.Location = new System.Drawing.Point(705, 430);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(114, 48);
             this.btnCadastrar.TabIndex = 23;
@@ -227,7 +227,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(825, 309);
+            this.btnCancelar.Location = new System.Drawing.Point(825, 430);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(114, 48);
             this.btnCancelar.TabIndex = 24;

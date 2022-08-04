@@ -3,12 +3,8 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
 {
@@ -21,7 +17,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
         public RepositorioFuncionarioOrmTest()
         {
             dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
-            repositorio = new RepositorioFuncionarioOrm();
+            repositorio = new RepositorioFuncionarioOrm(dbContext);
         }
 
         private Funcionario NovoFuncionario()
@@ -113,7 +109,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
             var f1 = new Funcionario("Lucas", 1040, DateTime.Now.Date, "lucasbleyer", "senha1999", "Comum");
             var f2 = new Funcionario("Daniel", 2000, DateTime.Now.Date, "danielz", "senha7788", "Administrador");
 
-            var repositorio = new RepositorioFuncionarioOrm();
+            var repositorio = new RepositorioFuncionarioOrm(dbContext);
             repositorio.Inserir(f0);
             dbContext.SaveChanges();
             repositorio.Inserir(f1);

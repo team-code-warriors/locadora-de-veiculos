@@ -2,7 +2,6 @@
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using Microsoft.EntityFrameworkCore;
 using Serilog;

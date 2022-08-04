@@ -103,7 +103,7 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
             var g1 = new GrupoDeVeiculos("SUV");
             var g2 = new GrupoDeVeiculos("Esportivo");
 
-            var repositorio = new RepositorioGrupoDeVeiculosEmBancoDeDados();
+            var repositorio = new RepositorioGrupoDeVeiculosOrm();
             repositorio.Inserir(g0);
             dbContext.SaveChanges();
             repositorio.Inserir(g1);

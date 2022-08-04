@@ -1,16 +1,11 @@
 ﻿using FluentAssertions;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using LocadoraDeVeiculos.Infra.BancoDeDados.Compartilhado;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 {
@@ -19,10 +14,12 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
     {
         private RepositorioClienteOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
+        private ConfiguracaoAplicacao configuracao;
 
         public RepositorioClienteOrmTests()
         {
-            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            //dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            dbContext = new LocadoraDeVeiculosDbContext(configuracao.ConnectionStrings.SqlServer);
             repositorio = new RepositorioClienteOrm(dbContext);
         }
 

@@ -1,15 +1,6 @@
 ﻿using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao
 {
@@ -17,7 +8,6 @@ namespace LocadoraDeVeiculos.WinFormsApp.ModuloConfiguracao
     {
         private ConfiguracaoAplicacao configuracao;
         ValidadorRegex validador = new ValidadorRegex();
-        string valorAux = "";
 
         public ConfiguracaoControl(ConfiguracaoAplicacao configuracao)
         {

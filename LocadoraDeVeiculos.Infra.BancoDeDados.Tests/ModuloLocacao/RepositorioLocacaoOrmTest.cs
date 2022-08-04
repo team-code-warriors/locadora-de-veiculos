@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
-using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
@@ -11,20 +9,8 @@ using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
-using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
-using LocadoraDeVeiculos.Infra.Orm.ModuloCondutor;
-using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
-using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
-using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
-using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
 {

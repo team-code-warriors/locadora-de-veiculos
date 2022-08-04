@@ -1,8 +1,6 @@
 ﻿using FluentAssertions;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;

@@ -1,7 +1,6 @@
 ﻿using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 
-
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloGrupoDeVeiculos
 {
     public partial class TabelaGrupoDeVeiculosControl : UserControl

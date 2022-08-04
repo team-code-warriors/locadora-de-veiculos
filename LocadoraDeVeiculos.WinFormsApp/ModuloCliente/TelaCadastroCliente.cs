@@ -1,23 +1,11 @@
 ﻿using FluentResults;
-using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloCliente
 {
     public partial class TelaCadastroCliente : Form
     {
-        ValidadorRegex validador = new ValidadorRegex();
         public TelaCadastroCliente()
         {
             InitializeComponent();

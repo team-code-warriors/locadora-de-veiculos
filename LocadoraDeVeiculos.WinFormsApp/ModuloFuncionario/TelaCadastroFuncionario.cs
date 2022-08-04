@@ -1,23 +1,14 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
+using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloFuncionario
 {
     public partial class TelaCadastroFuncionario : Form
     {
         ValidadorRegex validador = new ValidadorRegex();
-        RepositorioFuncionarioOrm repositorio = new RepositorioFuncionarioOrm();
         public TelaCadastroFuncionario()
         {
             InitializeComponent();

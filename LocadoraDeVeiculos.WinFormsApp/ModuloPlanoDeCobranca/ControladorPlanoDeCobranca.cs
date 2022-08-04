@@ -1,8 +1,6 @@
 ﻿using LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoDeCobrancas;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloGrupoDeVeiculos;
-using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.WinFormsApp.Compartilhado;
 
 namespace LocadoraDeVeiculos.WinFormsApp.ModuloPlanoDeCobranca
