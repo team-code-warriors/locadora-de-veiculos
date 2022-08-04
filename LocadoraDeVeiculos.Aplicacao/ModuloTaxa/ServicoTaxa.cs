@@ -10,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxa
 {
     public class ServicoTaxa
     {
-        private RepositorioTaxaOrm repositorioTaxa;
+        private IRepositorioTaxa repositorioTaxa;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoTaxa(RepositorioTaxaOrm repositorioTaxa, IContextoPersistencia contextoPersistencia)
+        public ServicoTaxa(IRepositorioTaxa repositorioTaxa, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioTaxa = repositorioTaxa;
             this.contextoPersistencia = contextoPersistencia;

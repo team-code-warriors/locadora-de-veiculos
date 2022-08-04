@@ -10,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
 {
     public class ServicoCliente
     {
-        private RepositorioClienteOrm repositorioCliente;
+        private IRepositorioCliente repositorioCliente;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCliente(RepositorioClienteOrm repositorioCliente, IContextoPersistencia contextoPersistencia)
+        public ServicoCliente(IRepositorioCliente repositorioCliente, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCliente = repositorioCliente;
             this.contextoPersistencia = contextoPersistencia;

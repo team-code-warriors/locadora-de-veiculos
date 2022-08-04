@@ -18,8 +18,8 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
 
         public RepositorioClienteOrmTests()
         {
-            //dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
-            dbContext = new LocadoraDeVeiculosDbContext(configuracao.ConnectionStrings.SqlServer);
+            configuracao = new ConfiguracaoAplicacao();
+            dbContext = new LocadoraDeVeiculosDbContext(configuracao.ConnectionStrings);
             repositorio = new RepositorioClienteOrm(dbContext);
         }
 

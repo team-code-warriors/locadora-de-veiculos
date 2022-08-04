@@ -9,6 +9,13 @@ using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
 using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
+using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
+using LocadoraDeVeiculos.Dominio.ModuloTaxa;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
@@ -47,41 +54,41 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
                 .SingleInstance();
 
             builder.RegisterType<LocadoraDeVeiculosDbContext>().As<IContextoPersistencia>()
-                .InstancePerLifetimeScope(); 
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<RepositorioClienteOrm>().As<IRepositorioCliente>();
             builder.RegisterType<ServicoCliente>();
             builder.RegisterType<ControladorCliente>();
 
-            builder.RegisterType<RepositorioGrupoDeVeiculoOrm>().AsSelf();
-            builder.RegisterType<ServicoGrupoDeVeiculo>().AsSelf();
-            builder.RegisterType<ControladorGrupoDeVeiculos>().AsSelf();
+            builder.RegisterType<RepositorioGrupoDeVeiculoOrm>().As<IRepositorioGrupoDeVeiculos>();
+            builder.RegisterType<ServicoGrupoDeVeiculo>();
+            builder.RegisterType<ControladorGrupoDeVeiculos>();
 
-            builder.RegisterType<RepositorioFuncionarioOrm>().AsSelf();
-            builder.RegisterType<ServicoFuncionario>().AsSelf();
-            builder.RegisterType<ControladorFuncionario>().AsSelf();
+            builder.RegisterType<RepositorioFuncionarioOrm>().As<IRepositorioFuncionario>();
+            builder.RegisterType<ServicoFuncionario>();
+            builder.RegisterType<ControladorFuncionario>();
 
-            builder.RegisterType<RepositorioCondutorOrm>().AsSelf();
-            builder.RegisterType<ServicoCondutor>().AsSelf();
-            builder.RegisterType<ControladorCondutor>().AsSelf();
+            builder.RegisterType<RepositorioCondutorOrm>().As<IRepositorioCondutor>();
+            builder.RegisterType<ServicoCondutor>();
+            builder.RegisterType<ControladorCondutor>();
 
-            builder.RegisterType<RepositorioTaxaOrm>().AsSelf();
-            builder.RegisterType<ServicoTaxa>().AsSelf();
-            builder.RegisterType<ControladorTaxa>().AsSelf();
+            builder.RegisterType<RepositorioTaxaOrm>().As<IRepositorioTaxa>();
+            builder.RegisterType<ServicoTaxa>();
+            builder.RegisterType<ControladorTaxa>();
 
-            builder.RegisterType<RepositorioPlanoDeCobrancaOrm>().AsSelf();
-            builder.RegisterType<ServicoPlanoDeCobranca>().AsSelf();
-            builder.RegisterType<ControladorPlanoDeCobranca>().AsSelf();
+            builder.RegisterType<RepositorioPlanoDeCobrancaOrm>().As<IRepositorioPlanoDeCobranca>();
+            builder.RegisterType<ServicoPlanoDeCobranca>();
+            builder.RegisterType<ControladorPlanoDeCobranca>();
 
-            builder.RegisterType<RepositorioVeiculoOrm>().AsSelf();
-            builder.RegisterType<ServicoVeiculo>().AsSelf();
-            builder.RegisterType<ControladorVeiculo>().AsSelf();
+            builder.RegisterType<RepositorioVeiculoOrm>().As<IRepositorioVeiculo>();
+            builder.RegisterType<ServicoVeiculo>();
+            builder.RegisterType<ControladorVeiculo>();
 
             builder.RegisterType<ControladorConfiguracao>().AsSelf();
 
-            builder.RegisterType<RepositorioLocacaoOrm>().AsSelf();
-            builder.RegisterType<ServicoLocacao>().AsSelf();
-            builder.RegisterType<ControladorLocacao>().AsSelf();
+            builder.RegisterType<RepositorioLocacaoOrm>().As<IRepositorioLocacao>();
+            builder.RegisterType<ServicoLocacao>();
+            builder.RegisterType<ControladorLocacao>();
 
             container = builder.Build();
         }

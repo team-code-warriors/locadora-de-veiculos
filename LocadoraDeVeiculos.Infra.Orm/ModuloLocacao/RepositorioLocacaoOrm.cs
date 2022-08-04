@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloLocacao;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,10 +15,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
         private DbSet<Locacao> locacoes;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioLocacaoOrm(LocadoraDeVeiculosDbContext dbContext)
+        public RepositorioLocacaoOrm(IContextoPersistencia contextoPersistencia)
         {
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             locacoes = dbContext.Set<Locacao>();
-            this.dbContext = dbContext;
         }
 
         public void Excluir(Locacao registro)
@@ -61,6 +62,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloLocacao
         public Locacao SelecionarLocacaoPorPlacaDoVeiculo(string placa)
         {
             return locacoes.FirstOrDefault(x => x.Veiculo.Placa == placa);
+        }
+
+        public void Editar(Locacao registro)
+        {
+
         }
     }
 }

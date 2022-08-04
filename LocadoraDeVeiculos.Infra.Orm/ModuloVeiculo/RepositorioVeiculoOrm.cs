@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo
         private DbSet<Veiculo> veiculos;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioVeiculoOrm(LocadoraDeVeiculosDbContext dbContext)
+        public RepositorioVeiculoOrm(IContextoPersistencia contextoPersistencia)
         {
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             veiculos = dbContext.Set<Veiculo>();
-            this.dbContext = dbContext;
         }
 
         public void Editar(Veiculo registro)

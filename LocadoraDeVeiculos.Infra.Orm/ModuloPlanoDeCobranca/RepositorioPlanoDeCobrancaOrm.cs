@@ -15,10 +15,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca
         private DbSet<PlanoDeCobranca> planos;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioPlanoDeCobrancaOrm(LocadoraDeVeiculosDbContext dbContext)
+        public RepositorioPlanoDeCobrancaOrm(IContextoPersistencia contextoPersistencia)
         {
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             planos = dbContext.Set<PlanoDeCobranca>();
-            this.dbContext = dbContext;
         }
         public void Editar(PlanoDeCobranca registro)
         {

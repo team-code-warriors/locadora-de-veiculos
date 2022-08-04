@@ -10,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
 {
     public class ServicoCondutor
     {
-        private RepositorioCondutorOrm repositorioCondutor;
+        private IRepositorioCondutor repositorioCondutor;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCondutor(RepositorioCondutorOrm repositorioCondutor, IContextoPersistencia contextoPersistencia)
+        public ServicoCondutor(IRepositorioCondutor repositorioCondutor, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCondutor = repositorioCondutor;
             this.contextoPersistencia = contextoPersistencia;

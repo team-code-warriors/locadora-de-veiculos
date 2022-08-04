@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,10 +16,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo
         private DbSet<GrupoDeVeiculos> grupos;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioGrupoDeVeiculoOrm(LocadoraDeVeiculosDbContext dbContext)
+        public RepositorioGrupoDeVeiculoOrm(IContextoPersistencia contextoPersistencia)
         {
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             grupos = dbContext.Set<GrupoDeVeiculos>();
-            this.dbContext = dbContext;
         }
         public void Editar(GrupoDeVeiculos registro)
         {

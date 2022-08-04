@@ -11,10 +11,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloLocacao
 {
     public class ServicoLocacao
     {
-        private RepositorioLocacaoOrm repositorioLocacao;
+        private IRepositorioLocacao repositorioLocacao;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoLocacao(RepositorioLocacaoOrm repositorioLocacao, IContextoPersistencia contextoPersistencia)
+        public ServicoLocacao(IRepositorioLocacao repositorioLocacao, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioLocacao = repositorioLocacao;
             this.contextoPersistencia = contextoPersistencia;

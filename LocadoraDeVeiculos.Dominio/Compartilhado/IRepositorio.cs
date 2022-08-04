@@ -6,6 +6,8 @@
 
         void Excluir(T registro);
 
+        void Editar(T registro);
+
         List<T> SelecionarTodos();
 
         T SelecionarPorId(Guid id);

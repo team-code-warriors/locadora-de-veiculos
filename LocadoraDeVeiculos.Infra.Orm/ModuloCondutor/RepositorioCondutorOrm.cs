@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,10 +15,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.ModuloCondutor
         private DbSet<Condutor> condutores;
         private readonly LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioCondutorOrm(LocadoraDeVeiculosDbContext dbContext)
+        public RepositorioCondutorOrm(IContextoPersistencia contextoPersistencia)
         {
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             condutores = dbContext.Set<Condutor>();
-            this.dbContext = dbContext;
+
         }
         public void Editar(Condutor registro)
         {

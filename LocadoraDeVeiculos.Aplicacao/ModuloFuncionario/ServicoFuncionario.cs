@@ -10,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 {
     public class ServicoFuncionario
     {
-        private RepositorioFuncionarioOrm repositorioFuncionario;
+        private IRepositorioFuncionario repositorioFuncionario;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoFuncionario(RepositorioFuncionarioOrm repositorioFuncionario, IContextoPersistencia contextoPersistencia)
+        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioFuncionario = repositorioFuncionario;
             this.contextoPersistencia = contextoPersistencia;

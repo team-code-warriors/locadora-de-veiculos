@@ -51,14 +51,9 @@ namespace LocadoraDeVeiculos.WinFormsApp.Compartilhado.ServiceLocator
 
         private void ConfigurarControladores()
         {
-            var configuracao = new ConfigurationBuilder()
-                 .SetBasePath(Directory.GetCurrentDirectory())
-                 .AddJsonFile("ConfiguracaoAplicacao.json")
-                 .Build();
+            ConfiguracaoAplicacao configuracao = new ConfiguracaoAplicacao();
 
-            var connectionString = configuracao.GetConnectionString("SqlServer");
-
-            var contextoDadosOrm = new LocadoraDeVeiculosDbContext(connectionString);
+            var contextoDadosOrm = new LocadoraDeVeiculosDbContext(configuracao.ConnectionStrings);
 
             var repositorioFuncionario = new RepositorioFuncionarioOrm(contextoDadosOrm);
             var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario, contextoDadosOrm);

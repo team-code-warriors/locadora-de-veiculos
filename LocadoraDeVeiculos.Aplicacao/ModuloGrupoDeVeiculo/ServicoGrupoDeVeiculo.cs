@@ -10,10 +10,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoDeVeiculo
 {
     public class ServicoGrupoDeVeiculo
     {
-        private RepositorioGrupoDeVeiculoOrm repositorioGrupo;
+        private IRepositorioGrupoDeVeiculos repositorioGrupo;
         private IContextoPersistencia contextoPersistencia;
 
-        public ServicoGrupoDeVeiculo(RepositorioGrupoDeVeiculoOrm repositorioGrupoVeiculos, IContextoPersistencia contextoPersistencia)
+        public ServicoGrupoDeVeiculo(IRepositorioGrupoDeVeiculos repositorioGrupoVeiculos, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioGrupo = repositorioGrupoVeiculos;
             this.contextoPersistencia = contextoPersistencia;
