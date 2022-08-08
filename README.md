@@ -5,7 +5,7 @@
 
 ### Tópicos 
 <div> 🔹 Descrição do projeto <div>
-<div>🔹 Funcionalidades <div>
+<div>🔹 Principais Funcionalidades <div>
 <div>🔹 Como rodar a aplicação <div>
 
        
