@@ -1,10 +1,11 @@
 <h1 align="center"> Locadora de Veículos - Equipe Code Warriors 🟨🟦 </h1>
        
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+![STATUS](https://user-images.githubusercontent.com/85200696/183472262-cbec62bf-6256-4deb-93f2-358c3cf718eb.png)
+
 
 ### Tópicos 
 <div> 🔹 Descrição do projeto <div>
-<div>🔹 Funcionalidades <div>
+<div>🔹 Principais Funcionalidades <div>
 <div>🔹 Como rodar a aplicação <div>
 
        
@@ -12,7 +13,7 @@
 A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programador 2022. A proposta desta aplicação é entregar um software de locação de veículos (carros), a fim de automatizar processos, otimizar funções e armazenar de forma computacional todos os registros do comercio em questão. 
 
 
-### Funcionalidades
+### Principais Funcionalidades
 <div> ✔️ Gerencia os veículos <div>
 <div> ✔️ Gerencia os funcionários <div>
 <div> ✔️ Gerencia os clientes <div>
@@ -20,14 +21,14 @@ A Locadora de Veículos é um projeto de desenvolvimento da Academia do Programa
 
        
 ### Layout da Aplicação 💨
-![telaprincipal](https://user-images.githubusercontent.com/85200696/177874493-546a7b78-094d-4026-bf49-238e26302d89.png)
+![layout locadora](https://user-images.githubusercontent.com/85200696/183470854-098dd1cc-3bab-4e06-a254-7aab0bef5c47.jpg)
 
 
 ### Como rodar a aplicação ▶️
 1⃣ No terminal, clone o projeto:
 git clone https://github.com/team-code-warriors/locadora-de-veiculos.git
 
-2⃣ Após, abra o projeto com o Microsoft Visual Studio e rode a aplicação (será necessário efetuar o PUBLISH no projeto de banco de dados).
+2⃣ Após, abra o projeto com o Microsoft Visual Studio e rode a aplicação
 
 
 ### Tecnologias utilizadas no projeto
