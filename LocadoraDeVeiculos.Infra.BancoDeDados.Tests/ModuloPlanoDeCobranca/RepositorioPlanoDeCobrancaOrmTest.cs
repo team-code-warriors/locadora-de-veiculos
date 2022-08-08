@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
@@ -17,9 +18,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
         private RepositorioPlanoDeCobrancaOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioPlanoDeCobrancaOrmTest()
+        public RepositorioPlanoDeCobrancaOrmTest(IContextoPersistencia contextoPersistencia)
         {
-            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             repositorioGrupo = new RepositorioGrupoDeVeiculoOrm(dbContext);
             repositorio = new RepositorioPlanoDeCobrancaOrm(dbContext);
 

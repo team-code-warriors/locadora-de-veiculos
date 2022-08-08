@@ -40,7 +40,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca
 
         public override string ToString()
         {
-            return $"{GrupoVeiculo.Nome} - {TipoPlano}";
+            if (GrupoVeiculo != null)
+                return $"{GrupoVeiculo.Nome} - {TipoPlano}";
+            else
+            {
+                return $"{TipoPlano}";
+            }
         }
 
     }

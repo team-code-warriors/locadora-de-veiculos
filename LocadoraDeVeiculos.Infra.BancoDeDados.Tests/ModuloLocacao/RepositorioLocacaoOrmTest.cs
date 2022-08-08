@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
@@ -21,9 +22,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
         private readonly LocadoraDeVeiculosDbContext dbContext;
         byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
-        public RepositorioLocacaoOrmTest()
+        public RepositorioLocacaoOrmTest(IContextoPersistencia contextoPersistencia)
         {
-            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             this.repositorio = new RepositorioLocacaoOrm(dbContext);
         }
 

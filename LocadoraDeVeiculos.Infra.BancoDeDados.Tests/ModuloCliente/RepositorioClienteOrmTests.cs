@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
@@ -14,12 +15,10 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCliente
     {
         private RepositorioClienteOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
-        private ConfiguracaoAplicacao configuracao;
 
-        public RepositorioClienteOrmTests()
+        public RepositorioClienteOrmTests(IContextoPersistencia contextoPersistencia)
         {
-            configuracao = new ConfiguracaoAplicacao();
-            dbContext = new LocadoraDeVeiculosDbContext(configuracao.ConnectionStrings);
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             repositorio = new RepositorioClienteOrm(dbContext);
         }
 

@@ -5,6 +5,7 @@ using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
 using FluentAssertions;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 {
@@ -14,9 +15,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         private RepositorioGrupoDeVeiculoOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioGrupoDeVeiculosOrmTest()
+        public RepositorioGrupoDeVeiculosOrmTest(IContextoPersistencia contextoPersistencia)
         {
-            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             repositorio = new RepositorioGrupoDeVeiculoOrm(dbContext);
         }
 

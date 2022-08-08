@@ -6,6 +6,7 @@ using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
 {
@@ -17,9 +18,9 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloVeiculo
         private LocadoraDeVeiculosDbContext dbContext;
         byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
-        public RepositorioVeiculoOrmTest()
+        public RepositorioVeiculoOrmTest(IContextoPersistencia contextoPersistencia)
         {
-            dbContext = new LocadoraDeVeiculosDbContext("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False");
+            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
             repositorioGrupo = new RepositorioGrupoDeVeiculoOrm(dbContext);
             repositorio = new RepositorioVeiculoOrm(dbContext);
         }
