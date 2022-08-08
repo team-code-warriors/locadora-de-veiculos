@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloFuncionario;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,9 +16,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloFuncionario
         private RepositorioFuncionarioOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioFuncionarioOrmTest(IContextoPersistencia contextoPersistencia)
+        public RepositorioFuncionarioOrmTest()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             repositorio = new RepositorioFuncionarioOrm(dbContext);
         }
 

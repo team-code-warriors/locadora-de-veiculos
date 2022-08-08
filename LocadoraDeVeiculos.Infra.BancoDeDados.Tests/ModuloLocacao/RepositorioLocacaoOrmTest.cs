@@ -9,6 +9,7 @@ using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,9 +23,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloLocacao
         private readonly LocadoraDeVeiculosDbContext dbContext;
         byte[] byteItems = new byte[] { 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10 };
 
-        public RepositorioLocacaoOrmTest(IContextoPersistencia contextoPersistencia)
+        public RepositorioLocacaoOrmTest()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             this.repositorio = new RepositorioLocacaoOrm(dbContext);
         }
 

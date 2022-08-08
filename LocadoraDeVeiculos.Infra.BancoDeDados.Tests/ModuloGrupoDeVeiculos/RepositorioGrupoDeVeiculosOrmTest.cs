@@ -6,6 +6,7 @@ using FluentAssertions;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 
 namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
 {
@@ -15,9 +16,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloGrupoDeVeiculos
         private RepositorioGrupoDeVeiculoOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioGrupoDeVeiculosOrmTest(IContextoPersistencia contextoPersistencia)
+        public RepositorioGrupoDeVeiculosOrmTest()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             repositorio = new RepositorioGrupoDeVeiculoOrm(dbContext);
         }
 

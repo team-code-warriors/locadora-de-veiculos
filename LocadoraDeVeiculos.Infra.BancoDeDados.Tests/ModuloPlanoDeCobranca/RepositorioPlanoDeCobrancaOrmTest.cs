@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoDeVeiculos;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoDeCobranca;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoDeVeiculo;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoDeCobranca;
@@ -18,9 +19,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloPlanoDeCobranca
         private RepositorioPlanoDeCobrancaOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioPlanoDeCobrancaOrmTest(IContextoPersistencia contextoPersistencia)
+        public RepositorioPlanoDeCobrancaOrmTest()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             repositorioGrupo = new RepositorioGrupoDeVeiculoOrm(dbContext);
             repositorio = new RepositorioPlanoDeCobrancaOrm(dbContext);
 

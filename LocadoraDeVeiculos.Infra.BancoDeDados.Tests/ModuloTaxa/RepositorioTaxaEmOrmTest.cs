@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,9 +17,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloTaxa
         private RepositorioTaxaOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioTaxaEmOrmTest(IContextoPersistencia contextoPersistencia)
+        public RepositorioTaxaEmOrmTest()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             repositorio = new RepositorioTaxaOrm(dbContext);
         }
 

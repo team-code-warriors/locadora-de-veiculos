@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.BancoDeDados.Tests.Compartilhado;
+using LocadoraDeVeiculos.Infra.Configs;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm.ModuloCondutor;
@@ -17,9 +18,11 @@ namespace LocadoraDeVeiculos.Infra.BancoDeDados.Tests.ModuloCondutor
         private RepositorioCondutorOrm repositorio;
         private LocadoraDeVeiculosDbContext dbContext;
 
-        public RepositorioCondutorOrmTests(IContextoPersistencia contextoPersistencia)
+        public RepositorioCondutorOrmTests()
         {
-            this.dbContext = (LocadoraDeVeiculosDbContext)contextoPersistencia;
+            ConnectionStrings connectionString = new ConnectionStrings();
+            connectionString.SqlServer = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=DbLocadoraDeVeiculosTestes;Integrated Security=True;Pooling=False";
+            dbContext = new LocadoraDeVeiculosDbContext(connectionString);
             repositorio = new RepositorioCondutorOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
         }
